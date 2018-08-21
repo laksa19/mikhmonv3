@@ -20,7 +20,7 @@ session_start();
 error_reporting(0);
 include_once('./include/headhtml.php');
 if(!isset($_SESSION["mikhmon"])){
-  header("Location:./admin.php?id=login");
+  echo "<script>window.location='./admin.php?id=login'</script>";
 }else{
 	echo "<script>window.location='./admin.php?id=sessions'</script>";
 }

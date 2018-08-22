@@ -144,7 +144,7 @@ if(!isset($_SESSION["mikhmon"])){
         <ul>
         <li>Remove : User akan dihapus ketika sudah grace period habis.</li>
         <li>Notice : User tidah dihapus dan akan mendapatkan notifikasi setelah user expired.</li>
-        <li>Record : Menyimpan data harga tiap user yang login. Untuk menghitung total penjualan user hotspot.</li>
+        <li>Record : Menyimpan data harga tiap user yang login. Untuk menghitung total penjualan user hotspot dan ditampilkan dalam laporan penjualan.</li>
         </ul>
       </p>
       <p>Grace Period : Tenggang waktu sebelum user dihapus.</p>
@@ -160,7 +160,7 @@ if(!isset($_SESSION["mikhmon"])){
         <ul>
         <li>Remove: User will be deleted when the grace period expires.</li>
         <li>Notice: User will not deleted and get notification after user expiration.</li>
-        <li>Record: Save the price of each user login. To calculate total sales of hotspot users.</li>
+        <li>Record: Save the price of each user login. To calculate total sales of hotspot users and displayed in the sales report.</li>
         </ul>
       </p>
       <p>Grace Period : Grace period before user deleted.</p>

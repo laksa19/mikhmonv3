@@ -145,7 +145,7 @@ for ($i=0; $i<$TotalReg; $i++){
   $udisabled = $userdetails['disabled'];
   $utimelimit = $userdetails['limit-uptime'];
   if($utimelimit == '1s'){$utimelimit = ' expired';}else{$utimelimit = ' '.$utimelimit;}
-  $udatalimit = $userdetails['limit-bytes-out'];
+  $udatalimit = $userdetails['limit-bytes-total'];
   if($udatalimit == ''){$udatalimit = '';}else{$udatalimit = ' '.formatBytes2($udatalimit,2);}
 
 	echo "<tr>";

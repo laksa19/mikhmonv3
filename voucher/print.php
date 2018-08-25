@@ -99,6 +99,7 @@ body {
   font-size: 14px;
   font-family:  'Helvetica', arial, sans-serif;
   margin: 0px;
+  -webkit-print-color-adjust: exact;
 }
 table.voucher {
   display: inline-block;

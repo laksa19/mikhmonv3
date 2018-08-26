@@ -143,7 +143,6 @@ if($hotspot == "dashboard"){
   <a href="./admin.php?id=sessions" class="menu <?php echo $ssesslist;?>"><i class="fa fa-server"></i> Router List</a>
   <a href="./admin.php?id=settings&router=new" class="menu <?php echo $snsettings?>"><i class="fa fa-plus"></i> Add Router</a>
   <a href="./admin.php?id=about" class="menu <?php echo $sabout;?>"><i class="fa fa-info-circle"></i> About</a>
-  <a href="#" class="menu"><i class="fa fa-calendar"></i> Exp <?php echo $exp_date; ?></a>
 </div>
 
 <?php }else{?>

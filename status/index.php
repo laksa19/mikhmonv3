@@ -97,11 +97,13 @@ function goBack() {
 	$user = $getuser[0]['name'];
 	$profile = $getuser[0]['profile'];
 	$uptime = formatDTM($getuser[0]['uptime']);
+	$getbytein = $getuser[0]['bytes-in'];
 	$getbyteo = $getuser[0]['bytes-out'];
-	$byteo = formatBytes2($getbyteo, 2);
+	$getbytetot = ($getbytein + $getbyteo);
+	$bytetot = formatBytes2($getbyteo, 2);
 	$limitup = $getuser[0]['limit-uptime'];
-	$limitbyte = $getuser[0]['limit-bytes-out'];
-	if($limitbyte == ""){$dataleft = "Unlimited";}else{$dataleft = formatBytes2($limitbyte-$getbyteo,2);}
+	$limitbyte = $getuser[0]['limit-bytes-total'];
+	if($limitbyte == ""){$dataleft = "Unlimited";}else{$dataleft = formatBytes2($limitbyte-$getbytetot,2);}
 
 	$getprofile = $API->comm("/ip/hotspot/user/profile/print", array("?name"=> "$profile",));
     $ponlogin = $getprofile[0]['on-login'];

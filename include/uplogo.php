@@ -109,10 +109,10 @@ if ($uploadOk == 0) {
 
           <div class="pd-10">Format file : logo-<?php echo $session;?>.png </div>
           <div class="input-group">
-            <div class="input-group-4">
+            <div class="input-group-4 col-box-8">
                 <input style="cursor: pointer; " type="file" class="group-item group-item-l" name="UploadLogo" >
             </div>
-            <div class="input-group-2">
+            <div class="input-group-2 col-box-4">
                 <input style="cursor: pointer; font-size: 14px; padding:8px;" class="group-item group-item-r" type="submit" value="Upload" title="Upload logo" name="submit">
             </div>
 

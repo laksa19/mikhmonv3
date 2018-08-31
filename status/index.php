@@ -119,6 +119,7 @@ function goBack() {
 				$exp = $regtable['next-run'];
 				$strd = $regtable['start-date'];
 				$strt = $regtable['start-time'];
+				$flogin = $regtable['comment'];
 	}
 	if($user == "" || $exp == ""){
 		echo "<h3 class='text-center'>User <i style='color:#008CCA;'>$name</i> $title9</h3>";
@@ -153,9 +154,15 @@ function goBack() {
 	echo "	</tr>";
 	echo "	<tr>";
 	echo "		<td >$title4</td>";
-	echo "		<td > $byteo</td>";
+	echo "		<td > $bytetot</td>";
 	echo "	</tr>";
 	if($limitup == "1s"  || $uptime == $limitup || $getbyteo == $limitbyte){
+	if($flogin == ""){}else{	
+	echo "	<tr>";
+	echo "		<td >Start</td>";
+	echo "		<td >$flogin</td>";
+	echo "	</tr>";	
+	}
 	echo "	<tr>";
 	echo "		<td >Status</td>";
 	echo "		<td >$title16</td>";

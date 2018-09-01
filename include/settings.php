@@ -117,7 +117,7 @@ if(isset($_POST['save'])){
                   <table class="table">
                     <tr>
                       <td>Session Name</td>
-                      <td><input class="form-control" id="sessname" type="text" name="sessname" title="Session Name" value="<?php echo $session; ?>" required="1"/></td>
+                      <td><input class="form-control" id="sessname" type="text" name="sessname" title="Session Name" value="<?php if($session == "new"){echo "";}else{ echo $session;} ?>" required="1"/></td>
                     </tr>
                   </table>
                 </div>

@@ -86,7 +86,7 @@ if(isset($_POST['save'])){
                                 <div class="box-group">
                                   
                                   <div class="box-group-icon">
-                                    <a title='Open User by profile <?php echo $pname;?>'  href='./app.php?hotspot=dashboard&session=<?php echo $pname;?>&session=<?php echo $value;?>'>
+                                    <a title='Open User by profile <?php echo $pname;?>'  href='./app.php?hotspot=dashboard&session=<?php echo $value;?>'>
                                     <i class="fa fa-server"></i>
                                       </a>
                                   </div>

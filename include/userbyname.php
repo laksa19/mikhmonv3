@@ -55,10 +55,10 @@ if(!isset($_SESSION["mikhmon"])){
   $ucomment = $userdetails['comment'];
 
   if(substr(formatBytes2($udatalimit,2),-2) == "MB"){
-    $udatalimit = $udatalimit/1000000;
+    $udatalimit = $udatalimit/1048576;
     $MG = "MB";
   }elseif(substr(formatBytes2($udatalimit,2),-2) == "GB"){
-    $udatalimit = $udatalimit/1000000000;
+    $udatalimit = $udatalimit/1073741824;
     $MG = "GB";
   }elseif($udatalimit == ""){
     $udatalimit = "";
@@ -279,9 +279,9 @@ if($uname == $upass){$shareWA = $shareWAVC;}else{$shareWA = $shareWAUP;}
       </div>
           <div class="input-group-2 col-box-3">
               <select style="padding: 4.2px;" class="group-item group-item-r" name="mbgb" required="1">
-				        <option value="<?php if($MG == "MB"){echo "1000000";}elseif($MG == "GB"){echo "1000000000";}?>"><?php echo $MG;?></option>
-				        <option value=1000000>MB</option>
-				        <option value=1000000000>GB</option>
+				        <option value="<?php if($MG == "MB"){echo "1048576";}elseif($MG == "GB"){echo "1073741824";}?>"><?php echo $MG;?></option>
+				        <option value=1048576>MB</option>
+				        <option value=1073741824>GB</option>
 			        </select>
           </div>
       </div>

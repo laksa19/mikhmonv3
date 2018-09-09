@@ -22,6 +22,10 @@ if(!isset($_SESSION["mikhmon"])){
   header("Location:../admin.php?id=login");
 }else{
 
+  $getallqueue = $API->comm("/queue/simple/print", array(
+      "?dynamic"=> "false",
+    )); 
+
   if(isset($_POST['name'])){
     $name = ($_POST['name']);
     $sharedusers = ($_POST['sharedusers']);
@@ -33,6 +37,7 @@ if(!isset($_SESSION["mikhmon"])){
     if($getprice == ""){$price = "0";}else{$price = $getprice;}
     $getlock = ($_POST['lockunlock']);
     if($getlock == Enable){$lock = ';[:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';}else{$lock = "";}
+    $parent = ($_POST['parent']);
     
       $onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.',,'.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
 			$onlogin2 = ':put (",ntf,'.$price.','.$validity.',,,'.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
@@ -61,6 +66,7 @@ if(!isset($_SESSION["mikhmon"])){
 					  "status-autorefresh" => "1m",
 					  "transparent-proxy" => "yes",
 					  "on-login" => "$onlogin",
+            "parent-queue" => "$parent",
 			));
 			
 		$getprofile = $API->comm("/ip/hotspot/user/profile/print", array(
@@ -117,11 +123,24 @@ if(!isset($_SESSION["mikhmon"])){
   <tr>
     <td>Lock User</td><td>
       <select class="form-control" id="lockunlock" name="lockunlock" required="1">
-        <option value="<?php echo $getlocku;?>"><?php echo $getlocku;?></option>
-        <option value="Enable">Enable</option>
         <option value="Disable">Disable</option>
+        <option value="Enable">Enable</option>
       </select>
     </td>
+  </tr>
+  <tr>
+    <td class="align-middle">Parent Queue</td>
+    <td>
+    <select class="form-control " name="parent">
+      <option>none</option>
+        <?php $TotalReg = count($getallqueue);
+        for ($i=0; $i<$TotalReg; $i++){
+        
+          echo "<option>" . $getallqueue[$i]['name'] . "</option>";
+          }
+        ?>
+    </select>
+  </td>
   </tr>
 </table>
 </form>

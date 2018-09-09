@@ -69,6 +69,7 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
     <th>Mac Address</th>
     <th>Uptime</th>
     <th>Bytes Out</th>
+    <th>Time Left</th>
     <th>Login By</th>
     <th>Comment</th>
   </tr>
@@ -83,6 +84,7 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
 	$address = $hotspotactive['address'];
 	$mac = $hotspotactive['mac-address'];
 	$uptime = formatDTM($hotspotactive['uptime']);
+	$usesstime = formatDTM($hotspotactive['session-time-left']);
 	$byteso = formatBytes($hotspotactive['bytes-out'], 2);
 	$loginby = $hotspotactive['login-by'];
 	$comment = $hotspotactive['comment'];
@@ -95,6 +97,7 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
 	echo "<td>" . $mac . "</td>";
 	echo "<td style='text-align:right;'>" . $uptime . "</td>";
 	echo "<td style='text-align:right;'>" . $byteso . "</td>";
+	echo "<td style='text-align:right;'>" . $usesstime . "</td>";
 	echo "<td>" . $loginby . "</td>";
 	echo "<td>" . $comment . "</td>";
 	echo "</tr>";

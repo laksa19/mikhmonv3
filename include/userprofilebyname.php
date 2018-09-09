@@ -41,6 +41,7 @@ if(!isset($_SESSION["mikhmon"])){
   $psharedu = $profiledetalis['shared-users'];
   $pratelimit = $profiledetalis['rate-limit'];
   $ponlogin = $profiledetalis['on-login'];
+  $sparent = $profiledetalis['parent-queue'];
   
   $getexpmode = explode(",",$ponlogin)[1];
   
@@ -67,6 +68,10 @@ if(!isset($_SESSION["mikhmon"])){
     $getlocku = explode(",",$ponlogin)[6];
     if($getlocku == ""){$getprice = "Disable";}else{$getlocku = $getlocku;}
 
+    $getallqueue = $API->comm("/queue/simple/print", array(
+      "?dynamic"=> "false",
+    )); 
+
   if(isset($_POST['name'])){
     $name = ($_POST['name']);
     $sharedusers = ($_POST['sharedusers']);
@@ -78,6 +83,7 @@ if(!isset($_SESSION["mikhmon"])){
     if($getprice == ""){$price = "0";}else{$price = $getprice;}
     $getlock = ($_POST['lockunlock']);
     if($getlock == Enable){$lock = ';[:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';}else{$lock = "";}
+    $parent = ($_POST['parent']);
     
       $onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.',,'.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
 			$onlogin2 = ':put (",ntf,'.$price.','.$validity.',,,'.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
@@ -107,6 +113,7 @@ if(!isset($_SESSION["mikhmon"])){
   "status-autorefresh" => "1m",
   "transparent-proxy" => "yes",
   "on-login" => "$onlogin",
+  "parent-queue" => "$parent",
 			));
     echo "<script>window.location='./app.php?user-profile=".$pid."&session=".$session."'</script>";
   }
@@ -163,6 +170,21 @@ if(!isset($_SESSION["mikhmon"])){
         <option value="Enable">Enable</option>
         <option value="Disable">Disable</option>
       </select>
+    </td>
+  </tr>
+  <tr>
+    <td class="align-middle">Parent Queue</td>
+    <td>
+    <select class="form-control " name="parent">
+      <option><?php echo $sparent;?></option>
+      <option>none</option>
+        <?php $TotalReg = count($getallqueue);
+        for ($i=0; $i<$TotalReg; $i++){
+        
+          echo "<option>" . $getallqueue[$i]['name'] . "</option>";
+          }
+        ?>
+    </select>
     </td>
   </tr>
 </table>

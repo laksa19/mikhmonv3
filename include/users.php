@@ -146,7 +146,7 @@ for ($i=0; $i<$TotalReg; $i++){
   $utimelimit = $userdetails['limit-uptime'];
   if($utimelimit == '1s'){$utimelimit = ' expired';}else{$utimelimit = ' '.$utimelimit;}
   $udatalimit = $userdetails['limit-bytes-total'];
-  if($udatalimit == ''){$udatalimit = '';}else{$udatalimit = ' '.formatBytes2($udatalimit,2);}
+  if($udatalimit == ''){$udatalimit = '';}else{$udatalimit = ' '.formatBytes($udatalimit,2);}
 
 	echo "<tr>";
 	echo "<td style='text-align:center;'><a  title='Remove ".$uname. "' href=./app.php?remove-hotspot-user=".$uid ."&session=".$session."><i class='fa fa-minus-square text-danger'></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";

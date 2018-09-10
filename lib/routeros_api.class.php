@@ -457,12 +457,20 @@ return $new_format;
 }
 */
 function formatDTM($dtm){
-if(substr($dtm, 1,1) == "d" || substr($dtm, 1,1) == "w" || substr($dtm, 2,1) == "d" || substr($dtm, 2,1) == "w" ){
+if(substr($dtm, 1,1) == "d" || substr($dtm, 2,1) == "d"){
     $day = explode("d",$dtm)[0]."d";
     $day = str_replace("d", "d ", str_replace("w", "w ", $day));
-    $dtm = explode("d",$dtm)[1];
-    
+    $dtm = explode("d",$dtm)[1];    
+}elseif(substr($dtm, 1,1) == "w" && substr($dtm, 3,1) == "d" || substr($dtm, 2,1) == "w" && substr($dtm, 4,1) == "d"){
+    $day = explode("d",$dtm)[0]."d";
+    $day = str_replace("d", "d ", str_replace("w", "w ", $day));
+    $dtm = explode("d",$dtm)[1];  
+}elseif (substr($dtm, 1,1) == "w" || substr($dtm, 2,1) == "w" ) {
+    $day = explode("w",$dtm)[0]."w";
+    $day = str_replace("d", "d ", str_replace("w", "w ", $day));
+    $dtm = explode("w",$dtm)[1]; 
 }
+
 // secs
 if(strlen($dtm) == "2" && substr($dtm, -1) == "s"){
     $format = $day." 00:00:0".substr($dtm, 0,-1);

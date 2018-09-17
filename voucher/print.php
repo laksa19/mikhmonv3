@@ -141,7 +141,7 @@ table.voucher {
    $password = $regtable['password'];
    $timelimit = $regtable['limit-uptime'];
    $getdatalimit = $regtable['limit-bytes-total'];
-   if($getdatalimit == 0){$datalimit = "";}else{$datalimit = formatBytes2($getdatalimit,2);}
+   if($getdatalimit == 0){$datalimit = "";}else{$datalimit = formatBytes($getdatalimit,2);}
    // CHart Size
 	$chs = "80x80";
 	// CHart Link

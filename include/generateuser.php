@@ -196,7 +196,7 @@ if(!isset($_SESSION["mikhmon"])){
 	$utlimit = $genuser[7];
 	if($utlimit == "0"){$utlimit = "-";}else{$utlimit = $utlimit;}
 	$udlimit = $genuser[8];
-	if($udlimit == "0"){$udlimit = "-";}else{$udlimit = formatBytes2($udlimit,2);}
+	if($udlimit == "0"){$udlimit = "-";}else{$udlimit = formatBytes($udlimit,2);}
 	$ulock = $genuser[9];
 	$urlprint = "$umode-$ucode-$udate-$ucommt";
 	if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){

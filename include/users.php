@@ -63,15 +63,18 @@ if($comm != ""){
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-    <h3><i class="fa fa-users"></i> Hotspot Users
+    <h3><i class="fa fa-users"></i> Users
       <span style="font-size: 14px">
         <?php
-          if($counttuser == 0 ){echo "<script>window.location='./app.php?hotspot=users&profile=all&session=".$session."</script>";}
-          if($comm != ""){
-            echo '&nbsp; | &nbsp;<a class="text-info" onclick="loader()" href="./app.php?hotspot=users&profile=all&session='.$session.'"><i class="fa fa-search"></i> Show All</a> &nbsp; | &nbsp; <a class="text-danger" onclick="loader()" title="Remove user by comment '.$comm.'" href="./app.php?remove-hotspot-user-by-comment='.$comm.'&session='.$session.'"> <i class="fa fa-minus-square"></i> Remove</a>';
-          }
-				?>   
-         &nbsp; | &nbsp; <a href="./app.php?hotspot=export-users&session=<?php echo $session;?>" title="Download User List"><i class="fa fa-download"></i> Export</a>
+          if($counttuser == 0 ){echo "<script>window.location='./app.php?hotspot=users&profile=all&session=".$session."</script>";}?>
+         &nbsp; | &nbsp; <a href="./app.php?hotspot-user=add&session=<?php echo $session;?>" title="Add User"><i class="fa fa-user-plus"></i> Add</a>
+        &nbsp; | &nbsp; <a href="./app.php?hotspot-user=generate&session=<?php echo $session;?>" title="Generate User"><i class="fa fa-users"></i> Generate</a>    
+          <?php if($comm != ""){?>
+            &nbsp; | &nbsp;<a class="text-info" onclick="loader()" href="./app.php?hotspot=users&profile=all&session=<?php echo $session;?>"><i class="fa fa-search"></i> Show All</a> &nbsp; | &nbsp; <a class="text-danger" onclick="if(confirm('Are you sure to delete username by comment (<?php echo $comm;?>)?')){window.location='./app.php?remove-hotspot-user-by-comment=<?php echo $comm;?>&session=<?php echo $session;?>';loader();}else{}" title="Remove user by comment <?php echo $comm;?>" href="#">  <i class="fa fa-minus-square"></i> Remove</a>
+          <?php ;}
+				?>
+        
+         &nbsp; | &nbsp; <a href="./app.php?hotspot=export-users&profile=<?php echo $prof;?>&session=<?php echo $session;?>" title="Download User List"><i class="fa fa-download"></i> Export</a>
         </span> 
     </h3>
     <i id="loader" style="display: none;" ><i class='fa fa-circle-o-notch fa-spin'></i> Processing... </i>
@@ -149,7 +152,9 @@ for ($i=0; $i<$TotalReg; $i++){
   if($udatalimit == ''){$udatalimit = '';}else{$udatalimit = ' '.formatBytes($udatalimit,2);}
 
 	echo "<tr>";
-	echo "<td style='text-align:center;'><a  title='Remove ".$uname. "' href=./app.php?remove-hotspot-user=".$uid ."&session=".$session."><i class='fa fa-minus-square text-danger'></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+	?>
+  <td style='text-align:center;'><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete username (<?php echo $uname;?>)?')){window.location='./app.php?remove-hotspot-user=<?php echo $uid;?>&session=<?php echo $session;?>'}else{}" title='Remove <?php echo $uname;?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <?php
 	if($udisabled == "true"){ $tcolor = "#616161"; echo "<a title='Enable User ".$uname . "'  href='./app.php?enable-hotspot-user=".$uid . "&session=".$session."'><i class='fa fa-lock '></i></a></td>";}else{ $tcolor = "#f3f4f5";echo "<a title='Disable User ".$uname . "'  href='./app.php?disable-hotspot-user=".$uid . "&session=".$session."'><i class='fa fa-unlock '></i></a></td>";}
 	echo "<td style='color:".$tcolor.";'>" . $userver;echo "</td>";
   if($uname == $upass){$usermode = "vc";}else{$usermode = "up";} 

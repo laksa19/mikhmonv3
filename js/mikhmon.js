@@ -50,7 +50,7 @@ function defUserl(){
    var mix2 = document.getElementById('mix2').style;
   if(usr === 'up'){
      $('select[name=userl] option:first').html('4');
-     $('select[name=char] option:first').html('abcd');
+     $('select[name=char] option:first').html('Random abcd');
      lower.display = 'block';
      upper.display = 'block';
      upplow.display = 'block';
@@ -63,7 +63,7 @@ function defUserl(){
      mix2.display = 'block';
   }else if(usr === 'vc'){
     $('select[name=userl] option:first').html('8');
-    $('select[name=char] option:first').html('abcd1234');
+    $('select[name=char] option:first').html('Random abcd2345');
     lower.display = 'none';
     upper.display = 'none';
     upplow.display = 'none';

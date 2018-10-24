@@ -19,9 +19,38 @@ session_start();
 // hide all error
 error_reporting(0);
 
+$getuname = $API->comm("/ip/hotspot/user/print", array(
+	    "?.id"=> "$removehotspotuser",
+	));
+	
+$name = $getuname[0]['name'];
+echo $name;
+
+$getscr = $API->comm("/system/script/print", array(
+	    "?name"=> "$name",
+	));
+
+$scr = $getscr[0]['.id'];
+
+$getsch = $API->comm("/system/scheduler/print", array(
+	    "?name"=> "$name",
+	));
+
+$sch = $getsch[0]['.id'];
+	
+$API->comm("/system/script/remove", array(
+	    ".id"=> "$scr",
+	));
+
+$API->comm("/system/scheduler/remove", array(
+	    ".id"=> "$sch",
+	));
+
 $API->comm("/ip/hotspot/user/remove", array(
 	    ".id"=> "$removehotspotuser",
 	));
+	
+
 if($_SESSION['ubp'] != ""){
 echo "<script>window.location='./app.php?hotspot=users&profile=".$_SESSION['ubp']."&session=".$session."'</script>";
 }elseif($_SESSION['ubc'] != ""){
@@ -29,5 +58,5 @@ echo "<script>window.location='./app.php?hotspot=users&comment=".$_SESSION['ubc'
 }else{
 echo "<script>window.location='./app.php?hotspot=users&profile=all&session=".$session."'</script>";
 }
-  
+
 ?>

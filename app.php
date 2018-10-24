@@ -18,10 +18,10 @@
 session_start();
 // hide all error
 error_reporting(0);
+// check url
 
 ob_start("ob_gzhandler");
 
-// check url
 $url = $_SERVER['REQUEST_URI'];
 
 if(!isset($_SESSION["mikhmon"])){
@@ -31,6 +31,9 @@ if(!isset($_SESSION["mikhmon"])){
 // load session MikroTik
 
 $session = $_GET['session'];
+if(empty($session)){
+  echo "<script>window.location='./admin.php?id=sessions'</script>";
+}
 $_SESSION["$session"] = $session;
 $setsession = $_SESSION["$session"];
 
@@ -66,6 +69,7 @@ $hotspotuser = $_GET['hotspot-user'];
 $userbyname = $_GET['hotspot-user'];
 $removeuseractive = $_GET['remove-user-active'];
 $removehost = $_GET['remove-host'];
+$removecookie = $_GET['remove-cookie'];
 $removeipbinding = $_GET['remove-ip-binding'];
 $removehotspotuser = $_GET['remove-hotspot-user'];
 $removeuserprofile = $_GET['remove-user-profile'];
@@ -77,13 +81,21 @@ $enableipbinding = $_GET['enable-ip-binding'];
 $disableipbinding = $_GET['disable-ip-binding'];
 $userprofile = $_GET['user-profile'];
 $userprofilebyname = $_GET['user-profile'];
+$sys = $_GET['system'];
+$enablesch= $_GET['enable-scheduler'];
+$disablesch = $_GET['disable-scheduler'];
+$removesch  = $_GET['remove-scheduler'];
 $macbinding = $_GET['mac'];
 $ipbinding = $_GET['addr'];
 $ppp = $_GET['ppp'];
+$enablesecr= $_GET['enable-pppsecret'];
+$disablesecr = $_GET['disable-pppsecret'];
+$removesecr  = $_GET['remove-pppsecret'];
+$removepprofile  = $_GET['remove-pprofile'];
+$removepactive  = $_GET['remove-pactive'];
 $srv = $_GET['srv'];
 $prof = $_GET['profile'];
 $comm = $_GET['comment'];
-
 
 ?>
 <?php
@@ -156,6 +168,7 @@ elseif($hotspot == "users" && $prof == "all"){
   $_SESSION['ubp'] = "";
   $_SESSION['hua'] = "";
   $_SESSION['ubc'] = "";
+  $_SESSION['vcr'] = "";
   include_once('./include/users.php');
 }
 
@@ -164,6 +177,7 @@ elseif($hotspot == "users" && $prof!= ""){
   $_SESSION['ubp'] = $prof;
   $_SESSION['hua'] = "";
   $_SESSION['ubc'] = "";
+  $_SESSION['vcr'] = "";
   include_once('./include/users.php');
 }
 
@@ -172,6 +186,7 @@ elseif($hotspot == "users" && $comm!= ""){
   $_SESSION['ubc'] = $comm;
   $_SESSION['hua'] = "";
   $_SESSION['ubp'] = "";
+  $_SESSION['vcr'] = "";
   include_once('./include/users.php');
 }
 
@@ -180,6 +195,7 @@ elseif($hotspot == "users-by-profile"){
   $_SESSION['ubp'] = "";
   $_SESSION['hua'] = "";
   $_SESSION['ubc'] = "";
+  $_SESSION['vcr'] = "active";
   include_once('./include/userbyprofile.php');
 }
 // export hotspot users
@@ -288,28 +304,16 @@ elseif($hotspot == "hosts" || $hotspot == "hostp" || $hotspot == "hosta"){
   include_once('./include/hosts.php');
 }
 
-// hotspot bindings
-elseif($hotspot == "binding"){
-  include_once('./include/binding.php');
+// hotspot Cookies
+elseif($hotspot == "cookies"){
+  include_once('./include/cookies.php');
 }
 
-// hotspot Ip Bindings
-elseif($hotspot == "ipbinding"){
-  include_once('./include/ipbinding.php');
-}
-
-// enable hotspot user
-elseif($enableipbinding != ""){
+// remove hotspot Cookies
+elseif($removecookie != ""){
   echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
   
-  include_once('./process/enableipbinding.php');
-}
-
-// disable hotspot user
-elseif($disableipbinding != ""){
-  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
-  
-  include_once('./process/disableipbinding.php');
+  include_once('./process/removecookie.php');
 }
 
 // remove user active
@@ -326,29 +330,23 @@ elseif($removehost != ""){
   include_once('./process/removehost.php');
 }
 
-// remove ipbinding
-elseif($removeipbinding != ""){
-  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
-  
-  include_once('./process/removeipbinding.php');
-}
-
-// makebinding
-elseif($macbinding != ""){
-  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
-  
-  include_once('./process/makebinding.php');
-}
-
 // selling
 elseif($hotspot == "selling"){
   include_once('./include/selling.php');
 }
 
-// pppoe
-elseif($ppp== "pppoe"){
-  include_once('./include/pppoe.php');
+
+// sys scheduler
+elseif($sys == "scheduler"){
+  include_once('./include/scheduler.php');
 }
+// remove enable disable scheduler
+elseif($removesch != "" || $enablesch != "" || $disablesch != ""){
+  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
+  
+  include_once('./process/pscheduler.php');
+}
+
 ?>
 
 </div>  

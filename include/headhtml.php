@@ -23,14 +23,14 @@ error_reporting(0);
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="cache-control" content="private" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!-- Tell the browser to be responsive to screen width -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<!-- Font Awesome -->
   		<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css" />
   		<!-- Mikhmon UI -->
-  		<link rel="stylesheet" href="css/mikhmon-ui.css">
+  		<link rel="stylesheet" href="css/mikhmon-ui.min.css">
 		<link rel="icon" href="./img/favicon.png" />
 		<title>.:: MIKHMON <?php echo $hotspotname;?> ::.</title>
 	</head>

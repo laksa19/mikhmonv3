@@ -29,11 +29,34 @@ $color = array ('1'=>'bg-blue','bg-indigo','bg-purple','bg-pink','bg-red','bg-ye
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-	<h3><i class=" fa fa-users"></i> User by Profile &nbsp;&nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer" title="Reload data"></i></h3>
+	<h3><i class=" fa fa-users"></i> Vouchers &nbsp;&nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer" title="Reload data"></i></h3>
 </div>
 <div class="card-body">
 <div class="overflow" style="max-height: 80vh">	
 <div class="row">	
+      <div class="col-4">
+        <div class="box bmh-75 box-bordered <?php echo $color[rand(1,11)];?>">
+          <div class="box-group">
+            <div class="box-group-icon">
+              <a title='Open User by profile <?php echo $pname;?>'  href='./app.php?hotspot=users&profile=all&session=<?php echo $session;?>'>
+              <i class="fa fa-ticket"></i></a>
+            </div>
+              <div class="box-group-area">
+                <h3 >Profile : all<br>
+                <?php $countuser = $API->comm("/ip/hotspot/user/print", array("count-only" => ""));
+          if($countuser < 2 ){
+            echo $countuser." Item";
+            }elseif($countuser > 1){
+              echo $countuser." Items";}
+            ?></h3>
+
+              <a title="Open User by profile all" href="./app.php?hotspot=users&profile=all&session=<?php echo $session;?>"><i class="fa fa-external-link"></i> Open</a>&nbsp;
+              <a title="Generate User by profile <?php echo $pname;?>" href="./app.php?hotspot-user=generate&session=<?php echo $session;?>"><i class="fa fa-users"></i> Generate</a>&nbsp;
+              </div>
+            </div>
+            
+          </div>
+        </div>
 <?php
 // get user profile
 	$getprofile = $API->comm("/ip/hotspot/user/profile/print");
@@ -44,10 +67,10 @@ $color = array ('1'=>'bg-blue','bg-indigo','bg-purple','bg-pink','bg-red','bg-ye
 	?>
 	     <div class="col-4">
         <div class="box bmh-75 box-bordered <?php echo $color[rand(1,11)];?>">
-        	<a title='Open User by profile <?php echo $pname;?>'  href='./app.php?hotspot=users&profile=<?php echo $pname;?>&session=<?php echo $session;?>'>
           <div class="box-group">
             <div class="box-group-icon">
-            	<i class="fa fa-address-book"></i>
+              <a title='Open User by profile <?php echo $pname;?>'  href='./app.php?hotspot=users&profile=<?php echo $pname;?>&session=<?php echo $session;?>'>
+            	<i class="fa fa-ticket"></i></a>
             </div>
               <div class="box-group-area">
                 <h3 >Profile : <?php echo $pname;?><br>
@@ -57,9 +80,12 @@ $color = array ('1'=>'bg-blue','bg-indigo','bg-purple','bg-pink','bg-red','bg-ye
   					}elseif($countuser > 1){
   						echo $countuser." Items";}
   					?></h3>
+
+              <a title="Open User by profile <?php echo $pname;?>" href="./app.php?hotspot=users&profile=<?php echo $pname;?>&session=<?php echo $session;?>"><i class="fa fa-external-link"></i> Open</a>&nbsp;
+              <a title="Generate User by profile <?php echo $pname;?>" href="./app.php?hotspot-user=generate&genprof=<?php echo $pname;?>&session=<?php echo $session;?>"><i class="fa fa-users"></i> Generate</a>&nbsp;
               </div>
             </div>
-            </a>
+            
           </div>
         </div>
         <?php }}?>

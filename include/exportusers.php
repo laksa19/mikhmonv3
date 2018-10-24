@@ -23,11 +23,36 @@ if(!isset($_SESSION["mikhmon"])){
   header("Location:../admin.php?id=login");
 }else{
 
+if($prof == "all"){
   $getuser = $API->comm("/ip/hotspot/user/print");
-	$TotalReg = count($getuser);
-	
+  $TotalReg = count($getuser);
+  
   $counttuser = $API->comm("/ip/hotspot/user/print", array(
-	 "count-only" => ""));
+   "count-only" => ""));
+}elseif($prof != "all"){
+  $getuser = $API->comm("/ip/hotspot/user/print", array(
+    "?profile" => "$prof",
+    ));
+  $TotalReg = count($getuser);
+  
+  $counttuser = $API->comm("/ip/hotspot/user/print", array(
+   "count-only" => "",
+   "?profile" => "$prof",
+   ));
+  
+}
+if($comm != ""){
+  $getuser = $API->comm("/ip/hotspot/user/print", array(
+    "?comment" => "$comm",
+    //"?uptime" => "00:00:00"
+  ));
+  $TotalReg = count($getuser);
+  
+  $counttuser = $API->comm("/ip/hotspot/user/print", array(
+   "count-only" => "",
+   "?comment" => "$comm",
+   ));
+}
 }
 ?>
 <div class="row">
@@ -57,10 +82,10 @@ for ($i=1; $i<$TotalReg; $i++){
 	$ucomment = $userdetails['comment'];
   $udisabled = $userdetails['disabled'];
   $utimelimit = $userdetails['limit-uptime'];
-  $udatalimit = $userdetails['limit-bytes-out'];
+  $udatalimit = $userdetails['limit-bytes-total'];
 
   if($utimelimit == ""){$timelimit= "";}else{$timelimit = 'limit-uptime="'.$utimelimit.'"';}
-  if($udatalimit == ""){$datalimit= "";}else{$datalimit = 'limit-bytes-out="'.$udatalimit.'"';}
+  if($udatalimit == ""){$datalimit= "";}else{$datalimit = 'limit-bytes-total="'.$udatalimit.'"';}
   if($ucomment == ""){$comment = "";}else{$comment = 'comment="'.$ucomment.'"';}
 
 	echo '

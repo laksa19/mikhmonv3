@@ -67,7 +67,7 @@ if(!isset($_SESSION["mikhmon"])){
 
 	if($uname == $upass){$usermode = "vc";}else{$usermode = "up";}
   
-  if($uname == ""){ echo "<b>User not found redirect to user list...</b>"; echo "<script>window.location='./app.php?hotspot=users'</script>";}
+  if($uname == ""){ echo "<b>User not found redirect to user list...</b>"; echo "<script>window.location='./app.php?hotspot=users&profile=all&session=".$session."'</script>";}
   
   $getprofilebyuser = $API->comm("/ip/hotspot/user/profile/print", array(
     "?name" => "$uprofile"));
@@ -263,10 +263,7 @@ if($uname == $upass){$shareWA = $shareWAVC;}else{$shareWA = $shareWAUP;}
     <td class="align-middle">Uptime</td><td><input class="form-control" type="text" value="<?php if($uuptime == 0){}else{echo $uuptime;}?>" disabled></td>
   </tr>
   <tr>
-    <td class="align-middle">Bytes In</td><td><input class="form-control" type="text" value="<?php if($ubytesout == 0){}else{echo formatBytes($ubytesin,2);}?>" disabled></td>
-  </tr>
-  <tr>
-    <td class="align-middle">Bytes Out</td><td><input class="form-control" type="text" value="<?php if($ubytesout == 0){}else{echo formatBytes($ubytesout,2);}?>" disabled></td>
+    <td class="align-middle">Bytes  In / Out</td><td><input class="form-control" type="text" value="<?php if($ubytesout == 0){}else{echo formatBytes($ubytesin,2);}?> / <?php if($ubytesout == 0){}else{echo formatBytes($ubytesout,2);}?>" disabled></td>
   </tr>
   <tr>
     <td class="align-middle">Time Limit</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if($utimelimit == "1s"){echo "";}else{ echo $utimelimit;}?>"></td>
@@ -279,9 +276,9 @@ if($uname == $upass){$shareWA = $shareWAVC;}else{$shareWA = $shareWAUP;}
       </div>
           <div class="input-group-2 col-box-3">
               <select style="padding: 4.2px;" class="group-item group-item-r" name="mbgb" required="1">
-				        <option value="<?php if($MG == "MB"){echo "1000000";}elseif($MG == "GB"){echo "1000000000";}?>"><?php echo $MG;?></option>
+				        <option value="<?php if($MG == "MB"){echo "1048576";}elseif($MG == "GB"){echo "1073741824";}?>"><?php echo $MG;?></option>
 				        <option value=1048576>MB</option>
-                <option value=1073741824>GB</option>
+				        <option value=1073741824>GB</option>
 			        </select>
           </div>
       </div>

@@ -67,9 +67,10 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
     <th>User</th>
     <th>Address</th>
     <th>Mac Address</th>
-    <th>Uptime</th>
-    <th>Bytes Out</th>
-    <th>Time Left</th>
+    <th class="text-right">Uptime</th>
+    <th class="text-right">Bytes In</th>
+    <th class="text-right">Bytes Out</th>
+    <th class="text-right">Time Left</th>
     <th>Login By</th>
     <th>Comment</th>
   </tr>
@@ -85,6 +86,7 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
 	$mac = $hotspotactive['mac-address'];
 	$uptime = formatDTM($hotspotactive['uptime']);
 	$usesstime = formatDTM($hotspotactive['session-time-left']);
+	$bytesi = formatBytes($hotspotactive['bytes-in'], 2);
 	$byteso = formatBytes($hotspotactive['bytes-out'], 2);
 	$loginby = $hotspotactive['login-by'];
 	$comment = $hotspotactive['comment'];
@@ -96,6 +98,7 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
 	echo "<td>" . $address . "</td>";
 	echo "<td>" . $mac . "</td>";
 	echo "<td style='text-align:right;'>" . $uptime . "</td>";
+	echo "<td style='text-align:right;'>" . $bytesi . "</td>";
 	echo "<td style='text-align:right;'>" . $byteso . "</td>";
 	echo "<td style='text-align:right;'>" . $usesstime . "</td>";
 	echo "<td>" . $loginby . "</td>";

@@ -136,7 +136,7 @@ if(!isset($_SESSION["mikhmon"])){
           <div class="input-group-2 col-box-3">
               <select style="padding:4.2px;" class="group-item group-item-r" name="mbgb" required="1">
 				        <option value=1048576>MB</option>
-                <option value=1073741824>GB</option>
+				        <option value=1073741824>GB</option>
 			        </select>
           </div>
       </div>

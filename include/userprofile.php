@@ -44,7 +44,7 @@ if(!isset($_SESSION["mikhmon"])){
 <div class="card">
 <div class="card-header align-middle">
     <h3><i class=" fa fa-pie-chart"></i> User Profile 
-    
+    &nbsp; | &nbsp; <a href="./app.php?user-profile=add&session=<?php echo $session;?>" title="Add User"><i class="fa fa-user-plus"></i> Add</a>
 	</h3>
 </div>
 <!-- /.card-header -->
@@ -72,15 +72,18 @@ if(!isset($_SESSION["mikhmon"])){
 <?php
 
 for ($i=0; $i<$TotalReg; $i++){
-echo "<tr>";
+
 $profiledetalis = $getprofile[$i];
 $pid = $profiledetalis['.id'];
 $pname = $profiledetalis['name'];
 $psharedu = $profiledetalis['shared-users'];
 $pratelimit = $profiledetalis['rate-limit'];
 $ponlogin = $profiledetalis['on-login'];
-
-echo "<td style='text-align:center;'><a  href='./app.php?remove-user-profile=".$pid . "&session=".$session."' title='Remove User Profile " . $pname . "'><i class='fa fa-minus-square text-danger'></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a title='Open User by profile " .$pname. "'  href='./app.php?hotspot=users&profile=" .$pname . "&session=".$session."'><i class='fa fa-users'></i></a></td>";
+echo "<tr>";
+?>
+  <td style='text-align:center;'><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete profile (<?php echo $pname;?>)?')){window.location='./app.php?remove-user-profile=<?php echo $pid;?>&session=<?php echo $session;?>'}else{}" title='Remove <?php echo $pname;?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <?php
+echo "<a title='Open User by profile " .$pname. "'  href='./app.php?hotspot=users&profile=" .$pname . "&session=".$session."'><i class='fa fa-users'></i></a></td>";
 echo "<td><a title='Open User Profile " . $pname . "' href='./app.php?user-profile=".$pid."&session=".$session."'><i class='fa fa-edit'></i> $pname</a></td>";
 //$profiledetalis = $ARRAY[$i];echo "<td>" . $profiledetalis['name'];echo "</td>";
 echo "<td>" . $psharedu;echo "</td>";

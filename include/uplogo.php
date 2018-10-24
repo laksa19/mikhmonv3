@@ -143,7 +143,11 @@ if ($uploadOk == 0) {
                 ){
             }else{?>
               
-              <tr><td><?php echo $file;?></td><td><a href="javascript:void(0)" onclick="if(confirm('Sure to delete <?php echo $file;?> ?')){window.location='./admin.php?id=remove&logo=<?php echo $file;?>'}else{}"><i class="fa fa-remove"></i> Delete</a></td></tr>
+              <tr>
+                <td><a href="javascript:window.open('./img/<?php echo $file;?>','_blank','width=300,height=300')"><img height="30px" src="./img/<?php echo $file;?>" title="Open <?php echo $file;?>"></a></td>
+                <td><a href="javascript:void(0)" onclick="if(confirm('Sure to delete <?php echo $file;?> ?')){window.location='./admin.php?id=remove&logo=<?php echo $file;?>'}else{}"><i class="fa fa-remove"></i> Delete</a>
+                </td>
+              </tr>
               
           <?php }}
         }

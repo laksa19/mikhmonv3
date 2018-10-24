@@ -25,6 +25,28 @@ if(!isset($_SESSION["mikhmon"])){
   header("Location:../admin.php?id=login");
 }else{
   
+  $genprof = $_GET['genprof'];
+if($genprof !=""){
+	$getprofile = $API->comm("/ip/hotspot/user/profile/print", array(
+    "?name"=> "$genprof",
+    ));
+    $ponlogin = $getprofile[0]['on-login'];
+	$getprice = explode(",",$ponlogin)[2];
+    if($getprice == "0"){$getprice = "";}else{$getprice = $getprice;}
+		
+	$getvalid = explode(",",$ponlogin)[3];
+		
+    $getlocku = explode(",",$ponlogin)[6];
+    if($getlocku == ""){$getprice = "Disable";}else{$getlocku = $getlocku;}
+
+	if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){
+		$getprice = $curency." ".number_format($getprice,0,",",".");
+	}else{
+	$getprice = $curency." ".number_format($getprice);
+	}
+	$ValidPrice = "<b>Validity : ".$getvalid." | Price : ".$getprice." | Lock User : ". $getlocku."</b>";
+}else{}
+
   $srvlist = $API->comm("/ip/hotspot/print");
   
   if(isset($_POST['qty'])){
@@ -61,30 +83,30 @@ if(!isset($_SESSION["mikhmon"])){
     if($user=="up"){
 		for($i=1;$i<=$qty;$i++){
 			if($char == "lower"){
-			$u[$i]= substr(str_shuffle("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"), -$userl);
+			$u[$i]= randLC($userl);
 		  }elseif($char == "upper"){
-		  $u[$i]= substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"), -$userl);
+		  $u[$i]= randUC($userl);
 		  }elseif($char == "upplow"){
-		  $u[$i]= substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), -$userl);
+		  $u[$i]= randULC($userl);
 		  }elseif($char == "mix"){
-		  $u[$i]= substr(str_shuffle("123456789123456789123456789abcdefghijklmnopqrstuvwxyz"), -$userl);
+		  $u[$i]= randNLC($userl);
 		  }elseif($char == "mix1"){
-		  $u[$i]= substr(str_shuffle("123456789123456789123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), -$userl);
+		  $u[$i]= randNUC($userl);
 		  }elseif($char == "mix2"){
-		  $u[$i]= substr(str_shuffle("123456789123456789123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"), -$userl);
+		  $u[$i]= randNULC($userl);
 		  }
 		  if($userl == 3){
-				$p[$i]= rand(100,999);
+				$p[$i]= randN(3);
 			}elseif($userl == 4){
-				$p[$i]= rand(1000,9999);
+				$p[$i]= randN(4);
 			}elseif($userl == 5){
-				$p[$i]= rand(10000,99999);
+				$p[$i]= randN(5);
 			}elseif($userl == 6){
-				$p[$i]= rand(100000,999999);
+				$p[$i]= randN(6);
 			}elseif($userl == 7){
-				$p[$i]= rand(1000000,9999999);
+				$p[$i]= randN(7);
 			}elseif($userl == 8){
-				$p[$i]= rand(10000000,99999999);
+				$p[$i]= randN(8);
 			}
 			
 			$u[$i] = "$prefix$u[$i]";
@@ -106,55 +128,55 @@ if(!isset($_SESSION["mikhmon"])){
 		  $shuf = ($userl-$a[$userl]);
 		for($i=1;$i<=$qty;$i++){
         if($char == "lower"){
-          $u[$i]= substr(str_shuffle("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"), -$shuf);
+          $u[$i]= randLC($shuf);
         }elseif($char == "upper"){
-          $u[$i]= substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"), -$shuf);
+          $u[$i]= randUP($shuf);
         }elseif($char == "upplow"){
-          $u[$i]= substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), -$shuf);
+          $u[$i]= randULC($shuf);
         }
         if($userl == 3){
-			  	$p[$i]= rand(1,9);
+			  	$p[$i]= randN(1);
 			  }elseif($userl == 4 || $userl == 5){
-			  	$p[$i]= rand(10,99);
+			  	$p[$i]= randN(2);
 			  }elseif($userl == 6 || $userl == 7){
-			  	$p[$i]= rand(100,999);
+			  	$p[$i]= randN(3);
 			  }elseif($userl == 8){
-			  	$p[$i]= rand(1000,9999);
+			  	$p[$i]= randN(4);
 			  }
 
 	      $u[$i] = "$prefix$u[$i]$p[$i]";
 	      
 	      if($char == "num"){
 	      if($userl == 3){
-			  	$p[$i]= rand(100,999);
+			  	$p[$i]= randN(3);
 			  }elseif($userl == 4){
-			  	$p[$i]= rand(1000,9999);
+			  	$p[$i]= randN(4);
 			  }elseif($userl == 5){
-			  	$p[$i]= rand(10000,99999);
+			  	$p[$i]= randN(5);
 			  }elseif($userl == 6){
-			  	$p[$i]= rand(100000,999999);
+			  	$p[$i]= randN(6);
 			  }elseif($userl == 7){
-			  	$p[$i]= rand(1000000,9999999);
+			  	$p[$i]= randN(7);
 			  }elseif($userl == 8){
-			  	$p[$i]= rand(10000000,99999999);
+			  	$p[$i]= randN(8);
 			  }
 
 	      $u[$i] = "$prefix$p[$i]";
 	      }
 	      if($char == "mix"){
-			  	$p[$i]= substr(str_shuffle("123456789123456789123456789abcdefghijklmnopqrstuvwxyz"), -$userl);
+			  	$p[$i]= randNLC($userl);
 			  
 
 	      $u[$i] = "$prefix$p[$i]";
 	      }
 	      if($char == "mix1"){
-			  	$p[$i]= substr(str_shuffle("123456789123456789123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), -$userl);
+			  	$p[$i]= randNUC($userl);
 			  
 
 	      $u[$i] = "$prefix$p[$i]";
 	      }
 	      if($char == "mix2"){
-			  	$p[$i]= substr(str_shuffle("123456789123456789123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"), -$userl);
+			  	$p[$i]= randNULC($userl);
 			  
 
 	      $u[$i] = "$prefix$p[$i]";
@@ -170,15 +192,15 @@ if(!isset($_SESSION["mikhmon"])){
 			"limit-uptime" => "$timelimit",
 			"limit-bytes-total" => "$datalimit",
 			"comment" => "$commt",
-			));	
+			));
 		}}
 		
 		
 	if($qty < 2){
 		  echo "<script>window.location='./app.php?hotspot-user=".$u[1]."&session=".$session."'</script>";
 		}else{
-			echo "<script>window.location='./app.php?hotspot-user=generate&session=".$session."'</script>"; 
-		} 		
+			echo "<script>window.location='./app.php?hotspot-user=generate&session=".$session."'</script>";
+		}
 }
 
   $getprofile = $API->comm("/ip/hotspot/user/profile/print");
@@ -203,7 +225,9 @@ if(!isset($_SESSION["mikhmon"])){
 		$uprice = $curency." ".number_format($uprice,0,",",".");
 	}else{
 	$uprice = $curency." ".number_format($uprice);
+
 }
+
 }
 ?>
 <div class="row">
@@ -218,11 +242,14 @@ if(!isset($_SESSION["mikhmon"])){
 	<div>
 		<?php if($_SESSION['ubp'] != ""){
     echo "    <a class='btn bg-warning' href='./app.php?hotspot=users&profile=".$_SESSION['ubp']."&session=".$session."'> <i class='fa fa-close'></i> Close</a>";
+}elseif($_SESSION['vcr'] = "active"){
+    echo "    <a class='btn bg-warning' href='./app.php?hotspot=users-by-profile&session=".$session."'> <i class='fa fa-close'></i> Close</a>";
 }else{
     echo "    <a class='btn bg-warning' href='./app.php?hotspot=users&profile=all&session=".$session."'> <i class='fa fa-close'></i> Close</a>";
 }
+
 ?>
-	<a class="btn bg-info" title="Open User List by Profile <?php if($_SESSION['ubp'] == ""){echo "all";}else{echo $uprofile;}?>" href="./app.php?hotspot=users&profile=<?php if($_SESSION['ubp'] == ""){echo "all";}else{echo $uprofile;}?>&session=<?php echo $session;?>"> <i class="fa fa-users"></i> User List</a>
+	<a class="btn bg-pink" title="Open User List by Profile <?php if($_SESSION['ubp'] == ""){echo "all";}else{echo $uprofile;}?>" href="./app.php?hotspot=users&profile=<?php if($_SESSION['ubp'] == ""){echo "all";}else{echo $uprofile;}?>&session=<?php echo $session;?>"> <i class="fa fa-users"></i> User List</a>
     <button type="submit" name="save" onclick="loader()" class="btn bg-primary" title="Generate User"> <i class="fa fa-save"></i> Generate</button>
     <a class="btn bg-secondary" title="Print Default" href="./voucher/print.php?id=<?php echo $urlprint;?>&qr=no&session=<?php echo $session;?>" target="_blank"> <i class="fa fa-print"></i> Print</a>
     <a class="btn bg-danger" title="Print QR" href="./voucher/print.php?id=<?php echo $urlprint;?>&qr=yes&session=<?php echo $session;?>" target="_blank"> <i class="fa fa-qrcode"></i> QR</a>
@@ -288,7 +315,8 @@ if(!isset($_SESSION["mikhmon"])){
   <tr>
     <td class="align-middle">Profile</td><td>
 			<select class="form-control " onchange="GetVP();" id="uprof" name="profile" required="1">
-				<?php $TotalReg = count($getprofile);
+				<?php if ($genprof !=""){echo "<option>" .$genprof. "</option>";}else{}
+				$TotalReg = count($getprofile);
 				for ($i=0; $i<$TotalReg; $i++){
 				  echo "<option>" . $getprofile[$i]['name'] . "</option>";
 				  }
@@ -318,7 +346,9 @@ if(!isset($_SESSION["mikhmon"])){
     <td class="align-middle">Comment</td><td><input class="form-control " type="text" title="No special characters" id="comment" autocomplete="off" name="adcomment" value=""></td>
   </tr>
    <tr >
-    <td  colspan="4" class="align-middle"  id="GetValidPrice"></td>
+    <td  colspan="4" class="align-middle w-12"  id="GetValidPrice">
+    	<?php if($genprof !=""){echo $ValidPrice;}?>
+    </td>
   </tr>
 </table>
 </form>
@@ -382,7 +412,7 @@ if(!isset($_SESSION["mikhmon"])){
   </tr>
   <tr>
   	<td>Lock User</td><td>'.$ulock.'</td>
-  </tr>';  	
+  </tr>';
       }
       ?>
   <tr>

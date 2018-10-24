@@ -22,10 +22,10 @@ if(!isset($_SESSION["mikhmon"])){
   header("Location:../admin.php?id=login");
 }else{
 
-  $getbinding = $API->comm("/ip/dhcp-server/lease/print");
-	$TotalReg = count($getbinding);
+  $getlease = $API->comm("/ip/dhcp-server/lease/print");
+	$TotalReg = count($getlease);
 	
-	$countbinding = $API->comm("/ip/dhcp-server/lease/print", array(
+	$countlease = $API->comm("/ip/dhcp-server/lease/print", array(
 	  "count-only" => "",));
 
 }
@@ -36,9 +36,9 @@ if(!isset($_SESSION["mikhmon"])){
 <div class="card-header">
 	<h3><i class=" fa fa-sitemap"></i> DHCP Leases 
 <?php
-  if($countbinding < 2 ){echo "$countbinding item";
-  }elseif($countbinding > 1){
-  echo "$countbinding items";};echo"</th>";
+  if($countlease < 2 ){echo "$countlease item";
+  }elseif($countlease > 1){
+  echo "$countlease items";};echo"</th>";
 ?>
 &nbsp;&nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer" title="Reload data"></i>
     </h3>
@@ -64,7 +64,7 @@ if(!isset($_SESSION["mikhmon"])){
   <tbody> 
 <?php
 	for ($i=0; $i<$TotalReg; $i++){
-	$lease = $getbinding[$i];
+	$lease = $getlease[$i];
 	$id = $lease['.id'];
 	
 	

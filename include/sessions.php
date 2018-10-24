@@ -86,7 +86,7 @@ if(isset($_POST['save'])){
                                 <div class="box-group">
                                   
                                   <div class="box-group-icon">
-                                    <a title='Open User by profile <?php echo $pname;?>'  href='./app.php?hotspot=dashboard&session=<?php echo $value;?>'>
+                                    <a title='Open session <?php echo $value;?>'  href='./app.php?hotspot=dashboard&session=<?php echo $value;?>'>
                                     <i class="fa fa-server"></i>
                                       </a>
                                   </div>
@@ -97,7 +97,7 @@ if(isset($_POST['save'])){
                                       Session Name : <?php echo $value;?><br>
                                       <a href="./app.php?hotspot=dashboard&session=<?php echo $value;?>"><i class="fa fa-external-link"></i> Open</a>&nbsp;
                                       <a href="./admin.php?id=settings&session=<?php echo $value;?>"><i class="fa fa-edit"></i> Edit</a>&nbsp;
-                                      <a href="javascript:void(0)" onclick="if(confirm('Sure to delete data <?php echo $value; echo " (".explode('%',$data[$value][4])[1].")";?>?')){window.location='./admin.php?id=remove&session=<?php echo $value;?>'}else{}"><i class="fa fa-remove"></i> Delete</a>
+                                      <a href="javascript:void(0)" onclick="if(confirm('Are you sure to delete data <?php echo $value; echo " (".explode('%',$data[$value][4])[1].")";?>?')){window.location='./admin.php?id=remove&session=<?php echo $value;?>'}else{}"><i class="fa fa-remove"></i> Delete</a>
                                     </span>
  
                                   </div>

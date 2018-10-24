@@ -130,7 +130,7 @@ if($genprof !=""){
         if($char == "lower"){
           $u[$i]= randLC($shuf);
         }elseif($char == "upper"){
-          $u[$i]= randUP($shuf);
+          $u[$i]= randUC($shuf);
         }elseif($char == "upplow"){
           $u[$i]= randULC($shuf);
         }
@@ -299,16 +299,16 @@ if($genprof !=""){
   <tr>
     <td class="align-middle">Character</td><td>
       <select class="form-control " name="char" required="1">
-				<option id="lower" style="display:block;" value="lower">abcd</option>
-				<option id="upper" style="display:block;" value="upper">ABCD</option>
-				<option id="upplow" style="display:block;" value="upplow">aBcD</option>
-				<option id="lower1" style="display:none;" value="lower">abcd1234</option>
-				<option id="upper1" style="display:none;" value="upper">ABCD1234</option>
-				<option id="upplow1" style="display:none;" value="upplow">aBcD1234</option>
-				<option id="mix" style="display:block;" value="mix">1ab2c34d</option>
-				<option id="mix1" style="display:block;" value="mix1">1AB2C34D</option>
-				<option id="mix2" style="display:block;" value="mix2">1aB2c34D</option>
-				<option id="num" style="display:none;" value="num">1234</option>
+				<option id="lower" style="display:block;" value="lower">Random abcd</option>
+				<option id="upper" style="display:block;" value="upper">Random ABCD</option>
+				<option id="upplow" style="display:block;" value="upplow">Random aBcD</option>
+				<option id="lower1" style="display:none;" value="lower">Random abcd2345</option>
+				<option id="upper1" style="display:none;" value="upper">Random ABCD2345</option>
+				<option id="upplow1" style="display:none;" value="upplow">Random aBcD2345</option>
+				<option id="mix" style="display:block;" value="mix">Random 5ab2c34d</option>
+				<option id="mix1" style="display:block;" value="mix1">Random 5AB2C34D</option>
+				<option id="mix2" style="display:block;" value="mix2">Random 5aB2c34D</option>
+				<option id="num" style="display:none;" value="num">Random 1234</option>
 			</select>
     </td>
   </tr>

@@ -72,7 +72,7 @@ if($genprof !=""){
     $_SESSION['ubp'] = $profile;
     $commt = $user . "-" . rand(100,999) . "-" . date("m.d.y") . "-" .$adcomment;
     
-    $gen = '<?php $genu="'. $commt . "-" . $profile . "-" . $getvalid . "-" . $getprice . "-" . $timelimit ."-" . $datalimit . "-" . $getlock .'";?>';
+    $gen = '<?php $genu="'. $commt . "|~" . $profile . "~" . $getvalid . "~" . $getprice . "~" . $timelimit ."~" . $datalimit . "~" . $getlock .'";?>';
     $temp = './voucher/temp.php';
 		$handle = fopen($temp, 'w') or die('Cannot open file:  '.$temp);
 		$data = $gen;
@@ -206,21 +206,23 @@ if($genprof !=""){
   $getprofile = $API->comm("/ip/hotspot/user/profile/print");
   include_once('./voucher/temp.php');
   $genuser = explode("-",$genu);
+  $genuser1 = explode("~",$genu);
   $umode = $genuser[0];
   $ucode = $genuser[1];
   $udate = $genuser[2];
-  $uprofile = $genuser[4];
-	$uvalid = $genuser[5];
+  $uprofile = $genuser1[1];
+	$uvalid = $genuser1[2];
 	$ucommt = $genuser[3];
 	if($uvalid == ""){$uvalid = "-";}else{$uvalid = $uvalid;}
-	$uprice = $genuser[6];
+	$uprice = $genuser1[3];
 	if($uprice == "0"){$uprice = "-";}else{$uprice = $uprice;}
-	$utlimit = $genuser[7];
+	$utlimit = $genuser1[4];
 	if($utlimit == "0"){$utlimit = "-";}else{$utlimit = $utlimit;}
-	$udlimit = $genuser[8];
+	$udlimit = $genuser1[5];
 	if($udlimit == "0"){$udlimit = "-";}else{$udlimit = formatBytes($udlimit,2);}
-	$ulock = $genuser[9];
-	$urlprint = "$umode-$ucode-$udate-$ucommt";
+	$ulock = $genuser1[6];
+	//$urlprint = "$umode-$ucode-$udate-$ucommt";
+	$urlprint = explode("|",$genu)[0];
 	if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){
 		$uprice = $curency." ".number_format($uprice,0,",",".");
 	}else{

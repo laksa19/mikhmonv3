@@ -41,16 +41,24 @@ $_SESSION["connect"] = "";
 
 // load config
 include('./include/config.php');
-$iphost=explode('!',$data[$session][1])[1]; 
+$iphost=explode('!',$data[$session][1])[1];
 $userhost=explode('@|@',$data[$session][2])[1];
-$passwdhost=explode('#|#',$data[$session][3])[1]; 
-$hotspotname=explode('%',$data[$session][4])[1]; 
-$dnsname=explode('^',$data[$session][5])[1]; 
+$passwdhost=explode('#|#',$data[$session][3])[1];
+$hotspotname=explode('%',$data[$session][4])[1];
+$dnsname=explode('^',$data[$session][5])[1];
 $curency=explode('&',$data[$session][6])[1];
-$areload=explode('*',$data[$session][7])[1];  
-$iface=explode('(',$data[$session][8])[1];  
-$maxtx=explode(')',$data[$session][9])[1]; 
+$areload=explode('*',$data[$session][7])[1];
+$iface=explode('(',$data[$session][8])[1];
+$maxtx=explode(')',$data[$session][9])[1];
 $maxrx=explode('+',$data[$session][10])[1];
+
+
+// load exp
+include_once('./lib/exdtmo.php');
+
+$today = strtotime($todays_date);
+$expiration_date = strtotime($exp_date);
+
 
 
 // routeros api
@@ -106,7 +114,7 @@ include_once('./include/menu.php');
 $disable_sci = '<script>
   document.getElementById("comment").onkeypress = function(e) {
     var chr = String.fromCharCode(e.which);
-    if (" -_!@#$%^&*()+=;|?,.~".indexOf(chr) >= 0)
+    if (" _!@#$%^&*()+=;|?,.~".indexOf(chr) >= 0)
         return false;
 };
 </script>';
@@ -304,6 +312,12 @@ elseif($hotspot == "hosts" || $hotspot == "hostp" || $hotspot == "hosta"){
   include_once('./include/hosts.php');
 }
 
+// hotspot bindings
+elseif($hotspot == "binding"){
+  include_once('./include/binding.php');
+}
+
+
 // hotspot Cookies
 elseif($hotspot == "cookies"){
   include_once('./include/cookies.php');
@@ -315,6 +329,19 @@ elseif($removecookie != ""){
   
   include_once('./process/removecookie.php');
 }
+
+// hotspot Ip Bindings
+elseif($hotspot == "ipbinding"){
+  include_once('./include/ipbinding.php');
+}
+
+// remove enable disable ipbinding
+elseif($removeipbinding != "" || $enableipbinding != "" || $disableipbinding != ""){
+  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
+  
+  include_once('./process/pipbinding.php');
+}
+
 
 // remove user active
 elseif($removeuseractive != ""){
@@ -330,11 +357,60 @@ elseif($removehost != ""){
   include_once('./process/removehost.php');
 }
 
+
+// makebinding
+elseif($macbinding != ""){
+  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
+  
+  include_once('./process/makebinding.php');
+}
+
 // selling
 elseif($hotspot == "selling"){
   include_once('./include/selling.php');
 }
 
+// ppp secret
+elseif($ppp== "secrets"){
+  include_once('./include/pppsecrets.php');
+}
+
+// ppp addsecret
+elseif($ppp== "addsecret"){
+  include_once('./include/addsecret.php');
+}
+
+// remove enable disable secret
+elseif($removesecr != "" || $enablesecr != "" || $disablesecr != ""){
+  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
+  
+  include_once('./process/psecret.php');
+}
+
+
+// ppp profile
+elseif($ppp== "profiles"){
+  include_once('./include/pppprofile.php');
+}
+
+// remove enable disable profile
+elseif($removepprofile != ""){
+  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
+  
+  include_once('./process/removepprofile.php');
+}
+
+// ppp active connection
+elseif($ppp== "active"){
+  include_once('./include/pppactive.php');
+}
+
+// remove ppp active connection
+elseif($removepactive != ""){
+  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
+  
+  include_once('./process/removepactive.php');
+}
 
 // sys scheduler
 elseif($sys == "scheduler"){
@@ -349,8 +425,8 @@ elseif($removesch != "" || $enablesch != "" || $disablesch != ""){
 
 ?>
 
-</div>  
-</div>  
+</div>
+</div>
 </div>
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
@@ -366,18 +442,18 @@ $(document).ready(function(){
   });
 });
 </script>
-<?php 
+<?php
 if($hotspot == "dashboard"){
   echo '<script>
   $(document).ready(function(){
-   var interval = "'.($areload * 1000).'"; 
+   var interval = "'.($areload * 1000).'";
    setInterval(function() {
-    $("#reloadHome").load("./include/home.php?session='.$session.'"); }, interval);}) 
+    $("#reloadHome").load("./include/home.php?session='.$session.'"); }, interval);})
 </script>';
 }elseif($hotspot == "active"){
     echo '<script>
   $(document).ready(function(){
-   var interval = "'.($areload * 1000).'"; 
+   var interval = "'.($areload * 1000).'";
    setInterval(function() {
     $("#reloadHotspotActive").load("./include/hotspotactive.php?session='.$session.'"); }, interval);})
 </script>

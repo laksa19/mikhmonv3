@@ -50,7 +50,11 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
 
 if($userp != ""){
   $usermode = explode('-',$userp)[0];
-  $user = explode('-',$userp)[1];
+  $pulluser = explode('-',$userp);
+  $iuser  = count($pulluser);
+  $prefix = explode('-',$userp)[$iuser - 2];
+  $user = explode('-',$userp)[$iuser - 1];
+  if($iuser == 3){$user = $prefix."-".$user;}else{$user = $user;}
   $getuser = $API->comm("/ip/hotspot/user/print", array("?name"=> "$user"));
   $TotalReg = count($getuser);
 }elseif($id != ""){

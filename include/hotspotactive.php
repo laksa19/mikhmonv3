@@ -104,7 +104,7 @@ if($serveractive != ""){
 	
 	echo "<tr>";
 	echo "<td style='text-align:center;'><a  title='Remove ". $user . "' href='./app.php?remove-user-active=". $id . "&session=".$session."'><i class='fa fa-minus-square text-danger'></i></a></td>";
-	echo "<td><a  title='filter ". $server . "' href='./app.php?hotspot=active&server=". $server . "&session=".$session."'><i class='fa fa-search'></i> " . $server . "</a></td>";
+	echo "<td><a  title='filter ". $server . "' href='./app.php?hotspot=active&server=". $server . "&session=".$session."'><i class='fa fa-server'></i> " . $server . "</a></td>";
 	echo "<td><a title='Open User " .$user. "' style='color:#f3f4f5;' href=./app.php?hotspot-user=" .$user. "&session=".$session."><i class='fa fa-edit'></i> " .$user."</a></td>";
 	echo "<td>" . $address . "</td>";
 	echo "<td>" . $mac . "</td>";

@@ -30,7 +30,7 @@ if(!isset($_SESSION["mikhmon"])){
         <h3><i class="fa fa-info-circle"></i> About</h3>
       </div>
       <div class="card-body">
-        <h3>MIKHMON V3.3</h3>
+        <h3>MIKHMON V3.4</h3>
 <p>
   Aplikasi ini dipersembahkan untuk pengusaha hotspot di manapun Anda berada.
   Semoga makin sukses.

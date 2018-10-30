@@ -25,12 +25,13 @@ if(!isset($_SESSION["mikhmon"])){
 // load session MikroTik
 $session = $_GET['session'];
 
+
 // load config
 include('./config.php');
 $iphost=explode('!',$data[$session][1])[1]; 
 $userhost=explode('@|@',$data[$session][2])[1];
 $passwdhost=explode('#|#',$data[$session][3])[1]; 
-
+$serveractive = $_GET['server'];
 
 // routeros api
 include_once('../lib/routeros_api.class.php');
@@ -39,12 +40,20 @@ $API = new RouterosAPI();
 $API->debug = false;
 $API->connect( $iphost, $userhost, decrypt($passwdhost));
 
+if($serveractive != ""){
+	$gethotspotactive = $API->comm("/ip/hotspot/active/print", array("?server" => "".$serveractive.""));
+	$TotalReg = count($gethotspotactive);
+	
+	$counthotspotactive = $API->comm("/ip/hotspot/active/print", array(
+	  "count-only" => "","?server" => "".$serveractive.""));
+
+}else{
   $gethotspotactive = $API->comm("/ip/hotspot/active/print");
 	$TotalReg = count($gethotspotactive);
 	
 	$counthotspotactive = $API->comm("/ip/hotspot/active/print", array(
 	  "count-only" => "",));
-
+}
 }
 ?>
 <div class="row">
@@ -53,9 +62,11 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
 	<div class="card">
 		<div class="card-header">
     		<h3><i class="fa fa-wifi"></i> Hotspot Active <?php
+  if($serveractive == ""){}else{echo $serveractive." "; }  		
   if($counthotspotactive < 2 ){echo "$counthotspotactive item";
   }elseif($counthotspotactive > 1){
-  echo "$counthotspotactive items";};echo"</th>";
+  echo "$counthotspotactive items";};
+  if($serveractive == ""){}else{echo " | <a href='./app.php?hotspot=active&session=".$session."'> <i class='fa fa-search'></i> Show all</a>";}
 ?>			</h3>
         </div>
          <div class="card-body overflow">	   
@@ -93,7 +104,7 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
 	
 	echo "<tr>";
 	echo "<td style='text-align:center;'><a  title='Remove ". $user . "' href='./app.php?remove-user-active=". $id . "&session=".$session."'><i class='fa fa-minus-square text-danger'></i></a></td>";
-	echo "<td>" . $server . "</td>";
+	echo "<td><a  title='filter ". $server . "' href='./app.php?hotspot=active&server=". $server . "&session=".$session."'><i class='fa fa-search'></i> " . $server . "</a></td>";
 	echo "<td><a title='Open User " .$user. "' style='color:#f3f4f5;' href=./app.php?hotspot-user=" .$user. "&session=".$session."><i class='fa fa-edit'></i> " .$user."</a></td>";
 	echo "<td>" . $address . "</td>";
 	echo "<td>" . $mac . "</td>";

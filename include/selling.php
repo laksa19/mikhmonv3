@@ -133,7 +133,7 @@ $shd = "none";
           var dataTable = document.getElementById("dataTable");
           
           // use querySelector to find all second table cells
-          var cells = document.querySelectorAll("td + td + td + td");
+          var cells = document.querySelectorAll("td + td + td + td + td + td");
           for (var i = 0; i < cells.length; i++)
           sum+=parseFloat(cells[i].firstChild.data);
           
@@ -161,7 +161,7 @@ $shd = "none";
 			<table id="dataTable" class="table table-bordered table-hover text-nowrap">
 				<thead class="thead-light">
 				<tr>
-				  <th colspan=2 >Selling report <?php echo $filedownload;?><b style="font-size:0;">,</b></th>
+				  <th colspan=4 >Selling report <?php echo $filedownload;?><b style="font-size:0;">,</b></th>
 				  <th style="text-align:right;">Total</th>
 				  <th style="text-align:right;" id="total"></th>
 				</tr>
@@ -169,6 +169,8 @@ $shd = "none";
 					<th >Date</th>
 					<th >Time</th>
 					<th >Username</th>
+					<th >Profile</th>
+					<th >Comment</th>
 					<th style="text-align:right;">Price <?php echo $curency;?></th>
 				</tr>
 				</thead>
@@ -195,6 +197,14 @@ $shd = "none";
 							echo "<td>";
 							$username = $getname[2];
 							echo $username;
+							echo "</td>";
+							echo "<td>";
+							$profile = $getname[7];
+							echo $profile;
+							echo "</td>";
+							echo "<td>";
+							$comment = $getname[8];
+							echo $comment;
 							echo "</td>";
 							echo "<td style='text-align:right;'>";
 							$price = $getname[3];

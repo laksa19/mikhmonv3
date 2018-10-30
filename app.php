@@ -104,6 +104,7 @@ $removepactive  = $_GET['remove-pactive'];
 $srv = $_GET['srv'];
 $prof = $_GET['profile'];
 $comm = $_GET['comment'];
+$serveractive = $_GET['server'];
 
 ?>
 <?php
@@ -450,7 +451,15 @@ if($hotspot == "dashboard"){
    setInterval(function() {
     $("#reloadHome").load("./include/home.php?session='.$session.'"); }, interval);})
 </script>';
-}elseif($hotspot == "active"){
+}elseif($hotspot == "active" && $serveractive != ""){
+    echo '<script>
+  $(document).ready(function(){
+   var interval = "'.($areload * 1000).'";
+   setInterval(function() {
+    $("#reloadHotspotActive").load("./include/hotspotactive.php?server='.$serveractive.'&session='.$session.'"); }, interval);})
+</script>
+';
+}elseif($hotspot == "active" && $serveractive == ""){
     echo '<script>
   $(document).ready(function(){
    var interval = "'.($areload * 1000).'";

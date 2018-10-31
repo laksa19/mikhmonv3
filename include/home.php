@@ -236,7 +236,9 @@ $routerboard = $getrouterboard[0];
   $log = array_reverse($getlog);
   $TotalReg = count($getlog);
   for ($i=0; $i<$TotalReg; $i++){
+  if(substr($log[$i]['message'], 0,2) == "->"){  
   echo "".$log[$i]['time'] ." " . $log[$i]['message']."&#13;&#10;";
+  }else{};
   }
 ?>
                   </textarea>

@@ -40,14 +40,15 @@ if(!isset($_SESSION["mikhmon"])){
      <input id="filterTable" type="text" class="form-control" placeholder="Search.."> 
 </div>
 <div style="padding: 5px; max-height: 75vh;" class="mr-t-10 overflow">
-<table class="table table-sm" id="dataTable" >
+<table class="table table-sm table-bordered table-hover" id="dataTable" >
 	<tbody>
 <?php
 	for ($i=0; $i<$TotalReg; $i++){
 	echo "<tr>";
-	echo "<td></td>";
+	if(substr($log[$i]['message'], 0,2) == "->"){  
 	echo "<td>" . $log[$i]['time'];echo "</td>";
 	echo "<td>" . $log[$i]['message'];echo "</td>";
+	}else{}
 	echo "</tr>";
 	}
 ?>

@@ -245,7 +245,7 @@ if(!isset($_SESSION["mikhmon"])){
 function remSpace() {
   var upName = document.getElementsByName("name")[0];
   var newUpName = upName.value.replace(/\s/g, "-");
-  alert("<?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){echo "Nama Profile tidak boleh berisi spasi";}else{echo "Profile name can't containing white space!";}?>");
+  //alert("<?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){echo "Nama Profile tidak boleh berisi spasi";}else{echo "Profile name can't containing white space!";}?>");
   upName.value = newUpName;
   upName.focus();
 }

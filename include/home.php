@@ -221,7 +221,17 @@ $routerboard = $getrouterboard[0];
               <div class="card-header">
                 <h3><i class="fa fa-align-justify"></i> Hotspot Log</h3></div>
                   <div class="card-body">
-                    <textarea class="bg-dark" style="overflow: auto; width:100%; height:395px; font-size:11px; border:0;" disabled>
+                    <div style="padding: 5px; max-height: 400px;" class="mr-t-10 overflow">
+                      <table class="table table-sm table-bordered table-hover" style="font-size: 12px;">
+                        <thead>
+                          <tr>
+                            <th>Time</th>
+                            <th>User (IP)</th>
+                            <th>Messages</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                    
 <?php
 // move hotspot log to disk
   $getlogging = $API->comm("/system/logging/print", array(
@@ -236,12 +246,21 @@ $routerboard = $getrouterboard[0];
   $log = array_reverse($getlog);
   $TotalReg = count($getlog);
   for ($i=0; $i<$TotalReg; $i++){
+  $mess = explode(":", $log[$i]['message']);
+  $time = $log[$i]['time']; 
+  echo "<tr>";
   if(substr($log[$i]['message'], 0,2) == "->"){  
-  echo "".$log[$i]['time'] ." " . $log[$i]['message']."&#13;&#10;";
-  }else{};
+  echo "<td>" . $time . "</td>";
+  //echo substr($mess[1], 0,2);
+  echo "<td>"; if(substr(trim($mess[1]), 0,2) == "T-"){echo $mess[1].":".$mess[2].":".$mess[3].":".$mess[4].":".$mess[5].":".$mess[6];}else{echo $mess[1];} echo "</td>";
+  echo "<td>"; if(substr(trim($mess[1]), 0,2) == "T-"){echo str_replace("trying to", "", $mess[7]. " " .$mess[8]. " " .$mess[9]. " " .$mess[10]);}else{echo str_replace("trying to", "", $mess[2]. " " .$mess[3]. " " .$mess[4]. " " .$mess[5]);} echo "</td>";
+  }else{}
+  echo "</tr>";
   }
 ?>
-                  </textarea>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>

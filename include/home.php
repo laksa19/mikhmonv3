@@ -221,7 +221,7 @@ $routerboard = $getrouterboard[0];
               <div class="card-header">
                 <h3><i class="fa fa-align-justify"></i> Hotspot Log</h3></div>
                   <div class="card-body">
-                    <div style="padding: 5px; max-height: 400px;" class="mr-t-10 overflow">
+                    <div style="padding: 5px; max-height: 400px; min-height: 300px;" class="mr-t-10 overflow">
                       <table class="table table-sm table-bordered table-hover" style="font-size: 12px;">
                         <thead>
                           <tr>

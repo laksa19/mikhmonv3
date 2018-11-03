@@ -38,15 +38,18 @@ input {
 
 /* scroll bar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: #3a4149;
+  border: solid 1px #2f353a;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #343b41;
+  border: solid 1px #2f353a;
 }
 
 ::-webkit-scrollbar-corner {
@@ -132,14 +135,14 @@ input {
   outline: none;
   transition: 0.5s;
   padding-right: 10px;
-  margin: 3px 0px 3px 5px;
+  margin: 5px 0px 5px 5px;
   
 
 }
 .sidenav i{
   font-size: 20px;
   margin-right: 2px;
-  padding: 10px 0px 10px 10px;
+  padding: 7px 0px 7px 7px;
 }
 
 .sidenav a:hover, .dropdown-btn:hover {
@@ -1000,4 +1003,3 @@ width: 100%; padding:5px 0px 5px 0px; border-radius: 3px;
 .settings {
   width: auto;
   }  
-}

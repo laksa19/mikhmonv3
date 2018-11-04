@@ -23,6 +23,9 @@ Data Limit :
 Price :
 <?php echo $price;?>
 
+Comment :
+<?php echo $comment;?>
+
 QR Code :
 <img src="<?php echo $qrcode ?>">
 

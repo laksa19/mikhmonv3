@@ -24,20 +24,22 @@ ob_start("ob_gzhandler");
 
 $url = $_SERVER['REQUEST_URI'];
 
-if(!isset($_SESSION["mikhmon"])){
-  header("Location:./admin.php?id=login");
-}else{
-
 // load session MikroTik
 
 $session = $_GET['session'];
-if(empty($session)){
+
+if(!isset($_SESSION["mikhmon"])){
+  header("Location:./admin.php?id=login");
+}elseif(empty($session)){
   echo "<script>window.location='./admin.php?id=sessions'</script>";
-}
+}else{
 $_SESSION["$session"] = $session;
 $setsession = $_SESSION["$session"];
 
 $_SESSION["connect"] = "";
+
+$trff = "trff".$session;
+$_SESSION[$trff]="";
 
 // load config
 include('./include/config.php');
@@ -51,15 +53,6 @@ $areload=explode('*',$data[$session][7])[1];
 $iface=explode('(',$data[$session][8])[1];
 $maxtx=explode(')',$data[$session][9])[1];
 $maxrx=explode('+',$data[$session][10])[1];
-
-
-// load exp
-include_once('./lib/exdtmo.php');
-
-$today = strtotime($todays_date);
-$expiration_date = strtotime($exp_date);
-
-
 
 // routeros api
 include_once('./lib/routeros_api.class.php');
@@ -96,6 +89,7 @@ $removesch  = $_GET['remove-scheduler'];
 $macbinding = $_GET['mac'];
 $ipbinding = $_GET['addr'];
 $ppp = $_GET['ppp'];
+$secretbyname= $_GET['secret'];
 $enablesecr= $_GET['enable-pppsecret'];
 $disablesecr = $_GET['disable-pppsecret'];
 $removesecr  = $_GET['remove-pppsecret'];
@@ -381,6 +375,11 @@ elseif($ppp== "addsecret"){
   include_once('./include/addsecret.php');
 }
 
+// ppp secretbyname
+elseif($secretbyname != ""){
+  include_once('./include/secretbyname.php');
+}
+
 // remove enable disable secret
 elseif($removesecr != "" || $enablesecr != "" || $disablesecr != ""){
   echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
@@ -443,18 +442,40 @@ $(document).ready(function(){
   });
 });
 </script>
+
 <?php
 if($hotspot == "dashboard"){
-  echo '<script>
+echo '<script>
   $(document).ready(function(){
-   var interval = "'.($areload * 1000).'";
+   var intervalResources = "'.(($areload * 1000)/4).'";
    setInterval(function() {
-    $("#reloadHome").load("./include/home.php?session='.$session.'"); }, interval);})
+    $("#reloadDT").load("./include/dt.php?session='.$session.'"); }, intervalResources);
+    setInterval(function() {
+    $("#reloadSysload").load("./include/sysload.php?session='.$session.'"); }, intervalResources);
+   var intervalTraffic = "'.(($areload * 1000)/1.5).'";
+   setInterval(function() {
+    $("#reloadTraffic").load("./include/traffic.php?session='.$session.'"); }, intervalTraffic);
+   var intervalHactive = "'.(($areload * 1000)-2000).'";
+   setInterval(function() {
+    $("#reloadHactive").load("./include/hactive.php?session='.$session.'"); }, intervalHactive);
+   var intervalTusers = "'.(($areload * 1000)-1500).'";
+   setInterval(function() {
+    $("#reloadTusers").load("./include/tusers.php?session='.$session.'"); }, intervalTusers);
+    var intervalHlog = "'.(($areload * 1000)+1050).'";
+   setInterval(function() {
+    $("#reloadHLog").load("./include/hlog.php?session='.$session.'"); }, intervalHlog);
+ })
+</script>';
+echo'
+<script>
+$(function() {
+    $("#reloadHLog").load("./include/hlog.php?session='.$session.'");
+});
 </script>';
 }elseif($hotspot == "active" && $serveractive != ""){
     echo '<script>
   $(document).ready(function(){
-   var interval = "'.($areload * 1000).'";
+   var interval = "'.(($areload * 1000)/2).'";
    setInterval(function() {
     $("#reloadHotspotActive").load("./include/hotspotactive.php?server='.$serveractive.'&session='.$session.'"); }, interval);})
 </script>
@@ -462,7 +483,7 @@ if($hotspot == "dashboard"){
 }elseif($hotspot == "active" && $serveractive == ""){
     echo '<script>
   $(document).ready(function(){
-   var interval = "'.($areload * 1000).'";
+   var interval = "'.(($areload * 1000)/2).'";
    setInterval(function() {
     $("#reloadHotspotActive").load("./include/hotspotactive.php?session='.$session.'"); }, interval);})
 </script>

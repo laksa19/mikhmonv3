@@ -22,6 +22,8 @@ error_reporting(0);
 
 ob_start("ob_gzhandler");
 
+$version = "3.5";
+
 $url = $_SERVER['REQUEST_URI'];
 
 // load session MikroTik

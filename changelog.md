@@ -1,10 +1,13 @@
 ## Changelog
 
+### Update 11-9-2018 V3.5
+1. Penambahan chart traffic. Sesuaikan Max Rx dan Tx di Settings.
+2. Penambahan pilihan filter di Report dan User Log. 
+
 ### Update 10-30-2018 V3.4
 1. Penambahan cek spasi di nama user profile.
 2. Penambahan user profile dan comment di Report. Yang perlu dilakukan adalah update user profile dari Mikhmon, buka user profile yang ingin diupdate kemudian klik Save. 
 3. Penambahan filter berdasarkan server hotspot di Hotspot Active.
-
 
 ### Update 10-24-2018 V3.3
 1. Perubahan struktur menu.

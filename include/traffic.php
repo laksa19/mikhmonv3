@@ -98,7 +98,7 @@ $API->connect( $iphost, $userhost, decrypt($passwdhost));
                             $txf = explode("~",explode(",", $_SESSION[$trff])[$i])[0];
                             $rxf = explode("~",explode(",", $_SESSION[$trff])[$i])[1];
 
-                            echo "<td style='vertical-align:bottom; padding:0px;'><div class='w-12 bg-blue' style='writing-mode:tb-rl;height:".($txf/$maxrx*100)."px;'></div></td><td style='vertical-align:bottom; padding:0px;'><div class='w-12 bg-red' style='writing-mode:tb-rl;height:".($rxf/$maxrx*100)."px;'></div></td>";
+                            echo "<td style='vertical-align:bottom; padding:0px;'><div class='w-12 bg-blue' style='writing-mode:tb-rl;height:".($txf/$maxtx*100)."px;'></div></td><td style='vertical-align:bottom; padding:0px;'><div class='w-12 bg-red' style='writing-mode:tb-rl;height:".($rxf/$maxrx*100)."px;'></div></td>";
                             }
 
                             ?>

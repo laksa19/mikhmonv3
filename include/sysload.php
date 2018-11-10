@@ -47,7 +47,7 @@ $routerboard = $getrouterboard[0];
 
 }
 
-                echo "CPU Load ". $resource['cpu-load']."%<br/>
-        		Free Memory ".formatBytes($resource['free-memory'],2)."<br/>
-        		Free HDD ".formatBytes($resource['free-hdd-space'],2)
+                echo "CPU Load : ". $resource['cpu-load']."%<br/>
+        		Free Memory : ".formatBytes($resource['free-memory'],2)."<br/>
+        		Free HDD : ".formatBytes($resource['free-hdd-space'],2)
 ?>

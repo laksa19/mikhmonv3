@@ -46,7 +46,7 @@ $routerboard = $getrouterboard[0];
 
 }
 
-                echo "Board Name ". $resource['board-name']."<br/>
+                echo "Board Name : ". $resource['board-name']."<br/>
         		Model : ".$routerboard['model']."<br/>
         		Router OS : ".$resource['version'];
 ?>

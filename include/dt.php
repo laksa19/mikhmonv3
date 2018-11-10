@@ -46,7 +46,7 @@ $resource = $getresource[0];
 
 }
 
-                echo $clock['time']." ". $clock['date']."<br>
+                echo $clock['date'] ." ". $clock['time']."<br>
                 Uptime : ". formatDTM($resource['uptime']);
 ?>
                 

@@ -277,8 +277,8 @@ if($genprof !=""){
 	<tr>
     <td class="align-middle">User Mode</td><td>
 			<select class="form-control " onchange="defUserl();" id="user" name="user" required="1">
-				<option value="up">Username & Pasword</option>
-				<option value="vc">Username = Pasword</option>
+				<option value="up">Username & Password</option>
+				<option value="vc">Username = Password</option>
 			</select>
 		</td>
 	</tr>

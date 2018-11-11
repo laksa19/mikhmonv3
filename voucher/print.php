@@ -33,7 +33,7 @@ $userhost=explode('@|@',$data[$session][2])[1];
 $passwdhost=explode('#|#',$data[$session][3])[1]; 
 $hotspotname=explode('%',$data[$session][4])[1]; 
 $dnsname=explode('^',$data[$session][5])[1]; 
-$curency=explode('&',$data[$session][6])[1];
+$currency=explode('&',$data[$session][6])[1];
 
 
 include('../lib/formatbytesbites.php');
@@ -73,10 +73,10 @@ $getprofile = $API->comm("/ip/hotspot/user/profile/print", array("?name" => "$ge
   if($getprice == 0){
     $price = "";
   }else{
-    if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){
-       $price = $curency." ".number_format($getprice,0,",",".");
+    if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){
+       $price = $currency." ".number_format($getprice,0,",",".");
      }else{
-    $price = $curency." ".number_format($getprice);
+    $price = $currency." ".number_format($getprice);
   }
   }
 

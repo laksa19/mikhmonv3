@@ -66,11 +66,7 @@ if(isset($_POST['login'])){
 if ($user == $useradm && $pass == decrypt($passadm)){
 		  $_SESSION["mikhmon"]=$user;
   			
-      if($expiration_date > $today) {
-        echo "<script>window.location='./admin.php?id=sessions'</script>";
-      }else{
-        $error = '<div style="width: 100%; padding:5px 0px 5px 0px; border-radius:5px;" class="bg-danger"></i> Alert!<br>Mikhmon Online Expired '.$exp_date.'</div>';
-      }
+      echo "<script>window.location='./admin.php?id=sessions'</script>";
 
 		}else{
 			$error = '<div style="width: 100%; padding:5px 0px 5px 0px; border-radius:5px;" class="bg-danger"><i class="fa fa-ban"></i> Alert!<br>Invalid username or password.</div>';

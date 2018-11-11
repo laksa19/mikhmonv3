@@ -162,7 +162,7 @@ if(!isset($_SESSION["mikhmon"])){
 <table>
    <tr>
     <td colspan="2">
-      <?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){?>
+      <?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){?>
       <p style="padding:0px 5px;">
         Format Time Limit.<br>
         [wdhm] Contoh : 30d = 30hari, 12h = 12jam, 4w3d = 31hari.

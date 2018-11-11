@@ -55,7 +55,7 @@ if(isset($_POST['save'])){
 	$spasswdhost = encrypt($_POST['passmik']);
     $shotspotname = ($_POST['hotspotname']);
     $sdnsname = ($_POST['dnsname']);
-    $scurency = ($_POST['curency']);
+    $scurrency = ($_POST['currency']);
     $sreload = ($_POST['areload']);
     $siface = ($_POST['iface']);
     $smaxtx = ($_POST['maxtx']);
@@ -66,8 +66,8 @@ if(isset($_POST['save'])){
     if($smaxtx == ""){$smaxtx = "0";}else{$smaxtx = $smaxtx*$mbgbtx;}
     if($smaxrx == ""){$smaxrx = "0";}else{$smaxrx = $smaxrx*$mbgbrx;}
 
-		$search = array ('1' =>"$session!$iphost","$session@|@$userhost","$session#|#$passwdhost","$session%$hotspotname","$session^$dnsname","$session&$curency","$session*$areload","$session($iface","$session)$maxtx","$session=$maxrx","'$session'");
-    $replace = array ('1' =>"$sesname!$siphost","$sesname@|@$suserhost","$sesname#|#$spasswdhost","$sesname%$shotspotname","$sesname^$sdnsname","$sesname&$scurency","$sesname*$sreload","$sesname($siface","$sesname)$smaxtx","$sesname=$smaxrx","'$sesname'");
+		$search = array ('1' =>"$session!$iphost","$session@|@$userhost","$session#|#$passwdhost","$session%$hotspotname","$session^$dnsname","$session&$currency","$session*$areload","$session($iface","$session)$maxtx","$session=$maxrx","'$session'");
+    $replace = array ('1' =>"$sesname!$siphost","$sesname@|@$suserhost","$sesname#|#$spasswdhost","$sesname%$shotspotname","$sesname^$sdnsname","$sesname&$scurrency","$sesname*$sreload","$sesname($siface","$sesname)$smaxtx","$sesname=$smaxrx","'$sesname'");
    
     for ($i=1; $i<12; $i++){ 
     $file = file("./include/config.php");
@@ -186,7 +186,7 @@ if(isset($_POST['save'])){
 	<td class="align-middle">DNS Name  </td><td><input class="form-control" type="text" size="15" maxlength="500" name="dnsname" title="DNS Name [IP->Hotspot->Server Profiles->DNS Name]" value="<?php echo $dnsname; ?>" required="1"/></td>
 	</tr>
 	<tr>
-	<td class="align-middle">Curency  </td><td><input class="form-control" type="text" size="3" maxlength="4" name="curency" title="Curency" value="<?php echo $curency; ?>" required="1"/></td>
+	<td class="align-middle">Currency  </td><td><input class="form-control" type="text" size="3" maxlength="4" name="currency" title="currency" value="<?php echo $currency; ?>" required="1"/></td>
 	</tr>
 	<tr>
 	<td class="align-middle">Auto Reload</td><td>

@@ -39,10 +39,10 @@ if($genprof !=""){
     $getlocku = explode(",",$ponlogin)[6];
     if($getlocku == ""){$getprice = "Disable";}else{$getlocku = $getlocku;}
 
-	if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){
-		$getprice = $curency." ".number_format($getprice,0,",",".");
+	if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){
+		$getprice = $currency." ".number_format($getprice,0,",",".");
 	}else{
-	$getprice = $curency." ".number_format($getprice);
+	$getprice = $currency." ".number_format($getprice);
 	}
 	$ValidPrice = "<b>Validity : ".$getvalid." | Price : ".$getprice." | Lock User : ". $getlocku."</b>";
 }else{}
@@ -223,10 +223,10 @@ if($genprof !=""){
 	$ulock = $genuser1[6];
 	//$urlprint = "$umode-$ucode-$udate-$ucommt";
 	$urlprint = explode("|",$genu)[0];
-	if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){
-		$uprice = $curency." ".number_format($uprice,0,",",".");
+	if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){
+		$uprice = $currency." ".number_format($uprice,0,",",".");
 	}else{
-	$uprice = $curency." ".number_format($uprice);
+	$uprice = $currency." ".number_format($uprice);
 
 }
 
@@ -365,7 +365,7 @@ if($genprof !=""){
 		</div>
 		<div class="card-body">
 <table class="table table-bordered">
- <?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){
+ <?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){
  	echo '
   <tr>
   	<td>Kode Generate</td><td>'.$ucode.'</td>
@@ -419,7 +419,7 @@ if($genprof !=""){
       ?>
   <tr>
     <td colspan="2">
-      <?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){?>
+      <?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){?>
       <p style="padding:0px 5px;">
         Format Time Limit.<br>
         [wdhm] Contoh : 30d = 30hari, 12h = 12jam, 4w3d = 31hari.

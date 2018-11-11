@@ -249,7 +249,7 @@ $shd = "none";
 					<th >Username</th>
 					<th >Profile</th>
 					<th >Comment</th>
-					<th style="text-align:right;">Price <?php echo $curency;?></th>
+					<th style="text-align:right;">Price <?php echo $currency;?></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -300,7 +300,7 @@ $shd = "none";
   	<header><h1>Confirm</h1></header>
   	<a style="font-weight:bold;" href="#" title="Close" class="modal-close">X</a>
 	<p>
-        <?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){?>
+        <?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){?>
 		      <ul>
 		        <li>Menghapus Selling Report akan menghapus User Log juga.</li>
 		        <li>Disarankan untuk mengunduh  <a class="text-blue" href="./app.php?hotspot=userlog&session=<?php echo $session;?>">User Log</a> terlebih dahulu.</li>
@@ -325,7 +325,7 @@ $shd = "none";
   	<header><h1>Help</h1></header>
   	<a style="font-weight:bold;" href="#" title="Close" class="modal-close">X</a>
 	<p> 
-		    <?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){?>
+		    <?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){?>
 		      <ul>
 		        <li>Klik CSV untuk mengunduh.</li>
 		        <li>Untuk filter per bulan, pilih Day dan bulannya, kemudian klik Filter.<br>

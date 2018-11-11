@@ -118,7 +118,7 @@ if(!isset($_SESSION["mikhmon"])){
     <td class="align-middle">Grace Period</td><td><input class="form-control" type="text" id="gracepi" size="4" autocomplete="off" name="graceperiod" placeholder="5m" value="5m" required="1"></td>
   </tr>
   <tr>
-    <td class="align-middle">Price <?php echo $curency;?></td><td><input class="form-control" type="number" size="10" min="0" name="price" value="" ></td>
+    <td class="align-middle">Price <?php echo $currency;?></td><td><input class="form-control" type="number" size="10" min="0" name="price" value="" ></td>
   </tr>
   <tr>
     <td>Lock User</td><td>
@@ -156,7 +156,7 @@ if(!isset($_SESSION["mikhmon"])){
 <table class="table">
     <tr>
     <td colspan="2">
-      <?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){?>
+      <?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){?>
       <p style="padding:0px 5px;">
         Expired Mode adalah kontrol untuk user hotspot.<br>
         Pilihan : Remove, Notice, Remove & Record, Notice & Record.
@@ -200,7 +200,7 @@ if(!isset($_SESSION["mikhmon"])){
 function remSpace() {
   var upName = document.getElementsByName("name")[0];
   var newUpName = upName.value.replace(/\s/g, "-");
-  //alert("<?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){echo "Nama Profile tidak boleh berisi spasi";}else{echo "Profile name can't containing white space!";}?>");
+  //alert("<?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){echo "Nama Profile tidak boleh berisi spasi";}else{echo "Profile name can't containing white space!";}?>");
   upName.value = newUpName;
   upName.focus();
 }

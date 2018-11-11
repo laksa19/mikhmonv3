@@ -64,7 +64,7 @@ if(!isset($_SESSION["mikhmon"])){
 		<th class="align-middle">Expired Mode</th>
 		<th class="align-middle">Validity</th>
 		<th class="align-middle">Grace<br>Period</th>
-		<th class="text-right align-middle" >Price <?php echo $curency;?></th>
+		<th class="text-right align-middle" >Price <?php echo $currency;?></th>
 		<th class="align-middle">Lock<br>User</th>
     </tr>
   </thead>
@@ -124,7 +124,7 @@ $price = trim($getprice[2]);
 if($price == "" || $price == "0" ){
 	  echo "";
 }else{
-	if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){
+	if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){
 		echo number_format($price,0,",",".");
 	}else{ 
 		echo number_format($price); 

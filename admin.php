@@ -31,6 +31,9 @@ $sesspath = './include/sessions/';
 $_SESSION["$session"] = $session;
 $setsession = $_SESSION["$session"];
 
+if(empty($id)){
+  echo "<script>window.location='./admin.php?id=sessions'</script>";
+}
 $router = $_GET['router'];
 $logo = $_GET['logo'];
 
@@ -45,7 +48,7 @@ $userhost=explode('@|@',$data[$session][2])[1];
 $passwdhost=explode('#|#',$data[$session][3])[1]; 
 $hotspotname=explode('%',$data[$session][4])[1]; 
 $dnsname=explode('^',$data[$session][5])[1]; 
-$curency=explode('&',$data[$session][6])[1];
+$currency=explode('&',$data[$session][6])[1];
 $areload=explode('*',$data[$session][7])[1];  
 $iface=explode('(',$data[$session][8])[1];  
 $maxtx=explode(')',$data[$session][9])[1]; 
@@ -62,7 +65,13 @@ if(isset($_POST['login'])){
 	$pass = $_POST['pass'];
 if ($user == $useradm && $pass == decrypt($passadm)){
 		  $_SESSION["mikhmon"]=$user;
-      echo "<script>window.location='./admin.php?id=sessions'</script>";
+  			
+      if($expiration_date > $today) {
+        echo "<script>window.location='./admin.php?id=sessions'</script>";
+      }else{
+        $error = '<div style="width: 100%; padding:5px 0px 5px 0px; border-radius:5px;" class="bg-danger"></i> Alert!<br>Mikhmon Online Expired '.$exp_date.'</div>';
+      }
+
 		}else{
 			$error = '<div style="width: 100%; padding:5px 0px 5px 0px; border-radius:5px;" class="bg-danger"><i class="fa fa-ban"></i> Alert!<br>Invalid username or password.</div>';
 	}

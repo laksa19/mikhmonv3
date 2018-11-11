@@ -49,7 +49,7 @@ $userhost=explode('@|@',$data[$session][2])[1];
 $passwdhost=explode('#|#',$data[$session][3])[1];
 $hotspotname=explode('%',$data[$session][4])[1];
 $dnsname=explode('^',$data[$session][5])[1];
-$curency=explode('&',$data[$session][6])[1];
+$currency=explode('&',$data[$session][6])[1];
 $areload=explode('*',$data[$session][7])[1];
 $iface=explode('(',$data[$session][8])[1];
 $maxtx=explode(')',$data[$session][9])[1];
@@ -465,6 +465,7 @@ echo '<script>
     $("#reloadHactive").load("./include/hactive.php?session='.$session.'"); }, intervalHlog);
     setInterval(function() {
     $("#reloadTusers").load("./include/tusers.php?session='.$session.'"); }, intervalHlog);
+
  })
 </script>';
 echo'

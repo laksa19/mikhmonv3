@@ -22,6 +22,8 @@ if(!isset($_SESSION["mikhmon"])){
   header("Location:../admin.php?id=login");
 }else{
 
+$_SESSION["v"] = "3.5";
+
 // array color
 $color = array ('1'=>'bg-blue','bg-indigo','bg-purple','bg-pink','bg-red','bg-yellow','bg-green','bg-teal','bg-cyan','bg-grey','bg-light-blue');
 
@@ -155,6 +157,7 @@ if(isset($_POST['save'])){
           </td>
         </tr>
       </table>
+      <div id="loadV"></div> 
     </div>
     </div>
     </form>
@@ -164,7 +167,11 @@ if(isset($_POST['save'])){
 </div>
 </div>
 </div> 
-  
+<script>
+$(function() {
+    $("#loadV").load("https://raw.githubusercontent.com/laksa19/mikhmonv3/master/verson.txt");
+});
+</script> 
 
 
 

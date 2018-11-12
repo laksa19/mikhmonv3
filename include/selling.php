@@ -26,7 +26,9 @@ $idhr = $_GET['idhr'];
 $idbl = $_GET['idbl'];
 $remdata = ($_POST['remdata']);
 
-
+$gettimezone = $API->comm("/system/clock/print");
+  $timezone = $gettimezone[0]['time-zone-name'];  
+date_default_timezone_set($timezone);
 
 if(isset($remdata)){
   if(strlen($idhr) > "0"){
@@ -130,7 +132,7 @@ $shd = "none";
         downloadCSV(csv.join("\n"), filename);
         }
         
-        window.onload=function() {
+        function countReport() {
           var sum = 0;
           var dataTable = document.getElementById("dataTable");
           
@@ -142,6 +144,8 @@ $shd = "none";
           var th = document.getElementById('total');
           th.innerHTML = th.innerHTML + (sum) ;
         }
+
+        window.onload = countReport;
 		</script>
 <div class="row">		
 <div class="col-12">

@@ -69,11 +69,6 @@ if($comm != ""){
           if($counttuser == 0 ){echo "<script>window.location='./app.php?hotspot=users&profile=all&session=".$session."</script>";}?>
          &nbsp; | &nbsp; <a href="./app.php?hotspot-user=add&session=<?php echo $session;?>" title="Add User"><i class="fa fa-user-plus"></i> Add</a>
         &nbsp; | &nbsp; <a href="./app.php?hotspot-user=generate&session=<?php echo $session;?>" title="Generate User"><i class="fa fa-users"></i> Generate</a>    
-          <?php if($comm != ""){?>
-            &nbsp; | &nbsp;<a class="text-info" onclick="loader()" href="./app.php?hotspot=users&profile=all&session=<?php echo $session;?>"><i class="fa fa-search"></i> Show All</a> &nbsp; | &nbsp; <a class="text-danger" onclick="if(confirm('Are you sure to delete username by comment (<?php echo $comm;?>)?')){window.location='./app.php?remove-hotspot-user-by-comment=<?php echo $comm;?>&session=<?php echo $session;?>';loader();}else{}" title="Remove user by comment <?php echo $comm;?>" href="#">  <i class="fa fa-minus-square"></i> Remove</a>
-          <?php ;}
-				?>
-        
          &nbsp; | &nbsp; <a href="./app.php?hotspot=export-users&profile=<?php echo $prof;?>&session=<?php echo $session;?>" title="Download User List"><i class="fa fa-download"></i> Export</a>
         </span> 
     </h3>
@@ -81,11 +76,12 @@ if($comm != ""){
 </div>
 <div class="card-body">	
   <div class="row">
+   <div class="col-4 pd-5"> 
   <div class="input-group">
-    <div class="input-group-3 col-box-6">
+    <div class="input-group-6 col-box-6">
       <input id="filterTable" type="text" style="padding:5.8px;" class="group-item group-item-l" placeholder="Search..">
     </div>
-    <div class="input-group-3 col-box-6">
+    <div class="input-group-6 col-box-6">
       <select style="padding:5px;" class="group-item group-item-r" onchange="location = this.value; loader()" title="Filter by Profile">
         <option>Profile <?php echo $prof;?></option>
         <option value="./app.php?hotspot=users&profile=all&session=<?php echo $session;?>">Show All</option>
@@ -98,6 +94,13 @@ if($comm != ""){
     </select>
   </div>
   </div>
+  </div>
+  <div class="col-6">
+    <?php if($comm != ""){?>
+            <button class="btn bg-red" onclick="if(confirm('Are you sure to delete username by comment (<?php echo $comm;?>)?')){window.location='./app.php?remove-hotspot-user-by-comment=<?php echo $comm;?>&session=<?php echo $session;?>';loader();}else{}" title="Remove user by comment <?php echo $comm;?>">  <i class="fa fa-minus-square"></i> Remove by Comment</button>
+            <a class="btn bg-info" onclick="loader()" href="./app.php?hotspot=users&profile=all&session=<?php echo $session;?>"><i class="fa fa-search"></i> Show All</a>
+    <?php ;} ?>
+  </div>  
 </div>
 <div class="overflow mr-t-10 box-bordered" style="max-height: 75vh">     
 <table id="dataTable" class="table table-bordered table-hover text-nowrap">

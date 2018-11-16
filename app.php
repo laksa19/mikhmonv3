@@ -446,7 +446,7 @@ $(document).ready(function(){
 </script>
 
 <?php
-if($areload < 7){$reload = $areload/2;}else{$reload = $areload/3;}
+if($areload < 7){$reload = $areload/1.5;}else{$reload = $areload/2.5;}
 if($hotspot == "dashboard"){
 echo '<script>
   $(document).ready(function(){

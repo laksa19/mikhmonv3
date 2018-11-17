@@ -446,26 +446,13 @@ $(document).ready(function(){
 </script>
 
 <?php
-if($areload < 7){$reload = $areload/1.5;}else{$reload = $areload/2.5;}
 if($hotspot == "dashboard"){
 echo '<script>
   $(document).ready(function(){
-   var intervalResources = "'.($reload * 1000).'";
-   setInterval(function() {
-    $("#reloadDT").load("./include/dt.php?session='.$session.'"); }, intervalResources);
-    setInterval(function() {
-    $("#reloadSysload").load("./include/sysload.php?session='.$session.'"); }, intervalResources);
-    setInterval(function() {
-    $("#reloadTraffic").load("./include/traffic.php?session='.$session.'"); }, intervalResources);
     
-    var intervalHlog = "'.(($areload * 1000)+1050).'";
+    var interval= "'.($areload * 1000).'";
    setInterval(function() {
-    $("#reloadHLog").load("./include/hlog.php?session='.$session.'"); }, intervalHlog);
-    setInterval(function() {
-    $("#reloadHactive").load("./include/hactive.php?session='.$session.'"); }, intervalHlog);
-    setInterval(function() {
-    $("#reloadTusers").load("./include/tusers.php?session='.$session.'"); }, intervalHlog);
-
+    $("#reloadHome").load("./include/home.php?session='.$session.'"); }, interval);
  })
 </script>';
 echo'

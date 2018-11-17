@@ -298,7 +298,7 @@ if($counthotspotactive < 2 ){$hunit = "item";}elseif($counthotspotactive > 1){$h
                   </div>
                 </div>
               </div>
-              </div>
             </div>
-</div>
-</div>
+          </div>
+        </div>
+      </div>

@@ -101,10 +101,10 @@ if ($udatalimit != "") {
   $wadlimit = "";
 }
 if($getprice == 0){echo "";}else{
-  if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){
-    $waprice = "Price : *".$curency." ".number_format($getprice,0,",",".")."* %0A";
+  if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){
+    $waprice = "Price : *".$currency." ".number_format($getprice,0,",",".")."* %0A";
   }else{
-    $waprice = "Price : *".$curency." ".number_format($getprice)."* %0A";
+    $waprice = "Price : *".$currency." ".number_format($getprice)."* %0A";
   }
 }
 
@@ -196,7 +196,7 @@ if($uname == $upass){$shareWA = $shareWAVC;}else{$shareWA = $shareWAUP;}
 }
 ?>
     <button type="submit" name="save" class="btn bg-primary" > <i class="fa fa-save"></i> Save</button>
-    <a class="btn bg-danger"  href="./app.php?remove-hotspot-user=<?php echo $uid;?>&session=<?php echo $session;?>"> <i class="fa fa-minus-square"></i> Remove</a>
+    <div class="btn bg-danger"  onclick="if(confirm('Are you sure to delete username (<?php echo $uname;?>)?')){window.location='./app.php?remove-hotspot-user=<?php echo $uid;?>&session=<?php echo $session;?>'}else{}" title='Remove <?php echo $uname;?>'><i class='fa fa-minus-square'></i> Remove</div>
     <a class="btn bg-secondary"  title="Print" href="javascript:window.open('./voucher/print.php?user=<?php echo $usermode."-".$uname;?>&qr=no&session=<?php echo $session;?>','_blank','width=310,height=450').print();"> <i class="fa fa-print"></i> Print</a>
     <a class="btn bg-info"  title="Print QR" href="javascript:window.open('./voucher/print.php?user=<?php echo $usermode."-".$uname;?>&qr=yes&session=<?php echo $session;?>','_blank','width=310,height=450').print();"> <i class="fa fa-qrcode"></i> QR</a>
     <?php if($utimelimit == "1s"){echo '<a class="btn bg-info"  href="./app.php?reset-hotspot-user='.$uid.'&session='.$session.'"> <i class="fa fa-retweet"></i> Reset</a>';}?>
@@ -288,7 +288,7 @@ if($uname == $upass){$shareWA = $shareWAVC;}else{$shareWA = $shareWAUP;}
     <td class="align-middle">Comment</td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?php echo $ucomment;?>"></td>
   </tr>
   <tr>
-    <td class="align-middle">Price</td><td><input class="form-control" type="text" value="<?php if($getprice == 0){}else{if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){echo $curency." ".number_format($getprice,0,",",".");}else{ echo $curency." ".number_format($getprice); }}?>" disabled></td>
+    <td class="align-middle">Price</td><td><input class="form-control" type="text" value="<?php if($getprice == 0){}else{if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){echo $currency." ".number_format($getprice,0,",",".");}else{ echo $currency." ".number_format($getprice); }}?>" disabled></td>
   </tr>
   <?php if($getvalid != ""){?>
   <tr>
@@ -303,7 +303,7 @@ if($uname == $upass){$shareWA = $shareWAVC;}else{$shareWA = $shareWAUP;}
   <?php }else{}?>
   <tr>
     <td colspan="2">
-      <?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){?>
+      <?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){?>
       <p style="padding:0px 5px;">
         Format Time Limit.<br>
         [wdhm] Contoh : 30d = 30hari, 12h = 12jam, 4w3d = 31hari.

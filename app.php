@@ -30,6 +30,7 @@ $url = $_SERVER['REQUEST_URI'];
 $session = $_GET['session'];
 
 if(!isset($_SESSION["mikhmon"])){
+  session_destroy();
   header("Location:./admin.php?id=login");
 }elseif(empty($session)){
   echo "<script>window.location='./admin.php?id=sessions'</script>";
@@ -455,16 +456,10 @@ echo '<script>
     $("#reloadHome").load("./include/home.php?session='.$session.'"); }, interval);
  })
 </script>';
-echo'
-<script>
-$(function() {
-    $("#reloadHLog").load("./include/hlog.php?session='.$session.'");
-});
-</script>';
 }elseif($hotspot == "active" && $serveractive != ""){
     echo '<script>
   $(document).ready(function(){
-   var interval = "'.(($areload * 1000)/2).'";
+   var interval = "'.($areload * 1000).'";
    setInterval(function() {
     $("#reloadHotspotActive").load("./include/hotspotactive.php?server='.$serveractive.'&session='.$session.'"); }, interval);})
 </script>
@@ -472,7 +467,7 @@ $(function() {
 }elseif($hotspot == "active" && $serveractive == ""){
     echo '<script>
   $(document).ready(function(){
-   var interval = "'.(($areload * 1000)/2).'";
+   var interval = "'.($areload * 1000).'";
    setInterval(function() {
     $("#reloadHotspotActive").load("./include/hotspotactive.php?session='.$session.'"); }, interval);})
 </script>

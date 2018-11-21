@@ -161,7 +161,7 @@ if(!isset($_SESSION["mikhmon"])){
     <td>Grace Period</td><td><input class="form-control" type="text" id="gracepi" size="4" autocomplete="off" name="graceperiod" value="<?php echo $getgracep;?>" required="1"></td>
   </tr>
   <tr>
-    <td>Price <?php echo $curency;?></td><td><input class="form-control" type="number" min="0" name="price" value="<?php echo $getprice;?>" ></td>
+    <td>Price <?php echo $currency;?></td><td><input class="form-control" type="number" min="0" name="price" value="<?php echo $getprice;?>" ></td>
   </tr>
   <tr>
     <td>Lock User</td><td>
@@ -201,14 +201,14 @@ if(!isset($_SESSION["mikhmon"])){
 <table class="table">
     <tr>
     <td colspan="2">
-      <?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){?>
+      <?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){?>
       <p style="padding:0px 5px;">
         Expired Mode adalah kontrol untuk user hotspot.<br>
         Pilihan : Remove, Notice, Remove & Record,Notice & Record.
         <ul>
         <li>Remove : User akan dihapus ketika sudah grace period habis.</li>
         <li>Notice : User tidah dihapus dan akan mendapatkan notifikasi setelah user expired.</li>
-        <li>Record : Menyimpan data harga tiap user yang login. Untuk menghitung total penjualan user hotspot.</li>
+        <li>Record : Menyimpan data harga tiap user yang login. Untuk menghitung total penjualan user hotspot dan ditampilkan dalam laporan penjualan.</li>
         </ul>
       </p>
       <p>Grace Period : Tenggang waktu sebelum user dihapus.</p>
@@ -245,7 +245,7 @@ if(!isset($_SESSION["mikhmon"])){
 function remSpace() {
   var upName = document.getElementsByName("name")[0];
   var newUpName = upName.value.replace(/\s/g, "-");
-  //alert("<?php if($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr"){echo "Nama Profile tidak boleh berisi spasi";}else{echo "Profile name can't containing white space!";}?>");
+  //alert("<?php if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){echo "Nama Profile tidak boleh berisi spasi";}else{echo "Profile name can't containing white space!";}?>");
   upName.value = newUpName;
   upName.focus();
 }

@@ -1,5 +1,15 @@
 ## Changelog
 
+### Update 12-1-2018 V3.6
+1. Penambahan progrss bar.
+2. Enable price use decimal (.).
+3. Filter report by prefix.
+4. Export user to script.
+5. Export user to csv.
+6. Penggantian kolom print menjadi tombol dan penambahan pilihan comment di user list.
+7. Perubahan cara print voucher dari user list.
+6. Beautify template editor.
+
 ### Update 11-9-2018 V3.5
 1. Penambahan chart traffic. Sesuaikan Max Rx dan Tx di Settings.
 2. Penambahan pilihan filter di Report dan User Log. 

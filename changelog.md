@@ -8,7 +8,7 @@
 5. Export user to csv.
 6. Penggantian kolom print menjadi tombol dan penambahan pilihan comment di user list.
 7. Perubahan cara print voucher dari user list.
-6. Beautify template editor.
+6. Beautify template editor dan penambahan tombol view voucher.
 
 ### Update 11-9-2018 V3.5
 1. Penambahan chart traffic. Sesuaikan Max Rx dan Tx di Settings.

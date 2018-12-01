@@ -259,7 +259,7 @@ if (!isset($_SESSION["mikhmon"])) {
   </div>
   <div class="dropdown-container <?= $lmenu; ?>">
     <a href="./?hotspot=log&session=<?= $session; ?>" class="<?= $slog; ?>"> <i class="fa fa-wifi "></i> Hotspot Log </a>
-    <a href="./?report=userlog&session=<?= $session; ?>" class=" <?= $sulog; ?>"> <i class="fa fa-users "></i> User Log </a>
+    <a href="./?report=userlog&idbl=<?= strtolower(date("M")).date("Y");?>&session=<?= $session; ?>" class=" <?= $sulog; ?>"> <i class="fa fa-users "></i> User Log </a>
   </div>
   <!--system-->
   <div class="dropdown-btn <?= $sysmenu; ?>"><i class=" fa fa-gear"></i> System 

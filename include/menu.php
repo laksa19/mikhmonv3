@@ -272,7 +272,7 @@ if (!isset($_SESSION["mikhmon"])) {
   <!--dhcp leases-->
   <a href="./?hotspot=dhcp-leases&session=<?= $session; ?>" class="menu <?= $slease; ?>"><i class=" fa fa-sitemap"></i> DHCP Leases</a>
   <!--report-->
-  <a href="./?report=selling&session=<?= $session; ?>" class="menu <?= $sselling; ?>"><i class="nav-icon fa fa-money"></i> Report</a>
+  <a href="./?report=selling&idbl=<?= strtolower(date("M")).date("Y");?>&session=<?= $session; ?>" class="menu <?= $sselling; ?>"><i class="nav-icon fa fa-money"></i> Report</a>
   <!--settings-->
   <div class="dropdown-btn <?= $ssett; ?>"><i class=" fa fa-gear"></i> Settings 
     <i class="fa fa-caret-down"></i> &nbsp;

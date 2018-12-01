@@ -19,80 +19,78 @@ session_start();
 ?>
 <?php
 error_reporting(0);
-if(!isset($_SESSION["mikhmon"])){
+if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
-}else{
+} else {
 
 // load session MikroTik
-$session = $_GET['session'];
+  $session = $_GET['session'];
 
 // load config
-include('../include/config.php');
-$iphost=explode('!',$data[$session][1])[1]; 
-$userhost=explode('@|@',$data[$session][2])[1];
-$passwdhost=explode('#|#',$data[$session][3])[1]; 
-$hotspotname=explode('%',$data[$session][4])[1]; 
-$dnsname=explode('^',$data[$session][5])[1]; 
-$currency=explode('&',$data[$session][6])[1];
+  include('../include/config.php');
+  include('../include/readcfg.php');
 
+  include('../lib/formatbytesbites.php');
 
-include('../lib/formatbytesbites.php');
+  $id = $_GET['id'];
+  $qr = $_GET['qr'];
+  $small = $_GET['small'];
+  $userp = $_GET['user'];
 
-$id = $_GET['id'];
-$qr = $_GET['qr'];
-$small = $_GET['small'];
-$userp = $_GET['user'];
+  require('../lib/routeros_api.class.php');
+  $API = new RouterosAPI();
+  $API->debug = false;
+  $API->connect($iphost, $userhost, decrypt($passwdhost));
 
-require('../lib/routeros_api.class.php');
-$API = new RouterosAPI();
-$API->debug = false;
-$API->connect( $iphost, $userhost, decrypt($passwdhost));
-
-if($userp != ""){
-  $usermode = explode('-',$userp)[0];
-  $pulluser = explode('-',$userp);
-  $iuser  = count($pulluser);
-  $prefix = explode('-',$userp)[$iuser - 2];
-  $user = explode('-',$userp)[$iuser - 1];
-  if($iuser == 3){$user = $prefix."-".$user;}else{$user = $user;}
-  $getuser = $API->comm("/ip/hotspot/user/print", array("?name"=> "$user"));
-  $TotalReg = count($getuser);
-}elseif($id != ""){
-  $usermode = explode('-',$id)[0];
-  $getuser = $API->comm('/ip/hotspot/user/print', array("?comment" => "$id", "?uptime"=> "0s"));
-  $TotalReg = count($getuser);
-}
+  if ($userp != "") {
+    $usermode = explode('-', $userp)[0];
+    $pulluser = explode('-', $userp);
+    $iuser = count($pulluser);
+    $prefix = explode('-', $userp)[$iuser - 2];
+    $user = explode('-', $userp)[$iuser - 1];
+    if ($iuser == 3) {
+      $user = $prefix . "-" . $user;
+    } else {
+      $user = $user;
+    }
+    $getuser = $API->comm("/ip/hotspot/user/print", array("?name" => "$user"));
+    $TotalReg = count($getuser);
+  } elseif ($id != "") {
+    $usermode = explode('-', $id)[0];
+    $getuser = $API->comm('/ip/hotspot/user/print', array("?comment" => "$id", "?uptime" => "0s"));
+    $TotalReg = count($getuser);
+  }
   $getuprofile = $getuser[0]['profile'];
-    
 
-$getprofile = $API->comm("/ip/hotspot/user/profile/print", array("?name" => "$getuprofile"));
+
+  $getprofile = $API->comm("/ip/hotspot/user/profile/print", array("?name" => "$getuprofile"));
   $getsharedu = $getprofile[0]['shared-users'];
   $ponlogin = $getprofile[0]['on-login'];
-  $validity = explode(",",$ponlogin)[3];
-  $getprice = explode(",",$ponlogin)[2];
-  if($getprice == 0){
+  $validity = explode(",", $ponlogin)[3];
+  $getprice = explode(",", $ponlogin)[2];
+  if ($getprice == 0) {
     $price = "";
-  }else{
-    if($currency == "Rp" || $currency == "rp" || $currency == "IDR" || $currency == "idr"){
-       $price = $currency." ".number_format($getprice,0,",",".");
-     }else{
-    $price = $currency." ".number_format($getprice);
-  }
+  } else {
+    if ($currency == in_array($currency, $cekindo['indo'])) {
+      $price = $currency . " " . number_format($getprice, 0, ",", ".");
+    } else {
+      $price = $currency . " " . number_format($getprice, 2);
+    }
   }
 
-$logo = "../img/logo-".$session.".png";
-if (file_exists($logo)) {
-    $logo = "../img/logo-".$session.".png";
-} else {
+  $logo = "../img/logo-" . $session . ".png";
+  if (file_exists($logo)) {
+    $logo = "../img/logo-" . $session . ".png";
+  } else {
     $logo = "../img/logo.png";
-}
+  }
 
 }
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Voucher-<?php echo $hotspotname."-".$getuprofile."-".$id;  ?></title>
+		<title>Voucher-<?= $hotspotname . "-" . $getuprofile . "-" . $id; ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="pragma" content="no-cache" />
 		<link rel="icon" href="../img/favicon.png" />
@@ -139,34 +137,39 @@ table.voucher {
 	</head>
 	<body onload="window.print()">
 
-<?php for ($i=0; $i<$TotalReg; $i++){;
-   $regtable = $getuser[$i];
-   $username = $regtable['name'];
-   $password = $regtable['password'];
-   $timelimit = $regtable['limit-uptime'];
-   $getdatalimit = $regtable['limit-bytes-total'];
-   $comment = $regtable['comment'];
-   if($getdatalimit == 0){$datalimit = "";}else{$datalimit = formatBytes($getdatalimit,2);}
+<?php for ($i = 0; $i < $TotalReg; $i++) {;
+  $regtable = $getuser[$i];
+  $username = $regtable['name'];
+  $password = $regtable['password'];
+  $timelimit = $regtable['limit-uptime'];
+  $getdatalimit = $regtable['limit-bytes-total'];
+  $comment = $regtable['comment'];
+  if ($getdatalimit == 0) {
+    $datalimit = "";
+  } else {
+    $datalimit = formatBytes($getdatalimit, 2);
+  }
    // CHart Size
-	$chs = "80x80";
+  $chs = "80x80";
 	// CHart Link
-	$chl = urlencode("http://$dnsname/login?username=$username&password=$password");
-	$qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=' . $chs . '&chld=L|0&chl=' . $chl . '&choe=utf-8';
-	
-	$num = $i+1;
-?>
+  $chl = urlencode("http://$dnsname/login?username=$username&password=$password");
+  $qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=' . $chs . '&chld=L|0&chl=' . $chl . '&choe=utf-8';
+
+  $num = $i + 1;
+  ?>
 <?php
-if($userp != ""){
+if ($userp != "") {
   include('./template-thermal.php');
-}else{
-  if($small == "yes"){
+} else {
+  if ($small == "yes") {
     include('./template-small.php');
-  }else{
+  } else {
     include('./template.php');
   }
 }
 ?>
-<?php } ?>
+<?php 
+} ?>
 
 	
 </body>

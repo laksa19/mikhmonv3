@@ -20,7 +20,8 @@ session_start();
 error_reporting(0);
 
 $API->comm("/ip/hotspot/user/set", array(
-	    ".id"=> "$resethotspotuser", "limit-uptime" => "0"));
-echo "<script>window.location='./app.php?hotspot-user=".$resethotspotuser."&session=".$session."'</script>";
+	".id" => "$resethotspotuser", "limit-uptime" => "0"
+));
+echo "<script>window.location='./?hotspot-user=" . $resethotspotuser . "&session=" . $session . "'</script>";
 
 ?>

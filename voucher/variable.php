@@ -1,41 +1,41 @@
 
 Logo :
-<img src="<?php echo $logo;?>" style="height:30px;border:0;">
+<img src="<?= $logo; ?>" style="height:30px;border:0;">
 
 Hotspotname :
-<?php echo $hotspotname;?>
+<?= $hotspotname; ?>
 
 Username :
-<?php echo $username;?>
+<?= $username; ?>
 
 Password :
-<?php echo $password;?>
+<?= $password; ?>
 
 Validity :
-<?php echo $validity;?>
+<?= $validity; ?>
 
 Time Limit :
-<?php echo $timelimit;?>
+<?= $timelimit; ?>
 
 Data Limit :
-<?php echo $datalimit;?>
+<?= $datalimit; ?>
 
 Price :
-<?php echo $price;?>
+<?= $price; ?>
 
 Comment :
-<?php echo $comment;?>
+<?= $comment; ?>
 
 QR Code :
-<img src="<?php echo $qrcode ?>">
+<img src="<?= $qrcode ?>">
 
 Number Voucher:
-<?php echo $num;?>
-<span id="num"><?php echo " [$num]";?></span>
+<?= $num; ?>
+<span id="num"><?= " [$num]"; ?></span>
 
 Conditional :
 $usermode = "vc"
-username=password
+username = password
 
 $usermode = "up"
-username&password
+username & password

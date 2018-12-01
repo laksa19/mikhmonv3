@@ -18,20 +18,20 @@
 session_start();
 // hide all error
 error_reporting(0);
-if(!isset($_SESSION["mikhmon"])){
+if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
-}else{
+} else {
 
-if(isset($_POST['submit'])){
-$API = new RouterosAPI();
-$API->debug = false;
-if ($API->connect( $iphost, $userhost, decrypt($passwdhost))) {
-	$API->write('/system/reboot');
-	$API->read();
-}
-session_destroy();
-echo "<script>window.location='./admin.php?id=login'</script>";
-}
+  if (isset($_POST['submit'])) {
+    $API = new RouterosAPI();
+    $API->debug = false;
+    if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+      $API->write('/system/reboot');
+      $API->read();
+    }
+    session_destroy();
+    echo "<script>window.location='./admin.php?id=login'</script>";
+  }
 }
 ?>
 <div style="padding-top:10%;" class="register-box">
@@ -42,10 +42,10 @@ echo "<script>window.location='./admin.php?id=login'</script>";
   	<div class="card-body text-center">
   		<form action="" method="post" enctype="multipart/form-data">
         <div>
-          <h3>Are you sure to reboot <?php echo $session;?>?</h3>
+          <h3>Are you sure to reboot <?= $session; ?>?</h3>
         </div>
   	  <button class="btn bg-warning" type="submit" title="Yes" name="submit">Yes</button>
-      <a class="btn bg-primary" href="./app.php?hotspot=dashboard&session=<?php echo $session;?>" title="No"> No </a>
+      <a class="btn bg-primary" href="./?hotspot=dashboard&session=<?= $session; ?>" title="No"> No </a>
     </form>
   </div>
 </div>

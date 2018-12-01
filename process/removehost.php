@@ -21,7 +21,8 @@ error_reporting(0);
 
 // remove host
 $API->comm("/ip/hotspot/host/remove", array(
-".id"=> "$removehost",));
+    ".id" => "$removehost",
+));
 // redirect to host
-echo "<script>window.location='./app.php?hotspot=hosts&session=".$session."'</script>";
+echo "<script>window.location='./?hotspot=hosts&session=" . $session . "'</script>";
 ?>

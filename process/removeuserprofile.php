@@ -20,6 +20,7 @@ session_start();
 error_reporting(0);
 
 $API->comm("/ip/hotspot/user/profile/remove", array(
-".id"=> "$removeuserprofile",));
-echo "<script>window.location='./app.php?hotspot=user-profiles&session=".$session."'</script>";
+    ".id" => "$removeuserprofile",
+));
+echo "<script>window.location='./?hotspot=user-profiles&session=" . $session . "'</script>";
 ?>

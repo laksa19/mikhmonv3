@@ -450,13 +450,13 @@ function decrypt($string, $key=128) {
 
 // Reformat date time MikroTik
 // by Laksamadi Guko
- 
+
 function formatInterval($dtm){
 $val_convert = $dtm;
 $new_format = str_replace("s", "", str_replace("m", "m ", str_replace("h", "h ", str_replace("d", "d ", str_replace("w", "w ", $val_convert)))));
 return $new_format;
 }
- 
+
 function formatDTM($dtm){
 if(substr($dtm, 1,1) == "d" || substr($dtm, 2,1) == "d"){
     $day = explode("d",$dtm)[0]."d";
@@ -541,6 +541,7 @@ if(strlen($dtm) == "2" && substr($dtm, -1) == "s"){
 }
 return $format;
 }
+
 
 function randN($length) {
 	$chars = "23456789";

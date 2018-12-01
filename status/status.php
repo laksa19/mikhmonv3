@@ -22,12 +22,7 @@ $session = $_GET['session'];
 $uname = $_GET['name'];
 
 include_once('../include/config.php');
-$iphost=explode('!',$data[$session][1])[1]; 
-$userhost=explode('@|@',$data[$session][2])[1];
-$passwdhost=explode('#|#',$data[$session][3])[1]; 
-$hotspotname=explode('%',$data[$session][4])[1]; 
-$dnsname=explode('^',$data[$session][5])[1]; 
-$curency=explode('&',$data[$session][6])[1];
+include('../include/readcfg.php');
 
 
 include_once('../lib/routeros_api.class.php');
@@ -46,7 +41,7 @@ if($uname != ""){
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Voucher-<?php echo $hotspotname."-".$uname;?></title>
+		<title>Voucher-<?= $hotspotname."-".$uname;?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="pragma" content="no-cache" />
 		<style>
@@ -58,6 +53,6 @@ if($uname != ""){
 		</style>
 	</head>
 	<body>
-		<div style="padding:5px;" id="exp" ><?php echo $exp;?></div>
+		<div style="padding:5px;" id="exp" ><?= $exp;?></div>	
 	</body>
 </html>

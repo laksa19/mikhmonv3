@@ -24,8 +24,17 @@ if (!isset($_SESSION["mikhmon"])) {
 
 	$idhr = $_GET['idhr'];
 	$idbl = $_GET['idbl'];
+	if ($idhr != ""){
+		$_SESSION['report'] = "&idhr=".$idhr; 
+	} elseif ($idbl != ""){
+		$_SESSION['report'] = "&idbl=".$idbl; 
+	} else {
+		$_SESSION['report'] = "";
+	}
+	$_SESSION['idbl'] = $idbl;
 	$remdata = ($_POST['remdata']);
 	$prefix = $_GET['prefix'];
+	
 
 	$gettimezone = $API->comm("/system/clock/print");
 	$timezone = $gettimezone[0]['time-zone-name'];
@@ -74,11 +83,6 @@ if (!isset($_SESSION["mikhmon"])) {
 				"?source" => "$idhr",
 			));
 			$TotalReg = count($getData);
-			for ($i = 0; $i < $TotalReg; $i++) {
-
-				$totalSR += explode("-|-", $getData[$i]['name'])[3];
-
-			}
 		}
 		$filedownload = $idhr;
 		$shf = "hidden";
@@ -89,11 +93,6 @@ if (!isset($_SESSION["mikhmon"])) {
 				"?owner" => "$idbl",
 			));
 			$TotalReg = count($getData);
-			for ($i = 0; $i < $TotalReg; $i++) {
-
-				$totalSR += explode("-|-", $getData[$i]['name'])[3];
-
-			}
 		}
 		$filedownload = $idbl;
 		$shf = "hidden";
@@ -104,16 +103,12 @@ if (!isset($_SESSION["mikhmon"])) {
 				"?comment" => "mikhmon",
 			));
 			$TotalReg = count($getData);
-			for ($i = 0; $i < $TotalReg; $i++) {
-
-				$totalSR += explode("-|-", $getData[$i]['name'])[3];
-
-			}
 		}
 		$filedownload = "all";
 		$shf = "text";
 		$shd = "none";
 	}
+	
 }
 ?>
 		<script>
@@ -149,24 +144,42 @@ if (!isset($_SESSION["mikhmon"])) {
         // Download CSV file
         downloadCSV(csv.join("\n"), filename);
         }
-
+		window.onload=function() {
+          var sum = 0;
+          var dataTable = document.getElementById("selling");
+          
+          // use querySelector to find all second table cells
+          var cells = document.querySelectorAll("td + td + td + td + td + td");
+          for (var i = 0; i < cells.length; i++)
+          sum+=parseFloat(cells[i].firstChild.data);
+          
+          var th = document.getElementById('total');
+          th.innerHTML = th.innerHTML + (sum) ;
+        }
 		</script>
+<script type="text/javascript">
+var _0x208b=["\x69\x6E\x70\x75\x74","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x73\x42\x79\x54\x61\x67\x4E\x61\x6D\x65","\x64\x61\x74\x61\x54\x61\x62\x6C\x65","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","","\x6C\x65\x6E\x67\x74\x68","\x74\x79\x70\x65","\x63\x68\x65\x63\x6B\x62\x6F\x78","\x63\x68\x65\x63\x6B\x65\x64","\x76\x61\x6C\x75\x65","\x7E","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\x4D\x69\x6B\x68\x6D\x6F\x6E\x52\x65\x6D\x6F\x76\x65\x52\x65\x70\x6F\x72\x74\x53\x65\x6C\x65\x63\x74\x65\x64","\x73\x65\x74\x49\x74\x65\x6D","\x50\x6C\x65\x61\x73\x65\x20\x75\x73\x65\x20\x47\x6F\x6F\x67\x6C\x65\x20\x43\x68\x72\x6F\x6D\x65","\x67\x65\x74\x49\x74\x65\x6D","\x72\x65\x6D\x53\x65\x6C\x65\x63\x74\x65\x64","\x73\x65\x6C\x65\x63\x74\x65\x64","\x73\x70\x6C\x69\x74","\x64\x69\x73\x70\x6C\x61\x79","\x73\x74\x79\x6C\x65","\x6E\x6F\x6E\x65","\x69\x6E\x6C\x69\x6E\x65","\x69\x6E\x6E\x65\x72\x48\x54\x4D\x4C","\x4D\x69\x6B\x68\x6D\x6F\x6E\x53\x65\x73\x73\x69\x6F\x6E","\x50\x6C\x65\x61\x73\x65\x20\x73\x65\x6C\x65\x63\x74\x20\x75\x73\x65\x72\x20\x74\x6F\x20\x64\x65\x6C\x65\x74\x65\x21","\x4D\x69\x6B\x68\x6D\x6F\x6E\x20\x62\x61\x6A\x61\x6B\x61\x6E\x21\x20\x3A\x29","\x4D\x69\x6B\x68\x6D\x6F\x6E\x20\x73\x65\x73\x73\x69\x6F\x6E\x20","\x0A\x41\x72\x65\x20\x79\x6F\x75\x20\x73\x75\x72\x65\x20\x74\x6F\x20\x64\x65\x6C\x65\x74\x65\x20","\x20\x73\x65\x6C\x65\x63\x74\x65\x64\x20\x72\x65\x70\x6F\x72\x74\x20\x3F","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x2E\x2F\x3F\x72\x65\x6D\x6F\x76\x65\x2D\x72\x65\x70\x6F\x72\x74\x3D","\x26\x73\x65\x73\x73\x69\x6F\x6E\x3D"];function add_chk(_0xe21dx2){var _0xe21dx3=document[_0x208b[3]](_0x208b[2])[_0x208b[1]](_0x208b[0]);var _0xe21dx4=_0x208b[4];for(var _0xe21dx5=0,_0xe21dx6=_0xe21dx3[_0x208b[5]];_0xe21dx5< _0xe21dx6;_0xe21dx5++){if(_0xe21dx3[_0xe21dx5][_0x208b[6]]=== _0x208b[7]&& _0xe21dx3[_0xe21dx5][_0x208b[8]]){_0xe21dx4+= _0xe21dx3[_0xe21dx5][_0x208b[9]]+ _0x208b[10];n= _0xe21dx3[_0x208b[5]]}};if( typeof (Storage)!== _0x208b[11]){sessionStorage[_0x208b[13]](_0x208b[12],_0xe21dx4)}else {alert(_0x208b[14])};var _0xe21dx4=sessionStorage[_0x208b[15]](_0x208b[12]);var _0xe21dx7=document[_0x208b[3]](_0x208b[16]);var _0xe21dx8=document[_0x208b[3]](_0x208b[17]);var _0xe21dx9=_0xe21dx4[_0x208b[18]](_0x208b[10])[_0x208b[5]]- 1;if(_0xe21dx4=== _0x208b[4]){_0xe21dx7[_0x208b[20]][_0x208b[19]]= _0x208b[21]}else {_0xe21dx7[_0x208b[20]][_0x208b[19]]= _0x208b[22];_0xe21dx8[_0x208b[23]]= _0xe21dx9}}if( typeof (Storage)!== _0x208b[11]){sessionStorage[_0x208b[13]](_0x208b[12],_0x208b[4]);sessionStorage[_0x208b[13]](_0x208b[24],document[_0x208b[3]](_0x208b[24])[_0x208b[9]])}else {alert(_0x208b[14])};function MikhmonRemoveReportSelected(){var _0xe21dx4=sessionStorage[_0x208b[15]](_0x208b[12]);var _0xe21dxb=sessionStorage[_0x208b[15]](_0x208b[24]);var _0xe21dx9=_0xe21dx4[_0x208b[18]](_0x208b[10])[_0x208b[5]]- 1;if(_0xe21dx4=== _0x208b[4]){alert(_0x208b[25])}else {if(_0xe21dxb=== _0x208b[4]){var _0xe21dxc=_0x208b[26]}else {var _0xe21dxc=_0xe21dxb};if(confirm(_0x208b[27]+ _0xe21dxc+ _0x208b[28]+ _0xe21dx9+ _0x208b[29])){window[_0x208b[30]]= _0x208b[31]+ _0xe21dx4+ _0x208b[32]+ _0xe21dxb}else {}}}
+</script> 		
 <div class="row">		
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-	<h3><i class=" fa fa-money"></i> Selling Report <?= $idhr . $idbl; if ($prefix != "") {echo " prefix [" . $prefix . "]";} ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> Processing... </i></small></h3>
+	<h3><i class=" fa fa-money"></i> Selling Report <?= $idhr . $idbl;	if ($prefix != "") {echo " prefix [" . $prefix . "]";} ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> Processing... </i></small></h3>
 </div>
 <div class="card-body">
 <div class="row">
-	<div>
+	<div class="row">
+	<div class="col-12">
 		<div style="padding-bottom: 5px; padding-top: 5px;">   
 		  <input id="filterTable" type="text" class="form-control" style="float:left; margin-top: 6px; max-width: 150px;" placeholder="Search..">&nbsp;
 		  <button class="btn bg-primary" onclick="exportTableToCSV('report-mikhmon-<?= $filedownload . $fprefix; ?>.csv')" title="Download selling report"><i class="fa fa-download"></i> CSV</button>
 		  <button class="btn bg-primary" onclick="location.href='./?report=selling&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> ALL</button>
 		  <button name="help" class="btn bg-primary" onclick="location.href='#help';" title="Help"><i class="fa fa-question"></i> Help</button>
 		  <button style="display: <?= $shd; ?>;" name="remdata" class="btn bg-danger" onclick="location.href='#remdata';" title="Delete Data <?= $filedownload; ?>"><i class="fa fa-trash"></i> Delete data <?= $filedownload; ?></button>
+		  <button  id="remSelected" style="display: none;" class="btn bg-red" onclick="MikhmonRemoveReportSelected()"><i class="fa fa-trash"></i> <span id="selected"></span> Selected</button>
 		</div>
+	</div>
+	</div>
 		<div class="input-group mr-b-10">  
 			<div class="input-group-1 col-box-2">
 			<select style="padding:5px;" class="group-item group-item-l" title="Day" id="D">
@@ -249,6 +262,7 @@ if (!isset($_SESSION["mikhmon"])) {
 					}else if(D === ""){
 						window.location='./?report=selling&idbl='+M+Y+'&prefix='+X+'&session=<?= $session; ?>';
 					}
+					
 				}
 			</script>
 		</div>
@@ -258,7 +272,7 @@ if (!isset($_SESSION["mikhmon"])) {
 				<tr>
 				  <th colspan=4 >Selling report <?= $filedownload . $fprefix; ?><b style="font-size:0;">,</b></th>
 				  <th style="text-align:right;">Total</th>
-				  <th style="text-align:right;" id="total"><?= $totalSR; ?></th>
+				  <th style="text-align:right;" id="total"></th>
 				</tr>
 				<tr>
 					<th >Date</th>
@@ -277,7 +291,8 @@ if (!isset($_SESSION["mikhmon"])) {
 					if (substr($getname[2], 0, strlen($prefix)) == $prefix) {
 						echo "<tr>";
 						echo "<td>";
-						$tgl = $getname[0];
+						echo "<input type='checkbox' value='".$getData[$i]['.id']."' onclick='add_chk(this);'> ";
+					$tgl = $getname[0];
 						echo $tgl;
 						echo "</td>";
 						echo "<td>";
@@ -308,6 +323,7 @@ if (!isset($_SESSION["mikhmon"])) {
 					$getname = explode("-|-", $getData[$i]['name']);
 					echo "<tr>";
 					echo "<td>";
+					echo "<input type='checkbox' value='".$getData[$i]['.id']."' onclick='add_chk(this);'> ";
 					$tgl = $getname[0];
 					echo $tgl;
 					echo "</td>";

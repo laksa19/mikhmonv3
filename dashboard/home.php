@@ -79,6 +79,45 @@ if (!isset($_SESSION["mikhmon"])) {
     $hunit = "items";
   }
 
+  if($livereport == "disable"){
+    $logh = "402px";
+    $lreport = "style='display:none;'";
+  }else{
+    $logh = "300px";
+    $lreport = "style='display:block;'";
+// get selling report
+  $thisD = date("d");
+  $thisM = strtolower(date("M"));
+  $thisY = date("Y");
+
+  if (strlen($thisD) == 1) {
+    $thisD = "0" . $thisD;
+  } else {
+    $thisD = $thisD;
+  }
+
+  $idhr = $thisM . "/" . $thisD . "/" . $thisY;
+  $idbl = $thisM . $thisY;
+
+  $getSRHr = $API->comm("/system/script/print", array(
+    "?source" => "$idhr",
+  ));
+  $TotalRHr = count($getSRHr);
+  $getSRBl = $API->comm("/system/script/print", array(
+    "?owner" => "$idbl",
+  ));
+  $TotalRBl = count($getSRBl);
+
+  for ($i = 0; $i < $TotalRHr; $i++) {
+
+    $tHr += explode("-|-", $getSRHr[$i]['name'])[3];
+
+  }
+  for ($i = 0; $i < $TotalRBl; $i++) {
+
+    $tBl += explode("-|-", $getSRBl[$i]['name'])[3];
+  }
+  }
 // get traffic ether
   $getinterface = $API->comm("/interface/print");
   $interface = $getinterface[$iface - 1]['name'];
@@ -276,11 +315,34 @@ if (!isset($_SESSION["mikhmon"])) {
             </div>  
             <div class="col-4">
             <div class="row">
+              <div <?= $lreport;?> class="box bmh-75 box-bordered">
+                <div class="box-group">
+                  <div class="box-group-icon"><i class="fa fa-money"></i></div>
+                    <div class="box-group-area">
+                      <span >
+                        <div id="reloadLreport">
+                          <?php 
+                          if ($currency == in_array($currency, $cekindo['indo'])) {
+                            echo "Pendapatan <br/>" . "
+                          Hari ini " . $TotalRHr ."vcr : " . $currency . " " . number_format($tHr, 0, ",", ".") . "<br/>
+                          Bulan ini ". $TotalRBl ."vcr : " . $currency . " " . number_format($tBl, 0, ",", ".");
+
+                          } else {
+                            echo "Income <br/>" . "
+                          This day " . $TotalRHr ."vcr : " . $currency . " " . number_format($tHr, 2) . "<br/>
+                          This month ". $TotalRBl ."vcr : " . $currency . " " . number_format($tBl, 2);
+                          }
+                          ?>
+                        </div>
+                    </span>
+                </div>
+              </div>
+            </div>
             <div class="card">
               <div class="card-header">
                 <h3><a href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> Hotspot Log</a></h3></div>
                   <div class="card-body">
-                    <div style="padding: 5px; height: 402px;" class="mr-t-10 overflow">
+                    <div style="padding: 5px; height: <?= $logh;?> ;" class="mr-t-10 overflow">
                       <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;">
                         <thead>
                           <tr>

@@ -36,6 +36,7 @@ $maxrx = explode('=', $data[$session][10])[1];
 $sesname = explode('+', $data[$session][10])[1];
 $useradm = explode('<|<', $data['mikhmon'][1])[1];
 $passadm = explode('>|>', $data['mikhmon'][2])[1];
+$livereport = explode('@!@', $data[$session][11])[1];
 
 
 $cekindo['indo'] = array(

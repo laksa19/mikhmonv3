@@ -79,39 +79,6 @@ if (!isset($_SESSION["mikhmon"])) {
     $hunit = "items";
   }
 
-// get selling report
-  $thisD = date("d");
-  $thisM = strtolower(date("M"));
-  $thisY = date("Y");
-
-  if (strlen($thisD) == 1) {
-    $thisD = "0" . $thisD;
-  } else {
-    $thisD = $thisD;
-  }
-
-  $idhr = $thisM . "/" . $thisD . "/" . $thisY;
-  $idbl = $thisM . $thisY;
-
-  $getSRHr = $API->comm("/system/script/print", array(
-    "?source" => "$idhr",
-  ));
-  $TotalRHr = count($getSRHr);
-  $getSRBl = $API->comm("/system/script/print", array(
-    "?owner" => "$idbl",
-  ));
-  $TotalRBl = count($getSRBl);
-
-  for ($i = 0; $i < $TotalRHr; $i++) {
-
-    $tHr += explode("-|-", $getSRHr[$i]['name'])[3];
-
-  }
-  for ($i = 0; $i < $TotalRBl; $i++) {
-
-    $tBl += explode("-|-", $getSRBl[$i]['name'])[3];
-  }
-
 // get traffic ether
   $getinterface = $API->comm("/interface/print");
   $interface = $getinterface[$iface - 1]['name'];

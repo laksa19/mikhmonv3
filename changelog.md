@@ -1,5 +1,5 @@
 ## Changelog
-### Update 12-1-2018 V3.6 r1
+### Update 12-21-2018 V3.6 r1
 1. Penambahan Live Report
 
 ### Update 12-1-2018 V3.6

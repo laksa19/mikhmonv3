@@ -26,7 +26,7 @@ if (!isset($_SESSION["mikhmon"])) {
   if ($id == "settings" && $router == "new") {
     $data = '$data';
     $f = fopen('./include/config.php', 'a');
-    fwrite($f, "\n'$'data['new'] = array ('1'=>'new!','new@|@','new#|#','new%','new^','new&Rp','new*10','new(1','new)','new=');");
+    fwrite($f, "\n'$'data['new'] = array ('1'=>'new!','new@|@','new#|#','new%','new^','new&Rp','new*10','new(1','new)','new=','new@!@disable');");
     fclose($f);
     $search = "'$'data";
     $replace = (string)"$data";
@@ -57,12 +57,14 @@ if (!isset($_SESSION["mikhmon"])) {
     $sdnsname = ($_POST['dnsname']);
     $scurrency = ($_POST['currency']);
     $sreload = ($_POST['areload']);
+    if($sreload < 10){$sreload = 10;}else{$sreload = $sreload;}
     $siface = ($_POST['iface']);
     $smaxtx = ($_POST['maxtx']);
     $smaxrx = ($_POST['maxrx']);
     $mbgbtx = ($_POST['mbgbtx']);
     $mbgbrx = ($_POST['mbgbrx']);
     $sesname = ($_POST['sessname']);
+    $slivereport = ($_POST['livereport']);
     if ($smaxtx == "") {
       $smaxtx = "0";
     } else {
@@ -74,10 +76,10 @@ if (!isset($_SESSION["mikhmon"])) {
       $smaxrx = $smaxrx * $mbgbrx;
     }
 
-    $search = array('1' => "$session!$iphost", "$session@|@$userhost", "$session#|#$passwdhost", "$session%$hotspotname", "$session^$dnsname", "$session&$currency", "$session*$areload", "$session($iface", "$session)$maxtx", "$session=$maxrx", "'$session'");
-    $replace = array('1' => "$sesname!$siphost", "$sesname@|@$suserhost", "$sesname#|#$spasswdhost", "$sesname%$shotspotname", "$sesname^$sdnsname", "$sesname&$scurrency", "$sesname*$sreload", "$sesname($siface", "$sesname)$smaxtx", "$sesname=$smaxrx", "'$sesname'");
+    $search = array('1' => "$session!$iphost", "$session@|@$userhost", "$session#|#$passwdhost", "$session%$hotspotname", "$session^$dnsname", "$session&$currency", "$session*$areload", "$session($iface", "$session)$maxtx", "$session=$maxrx","'$session'","$session@!@$livereport");
+    $replace = array('1' => "$sesname!$siphost", "$sesname@|@$suserhost", "$sesname#|#$spasswdhost", "$sesname%$shotspotname", "$sesname^$sdnsname", "$sesname&$scurrency", "$sesname*$sreload", "$sesname($siface", "$sesname)$smaxtx", "$sesname=$smaxrx","'$sesname'","$sesname@!@$slivereport");
 
-    for ($i = 1; $i < 12; $i++) {
+    for ($i = 1; $i < 15; $i++) {
       $file = file("./include/config.php");
       $content = file_get_contents("./include/config.php");
       $newcontent = str_replace((string)$search[$i], (string)$replace[$i], "$content");
@@ -86,7 +88,9 @@ if (!isset($_SESSION["mikhmon"])) {
     $_SESSION["connect"] = "";
     echo "<script>window.location='./admin.php?id=settings&session=" . $sesname . "'</script>";
   }
-
+	if($currency == ""){
+		echo "<script>window.location='./admin.php?id=settings&session=" . $session . "'</script>";
+	}
 }
 ?>
 <script>
@@ -204,7 +208,7 @@ if (!isset($_SESSION["mikhmon"])) {
 	<td class="align-middle">Auto Reload</td><td>
 	<div class="input-group">
 		<div class="input-group-10">
-        	<input class="group-item group-item-l" type="number" min="5" max="3600" name="areload" title="Auto Reload in sec [min 10s]" value="<?= $areload; ?>" required="1"/>
+        	<input class="group-item group-item-l" type="number" min="10" max="3600" name="areload" title="Auto Reload in sec [min 10s]" value="<?= $areload; ?>" required="1"/>
     	</div>
             <div class="input-group-2">
                 <span class="group-item group-item-r pd-2p5 text-center align-middle">sec</span>
@@ -245,6 +249,18 @@ if (!isset($_SESSION["mikhmon"])) {
       </div>
     </td>
   </tr>
+  <?php if(empty($livereport)){}else{?>
+  <tr>
+    <td>Live Report</td>
+    <td>
+      <select class="form-control" name="livereport" >
+          <option value="<?= $livereport;?>"><?= ucfirst($livereport);?></option>
+				  <option value="enable">Enable</option>
+				  <option value="disable">Disable</option>
+		  </select>
+    </td>
+  </tr>
+  <?php }?>
 </table>
 </div>
 </div>

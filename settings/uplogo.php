@@ -142,8 +142,8 @@ if (!isset($_SESSION["mikhmon"])) {
                 } else { ?>
               
               <tr>
-                <td><a href="javascript:window.open('./img/<?= $file; ?>','_blank','width=300,height=300')"><img height="30px" src="./img/<?= $file; ?>" title="Open <?= $file; ?>"></a></td>
-                <td><a href="javascript:void(0)" onclick="if(confirm('Sure to delete <?= $file; ?> ?')){window.location='./admin.php?id=remove&logo=<?= $file; ?>'}else{}"><i class="fa fa-remove"></i> Delete</a>
+                <td><a href="javascript:window.open('./img/<?= $file; ?>','_blank','width=300,height=300')"><img height="30px" src="./img/<?= $file; ?>" title="Open <?= $file; ?>"></a><br><span><?= $file; ?></span></td>
+                <td><a class="btn bg-danger" href="javascript:void(0)" onclick="if(confirm('Sure to delete <?= $file; ?> ?')){window.location='./admin.php?id=remove&logo=<?= $file; ?>'}else{}"><i class="fa fa-remove"></i> Delete</a>
                 </td>
               </tr>
               

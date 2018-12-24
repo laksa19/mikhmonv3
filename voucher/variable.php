@@ -23,6 +23,9 @@ Data Limit :
 Price :
 <?= $price; ?>
 
+Profile :
+<?= $profile; ?>
+
 Comment :
 <?= $comment; ?>
 

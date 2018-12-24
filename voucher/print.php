@@ -16,9 +16,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 session_start();
-?>
-<?php
+
 error_reporting(0);
+
+ob_start("ob_gzhandler");
+
 if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
@@ -141,6 +143,7 @@ table.voucher {
   $regtable = $getuser[$i];
   $username = $regtable['name'];
   $password = $regtable['password'];
+  $profile = $regtable['profile'];
   $timelimit = $regtable['limit-uptime'];
   $getdatalimit = $regtable['limit-bytes-total'];
   $comment = $regtable['comment'];

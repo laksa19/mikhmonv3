@@ -54,7 +54,8 @@ if (!isset($_SESSION["mikhmon"])) {
   $timelimit = "6h";
   $getdatalimit = "1073741824";
   $comment = "test";
-  $validity ="1d";
+  $validity = "1d";
+  $profile = "6Jam";
 
   
 if ($currency == in_array($currency, $cekindo['indo'])) {

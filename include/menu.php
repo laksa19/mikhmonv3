@@ -167,7 +167,11 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
  <div class="navbar-right">
   <a href="./admin.php?id=logout" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
-  <a href="javascript:void(0)" ><?= $hotspotname; ?></a>
+  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
+    <option> Theme</option>
+    <option value="<?= $url; ?>&set-theme=dark">Dark</option>
+    <option value="<?= $url; ?>&set-theme=light">Light</option>
+  </select>
 </div>
 </div>
 
@@ -200,7 +204,11 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
  <div class="navbar-right">
   <a href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
-
+  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
+    <option> Theme</option>
+    <option value="<?= $url; ?>&set-theme=dark">Dark</option>
+    <option value="<?= $url; ?>&set-theme=light">Light</option>
+  </select>
   <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
   <option id="MikhmonSession" value="<?= $session; ?>"><?= $hotspotname; ?></option>
       <?php

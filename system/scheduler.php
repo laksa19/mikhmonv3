@@ -83,18 +83,16 @@ for ($i = 0; $i < $TotalReg; $i++) {
   	<?php
 
 		if ($disabled == "true") {
-			$tcolor = "#616161";
-			echo "<a title='Enable Scheduler " . $name . "'  href='./?enable-scheduler=" . $id . "&session=" . $session . "'><i class='fa fa-lock '></i></a></td>";
+			echo "<a class='text-warning' title='Enable Scheduler " . $name . "'  href='./?enable-scheduler=" . $id . "&session=" . $session . "'><i class='fa fa-lock '></i></a></td>";
 		} else {
-			$tcolor = "#f3f4f5";
 			echo "<a title='Disable Scheduler " . $name . "'  href='./?disable-scheduler=" . $id . "&session=" . $session . "'><i class='fa fa-unlock '></i></a></td>";
 		}
-		echo "<td style='color:" . $tcolor . "; '>" . $name . "</td>";
-		echo "<td style='color:" . $tcolor . "; '>" . $startd . "</td>";
-		echo "<td style='color:" . $tcolor . "; '>" . $startt . "</td>";
-		echo "<td style='color:" . $tcolor . "; '>" . $interval . "</td>";
-		echo "<td style='color:" . $tcolor . "; '>" . $nextrun . "</a></td>";
-		echo "<td style='color:" . $tcolor . "; '>" . $comment . "</a></td>";
+		echo "<td>" . $name . "</td>";
+		echo "<td>" . $startd . "</td>";
+		echo "<td>" . $startt . "</td>";
+		echo "<td>" . $interval . "</td>";
+		echo "<td>" . $nextrun . "</a></td>";
+		echo "<td>" . $comment . "</a></td>";
 		echo "</tr>";
 	}
 	?>

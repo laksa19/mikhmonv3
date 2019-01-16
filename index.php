@@ -46,6 +46,10 @@ if (!isset($_SESSION["mikhmon"])) {
   include('./include/config.php');
   include('./include/readcfg.php');
 
+// theme  
+  include('./include/theme.php');
+  include('./settings/settheme.php');
+
 
 // routeros api
   include_once('./lib/routeros_api.class.php');
@@ -433,7 +437,7 @@ elseif ($hotspot == "uplogo") {
 </div>
 </div>
 
-<script src="js/mikhmon-ui.min.js"></script>
+<script src="js/mikhmon-ui.<?= $theme; ?>.min.js"></script>
 <script src="js/mikhmon.js"></script>
 <script>
 $(document).ready(function(){

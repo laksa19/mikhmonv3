@@ -21,6 +21,10 @@ error_reporting(0);
 
 ob_start("ob_gzhandler");
 
+// theme
+include('./include/theme.php');
+include('./settings/settheme.php');
+
 // check url
 $url = $_SERVER['REQUEST_URI'];
 
@@ -140,7 +144,7 @@ if ($id == "login" || substr($url, -1) == "p") {
   include_once('./settings/vouchereditor.php');
 }
 ?>
-<script src="js/mikhmon-ui.js"></script>
+<script src="js/mikhmon-ui.<?= $theme; ?>.min.js"></script>
 
 </body>
 </html>

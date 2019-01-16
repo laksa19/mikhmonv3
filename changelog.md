@@ -1,4 +1,9 @@
 ## Changelog
+
+### Update 01-17-2019 V3.7
+1. Penambahan Light Theme.
+2. Pennambahan menu penngganttian tema di navbar.
+
 ### Update 12-21-2018 V3.6 r1
 1. Penambahan Live Report
 

@@ -24,7 +24,16 @@ $session = $_GET['session'];
 require('../lib/routeros_api.class.php');
 include('../lib/formatbytesbites.php');
 include('../include/config.php');
-include('../include/readcfg.php');
+
+// theme  
+include('../include/theme.php');
+
+$iphost = explode('!', $data[$session][1])[1];
+$userhost = explode('@|@', $data[$session][2])[1];
+$passwdhost = explode('#|#', $data[$session][3])[1];
+$hotspotname = explode('%', $data[$session][4])[1];
+$dnsname = explode('^', $data[$session][5])[1];
+$currency = explode('&', $data[$session][6])[1];
 
 $cekindo['indo'] = array('RP', 'Rp', 'rp', 'IDR', 'idr', 'RP.', 'Rp.', 'rp.', 'IDR.', 'idr.', );
 
@@ -51,7 +60,7 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
 <!-- Font Awesome -->
 <link rel="stylesheet" type="text/css" href="../css/font-awesome/css/font-awesome.min.css" />
 <!-- Mikhmon UI -->
-<link rel="stylesheet" href="../css/mikhmon-ui.min.css">
+<link rel="stylesheet" href="../css/mikhmon-ui.<?= $theme; ?>.min.css">
 <link rel="icon" href="../img/favicon.png" />
 <script>
 function goBack() {

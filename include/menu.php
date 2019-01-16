@@ -67,11 +67,11 @@ if (!isset($_SESSION["mikhmon"])) {
     $sipbind = "active";
     $mpage = "IP Bindings";
     $ibmenu = "menu-open";
-  } elseif ($hotspot == "template-editor" ) {
+  } elseif ($hotspot == "template-editor") {
     $ssett = "active";
     $teditor = "active";
     $mpage = "Template Editor";
-    $settmenu = "menu-open";  
+    $settmenu = "menu-open";
   } elseif ($hotspot == "uplogo") {
     $ssett = "active";
     $uplogo = "active";
@@ -179,7 +179,7 @@ if (!isset($_SESSION["mikhmon"])) {
   <a  href="./admin.php?id=settings&session=<?= $session; ?>" class="menu <?= $ssettings; ?>" title="Mikhmon Settings"><i class='fa fa-gear'></i> Session Settings</a>
   <a href="./admin.php?id=uplogo&session=<?= $session; ?>" class="menu <?= $suplogo; ?>"><i class="fa fa-upload "></i> Upload Logo</a>
   <a href="./admin.php?id=editor&template=default&session=<?= $session; ?>" class="menu <?= $seditor; ?>"><i class="fa fa-edit"></i> Template Editor</a>
-  <div class="menu" style="border-bottom: 1px solid #23282c;"></div>
+  <div class="menu spa"></div>
 <?php 
 } ?>  
   <a href="./admin.php?id=sessions" class="menu <?= $ssesslist; ?>"><i class="fa fa-server"></i> Router List</a>
@@ -201,7 +201,7 @@ if (!isset($_SESSION["mikhmon"])) {
  <div class="navbar-right">
   <a href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
 
-  <select style="float: right; border: none; background-color: #3a4149; font-size: 14px;" class="text-light text-right mr-t-10 pd-5" onchange="location = this.value;">
+  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
   <option id="MikhmonSession" value="<?= $session; ?>"><?= $hotspotname; ?></option>
       <?php
       foreach (file('./include/config.php') as $line) {
@@ -259,7 +259,7 @@ if (!isset($_SESSION["mikhmon"])) {
   </div>
   <div class="dropdown-container <?= $lmenu; ?>">
     <a href="./?hotspot=log&session=<?= $session; ?>" class="<?= $slog; ?>"> <i class="fa fa-wifi "></i> Hotspot Log </a>
-    <a href="./?report=userlog&idbl=<?= strtolower(date("M")).date("Y");?>&session=<?= $session; ?>" class=" <?= $sulog; ?>"> <i class="fa fa-users "></i> User Log </a>
+    <a href="./?report=userlog&idbl=<?= strtolower(date("M")) . date("Y"); ?>&session=<?= $session; ?>" class=" <?= $sulog; ?>"> <i class="fa fa-users "></i> User Log </a>
   </div>
   <!--system-->
   <div class="dropdown-btn <?= $sysmenu; ?>"><i class=" fa fa-gear"></i> System 
@@ -272,15 +272,16 @@ if (!isset($_SESSION["mikhmon"])) {
   <!--dhcp leases-->
   <a href="./?hotspot=dhcp-leases&session=<?= $session; ?>" class="menu <?= $slease; ?>"><i class=" fa fa-sitemap"></i> DHCP Leases</a>
   <!--report-->
-  <a href="./?report=selling&idbl=<?= strtolower(date("M")).date("Y");?>&session=<?= $session; ?>" class="menu <?= $sselling; ?>"><i class="nav-icon fa fa-money"></i> Report</a>
+  <a href="./?report=selling&idbl=<?= strtolower(date("M")) . date("Y"); ?>&session=<?= $session; ?>" class="menu <?= $sselling; ?>"><i class="nav-icon fa fa-money"></i> Report</a>
   <!--settings-->
   <div class="dropdown-btn <?= $ssett; ?>"><i class=" fa fa-gear"></i> Settings 
     <i class="fa fa-caret-down"></i> &nbsp;
   </div>
   <div class="dropdown-container <?= $settmenu; ?>">
   <a href="./admin.php?id=settings&session=<?= $session; ?>" class="menu "> <i class="fa fa-gear "></i> Session Settings </a>
-  <a href="./?hotspot=uplogo&session=<?= $session; ?>" class="menu <?= $uplogo;?>"> <i class="fa fa-upload "></i> Upload Logo </a>
-  <a href="./?hotspot=template-editor&template=default&session=<?= $session; ?>" class="menu <?= $teditor;?>"> <i class="fa fa-edit "></i> Template Editor </a>          
+  <a href="./admin.php?id=sessions" class="menu "> <i class="fa fa-gear "></i> Admin Settings </a>
+  <a href="./?hotspot=uplogo&session=<?= $session; ?>" class="menu <?= $uplogo; ?>"> <i class="fa fa-upload "></i> Upload Logo </a>
+  <a href="./?hotspot=template-editor&template=default&session=<?= $session; ?>" class="menu <?= $teditor; ?>"> <i class="fa fa-edit "></i> Template Editor </a>          
   </div>
   <!--about-->
   <a href="./?hotspot=about&session=<?= $session; ?>" class="menu <?= $sabout; ?>"><i class="fa fa-info-circle"></i> About</a>

@@ -31,7 +31,7 @@ if (!isset($_SESSION["mikhmon"])) {
     $counttuser = $API->comm("/ip/hotspot/user/print", array(
       "count-only" => ""
     ));
-    
+
   } elseif ($prof != "all") {
     $getuser = $API->comm("/ip/hotspot/user/print", array(
       "?profile" => "$prof",
@@ -103,13 +103,19 @@ if (!isset($_SESSION["mikhmon"])) {
   <div class="input-group-4 col-box-4">
     <select style="padding:5px;" class="group-item group-item-r" id="comment" name="comment">
     <?php 
-    if($comm != ""){}else{echo "<option value=''>Comment</option>";}
+    if ($comm != "") {
+    } else {
+      echo "<option value=''>Comment</option>";
+    }
     for ($i = 0; $i < $TotalReg; $i++) {
       $ucomment = $getuser[$i]['comment'];
-      if (substr($ucomment, 0, 2) == "vc" || substr($ucomment, 0, 2) == "up") {  
-      if($ucomment <> $getuser[$i+1]['comment']){echo "<option value='".$ucomment."' >".$ucomment."</option>";}
-    }}
-    
+      if (substr($ucomment, 0, 2) == "vc" || substr($ucomment, 0, 2) == "up") {
+        if ($ucomment <> $getuser[$i + 1]['comment']) {
+          echo "<option value='" . $ucomment . "' >" . $ucomment . "</option>";
+        }
+      }
+    }
+
     ?>
     </select>
   </div>
@@ -128,9 +134,11 @@ if (!isset($_SESSION["mikhmon"])) {
     if (comm === "" ){
       <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
       alert('Silakan pilih salah satu Comment terlebih dulu!');
-      <?php } else { ?>
+      <?php 
+    } else { ?>
       alert('Please choose one of the Comments first!');
-      <?php } ?>
+      <?php 
+    } ?>
     }else{
       var win = window.open(url, '_blank');
       win.focus();
@@ -188,13 +196,12 @@ for ($i = 0; $i < $TotalReg; $i++) {
   <td style='text-align:center;'>  <i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete username (<?= $uname; ?>)?')){window.location='./?remove-hotspot-user=<?= $uid; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $uname; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   <?php
   if ($udisabled == "true") {
-    $tcolor = "#616161";
-    echo "<a title='Enable User " . $uname . "'  href='./?enable-hotspot-user=" . $uid . "&session=" . $session . "'><i class='fa fa-lock '></i></a></td>";
+    echo "<a class='text-warning' title='Enable User " . $uname . "'  href='./?enable-hotspot-user=" . $uid . "&session=" . $session . "'><i class='fa fa-lock '></i></a></td>";
   } else {
-    $tcolor = "#f3f4f5";
+
     echo "<a title='Disable User " . $uname . "'  href='./?disable-hotspot-user=" . $uid . "&session=" . $session . "'><i class='fa fa-unlock '></i></a></td>";
   }
-  echo "<td style='color:" . $tcolor . ";'>" . $userver ."</td>";
+  echo "<td>" . $userver . "</td>";
   if ($uname == $upass) {
     $usermode = "vc";
   } else {
@@ -202,20 +209,20 @@ for ($i = 0; $i < $TotalReg; $i++) {
   }
   $popup = "javascript:window.open('./voucher/print.php?user=" . $usermode . "-" . $uname . "&qr=no&session=" . $session . "','_blank','width=310,height=450').print();";
   $popupQR = "javascript:window.open('./voucher/print.php?user=" . $usermode . "-" . $uname . "&qr=yes&session=" . $session . "','_blank','width=310,height=450').print();";
-  echo "<td style='color:" . $tcolor . ";'><a title='Open User " . $uname . "' style='color:" . $tcolor . ";' href=./?hotspot-user=" . $uid . "&session=" . $session . "><i class='fa fa-edit'></i> " . $uname . " </a>";
-  echo '</td><td class"text-center"><a style="color:' . $tcolor . ';"  title="Print ' . $uname . '" href="' . $popup . '"><i class="fa fa-print"></i></a></td>';
-  echo '</td><td class"text-center"><a style="color:' . $tcolor . ';"  title="Print ' . $uname . '" href="' . $popupQR . '"><i class="fa fa-qrcode"></i></a></td>';
-  echo "<td style='color:" . $tcolor . "; '>" . $uprofile . "</td>";
-  echo "<td style='color:" . $tcolor . "; text-align:right'>" . $uuptime . "</td>";
-  echo "<td style='color:" . $tcolor . "; text-align:right'>" . $ubytesi . "</td>";
-  echo "<td style='color:" . $tcolor . "; text-align:right'>" . $ubyteso . "</td>";
-  echo "<td style='color:" . $tcolor . ";'>";
+  echo "<td><a title='Open User " . $uname . "' href=./?hotspot-user=" . $uid . "&session=" . $session . "><i class='fa fa-edit'></i> " . $uname . " </a>";
+  echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popup . '"><i class="fa fa-print"></i></a></td>';
+  echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popupQR . '"><i class="fa fa-qrcode"></i></a></td>';
+  echo "<td>" . $uprofile . "</td>";
+  echo "<td style=' text-align:right'>" . $uuptime . "</td>";
+  echo "<td style=' text-align:right'>" . $ubytesi . "</td>";
+  echo "<td style=' text-align:right'>" . $ubyteso . "</td>";
+  echo "<td>";
   if ($uname == "default-trial") {
   } else {
-    echo "<a style='color:" . $tcolor . ";' href=./?hotspot=users&comment=" . $ucomment . "&session=" . $session . " title='Filter by " . $ucomment . "'>" . $ucomment . "</a>";
+    echo "<a  href=./?hotspot=users&comment=" . $ucomment . "&session=" . $session . " title='Filter by " . $ucomment . "'>" . $ucomment . "</a>";
   }
   echo $utimelimit . ' ' . $udatalimit . "</td>";
-  
+
 
 }
 ?>

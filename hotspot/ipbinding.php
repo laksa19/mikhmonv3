@@ -84,10 +84,8 @@ for ($i = 0; $i < $TotalReg; $i++) {
   	<?php
 		echo "<a class='btnsmall' title='Remove " . $maca . "' href='./?remove-ip-binding=" . $id . "&mac=" . $maca . "&addr=" . $addr . "&session=" . $session . "'></a>";
 		if ($bdisabled == "true") {
-			$tcolor = "#616161";
-			echo "<a title='Enable Binding " . $addr . "' class='btnsmall' href='./?enable-ip-binding=" . $id . "&session=" . $session . "'><i class='fa fa-lock'></a></td>";
+			echo "<a class='text-warning' title='Enable Binding " . $addr . "' class='btnsmall' href='./?enable-ip-binding=" . $id . "&session=" . $session . "'><i class='fa fa-lock'></a></td>";
 		} else {
-			$tcolor = "#f3f4f5";
 			echo "<a title='Disable Binding " . $addr . "' class='btnsmall' href='./?disable-ip-binding=" . $id . "&session=" . $session . "'><i class='fa fa-unlock '></a></td>";
 		}
 		echo "<td style='text-align:center;'>";
@@ -96,11 +94,11 @@ for ($i = 0; $i < $TotalReg; $i++) {
 		} else {
 		}
 		echo "</td>";
-		echo "<td style='color:" . $tcolor . ";'>" . $commt . "</td>";
-		echo "<td style='color:" . $tcolor . ";'>" . $maca . "</td>";
-		echo "<td style='color:" . $tcolor . ";'>" . $addr . "</td>";
-		echo "<td style='color:" . $tcolor . ";'>" . $toaddr . "</td>";
-		echo "<td style='color:" . $tcolor . ";'>" . $server . "</td>";
+		echo "<td>" . $commt . "</td>";
+		echo "<td>" . $maca . "</td>";
+		echo "<td>" . $addr . "</td>";
+		echo "<td>" . $toaddr . "</td>";
+		echo "<td>" . $server . "</td>";
 		echo "</tr>";
 	}
 	?>

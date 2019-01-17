@@ -28,7 +28,7 @@ if (!isset($_SESSION["mikhmon"])) {
   if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?session") {
     $shome = "active";
     $mpage = "Dashboard";
-  } elseif ($hotspot == "users" || $userbyprofile != "" || $hotspot == "export-users" || $removehotspotuserbycomment != "" || $removehotspotuser != "" || $removehotspotusers != "") {
+  } elseif ($hotspot == "users" || $userbyprofile != "" || $hotspot == "export-users" || $removehotspotuserbycomment != "" || $removehotspotuser != "" || $removehotspotusers != "" || $disablehotspotuser || $enablehotspotuser != "") {
     $susersl = "active";
     $susers = "active";
     $mpage = "Users";

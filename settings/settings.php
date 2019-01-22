@@ -50,7 +50,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
   if (isset($_POST['save'])) {
 
-    $siphost = ($_POST['ipmik']);
+    $siphost = (preg_replace('/\s+/', '', $_POST['ipmik']));
     $suserhost = ($_POST['usermik']);
     $spasswdhost = encrypt($_POST['passmik']);
     $shotspotname = ($_POST['hotspotname']);

@@ -21,12 +21,17 @@ error_reporting(0);
 
 ob_start("ob_gzhandler");
 
+// check url
+$url = $_SERVER['REQUEST_URI'];
+
 // theme
 include('./include/theme.php');
 include('./settings/settheme.php');
-
-// check url
-$url = $_SERVER['REQUEST_URI'];
+if ($_SESSION['theme'] == "") {
+  $theme = $theme;
+} else {
+  $theme = $_SESSION['theme'];
+}
 
 $id = $_GET['id'];
 // load session MikroTik
@@ -58,7 +63,7 @@ if ($id == "login" || substr($url, -1) == "p") {
       $_SESSION["mikhmon"] = $user;
 
 
-        echo "<script>window.location='./admin.php?id=sessions'</script>";
+      echo "<script>window.location='./admin.php?id=sessions'</script>";
 
     } else {
       $error = '<div style="width: 100%; padding:5px 0px 5px 0px; border-radius:5px;" class="bg-danger"><i class="fa fa-ban"></i> Alert!<br>Invalid username or password.</div>';
@@ -112,8 +117,9 @@ if ($id == "login" || substr($url, -1) == "p") {
   include_once('./include/menu.php');
   include_once('./settings/uplogo.php');
 } elseif ($id == "reboot") {
-
   include_once('./process/reboot.php');
+} elseif ($id == "shutdown") {
+  include_once('./process/shutdown.php');
 } elseif ($id == "remove" && $session != "") {
   include_once('./include/menu.php');
 
@@ -138,7 +144,7 @@ if ($id == "login" || substr($url, -1) == "p") {
   $logopath = "./img/";
   $remlogo = $logopath . $logo;
   unlink("$remlogo");
-  echo "<script>window.location='./admin.php?id=uplogo&session=kemangi41'</script>";
+  echo "<script>window.location='./admin.php?id=uplogo&session=" . $session . "'</script>";
 } elseif ($id == "editor") {
   include_once('./include/menu.php');
   include_once('./settings/vouchereditor.php');

@@ -37,7 +37,7 @@ error_reporting(0);
 		<!-- jQuery -->
 		<script src="js/jquery.min.js"></script>
 		<!-- pace -->
-		<link href="css/pace.css" rel="stylesheet" />
+		<link href="css/pace.<?= $theme; ?>.css" rel="stylesheet" />
 		<script src="js/pace.min.js"></script>
 		
 	</head>

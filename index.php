@@ -49,6 +49,11 @@ if (!isset($_SESSION["mikhmon"])) {
 // theme  
   include('./include/theme.php');
   include('./settings/settheme.php');
+  if ($_SESSION['theme'] == "") {
+    $theme = $theme;
+  } else {
+    $theme = $_SESSION['theme'];
+  }
 
 
 // routeros api
@@ -99,7 +104,7 @@ if (!isset($_SESSION["mikhmon"])) {
   $comm = $_GET['comment'];
   $serveractive = $_GET['server'];
   $report = $_GET['report'];
-
+  $minterface = $_GET['interface'];
 
 
   include_once('./include/headhtml.php');
@@ -296,10 +301,15 @@ if (!isset($_SESSION["mikhmon"])) {
     include_once('./hotspot/hotspotactive.php');
   }
 
-// hotspot hosts
+// dhcp leases
   elseif ($hotspot == "dhcp-leases") {
     include_once('./dhcp/dhcpleases.php');
   }
+
+// traffic monitor
+elseif ($minterface == "traffic-monitor") {
+  include_once('./traffic/trafficmonitor.php');
+}
 
 // hotspot hosts
   elseif ($hotspot == "hosts" || $hotspot == "hostp" || $hotspot == "hosta") {
@@ -312,14 +322,14 @@ if (!isset($_SESSION["mikhmon"])) {
   }
 
 // template editor
-elseif ($hotspot == "template-editor") {
-  include_once('./settings/vouchereditor.php');
-}
+  elseif ($hotspot == "template-editor") {
+    include_once('./settings/vouchereditor.php');
+  }
 
 // upload logo
-elseif ($hotspot == "uplogo") {
-  include_once('./settings/uplogo.php');
-}
+  elseif ($hotspot == "uplogo") {
+    include_once('./settings/uplogo.php');
+  }
 
 // hotspot Cookies
   elseif ($hotspot == "cookies") {
@@ -437,8 +447,10 @@ elseif ($hotspot == "uplogo") {
 </div>
 </div>
 
-<script src="js/mikhmon-ui.<?= $theme; ?>.min.js"></script>
-<script src="js/mikhmon.js"></script>
+<script src="./js/highcharts/highcharts.js"></script>
+<script src="./js/highcharts/themes/hc.<?= $theme; ?>.js"></script>
+<script src="./js/mikhmon-ui.<?= $theme; ?>.min.js"></script>
+<script src="./js/mikhmon.js"></script>
 <script>
 $(document).ready(function(){
   $("#filterTable").on("keyup", function() {
@@ -457,9 +469,16 @@ if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?sessio
     
     var interval= "' . ($areload * 1000) . '";
     setInterval(function() {
-    $("#reloadHome").load("./dashboard/home.php?session=' . $session . '"); }, interval);
-  })
-</script>';
+      
+      $("#r_1").load("./dashboard/aload.php?session=' . $session . '&load=sysresource #r_1"); 
+      $("#r_2").load("./dashboard/aload.php?session=' . $session . '&load=hotspot #r_2"); 
+      $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3"); 
+    
+  }, interval);
+})
+</script>
+
+';
 } elseif ($hotspot == "active" && $serveractive != "") {
   echo '<script>
   $(document).ready(function(){
@@ -505,6 +524,16 @@ $(document).ready(function(){
     }
 });
 </script>";
+}
+if ($livereport == "enable" || $livereport == "") {
+  echo '<script>
+  $(document).ready(function(){
+    var interval= "65432";
+    setInterval(function() {
+    $("#r_4").load("./report/livereport.php?session=' . $session . ' #r_4"); 
+  }, interval);
+  })
+</script>';
 }
 }
 ?>

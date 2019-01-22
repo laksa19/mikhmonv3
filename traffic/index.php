@@ -15,32 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-session_start();
-// hide all error
-error_reporting(0);
-
-// check url
-$url2 = explode("&set-theme", $url)[0];
-
-$gettheme = $_GET['set-theme'];
-$atheme = array(
-    "light",
-    "dark",
-);
-if (empty($gettheme)) {
-
-} else {
-    if (in_array($gettheme, $atheme)) {
-        include_once('./include/headhtml.php');
-        $gen = '<?php $theme="' . $gettheme . '";?>';
-        $stheme = './include/theme.php';
-        $handle = fopen($stheme, 'w') or die('Cannot open file:  ' . $stheme);
-        $data = $gen;
-        fwrite($handle, $data);
-        $_SESSION['theme'] = $gettheme;
-    } else {
-        include_once('./include/headhtml.php');
-    }
-}
-
+echo "<meta http-equiv='refresh' content='0;url=../' />";
 ?>
+

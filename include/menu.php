@@ -63,6 +63,9 @@ if (!isset($_SESSION["mikhmon"])) {
   } elseif ($hotspot == "dhcp-leases") {
     $slease = "active";
     $mpage = "DHCP Leases";
+  } elseif ($minterface == "traffic-monitor") {
+    $strafficmonitor = "active";
+    $mpage = "Traffic Monitor";   
   } elseif ($hotspot == "ipbinding" || $hotspot == "binding" || $removeipbinding != "" || $enableipbinding != "" || $disableipbinding != "") {
     $sipbind = "active";
     $mpage = "IP Bindings";
@@ -167,11 +170,12 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
  <div class="navbar-right">
   <a href="./admin.php?id=logout" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
-  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
+  <select id="setTheme" class="ses text-right mr-t-10 pd-5">
     <option> Theme</option>
     <option value="<?= $url; ?>&set-theme=dark">Dark</option>
     <option value="<?= $url; ?>&set-theme=light">Light</option>
   </select>
+  <div style="display:none" id="LoadTheme"></div>
 </div>
 </div>
 
@@ -204,11 +208,12 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
  <div class="navbar-right">
   <a href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
-  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
+  <select id="setTheme" class="ses text-right mr-t-10 pd-5">
     <option> Theme</option>
     <option value="<?= $url; ?>&set-theme=dark">Dark</option>
     <option value="<?= $url; ?>&set-theme=light">Light</option>
   </select>
+  <div style="display:none" id="LoadTheme"></div>
   <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
   <option id="MikhmonSession" value="<?= $session; ?>"><?= $hotspotname; ?></option>
       <?php
@@ -276,9 +281,12 @@ if (!isset($_SESSION["mikhmon"])) {
   <div class="dropdown-container <?= $schmenu; ?>">
     <a href="./?system=scheduler&session=<?= $session; ?>" class="<?= $ssch; ?>"> <i class="fa fa-clock-o "></i> Scheduler </a>
     <a href="./admin.php?id=reboot&session=<?= $session; ?>" class=""> <i class="fa fa-power-off "></i> Reboot </a>            
+    <a href="./admin.php?id=shutdown&session=<?= $session; ?>" class=""> <i class="fa fa-power-off "></i> Shutdown </a>            
   </div>
   <!--dhcp leases-->
   <a href="./?hotspot=dhcp-leases&session=<?= $session; ?>" class="menu <?= $slease; ?>"><i class=" fa fa-sitemap"></i> DHCP Leases</a>
+  <!--traffic monitor-->
+  <a href="./?interface=traffic-monitor&session=<?= $session; ?>" class="menu <?= $strafficmonitor; ?>"><i class=" fa fa-area-chart"></i> Traffic Monitor</a>
   <!--report-->
   <a href="./?report=selling&idbl=<?= strtolower(date("M")) . date("Y"); ?>&session=<?= $session; ?>" class="menu <?= $sselling; ?>"><i class="nav-icon fa fa-money"></i> Report</a>
   <!--settings-->
@@ -297,6 +305,18 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
 <?php 
 } ?>
+<script>
+    $(function(){
+      $('#setTheme').on('change', function () {
+          var newTheme = $(this).val();
+          if (newTheme) { 
+            $("#LoadTheme").load(newTheme); 
+            window.location.reload();
+          }
+          return false;
+      });
+    });
+</script>
 <div id="main">  
 <div class="main-container">
 

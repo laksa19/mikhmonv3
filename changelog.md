@@ -1,5 +1,10 @@
 ## Changelog
 
+### Update 01-22-2019 V3.8
+1. Perbaikan Theme.
+2. Traffic dashboard dengan Highchart.
+3. Penambahan fitur Traffic Monitor.
+
 ### Update 01-17-2019 V3.7
 1. Penambahan Light Theme.
 2. Pennambahan menu penngganttian tema di navbar.

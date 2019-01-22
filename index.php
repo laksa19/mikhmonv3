@@ -479,6 +479,16 @@ if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?sessio
 </script>
 
 ';
+if ($livereport == "enable" || $livereport == "") {
+  echo '<script>
+  $(document).ready(function(){
+    var interval= "65432";
+    setInterval(function() {
+    $("#r_4").load("./report/livereport.php?session=' . $session . ' #r_4"); 
+  }, interval);
+  })
+</script>';
+}
 } elseif ($hotspot == "active" && $serveractive != "") {
   echo '<script>
   $(document).ready(function(){
@@ -524,16 +534,6 @@ $(document).ready(function(){
     }
 });
 </script>";
-}
-if ($livereport == "enable" || $livereport == "") {
-  echo '<script>
-  $(document).ready(function(){
-    var interval= "65432";
-    setInterval(function() {
-    $("#r_4").load("./report/livereport.php?session=' . $session . ' #r_4"); 
-  }, interval);
-  })
-</script>';
 }
 }
 ?>

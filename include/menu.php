@@ -170,12 +170,11 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
  <div class="navbar-right">
   <a href="./admin.php?id=logout" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
-  <select id="setTheme" class="ses text-right mr-t-10 pd-5">
+  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
     <option> Theme</option>
     <option value="<?= $url; ?>&set-theme=dark">Dark</option>
     <option value="<?= $url; ?>&set-theme=light">Light</option>
   </select>
-  <div style="display:none" id="LoadTheme"></div>
 </div>
 </div>
 
@@ -208,12 +207,11 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
  <div class="navbar-right">
   <a href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
-  <select id="setTheme" class="ses text-right mr-t-10 pd-5">
+  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
     <option> Theme</option>
     <option value="<?= $url; ?>&set-theme=dark">Dark</option>
     <option value="<?= $url; ?>&set-theme=light">Light</option>
   </select>
-  <div style="display:none" id="LoadTheme"></div>
   <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
   <option id="MikhmonSession" value="<?= $session; ?>"><?= $hotspotname; ?></option>
       <?php
@@ -305,18 +303,7 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
 <?php 
 } ?>
-<script>
-    $(function(){
-      $('#setTheme').on('change', function () {
-          var newTheme = $(this).val();
-          if (newTheme) { 
-            $("#LoadTheme").load(newTheme); 
-            window.location.reload();
-          }
-          return false;
-      });
-    });
-</script>
+
 <div id="main">  
 <div class="main-container">
 

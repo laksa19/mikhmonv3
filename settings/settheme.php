@@ -38,8 +38,13 @@ if (empty($gettheme)) {
         $data = $gen;
         fwrite($handle, $data);
         $_SESSION['theme'] = $gettheme;
+        echo '<center><div style="padding-top:10%;"><i class="fa fa-circle-o-notch fa-spin" style="font-size:40px"></i></div><h3>Load '.$gettheme.' theme...</h3></center>';
+        echo "<script>window.location='" . $url2 . "'</script>";
+        
     } else {
         include_once('./include/headhtml.php');
+        echo '<center><div style="padding-top:10%;"><i class="fa fa-circle-o-notch fa-spin" style="font-size:40px"></i></div><h3>'.$gettheme.' theme not found...</h3></center>';
+        echo "<script>window.location='" . $url2 . "'</script>";
     }
 }
 

@@ -135,7 +135,7 @@ if (!isset($_SESSION["mikhmon"])) {
   } elseif ($hotspot == "about") {
     $mpage = "About";
     $sabout = "active";
-  } elseif ($id == "sessions") {
+  } elseif ($id == "sessions" || $id == "remove" || $router == "new") {
     $ssesslist = "active";
     $mpage = "Router List";
   } elseif ($id == "settings" && $session == "new") {
@@ -162,7 +162,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
 <div id="navbar" class="navbar">
   <div class="navbar-left">
-    <a id="brand" class="text-center" href="javascript:void(0)"><span>MIKHMON</span></a>
+    <a id="brand" class="text-center" href="javascript:void(0)"><span>MIKHMON ONLINE</span></a>
 
 <a id="openNav" class="navbar-hover" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
 <a id="closeNav" class="navbar-hover" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
@@ -179,8 +179,9 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
 
 <div id="sidenav" class="sidenav">
-<?php if ($session == "" || $session == "new") {
-} else { ?>  
+<?php if (($id == "settings" && $session == "new") || $id == "settings" && $router == "new") {
+}else if ($id == "settings" || $id == "editor"|| $id == "uplogo"){
+?>  
   <div class="menu text-center align-middle card-header"><h3 id="MikhmonSession"><?= $session; ?></h3></div>
   <a href="./?session=<?= $session; ?>" class="menu <?= $shome; ?>" title="Dashboard"><i class='fa fa-tachometer'></i> Dashboard</a>
   <a  href="./admin.php?id=settings&session=<?= $session; ?>" class="menu <?= $ssettings; ?>" title="Mikhmon Settings"><i class='fa fa-gear'></i> Session Settings</a>
@@ -189,7 +190,7 @@ if (!isset($_SESSION["mikhmon"])) {
   <div class="menu spa"></div>
 <?php 
 } ?>  
-  <a href="./admin.php?id=sessions" class="menu <?= $ssesslist; ?>"><i class="fa fa-server"></i> Router List</a>
+  <a href="./admin.php?id=sessions" class="menu <?= $ssesslist; ?>"><i class="fa fa-gear"></i> Admin Settings</a>
   <a href="./admin.php?id=settings&router=new" class="menu <?= $snsettings ?>"><i class="fa fa-plus"></i> Add Router</a>
   <a href="./admin.php?id=about" class="menu <?= $sabout; ?>"><i class="fa fa-info-circle"></i> About</a>
 </div>

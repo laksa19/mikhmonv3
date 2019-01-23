@@ -67,14 +67,14 @@ if (!isset($_SESSION["mikhmon"])) {
 	<div class="col-12">
   	<div class="card">
   		<div class="card-header">
-  			<h3 class="card-title"><i class="fa fa-server"></i> Router List &nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i></h3>
+  			<h3 class="card-title"><i class="fa fa-gear"></i> Admin Settings &nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i></h3>
   		</div>
       <div class="card-body">
         <div class="row">
           <div class="col-6">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-server"></i> Router</h3>
+                <h3 class="card-title"><i class="fa fa-server"></i> Router List</h3>
               </div>
             <div class="card-body">
             <div class="row"> 

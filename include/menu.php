@@ -180,7 +180,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
 <div id="sidenav" class="sidenav">
 <?php if (($id == "settings" && $session == "new") || $id == "settings" && $router == "new") {
-}else if ($id == "settings" || $id == "editor"|| $id == "uplogo"){
+}else if ($id == "settings" || $id == "editor"|| $id == "uplogo" || $id == "connect"){
 ?>  
   <div class="menu text-center align-middle card-header"><h3 id="MikhmonSession"><?= $session; ?></h3></div>
   <a href="./?session=<?= $session; ?>" class="menu <?= $shome; ?>" title="Dashboard"><i class='fa fa-tachometer'></i> Dashboard</a>

@@ -174,6 +174,7 @@ if (!isset($_SESSION["mikhmon"])) {
     <option> Theme</option>
     <option value="<?= $url; ?>&set-theme=dark">Dark</option>
     <option value="<?= $url; ?>&set-theme=light">Light</option>
+    <option value="<?= $url; ?>&set-theme=pink">Pink</option>
   </select>
 </div>
 </div>
@@ -212,6 +213,7 @@ if (!isset($_SESSION["mikhmon"])) {
     <option> Theme</option>
     <option value="<?= $url; ?>&set-theme=dark">Dark</option>
     <option value="<?= $url; ?>&set-theme=light">Light</option>
+    <option value="<?= $url; ?>&set-theme=pink">Pink</option>
   </select>
   <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
   <option id="MikhmonSession" value="<?= $session; ?>"><?= $hotspotname; ?></option>

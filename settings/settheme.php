@@ -26,6 +26,7 @@ $gettheme = $_GET['set-theme'];
 $atheme = array(
     "light",
     "dark",
+    "pink",
 );
 if (empty($gettheme)) {
 

@@ -1,17 +1,17 @@
 /**
- * Mikhmon Light theme for Highcharts JS
+ * Mikhmon Pink theme for Highcharts JS
  * @author Laksamadi Guko
  */
 
 Highcharts.theme = {
 	colors: ["#20a8d8", "#f86c6b"],
 	chart: {
-		backgroundColor: '#FFFFFF',
-		borderColor: '#FFFFFF',
+		backgroundColor: 'rgb(255, 230, 241)',
+		borderColor: 'rgb(255, 230, 241)',
 		borderWidth: 1,
 		className: 'light-cart',
-		plotBackgroundColor: '#FFFFFF',
-		plotBorderColor: '#c1c1c1',
+		plotBackgroundColor: 'rgb(255, 230, 241)',
+		plotBorderColor: '#F670AD',
 		plotBorderWidth: 1,
 		height: '300px'
 	},
@@ -28,7 +28,7 @@ Highcharts.theme = {
 		}
 	},
 	xAxis: {
-		gridLineColor: '#c1c1c1',
+		gridLineColor: '#F670AD',
 		gridLineWidth: 1,
 		labels: {
 			style: {
@@ -36,8 +36,8 @@ Highcharts.theme = {
 			}
 		},
 
-		lineColor: '#c1c1c1',
-		tickColor: '#c1c1c1',
+		lineColor: '#F670AD',
+		tickColor: '#F670AD',
 		title: {
 			style: {
 				color: '#3E3E3E',
@@ -49,15 +49,15 @@ Highcharts.theme = {
 		}
 	},
 	yAxis: {
-		gridLineColor: '#c1c1c1',
+		gridLineColor: '#F670AD',
 		labels: {
 			style: {
 				color: '#3E3E3E'
 			}
 		},
-		lineColor: '#c1c1c1',
+		lineColor: '#F670AD',
 		minorTickInterval: null,
-		tickColor: '#c1c1c1',
+		tickColor: '#F670AD',
 		tickWidth: 1,
 		title: {
 			style: {
@@ -74,7 +74,7 @@ Highcharts.theme = {
 		}
 	},
 	tooltip: {
-		backgroundColor: 'rgba(254, 254, 254, 0.75)',
+		backgroundColor: 'rgb(253, 223, 237, 0.75)',
 		style: {
 			color: '#3E3E3E'
 		}

@@ -141,7 +141,7 @@ if (!isset($_SESSION["mikhmon"])) {
   } elseif ($id == "settings" && $session == "new") {
     $snsettings = "active";
     $mpage = "Add Router";
-  } elseif ($id == "settings") {
+  } elseif ($id == "settings" || $id == "connect") {
     $ssettings = "active";
     $mpage = "Session Settings";
   } elseif ($id == "about") {

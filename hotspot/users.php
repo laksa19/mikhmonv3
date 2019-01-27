@@ -144,9 +144,9 @@ if (!isset($_SESSION["mikhmon"])) {
       win.focus();
     }}
   </script>
-  <button class="btn bg-blue" title='Print' onclick="printV('qr','no');"><i class="fa fa-print"></i> Default</button>
-  <button class="btn bg-blue" title='Print QR' onclick="printV('qr','yes');"><i class="fa fa-print"></i> QR</button>
-  <button class="btn bg-blue" title='Print Small'onclick="printV('small','yes');"><i class="fa fa-print"></i> Small</button>
+  <button class="btn bg-primary" title='Print' onclick="printV('qr','no');"><i class="fa fa-print"></i> Default</button>
+  <button class="btn bg-primary" title='Print QR' onclick="printV('qr','yes');"><i class="fa fa-print"></i> QR</button>
+  <button class="btn bg-primary" title='Print Small'onclick="printV('small','yes');"><i class="fa fa-print"></i> Small</button>
   </div>  
 </div>
 <div class="overflow mr-t-10 box-bordered" style="max-height: 75vh">   

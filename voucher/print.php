@@ -82,9 +82,9 @@ if (!isset($_SESSION["mikhmon"])) {
 
   $logo = "../img/logo-" . $session . ".png";
   if (file_exists($logo)) {
-    $logo = "../img/logo-" . $session . ".png";
+    $logo = "../img/logo-" . $session . ".png?t=". str_replace(" ","_",date("Y-m-d H:i:s"));
   } else {
-    $logo = "../img/logo.png";
+    $logo = "../img/logo.png?t=". str_replace(" ","_",date("Y-m-d H:i:s"));
   }
 
 }

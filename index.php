@@ -106,6 +106,10 @@ if (!isset($_SESSION["mikhmon"])) {
   $report = $_GET['report'];
   $minterface = $_GET['interface'];
 
+  $pagehotspot = array('users','hosts','ipbinding','cookies','log','dhcp-leases');
+  $pageppp = array('secrets','profiles','active',);
+  $pagereport = array('userlog','selling');
+
 
   include_once('./include/headhtml.php');
 
@@ -383,6 +387,12 @@ elseif ($minterface == "traffic-monitor") {
     include_once('./report/selling.php');
   }
 
+// selling
+elseif ($report == "resume-report") {
+  include_once('./report/resumereport.php');
+}
+
+
 // ppp secret
   elseif ($ppp == "secrets") {
     include_once('./ppp/pppsecrets.php');
@@ -450,17 +460,7 @@ elseif ($minterface == "traffic-monitor") {
 <script src="./js/highcharts/highcharts.js"></script>
 <script src="./js/highcharts/themes/hc.<?= $theme; ?>.js"></script>
 <script src="./js/mikhmon-ui.<?= $theme; ?>.min.js"></script>
-<script src="./js/mikhmon.js"></script>
-<script>
-$(document).ready(function(){
-  $("#filterTable").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#dataTable tbody tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
+<script src="js/mikhmon.js?t=<?= str_replace(" ","_",date("Y-m-d H:i:s")); ?>"></script>
 
 <?php
 if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?session") {
@@ -534,6 +534,19 @@ $(document).ready(function(){
     }
 });
 </script>";
+} elseif (in_array($hotspot, $pagehotspot) || in_array($ppp, $pageppp) || in_array($report, $pagereport) || $sys == "scheduler") {
+  echo '
+  <script>
+  $(document).ready(function(){
+    $("#filterTable").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#dataTable tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  
+  </script>';
 }
 }
 ?>

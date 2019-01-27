@@ -23,15 +23,18 @@ error_reporting(0);
 $url2 = explode("&set-theme", $url)[0];
 
 $gettheme = $_GET['set-theme'];
-$atheme = array(
-    "light",
+$mtheme = array(
     "dark",
+    "light",
+    "blue",
+    "green",
     "pink",
+    
 );
 if (empty($gettheme)) {
 
 } else {
-    if (in_array($gettheme, $atheme)) {
+    if (in_array($gettheme, $mtheme)) {
         include_once('./include/headhtml.php');
         $gen = '<?php $theme="' . $gettheme . '";?>';
         $stheme = './include/theme.php';

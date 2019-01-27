@@ -43,7 +43,7 @@ if (!isset($_SESSION["mikhmon"])) {
                     <option>Select Interface</option>
                     <?php 
                       for ($i = 0; $i < $TotalReg; $i++) {
-                        echo '<option>' . $getinterface[$i]['name'] . '</option>';
+                        echo '<option value="' . $getinterface[$i]['name'] . '">['.($i+1).'] ' . $getinterface[$i]['name'] . '</option>';
                     }
                     ?>
                   </select>

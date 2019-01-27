@@ -114,7 +114,7 @@ if (!isset($_SESSION["mikhmon"])) {
     $ssch = "active";
     $mpage = "System Scheduler";
     $schmenu = "menu-open";
-  } elseif ($report == "selling") {
+  } elseif ($report == "selling"  || $report == "resume-report") {
     $sselling = "active";
     $mpage = "Report";
   } elseif ($userprofile == "add") {
@@ -170,11 +170,12 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
  <div class="navbar-right">
   <a href="./admin.php?id=logout" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
-  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
+  <select class="stheme ses text-right mr-t-10 pd-5">
     <option> Theme</option>
-    <option value="<?= $url; ?>&set-theme=dark">Dark</option>
-    <option value="<?= $url; ?>&set-theme=light">Light</option>
-    <option value="<?= $url; ?>&set-theme=pink">Pink</option>
+    <?php for ($i = 0; $i < count($mtheme); $i++) {
+      echo '<option value="'.$url.'&set-theme='.$mtheme[$i],'">'.ucfirst($mtheme[$i]),'</option>';
+    }
+    ?>
   </select>
 </div>
 </div>
@@ -183,8 +184,8 @@ if (!isset($_SESSION["mikhmon"])) {
 <?php if (($id == "settings" && $session == "new") || $id == "settings" && $router == "new") {
 }else if ($id == "settings" || $id == "editor"|| $id == "uplogo" || $id == "connect"){
 ?>  
-  <div class="menu text-center align-middle card-header"><h3 id="MikhmonSession"><?= $session; ?></h3></div>
-  <a href="./?session=<?= $session; ?>" class="menu <?= $shome; ?>" title="Dashboard"><i class='fa fa-tachometer'></i> Dashboard</a>
+  <div class="menu text-center align-middle card-header" style="border-radius:0;"><h3 id="MikhmonSession"><?= $session; ?></h3></div>
+  <a class="connect menu <?= $shome; ?>" id="<?= $session; ?>&c=settings"><i class='fa fa-tachometer'></i> Dashboard</a>
   <a  href="./admin.php?id=settings&session=<?= $session; ?>" class="menu <?= $ssettings; ?>" title="Mikhmon Settings"><i class='fa fa-gear'></i> Session Settings</a>
   <a href="./admin.php?id=uplogo&session=<?= $session; ?>" class="menu <?= $suplogo; ?>"><i class="fa fa-upload "></i> Upload Logo</a>
   <a href="./admin.php?id=editor&template=default&session=<?= $session; ?>" class="menu <?= $seditor; ?>"><i class="fa fa-edit"></i> Template Editor</a>
@@ -195,7 +196,20 @@ if (!isset($_SESSION["mikhmon"])) {
   <a href="./admin.php?id=settings&router=new" class="menu <?= $snsettings ?>"><i class="fa fa-plus"></i> Add Router</a>
   <a href="./admin.php?id=about" class="menu <?= $sabout; ?>"><i class="fa fa-info-circle"></i> About</a>
 </div>
-
+<script>
+$(document).ready(function(){
+  $(".connect").click(function(){
+    notify("Connecting");
+    connect(this.id)
+  });
+  $(".stheme").change(function(){
+    notify("Loading theme");
+    stheme(this.value)
+  });
+});
+</script>
+<div id="notify"><div class="message"></div></div>
+<div id="temp"></div>
 <?php 
 } else { ?>
 
@@ -209,20 +223,25 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
  <div class="navbar-right">
   <a href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
-  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
+  <select class="stheme ses text-right mr-t-10 pd-5">
     <option> Theme</option>
-    <option value="<?= $url; ?>&set-theme=dark">Dark</option>
-    <option value="<?= $url; ?>&set-theme=light">Light</option>
-    <option value="<?= $url; ?>&set-theme=pink">Pink</option>
+    <?php for ($i = 0; $i < count($mtheme); $i++) {
+      echo '<option value="'.$url.'&set-theme='.$mtheme[$i],'">'.ucfirst($mtheme[$i]),'</option>';
+    }
+    ?>
   </select>
-  <select class="ses text-right mr-t-10 pd-5" onchange="location = this.value;">
+  <select class="connect ses text-right mr-t-10 pd-5">
   <option id="MikhmonSession" value="<?= $session; ?>"><?= $hotspotname; ?></option>
-      <?php
+  <?php
       foreach (file('./include/config.php') as $line) {
-        $value = explode("'", $line)[1];
-        if ($value == "" || $value == "mikhmon") {
+        $sesname = explode("'", $line)[1];
+        if ($sesname == "" || $sesname== "mikhmon") {
         } else {
-          echo '<option value="./?session=' . $value . '">' . $value . '</option>';
+        if($sesname == $session){
+          echo '<option value="' . $sesname. '">'.$sesname. ' &#x2666;</option>';
+        }else{
+          echo '<option value="' . $sesname. '">'.$sesname. '</option>';
+        }
         }
       }
       ?>
@@ -232,7 +251,7 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
 
 <div id="sidenav" class="sidenav">
-  <div class="menu text-center align-middle card-header"><h3><?= $identity; ?></h3></div>
+  <div class="menu text-center align-middle card-header" style="border-radius:0;"><h3><?= $identity; ?></h3></div>
   <a href="./?session=<?= $session; ?>" class="menu <?= $shome; ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
   <!--hotspot-->
   <div class="dropdown-btn <?= $susers . $suserprof . $sactive . $shosts . $sipbind . $scookies; ?>"><i class="fa fa-wifi"></i> Hotspot
@@ -304,10 +323,25 @@ if (!isset($_SESSION["mikhmon"])) {
   <a href="./?hotspot=about&session=<?= $session; ?>" class="menu <?= $sabout; ?>"><i class="fa fa-info-circle"></i> About</a>
 
 </div>
+<script>
+$(document).ready(function(){
+  $(".connect").change(function(){
+    notify("Connecting");
+    connect(this.value)
+  });
+  $(".stheme").change(function(){
+    notify("Loading theme");
+    stheme(this.value)
+  });
+});
+</script>
+<div id="notify"><div class="message"></div></div>
+<div id="temp"></div>
 <?php 
 } ?>
 
 <div id="main">  
-<div class="main-container">
+<div id="loading" class="lds-dual-ring"></div>
+<div class="main-container" style="display: none">
 
 

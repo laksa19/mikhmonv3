@@ -107,7 +107,7 @@ if (!isset($_SESSION["mikhmon"])) {
     <?= $galat; ?>
       <form action="" method="post" enctype="multipart/form-data">
 
-          <div class="pd-10">Format file : logo-<?= $session; ?>.png </div>
+          <div class="pd-10">Format file name : logo-<?= $session; ?>.png </div>
           <div class="input-group">
             <div class="input-group-4 col-box-8">
                 <input style="cursor: pointer; " type="file" class="group-item group-item-l" name="UploadLogo" >
@@ -143,7 +143,7 @@ if (!isset($_SESSION["mikhmon"])) {
               
               <tr>
                 <td><a href="javascript:window.open('./img/<?= $file; ?>','_blank','width=300,height=300')"><img height="30px" src="./img/<?= $file; ?>" title="Open <?= $file; ?>"></a><br><span><?= $file; ?></span></td>
-                <td><a class="btn bg-danger" href="javascript:void(0)" onclick="if(confirm('Sure to delete <?= $file; ?> ?')){window.location='./admin.php?id=remove&logo=<?= $file; ?>'}else{}"><i class="fa fa-remove"></i> Delete</a>
+                <td><a class="btn bg-danger" href="javascript:void(0)" onclick="if(confirm('Sure to delete <?= $file; ?> ?')){window.location='./admin.php?id=remove&logo=<?= $file; ?>'}else{}"><i class="fa fa-trash"></i> Delete</a>
                 </td>
               </tr>
               

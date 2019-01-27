@@ -133,7 +133,7 @@ if (!isset($_SESSION["mikhmon"])) {
                 <div class="card-body">
                   <div class="row">
                     <div class="col-3 col-box-6">
-                      <div class="box bg-primary bmh-75">
+                      <div class="box bg-blue bmh-75">
                         <a href="./?hotspot=active&session=<?= $session; ?>">
                           <h1><?= $counthotspotactive; ?>
                               <span style="font-size: 15px;"><?= $hunit; ?></span>
@@ -145,7 +145,7 @@ if (!isset($_SESSION["mikhmon"])) {
                       </div>
                     </div>
                     <div class="col-3 col-box-6">
-                    <div class="box bg-success bmh-75">
+                    <div class="box bg-green bmh-75">
                       <a href="./?hotspot=users&profile=all&session=<?= $session; ?>">
                             <h1><?= $countallusers; ?>
                               <span style="font-size: 15px;"><?= $uunit; ?></span>
@@ -157,7 +157,7 @@ if (!isset($_SESSION["mikhmon"])) {
                     </div>
                   </div>
                   <div class="col-3 col-box-6">
-                    <div class="box bg-warning bmh-75">
+                    <div class="box bg-yellow bmh-75">
                       <a href="./?hotspot-user=add&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
@@ -171,7 +171,7 @@ if (!isset($_SESSION["mikhmon"])) {
                     </div>
                   </div>
                   <div class="col-3 col-box-6">
-                    <div class="box bg-danger bmh-75">
+                    <div class="box bg-red bmh-75">
                       <a href="./?hotspot-user=generate&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>

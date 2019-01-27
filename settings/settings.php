@@ -57,7 +57,11 @@ if (!isset($_SESSION["mikhmon"])) {
     $sdnsname = ($_POST['dnsname']);
     $scurrency = ($_POST['currency']);
     $sreload = ($_POST['areload']);
-    if($sreload < 10){$sreload = 10;}else{$sreload = $sreload;}
+    if ($sreload < 10) {
+      $sreload = 10;
+    } else {
+      $sreload = $sreload;
+    }
     $siface = ($_POST['iface']);
     $smaxtx = ($_POST['maxtx']);
     $smaxrx = ($_POST['maxrx']);
@@ -76,8 +80,8 @@ if (!isset($_SESSION["mikhmon"])) {
       $smaxrx = $smaxrx * $mbgbrx;
     }
 
-    $search = array('1' => "$session!$iphost", "$session@|@$userhost", "$session#|#$passwdhost", "$session%$hotspotname", "$session^$dnsname", "$session&$currency", "$session*$areload", "$session($iface", "$session)$maxtx", "$session=$maxrx","'$session'","$session@!@$livereport");
-    $replace = array('1' => "$sesname!$siphost", "$sesname@|@$suserhost", "$sesname#|#$spasswdhost", "$sesname%$shotspotname", "$sesname^$sdnsname", "$sesname&$scurrency", "$sesname*$sreload", "$sesname($siface", "$sesname)$smaxtx", "$sesname=$smaxrx","'$sesname'","$sesname@!@$slivereport");
+    $search = array('1' => "$session!$iphost", "$session@|@$userhost", "$session#|#$passwdhost", "$session%$hotspotname", "$session^$dnsname", "$session&$currency", "$session*$areload", "$session($iface", "$session)$maxtx", "$session=$maxrx", "'$session'", "$session@!@$livereport");
+    $replace = array('1' => "$sesname!$siphost", "$sesname@|@$suserhost", "$sesname#|#$spasswdhost", "$sesname%$shotspotname", "$sesname^$sdnsname", "$sesname&$scurrency", "$sesname*$sreload", "$sesname($siface", "$sesname)$smaxtx", "$sesname=$smaxrx", "'$sesname'", "$sesname@!@$slivereport");
 
     for ($i = 1; $i < 15; $i++) {
       $file = file("./include/config.php");
@@ -88,9 +92,9 @@ if (!isset($_SESSION["mikhmon"])) {
     $_SESSION["connect"] = "";
     echo "<script>window.location='./admin.php?id=settings&session=" . $sesname . "'</script>";
   }
-	if($currency == ""){
-		echo "<script>window.location='./admin.php?id=settings&session=" . $session . "'</script>";
-	}
+  if ($currency == "") {
+    echo "<script>window.location='./admin.php?id=settings&session=" . $session . "'</script>";
+  }
 }
 ?>
 <script>
@@ -172,10 +176,10 @@ if (!isset($_SESSION["mikhmon"])) {
 									<input class="group-item group-item-md" type="submit" style="cursor: pointer;" name="save" value="Save"/>
 								</div>
 								<div class="input-group-3">	
-									<a class="group-item group-item-md pd-2p5 text-center align-middle" href="./admin.php?id=connect&session=<?= $session; ?>" title="Test connection to MikroTik ">Connect</a>
+                  <span class="connect pointer group-item group-item-md pd-2p5 text-center align-middle" id="<?= $session; ?>&c=settings">Connect</span>
 								</div>
 								<div class="input-group-4">	
-										<a class="group-item group-item-md pd-2p5 text-center"  href="./?session=<?= $session; ?>" title="Dashboard">Dashboard</a>
+										<span class="connect pointer group-item group-item-md pd-2p5 text-center align-middle" id="<?= $session; ?>&c=settings">Dashboard</span>
               	</div>
               	<div class="input-group-1">	
 									<div style="cursor: pointer;" class="group-item group-item-r pd-2p5 text-center" onclick="location.reload();" title="Reload Data"><i class="fa fa-refresh"></i></div>
@@ -217,9 +221,9 @@ if (!isset($_SESSION["mikhmon"])) {
 	</td>
 	</tr>
 	<tr>
-	<td class="align-middle">Traffic Ether  </td><td><input class="form-control" type="number" min="1" max="99" name="iface" title="Traffic Interface" value="<?= $iface; ?>" required="1"/></td>
+	<td class="align-middle">Traffic Interface</td><td><input class="form-control" type="number" min="1" max="99" name="iface" title="Traffic Interface" value="<?= $iface; ?>" required="1"/></td>
 	</tr>
-	<tr>
+	<!--<tr>
     <td class="align-middle">Max Tx</td><td>
       <div class="input-group">
       	<div class="input-group-9 col-box-8">
@@ -248,19 +252,21 @@ if (!isset($_SESSION["mikhmon"])) {
           </div>
       </div>
     </td>
-  </tr>
-  <?php if(empty($livereport)){}else{?>
+  </tr>-->
+  <?php if (empty($livereport)) {
+  } else { ?>
   <tr>
     <td>Live Report</td>
     <td>
       <select class="form-control" name="livereport" >
-          <option value="<?= $livereport;?>"><?= ucfirst($livereport);?></option>
+          <option value="<?= $livereport; ?>"><?= ucfirst($livereport); ?></option>
 				  <option value="enable">Enable</option>
 				  <option value="disable">Disable</option>
 		  </select>
     </td>
   </tr>
-  <?php }?>
+  <?php 
+} ?>
 </table>
 </div>
 </div>

@@ -80,14 +80,6 @@ if ($id == "login" || substr($url, -1) == "p") {
   $_SESSION["connect"] = "";
   include_once('./include/menu.php');
   include_once('./settings/sessions.php');
-  echo '
-  <script type="text/javascript">
-    document.getElementById("sessname").onkeypress = function(e) {
-    var chr = String.fromCharCode(e.which);
-    if (" _!@#$%^&*()+=;|?,~".indexOf(chr) >= 0)
-        return false;
-    };
-    </script>';
 } elseif ($id == "settings") {
   include_once('./include/menu.php');
   include_once('./settings/settings.php');
@@ -100,18 +92,26 @@ if ($id == "login" || substr($url, -1) == "p") {
     };
     </script>';
 } elseif ($id == "connect") {
+  ini_set("max_execution_time",5);
   include_once('./include/menu.php');
   $API = new RouterosAPI();
   $API->debug = false;
-  $API->connect($iphost, $userhost, decrypt($passwdhost));
-  $getidentity = $API->comm("/system/identity/print");
-  $identity = $getidentity[0]['name'];
-  if ($identity == "") {
-    $_SESSION["connect"] = "<b class='text-red'>Not connected</b>";
-    echo "<script>window.location='./admin.php?id=settings&session=" . $session . "'</script>";
-  } else {
+  if ($API->connect($iphost, $userhost, decrypt($passwdhost))){
     $_SESSION["connect"] = "<b class='text-green'>Connected</b>";
-    echo "<script>window.location='./admin.php?id=settings&session=" . $session . "'</script>";
+    echo "<script>window.location='./?session=" . $session . "'</script>";
+  } else {
+    $_SESSION["connect"] = "<b class='text-red'>Not Connected</b>";
+    $nl = '\n';
+    if ($currency == in_array($currency, $cekindo['indo'])) {
+      echo "<script>alert('Mikhmon not connected!".$nl."Silakan periksa kembali IP, User, Password dan port API harus enable.".$nl."Jika menggunakan koneksi VPN, pastikan VPN tersebut terkoneksi.')</script>";
+    }else{
+      echo "<script>alert('Mikhmon not connected!".$nl."Please check the IP, User, Password and port API must be enabled.')</script>";
+    }
+    if($id == "settings"){
+      echo "<script>window.location='./admin.php?id=settings&session=" . $session . "'</script>";
+    }else{
+      echo "<script>window.location='./admin.php?id=sessions'</script>";
+    }
   }
 } elseif ($id == "uplogo") {
   include_once('./include/menu.php');
@@ -151,6 +151,6 @@ if ($id == "login" || substr($url, -1) == "p") {
 }
 ?>
 <script src="js/mikhmon-ui.<?= $theme; ?>.min.js"></script>
-
+<script src="js/mikhmon.js?t=<?= str_replace(" ","_",date("Y-m-d H:i:s")); ?>"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
-  $_SESSION["v"] = "3.8";
+  $_SESSION["v"] = "3.9";
 
 // array color
   $color = array('1' => 'bg-blue', 'bg-indigo', 'bg-purple', 'bg-pink', 'bg-red', 'bg-yellow', 'bg-green', 'bg-teal', 'bg-cyan', 'bg-grey', 'bg-light-blue');
@@ -62,7 +62,7 @@ if (!isset($_SESSION["mikhmon"])) {
     x.type = 'password';
   }}
 </script>
- 
+
 <div class="row">
 	<div class="col-12">
   	<div class="card">
@@ -88,16 +88,16 @@ if (!isset($_SESSION["mikhmon"])) {
                                 <div class="box-group">
                                   
                                   <div class="box-group-icon">
-                                    <a title='Open session <?= $value; ?>'  href='./?session=<?= $value; ?>'>
+                                    <span class="connect pointer" id="<?= $value; ?>">
                                     <i class="fa fa-server"></i>
-                                      </a>
+                                    </span>
                                   </div>
                                 
                                   <div class="box-group-area">
-                                    <span >
+                                    <span>
                                       Hotspot Name : <?= explode('%', $data[$value][4])[1]; ?><br>
                                       Session Name : <?= $value; ?><br>
-                                      <a href="./?session=<?= $value; ?>"><i class="fa fa-external-link"></i> Open</a>&nbsp;
+                                      <span class="connect pointer"  id="<?= $value; ?>"><i class="fa fa-external-link"></i> Open</span>&nbsp;
                                       <a href="./admin.php?id=settings&session=<?= $value; ?>"><i class="fa fa-edit"></i> Edit</a>&nbsp;
                                       <a href="javascript:void(0)" onclick="if(confirm('Are you sure to delete data <?= $value;
                                                                                                                     echo " (" . explode('%', $data[$value][4])[1] . ")"; ?>?')){window.location='./admin.php?id=remove&session=<?= $value; ?>'}else{}"><i class="fa fa-remove"></i> Delete</a>

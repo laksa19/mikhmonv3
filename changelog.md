@@ -1,7 +1,7 @@
 ## Changelog
 
 ### Update 01-27-2019 V3.9
-1. Perbaikan CSS.
+1. Perbaikan CSS, penambahan tema Blue dan Green.
 2. Cek Koneksi sebelum masuk dashboard dan berganti session.
 3. Penambahan Indikator session Mikhmon yang aktif.
 4. Penambahan fitur Resume Report.

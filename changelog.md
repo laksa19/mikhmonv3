@@ -3,7 +3,7 @@
 ### Update 01-27-2019 V3.9
 1. Perbaikan CSS.
 2. Cek Koneksi sebelum masuk dashboard dan berganti session.
-3. Indikator session Mikhmon yang aktif.
+3. Penambahan Indikator session Mikhmon yang aktif.
 4. Penambahan fitur Resume Report.
 
 ### Update 01-22-2019 V3.8

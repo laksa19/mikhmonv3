@@ -1,5 +1,10 @@
 ## Changelog
 
+### Update 01-29 2019 V3.9 r1
+1. Perbaikan template voucher editor.
+2. Penambahan short tabel.
+3. Perbaikan reset hotspot user.
+
 ### Update 01-27-2019 V3.9
 1. Perbaikan CSS, penambahan tema Blue dan Green.
 2. Cek Koneksi sebelum masuk dashboard dan berganti session.

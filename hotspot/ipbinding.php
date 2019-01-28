@@ -58,11 +58,11 @@ echo "</th>";
   <tr>
     <th></th>
     <th></th>
-    <th>Name</th>
-    <th>MAC Address</th>
-    <th>Address</th>
-    <th>To Address</th>
-    <th>Server</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Name</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> MAC Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> To Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Server</th>
   </tr>
   </thead>
   <tbody> 

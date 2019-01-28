@@ -56,10 +56,10 @@ echo "</th>";
   <thead>
   <tr>
   	<th></th>
-    <th>User</th>
-    <th>MAC Address</th>
-    <th>Domain</th>
-    <th>Expires In</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> User</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> MAC Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Domain</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Expires In</th>
   </tr>
   </thead>
   <tbody> 

@@ -101,7 +101,7 @@ if (!isset($_SESSION["mikhmon"])) {
     </select>
   </div>
   <div class="input-group-4 col-box-4">
-    <select style="padding:5px;" class="group-item group-item-r" id="comment" name="comment">
+    <select style="padding:5px;" class="group-item group-item-r" id="comment" name="comment" onchange="location = './?hotspot=users&comment='+ this.value +'&session=<?= $session;?>';">
     <?php 
     if ($comm != "") {
     } else {
@@ -154,14 +154,16 @@ if (!isset($_SESSION["mikhmon"])) {
   <thead>
   <tr>
     <th style="min-width:50px;" class="align-middle text-center" ><?= $counttuser; ?></th>
-    <th style="min-width:50px;" >Server</th>
-    <th colspan="3">Name</th>
-    <th>Profile</th>
-    <th class="text-right align-middle">Uptime</th>
-    <th class="text-right align-middle">Bytes In</th>
-    <th class="text-right align-middle">Bytes Out</th>
-    <th>Comment</th>
+    <th style="min-width:50px;" class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Server</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Name</th>
+    <th>Print</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Profile</th>
+    <th class="text-right align-middle pointer" title="Click to sort"><i class="fa fa-sort"></i> Uptime</th>
+    <th class="text-right align-middle pointer" title="Click to sort"><i class="fa fa-sort"></i> Bytes In</th>
+    <th class="text-right align-middle pointer" title="Click to sort"><i class="fa fa-sort"></i> Bytes Out</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Comment</th>
     </tr>
+
   </thead>
   <tbody>
 <?php
@@ -210,8 +212,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
   $popup = "javascript:window.open('./voucher/print.php?user=" . $usermode . "-" . $uname . "&qr=no&session=" . $session . "','_blank','width=310,height=450').print();";
   $popupQR = "javascript:window.open('./voucher/print.php?user=" . $usermode . "-" . $uname . "&qr=yes&session=" . $session . "','_blank','width=310,height=450').print();";
   echo "<td><a title='Open User " . $uname . "' href=./?hotspot-user=" . $uid . "&session=" . $session . "><i class='fa fa-edit'></i> " . $uname . " </a>";
-  echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popup . '"><i class="fa fa-print"></i></a></td>';
-  echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popupQR . '"><i class="fa fa-qrcode"></i></a></td>';
+  echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popup . '"><i class="fa fa-print"></i></a> &nbsp<a title="Print ' . $uname . '" href="' . $popupQR . '"><i class="fa fa-qrcode"></i></a></td>';
   echo "<td>" . $uprofile . "</td>";
   echo "<td style=' text-align:right'>" . $uuptime . "</td>";
   echo "<td style=' text-align:right'>" . $ubytesi . "</td>";

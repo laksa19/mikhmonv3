@@ -43,7 +43,7 @@ if (!isset($_SESSION["mikhmon"])) {
     $mpage = "Users";
     $susers = "active";
     $umenu = "menu-open";
-  } elseif ($userbyname != "") {
+  } elseif ($userbyname != "" || $resethotspotuser != "") {
     $susers = "active";
     $mpage = "Users";
     $umenu = "menu-open";
@@ -342,6 +342,11 @@ $(document).ready(function(){
 
 <div id="main">  
 <div id="loading" class="lds-dual-ring"></div>
-<div class="main-container" style="display: none">
+<?php if($hotspot == 'template-editor' || $id == 'editor'){
+echo '<div class="main-container">';
+}else{
+  echo '<div class="main-container" style="display:none">';
+}
+?>
 
 

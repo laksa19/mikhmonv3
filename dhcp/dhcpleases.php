@@ -56,13 +56,13 @@ echo "</th>";
   <thead>
   <tr>
   	<th></th>
-    <th>Address</th>
-    <th>MAC Address</th>
-    <th>Server</th>
-    <th>Active Address</th>
-    <th>Active MAC Address</th>
-    <th>Active Host Name</th>
-    <th>Status</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> MAC Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Server</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Active Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Active MAC Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Active Host Name</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Status</th>
   </tr>
   </thead>
   <tbody> 

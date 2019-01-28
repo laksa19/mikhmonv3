@@ -56,12 +56,12 @@ echo "</th>";
   <thead>
   <tr>
   	<th></th>
-    <th>Name</th>
-    <th>Start Date</th>
-    <th>Start Time</th>
-    <th>Interval</th>
-    <th>Next Run</th>
-    <th>Comment</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Name</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Start Date</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Start Time</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Interval</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Next Run</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Comment</th>
   </tr>
   </thead>
   <tbody> 

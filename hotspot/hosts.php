@@ -82,12 +82,12 @@ if (!isset($_SESSION["mikhmon"])) {
   <thead>
   <tr>
     <th></th>
-    <th></th>
-    <th>MAC Address</th>
-    <th>Address</th>
-    <th>To Address</th>
-    <th>Server</th>
-    <th>Comment</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> </th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> MAC Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> To Address</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Server</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Comment</th>
   </thead>
   <tbody>  	
 <?php

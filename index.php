@@ -538,6 +538,7 @@ $(document).ready(function(){
   echo '
   <script>
   $(document).ready(function(){
+    makeAllSortable();
     $("#filterTable").on("keyup", function() {
       var value = $(this).val().toLowerCase();
       $("#dataTable tbody tr").filter(function() {

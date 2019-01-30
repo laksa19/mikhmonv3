@@ -466,7 +466,7 @@ elseif ($report == "resume-report") {
 if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?session") {
   echo '<script>
   $(document).ready(function(){
-    
+    $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3");
     var interval= "' . ($areload * 1000) . '";
     setInterval(function() {
       

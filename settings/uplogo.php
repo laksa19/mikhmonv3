@@ -32,14 +32,14 @@ if (!isset($_SESSION["mikhmon"])) {
 
     $check = getimagesize($_FILES["UploadLogo"]["tmp_name"]);
     if ($check !== false) {
-      if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
+      if ($currency == in_array($currency, $cekindo['indo'])) {
         $galat = '<div class="box bg-danger"></i> Alert!<br> File name is : ' . basename($_FILES["UploadLogo"]["name"]) . '. </div>';
       } else {
         $galat = '<div class="box bg-danger"></i> Alert!<br> File name is : ' . basename($_FILES["UploadLogo"]["name"]) . '. </div>';
       }
       $uploadOk = 1;
     } else {
-      if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
+      if ($currency == in_array($currency, $cekindo['indo'])) {
         $galat = '<div class="box bg-danger"></i> Alert!<br>  File bukan gambar. </div>';
       } else {
         $galat = '<div class="box bg-danger"></i> Alert!<br>  File is not an image. </div>';
@@ -50,7 +50,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
 // Check file size
     if ($_FILES["UploadLogo"]["size"] > 2000000) {
-      if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
+      if ($currency == in_array($currency, $cekindo['indo'])) {
         $galat = '<div class="box bg-danger"></i> Alert!<br>  Ukuran file terlalu besar. </div>';
       } else {
         $galat = '<div class="box bg-danger"></i> Alert!<br> File is too large. </div>';
@@ -59,7 +59,7 @@ if (!isset($_SESSION["mikhmon"])) {
     }
 // Allow certain file formats
     if (basename($_FILES["UploadLogo"]["name"] != "logo-" . $session . ".png")) {
-      if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
+      if ($currency == in_array($currency, $cekindo['indo'])) {
         $galat = '<div class="box bg-danger"></i> Alert!<br>  Hanya bisa upload logo-' . $session . '.png. </div>';
       } else {
         $galat = '<div class="box bg-danger"></i> Alert!<br>  Only logo-' . $session . '.png are allowed. </div>';
@@ -68,26 +68,26 @@ if (!isset($_SESSION["mikhmon"])) {
     }
 // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
-      if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
-        $galat = '<div class="box bg-danger"></i> Alert!<br>  File tidak diupload. </div>';
+      if ($currency == in_array($currency, $cekindo['indo'])) {
+        $galat = '<div class="box bg-danger"></i> Alert!<br>  File tidak diupload. Nama file harus logo-'.$session.'.png</div>';
       } else {
-        $galat = '<div class="box bg-danger"></i> Alert!<br>  File was not uploaded. </div>';
+        $galat = '<div class="box bg-danger"></i> Alert!<br>  File was not uploaded. File name must be  logo-'.$session.'.png</div>';
       }
     
 // if everything is ok, try to upload file
     } else {
       if (move_uploaded_file($_FILES["UploadLogo"]["tmp_name"], $logo_file)) {
-        if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
+        if ($currency == in_array($currency, $cekindo['indo'])) {
           $galat = '<div class="box bg-success"></i> Alert!<br>  Success!</h5> File ' . basename($_FILES["UploadLogo"]["name"]) . ' telah diupload. </div>';
         } else {
           $galat = '<div class="box bg-success"></i> Alert!<br>  Success!</h5> The File ' . basename($_FILES["UploadLogo"]["name"]) . ' has been uploaded. </div>';
         }
 
       } else {
-        if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
-          $galat = '<div class="box bg-danger"></i> Alert!<br>  Terjadi masalah ketika upload file. </div>';
+        if ($currency == in_array($currency, $cekindo['indo'])) {
+          $galat = '<div class="box bg-danger"></i> Alert!<br>  Terjadi masalah ketika upload file. Nama file harus logo-'.$session.'.png </div>';
         } else {
-          $galat = '<div class="box bg-danger"></i> Alert!<br>  There was an error uploading your file </div>';
+          $galat = '<div class="box bg-danger"></i> Alert!<br>  There was an error uploading your file. File name must be  logo-'.$session.'.png </div>';
         }
 
       }

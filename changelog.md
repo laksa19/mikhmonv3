@@ -1,6 +1,10 @@
 ## Changelog
 
 ### Update 01-29 2019 V3.9 r1
+1. Perbaaikan load time laman dashboard.
+2. Perbaikan laman uploaad logo.
+
+### Update 01-29 2019 V3.9 r1
 1. Perbaikan template voucher editor.
 2. Penambahan short tabel.
 3. Perbaikan reset hotspot user.

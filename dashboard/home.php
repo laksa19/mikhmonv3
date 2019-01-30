@@ -49,8 +49,8 @@ if (!isset($_SESSION["mikhmon"])) {
 // get routeboard info
   $getrouterboard = $API->comm("/system/routerboard/print");
   $routerboard = $getrouterboard[0];
-
-// move hotspot log to disk
+/*
+// move hotspot log to disk *
   $getlogging = $API->comm("/system/logging/print", array("?prefix" => "->", ));
   $logging = $getlogging[0];
   if ($logging['prefix'] == "->") {
@@ -62,7 +62,7 @@ if (!isset($_SESSION["mikhmon"])) {
   $getlog = $API->comm("/log/print", array("?topics" => "hotspot,info,debug", ));
   $log = array_reverse($getlog);
   $THotspotLog = count($getlog);
-
+*/
 // get & counting hotspot users
   $countallusers = $API->comm("/ip/hotspot/user/print", array("count-only" => ""));
   if ($countallusers < 2) {
@@ -400,48 +400,11 @@ if (!isset($_SESSION["mikhmon"])) {
                           </tr>
                         </thead>
                         <tbody>
-                    
-<?php
-
-if ($THotspotLog > 100) {
-  $n = 100;
-} elseif ($THotspotLog > 200) {
-  $n = 200;
-} elseif ($THotspotLog > 300) {
-  $n = 300;
-} elseif ($THotspotLog > 400) {
-  $n = 400;
-} elseif ($THotspotLog > 500) {
-  $n = 500;
-} else {
-  $n = $THotspotLog;
-}
-for ($i = 0; $i < $n; $i++) {
-  $mess = explode(":", $log[$i]['message']);
-  $time = $log[$i]['time'];
-  echo "<tr>";
-  if (substr($log[$i]['message'], 0, 2) == "->") {
-    echo "<td>" . $time . "</td>";
-  //echo substr($mess[1], 0,2);
-    echo "<td>";
-    if (count($mess) > 6) {
-      echo $mess[1] . ":" . $mess[2] . ":" . $mess[3] . ":" . $mess[4] . ":" . $mess[5] . ":" . $mess[6];
-    } else {
-      echo $mess[1];
-    }
-    echo "</td>";
-    echo "<td>";
-    if (count($mess) > 6) {
-      echo str_replace("trying to", "", $mess[7] . " " . $mess[8] . " " . $mess[9] . " " . $mess[10]);
-    } else {
-      echo str_replace("trying to", "", $mess[2] . " " . $mess[3] . " " . $mess[4] . " " . $mess[5]);
-    }
-    echo "</td>";
-  } else {
-  }
-  echo "</tr>";
-}
-?>
+                          <tr>
+                            <td colspan="3" class="text-center">
+                              <div><i class="fa fa-spinner"></i> Loading logs</div>
+                            </td>
+                          </tr>
                       </tbody>
                     </table>
                   </div>

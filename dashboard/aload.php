@@ -193,9 +193,6 @@ if (!isset($_SESSION["mikhmon"])) {
 
   $API->connect($iphost, $userhost, decrypt($passwdhost));
 
-  $getrouterboard = $API->comm("/system/routerboard/print");
-  $routerboard = $getrouterboard[0];
-  
   // move hotspot log to disk
   $getlogging = $API->comm("/system/logging/print", array("?prefix" => "->", ));
   $logging = $getlogging[0];

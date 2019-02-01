@@ -41,6 +41,16 @@ $idbl = $_GET['idbl'];
 $thisM = substr($idbl,0,3);
 $thisY = substr($idbl,-4);
 
+$ms = array(1 => "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec");
+$mn = array_search($thisM, $ms);
+$getM = cal_days_in_month(CAL_GREGORIAN,$mn,$thisY);
+
+if ($mn == date("n")){
+  $totD =  (date('d') +1);
+}else{
+  $totD = ($getM + 1);
+}
+
 
 $getSRBl = $API->comm("/system/script/print", array(
   "?owner" => "$idbl",
@@ -156,7 +166,7 @@ Highcharts.chart('container', {
         data: [
 <?php
 
-for ($i = 1; $i < (date('d') + 1); $i++) {
+for ($i = 1; $i < $totD; $i++) {
         if (strlen($i) == "1") {
           $thisD = "0" . $i;
         } else {

@@ -43,13 +43,21 @@ $thisY = substr($idbl,-4);
 
 $ms = array(1 => "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec");
 $mn = array_search($thisM, $ms);
-$getM = cal_days_in_month(CAL_GREGORIAN,$mn,$thisY);
+
+// https://secure.php.net/manual/en/function.cal-days-in-month.php#38666
+function days_in_month($month, $year) 
+{ 
+// calculate number of days in a month 
+return $month == 2 ? ($year % 4 ? 28 : ($year % 100 ? 29 : ($year % 400 ? 28 : 29))) : (($month - 1) % 7 % 2 ? 30 : 31); 
+} 
+
 
 if ($mn == date("n")){
   $totD =  (date('d') +1);
 }else{
-  $totD = ($getM + 1);
+  $totD = (days_in_month($mn, $thisY)+ 1);
 }
+
 
 
 $getSRBl = $API->comm("/system/script/print", array(

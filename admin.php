@@ -38,9 +38,15 @@ $id = $_GET['id'];
 $session = $_GET['session'];
 $_SESSION["$session"] = $session;
 $setsession = $_SESSION["$session"];
-
+$ids = array(
+    "editor",
+    "uplogo",
+    "settings",
+);
 if (empty($id)) {
   echo "<script>window.location='./admin.php?id=sessions'</script>";
+}elseif(in_array($id, $ids) && empty($session)){
+	echo "<script>window.location='./admin.php?id=sessions'</script>";
 }
 $router = $_GET['router'];
 $logo = $_GET['logo'];

@@ -2,6 +2,7 @@
 
 ### Update 02-01 2019 V3.9 r3
 1. Perbaaikan cek empty session laman admin
+2. Perbaikan resume report, untuk menampilkan resume bulan sebelumnya.
 
 ### Update 01-29 2019 V3.9 r2
 1. Perbaaikan load time laman dashboard.

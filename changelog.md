@@ -1,6 +1,9 @@
 ## Changelog
 
-### Update 01-29 2019 V3.9 r1
+### Update 02-01 2019 V3.9 r3
+1. Perbaaikan cek empty session laman admin
+
+### Update 01-29 2019 V3.9 r2
 1. Perbaaikan load time laman dashboard.
 2. Perbaikan laman uploaad logo.
 

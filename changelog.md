@@ -1,5 +1,10 @@
 ## Changelog
 
+### Update 02-06 2019 V3.10
+1. Perbaaikan delete logo.
+2. Penambahan pilihan bahasa.
+3. Dukungan untuk print voucher dari Android. Panduan, https://laksa19.github.io/printBT.html
+
 ### Update 02-01 2019 V3.9 r3
 1. Perbaaikan cek empty session laman admin
 2. Perbaikan resume report, untuk menampilkan resume bulan sebelumnya.

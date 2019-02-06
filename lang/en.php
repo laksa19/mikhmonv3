@@ -150,7 +150,7 @@ $_format_time_limit = '
 ';
 $_details_add_user = '
     '.$_add_user.' with '.$_time_limit.'.<br>
-    Sebaiknya '.$_time_limit.' < '.$_validity.'.
+    Should '.$_time_limit.' < '.$_validity.'.
 ';
 
 $_details_user_profile = '

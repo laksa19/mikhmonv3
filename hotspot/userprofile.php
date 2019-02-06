@@ -62,14 +62,14 @@ if (!isset($_SESSION["mikhmon"])) {
 		echo "$countprofile items   ";
 	}
 	?></th>
-		<th class="align-middle">Name</th>
+		<th class="align-middle"><?= $_name ?></th>
 		<th class="align-middle">Shared<br>Users</th>
 		<th class="align-middle">Rate<br>Limit</th>
-		<th class="align-middle">Expired Mode</th>
-		<th class="align-middle">Validity</th>
-		<th class="align-middle">Grace<br>Period</th>
-		<th class="text-right align-middle" >Price <?= $currency; ?></th>
-		<th class="align-middle">Lock<br>User</th>
+		<th class="align-middle"><?= $_expired_mode ?></th>
+		<th class="align-middle"><?= $_validity ?></th>
+		<th class="align-middle"><?= $_grace_period ?></th>
+		<th class="text-right align-middle" > <?= $_price." ".$currency; ?></th>
+		<th class="align-middle"><?= $_lock_user ?></th>
     </tr>
   </thead>
   <tbody>

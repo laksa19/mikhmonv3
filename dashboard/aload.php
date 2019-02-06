@@ -25,6 +25,10 @@ if (!isset($_SESSION["mikhmon"])) {
   $session = $_GET['session'];
   $load = $_GET['load'];
 
+// lang
+include('../include/lang.php');
+include('../lang/'.$langid.'.php');
+
 // load config
   include('../include/config.php');
   include('../include/readcfg.php');
@@ -62,10 +66,10 @@ if (!isset($_SESSION["mikhmon"])) {
           <div class="box-group">
             <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
               <div class="box-group-area">
-                <span >System Date & Time<br>
+              <span ><?= $_system_date_time ?><br>
                     <?php 
                     echo $clock['date'] . " " . $clock['time'] . "<br>
-                    Uptime : " . formatDTM($resource['uptime']);
+                    ".$_uptime." : " . formatDTM($resource['uptime']);
                     ?>
                 </span>
               </div>
@@ -79,8 +83,8 @@ if (!isset($_SESSION["mikhmon"])) {
               <div class="box-group-area">
                 <span >
                     <?php
-                    echo "Board Name : " . $resource['board-name'] . "<br/>
-                    Model : " . $routerboard['model'] . "<br/>
+                    echo $_board_name." : " . $resource['board-name'] . "<br/>
+                    ".$_model." : " . $routerboard['model'] . "<br/>
                     Router OS : " . $resource['version'];
                     ?>
                 </span>
@@ -95,9 +99,9 @@ if (!isset($_SESSION["mikhmon"])) {
               <div class="box-group-area">
                 <span >
                     <?php
-                    echo "CPU Load : " . $resource['cpu-load'] . "%<br/>
-                    Free Memory : " . formatBytes($resource['free-memory'], 2) . "<br/>
-                    Free HDD : " . formatBytes($resource['free-hdd-space'], 2)
+                    echo $_cpu_load." : " . $resource['cpu-load'] . "%<br/>
+                    ".$_free_memory." : " . formatBytes($resource['free-memory'], 2) . "<br/>
+                    ".$_free_hdd." : " . formatBytes($resource['free-hdd-space'], 2)
                     ?>
                 </span>
                 </div>
@@ -139,7 +143,7 @@ if (!isset($_SESSION["mikhmon"])) {
                               <span style="font-size: 15px;"><?= $hunit; ?></span>
                             </h1>
                           <div>
-                            <i class="fa fa-laptop"></i> Hotspot Active
+                            <i class="fa fa-laptop"></i> <?= $_hotspot_active ?>
                           </div>
                         </a>
                       </div>
@@ -151,7 +155,7 @@ if (!isset($_SESSION["mikhmon"])) {
                               <span style="font-size: 15px;"><?= $uunit; ?></span>
                             </h1>
                       <div>
-                            <i class="fa fa-users"></i> Hotspot Users
+                            <i class="fa fa-users"></i> <?= $_hotspot_users ?>
                           </div>
                       </a>
                     </div>
@@ -161,11 +165,11 @@ if (!isset($_SESSION["mikhmon"])) {
                       <a href="./?hotspot-user=add&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
-                              <span style="font-size: 15px;">Add</span>
+                              <span style="font-size: 15px;"><?= $_add ?></span>
                           </h1>
                         </div>
                         <div>
-                            <i class="fa fa-user-plus"></i> Hotspot User
+                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
                         </div>
                       </a>
                     </div>
@@ -175,17 +179,18 @@ if (!isset($_SESSION["mikhmon"])) {
                       <a href="./?hotspot-user=generate&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
-                              <span style="font-size: 15px;">Generate</span>
+                              <span style="font-size: 15px;"><?= $_generate ?></span>
                           </h1>
                         </div>
                         <div>
-                            <i class="fa fa-user-plus"></i> Hotspot User
+                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
                         </div>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
           </div>
 
 <?php 
@@ -221,15 +226,15 @@ if (!isset($_SESSION["mikhmon"])) {
               <div id="r_3" class="row">
               <div class="card">
                 <div class="card-header">
-                  <h3><a href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> Hotspot Log</a></h3></div>
+                  <h3><a href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> <?= $_hotspot_log ?></a></h3></div>
                     <div class="card-body">
                       <div style="padding: 5px; height: <?= $logh; ?> ;" class="mr-t-10 overflow">
                         <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;">
                           <thead>
                             <tr>
-                              <th>Time</th>
-                              <th>User (IP)</th>
-                              <th>Messages</th>
+                            <th><?= $_time ?></th>
+                            <th><?= $_users ?> (IP)</th>
+                            <th><?= $_messages ?></th>
                             </tr>
                           </thead>
                           <tbody>

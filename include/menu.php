@@ -27,132 +27,132 @@ if (!isset($_SESSION["mikhmon"])) {
   $btnmenuactive = "font-weight: bold;background-color: #f9f9f9; color: #000000";
   if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?session") {
     $shome = "active";
-    $mpage = "Dashboard";
+    $mpage = $_dashboard;
   } elseif ($hotspot == "users" || $userbyprofile != "" || $hotspot == "export-users" || $removehotspotuserbycomment != "" || $removehotspotuser != "" || $removehotspotusers != "" || $disablehotspotuser || $enablehotspotuser != "") {
     $susersl = "active";
     $susers = "active";
-    $mpage = "Users";
+    $mpage = $_users;
     $umenu = "menu-open";
   } elseif ($hotspotuser == "add") {
     $sadduser = "active";
-    $mpage = "Users";
+    $mpage = $_users;
     $susers = "active";
     $umenu = "menu-open";
   } elseif ($hotspotuser == "generate") {
     $sgenuser = "active";
-    $mpage = "Users";
+    $mpage = $_users;
     $susers = "active";
     $umenu = "menu-open";
-  } elseif ($userbyname != "" || $resethotspotuser != "") {
+  } elseif ($userbyname != ""  || $resethotspotuser != "") {
     $susers = "active";
-    $mpage = "Users";
+    $mpage = $_users;
     $umenu = "menu-open";
   } elseif ($hotspot == "user-profiles") {
     $suserprofiles = "active";
     $suserprof = "active";
-    $mpage = "User Profiles";
+    $mpage = $_user_profile;
     $upmenu = "menu-open";
   } elseif ($hotspot == "active" || $removeuseractive != "") {
     $sactive = "active";
-    $mpage = "Hotspot Active";
+    $mpage = $_hotspot_active;
     $hamenu = "menu-open";
   } elseif ($hotspot == "hosts" || $hotspot == "hostp" || $hotspot == "hosta" || $removehost != "") {
     $shosts = "active";
-    $mpage = "Hosts";
+    $mpage = $_hosts;
     $hmenu = "menu-open";
   } elseif ($hotspot == "dhcp-leases") {
     $slease = "active";
-    $mpage = "DHCP Leases";
+    $mpage = $_dhcp_leases;
   } elseif ($minterface == "traffic-monitor") {
     $strafficmonitor = "active";
-    $mpage = "Traffic Monitor";   
+    $mpage = $_traffic_monitor;  
   } elseif ($hotspot == "ipbinding" || $hotspot == "binding" || $removeipbinding != "" || $enableipbinding != "" || $disableipbinding != "") {
     $sipbind = "active";
-    $mpage = "IP Bindings";
+    $mpage = $_ip_bindings;
     $ibmenu = "menu-open";
   } elseif ($hotspot == "template-editor") {
     $ssett = "active";
     $teditor = "active";
-    $mpage = "Template Editor";
+    $mpage = $_template_editor;
     $settmenu = "menu-open";
   } elseif ($hotspot == "uplogo") {
     $ssett = "active";
     $uplogo = "active";
-    $mpage = "Upload Logo";
+    $mpage = $_upload_logo;
     $settmenu = "menu-open";
   } elseif ($hotspot == "cookies" || $removecookie != "") {
     $scookies = "active";
-    $mpage = "Hotspot Cookies";
+    $mpage = $_hotspot_cookies;
     $cmenu = "menu-open";
   } elseif ($hotspot == "log") {
     $log = "active";
     $slog = "active";
-    $mpage = "Hotspot Log";
+    $mpage = $_hotspot_log;
     $lmenu = "menu-open";
   } elseif ($report == "userlog") {
     $log = "active";
     $sulog = "active";
-    $mpage = "User Log";
+    $mpage = $_user_log;
     $lmenu = "menu-open";
   } elseif ($ppp == "secrets" || $ppp == "addsecret" || $enablesecr != "" || $disablesecr != "" || $removesecr != "" || $secretbyname != "") {
     $mppp = "active";
     $ssecrets = "active";
-    $mpage = "PPP Secrets";
+    $mpage = $_ppp_secrets;
     $pppmenu = "menu-open";
-  } elseif ($ppp == "profiles" || $removepprofile != "") {
+  } elseif ($ppp == "profiles" || $removepprofile != "" || $ppp == "add-profile" || $ppp == "edit-profile"  ) {
     $mppp = "active";
     $spprofile = "active";
-    $mpage = "PPP Profiles";
+    $mpage = $_ppp_profiles;
     $pppmenu = "menu-open";
   } elseif ($ppp == "active" || $removepactive != "") {
     $mppp = "active";
     $spactive = "active";
-    $mpage = "PPP Active Connections";
+    $mpage = $_ppp_active;
     $pppmenu = "menu-open";
   } elseif ($sys == "scheduler" || $enablesch != "" || $disablesch != "" || $removesch != "") {
     $sysmenu = "active";
     $ssch = "active";
-    $mpage = "System Scheduler";
+    $mpage = $_system_scheduler;
     $schmenu = "menu-open";
-  } elseif ($report == "selling"  || $report == "resume-report") {
+  } elseif ($report == "selling" || $report == "resume-report") {
     $sselling = "active";
-    $mpage = "Report";
+    $mpage = $_report;
   } elseif ($userprofile == "add") {
     $suserprof = "active";
     $sadduserprof = "active";
-    $mpage = "User Profiles";
+    $mpage = $_user_profile;
     $upmenu = "menu-open";
   } elseif ($userprofilebyname != "") {
     $suserprof = "active";
-    $mpage = "User Profiles";
+    $mpage = $_user_profile;
     $upmenu = "menu-open";
   } elseif ($hotspot == "users-by-profile") {
     $susersbp = "active";
-    $mpage = "Vouchers";
+    $mpage = $_vouchers;
   } elseif ($userbyname != "") {
-    $mpage = "Users";
+    $mpage = $_users;
     $susers = "active";
   } elseif ($hotspot == "about") {
-    $mpage = "About";
+    $mpage = $_about;
     $sabout = "active";
   } elseif ($id == "sessions" || $id == "remove" || $router == "new") {
     $ssesslist = "active";
-    $mpage = "Router List";
+    $mpage = $_admin_settings;
   } elseif ($id == "settings" && $session == "new") {
     $snsettings = "active";
-    $mpage = "Add Router";
+    $mpage = $_add_router;
   } elseif ($id == "settings" || $id == "connect") {
     $ssettings = "active";
-    $mpage = "Session Settings";
+    $mpage = $_session_settings;
   } elseif ($id == "about") {
     $sabout = "active";
-    $mpage = "Router List";
+    $mpage = $_about;
   } elseif ($id == "uplogo") {
     $suplogo = "active";
-    $mpage = "Upload Logo";
+    $mpage = $_upload_logo;
   } elseif ($id == "editor") {
     $seditor = "active";
-    $mpage = "Template Voucher";
+    $mpage = $_template_editor;
   }
 }
 ?>
@@ -169,12 +169,26 @@ if (!isset($_SESSION["mikhmon"])) {
 <a id="cpage" class="navbar-left" href="javascript:void(0)"><?= $mpage; ?></a>
 </div>
  <div class="navbar-right">
-  <a href="./admin.php?id=logout" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
+  <a href="./admin.php?id=logout" ><i class="fa fa-sign-out mr-1"></i> <?= $_logout ?></a>
   <select class="stheme ses text-right mr-t-10 pd-5">
-    <option> Theme</option>
+    <option> <?= $_theme?></option>
     <?php for ($i = 0; $i < count($mtheme); $i++) {
       echo '<option value="'.$url.'&set-theme='.$mtheme[$i],'">'.ucfirst($mtheme[$i]),'</option>';
     }
+    ?>
+  </select>
+  <select class="slang ses text-right mr-t-10 pd-5">
+    <option> <?= $language ?></option>
+    <?php 
+      $fileList = glob('lang/*');
+      foreach($fileList as $filename){
+        if(is_file($filename)){
+          $filename = substr(explode("/",$filename)[1],0,-4);
+          if($filename == "isocodelang"){}else{
+            echo '<option value="'.$url.'&setlang=' . $filename . '">'. $isocodelang[$filename]. '</option>'; 
+         }   
+        }
+      }
     ?>
   </select>
 </div>
@@ -185,25 +199,31 @@ if (!isset($_SESSION["mikhmon"])) {
 }else if ($id == "settings" || $id == "editor"|| $id == "uplogo" || $id == "connect"){
 ?>  
   <div class="menu text-center align-middle card-header" style="border-radius:0;"><h3 id="MikhmonSession"><?= $session; ?></h3></div>
-  <a class="connect menu <?= $shome; ?>" id="<?= $session; ?>&c=settings"><i class='fa fa-tachometer'></i> Dashboard</a>
-  <a  href="./admin.php?id=settings&session=<?= $session; ?>" class="menu <?= $ssettings; ?>" title="Mikhmon Settings"><i class='fa fa-gear'></i> Session Settings</a>
-  <a href="./admin.php?id=uplogo&session=<?= $session; ?>" class="menu <?= $suplogo; ?>"><i class="fa fa-upload "></i> Upload Logo</a>
-  <a href="./admin.php?id=editor&template=default&session=<?= $session; ?>" class="menu <?= $seditor; ?>"><i class="fa fa-edit"></i> Template Editor</a>
+  <a class="connect menu <?= $shome; ?>" id="<?= $session; ?>&c=settings"><i class='fa fa-tachometer'></i> <?= $_dashboard ?></a>
+  <a  href="./admin.php?id=settings&session=<?= $session; ?>" class="menu <?= $ssettings; ?>" title="Mikhmon Settings"><i class='fa fa-gear'></i> <?= $_session_settings ?></a>
+  <a href="./admin.php?id=uplogo&session=<?= $session; ?>" class="menu <?= $suplogo; ?>"><i class="fa fa-upload "></i> <?= $_upload_logo ?></a>
+  <a href="./admin.php?id=editor&template=default&session=<?= $session; ?>" class="menu <?= $seditor; ?>"><i class="fa fa-edit"></i> <?= $_template_editor ?></a>
   <div class="menu spa"></div>
 <?php 
 } ?>  
-  <a href="./admin.php?id=sessions" class="menu <?= $ssesslist; ?>"><i class="fa fa-gear"></i> Admin Settings</a>
-  <a href="./admin.php?id=settings&router=new" class="menu <?= $snsettings ?>"><i class="fa fa-plus"></i> Add Router</a>
-  <a href="./admin.php?id=about" class="menu <?= $sabout; ?>"><i class="fa fa-info-circle"></i> About</a>
+  <a href="./admin.php?id=sessions" class="menu <?= $ssesslist; ?>"><i class="fa fa-gear"></i> <?= $_admin_settings ?></a>
+  <a href="./admin.php?id=settings&router=new" class="menu <?= $snsettings ?>"><i class="fa fa-plus"></i> <?= $_add_router ?></a>
+  <a href="./admin.php?id=about" class="menu <?= $sabout; ?>"><i class="fa fa-info-circle"></i> <?= $_about ?></a>
+
 </div>
+
 <script>
 $(document).ready(function(){
   $(".connect").click(function(){
-    notify("Connecting");
+    notify("<?= $_connecting ?>");
     connect(this.id)
   });
   $(".stheme").change(function(){
-    notify("Loading theme");
+    notify("<?= $_loading_theme ?>");
+    stheme(this.value)
+  });
+  $(".slang").change(function(){
+    notify("<?= $_loading ?>");
     stheme(this.value)
   });
 });
@@ -211,6 +231,7 @@ $(document).ready(function(){
 <div id="notify"><div class="message"></div></div>
 <div id="temp"></div>
 <?php 
+include('./info.php');
 } else { ?>
 
 <div id="navbar" class="navbar">
@@ -222,17 +243,17 @@ $(document).ready(function(){
 <a id="cpage" class="navbar-left" href="javascript:void(0)"><?= $mpage; ?></a>
 </div>
  <div class="navbar-right">
-  <a href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> Logout</a>
+  <a href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> <?= $_logout ?></a>
   <select class="stheme ses text-right mr-t-10 pd-5">
-    <option> Theme</option>
+    <option> <?= $_theme ?></option>
     <?php for ($i = 0; $i < count($mtheme); $i++) {
       echo '<option value="'.$url.'&set-theme='.$mtheme[$i],'">'.ucfirst($mtheme[$i]),'</option>';
     }
     ?>
   </select>
-  <select class="connect ses text-right mr-t-10 pd-5">
-  <option id="MikhmonSession" value="<?= $session; ?>"><?= $hotspotname; ?></option>
-  <?php
+  <select class="connect optfa ses text-right mr-t-10 pd-5">
+    <option id="MikhmonSession" value="<?= $session; ?>"><?= $hotspotname; ?></option>
+      <?php
       foreach (file('./include/config.php') as $line) {
         $sesname = explode("'", $line)[1];
         if ($sesname == "" || $sesname== "mikhmon") {
@@ -247,90 +268,92 @@ $(document).ready(function(){
       ?>
     
   </select>
+  
 </div>
 </div>
 
 <div id="sidenav" class="sidenav">
   <div class="menu text-center align-middle card-header" style="border-radius:0;"><h3><?= $identity; ?></h3></div>
-  <a href="./?session=<?= $session; ?>" class="menu <?= $shome; ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+  <a href="./?session=<?= $session; ?>" class="menu <?= $shome; ?>"><i class="fa fa-dashboard"></i> <?= $_dashboard ?></a>
   <!--hotspot-->
   <div class="dropdown-btn <?= $susers . $suserprof . $sactive . $shosts . $sipbind . $scookies; ?>"><i class="fa fa-wifi"></i> Hotspot
     <i class="fa fa-caret-down"></i>
   </div>
   <div class="dropdown-container <?= $umenu . $upmenu . $hamenu . $hmenu . $ibmenu . $cmenu; ?>">
    <!--users--> 
-  <div class="dropdown-btn <?= $susers; ?>"><i class="fa fa-users"></i> Users
+  <div class="dropdown-btn <?= $susers; ?>"><i class="fa fa-users"></i> <?= $_users ?>
     <i class="fa fa-caret-down"></i>
   </div>
   <div class="dropdown-container <?= $umenu; ?>">
-    <a href="./?hotspot=users&profile=all&session=<?= $session; ?>" class="<?= $susersl; ?>"> <i class="fa fa-list "></i> User List </a>
-    <a href="./?hotspot-user=add&session=<?= $session; ?>" class="<?= $sadduser; ?>"> <i class="fa fa-user-plus "></i> Add User </a>
-    <a href="./?hotspot-user=generate&session=<?= $session; ?>" class="<?= $sgenuser; ?>"> <i class="fa fa-user-plus"></i> Generate </a>        
+    <a href="./?hotspot=users&profile=all&session=<?= $session; ?>" class="<?= $susersl; ?>"> &nbsp;&nbsp;&nbsp;<i class="fa fa-list "></i> <?= $_user_list ?> </a>
+    <a href="./?hotspot-user=add&session=<?= $session; ?>" class="<?= $sadduser; ?>"> &nbsp;&nbsp;&nbsp;<i class="fa fa-user-plus "></i> <?= $_add_user ?> </a>
+    <a href="./?hotspot-user=generate&session=<?= $session; ?>" class="<?= $sgenuser; ?>"> &nbsp;&nbsp;&nbsp;<i class="fa fa-user-plus"></i> <?= $_generate ?> </a>        
   </div>
   <!--profile-->
-  <div class="dropdown-btn <?= $suserprof; ?>"><i class=" fa fa-pie-chart"></i>  User Profile
+  <div class="dropdown-btn <?= $suserprof; ?>"><i class=" fa fa-pie-chart"></i>  <?= $_user_profile ?>
     <i class="fa fa-caret-down"></i>
   </div>
   <div class="dropdown-container <?= $upmenu; ?>">
-    <a href="./?hotspot=user-profiles&session=<?= $session; ?>" class=" <?= $suserprofiles; ?>"> <i class="fa fa-list "></i> User Profile List </a>
-    <a href="./?user-profile=add&session=<?= $session; ?>" class=" <?= $sadduserprof; ?>"> <i class="fa fa-plus-square "></i> Add User Profile </a>
+    <a href="./?hotspot=user-profiles&session=<?= $session; ?>" class=" <?= $suserprofiles; ?>"> &nbsp;&nbsp;&nbsp;<i class="fa fa-list "></i> <?= $_user_profile_list ?> </a>
+    <a href="./?user-profile=add&session=<?= $session; ?>" class=" <?= $sadduserprof; ?>"> &nbsp;&nbsp;&nbsp;<i class="fa fa-plus-square "></i> <?= $_add_user_profile ?> </a>
+
   </div>
   <!--active-->
-  <a href="./?hotspot=active&session=<?= $session; ?>" class="menu <?= $sactive; ?>"><i class=" fa fa-wifi"></i> Active</a>
+  <a href="./?hotspot=active&session=<?= $session; ?>" class="menu <?= $sactive; ?>"><i class=" fa fa-wifi"></i> <?= $_hotspot_active ?></a>
   <!--hosts-->
-  <a href="./?hotspot=hosts&session=<?= $session; ?>" class="menu <?= $shosts; ?>"><i class=" fa fa-laptop"></i> Hosts</a>
+  <a href="./?hotspot=hosts&session=<?= $session; ?>" class="menu <?= $shosts; ?>"><i class=" fa fa-laptop"></i> <?= $_hosts ?></a>
   <!--ip bindings-->
-  <a href="./?hotspot=ipbinding&session=<?= $session; ?>" class="menu <?= $sipbind; ?>"><i class=" fa fa-address-book"></i> IP Bindings</a>
+  <a href="./?hotspot=ipbinding&session=<?= $session; ?>" class="menu <?= $sipbind; ?>"><i class=" fa fa-address-book"></i> <?= $_ip_bindings ?></a>
   <!--cookies-->
-   <a href="./?hotspot=cookies&session=<?= $session; ?>" class="menu <?= $scookies; ?>"><i class=" fa fa-hourglass"></i> Cookies</a>
+   <a href="./?hotspot=cookies&session=<?= $session; ?>" class="menu <?= $scookies; ?>"><i class=" fa fa-hourglass"></i> <?= $_hotspot_cookies ?></a>
   </div>
   <!--vouchers-->
-  <a href="./?hotspot=users-by-profile&session=<?= $session; ?>" class="menu <?= $susersbp; ?>"> <i class="fa fa-ticket"></i> Vouchers </a>
-  <!--log-->
-  <div class="dropdown-btn <?= $log; ?>"><i class=" fa fa-align-justify"></i> Log
+  <a href="./?hotspot=users-by-profile&session=<?= $session; ?>" class="menu <?= $susersbp; ?>"> <i class="fa fa-ticket"></i> <?= $_vouchers ?> </a>
+   <!--log-->
+  <div class="dropdown-btn <?= $log; ?>"><i class=" fa fa-align-justify"></i> <?= $_log ?>
     <i class="fa fa-caret-down"></i>
   </div>
   <div class="dropdown-container <?= $lmenu; ?>">
-    <a href="./?hotspot=log&session=<?= $session; ?>" class="<?= $slog; ?>"> <i class="fa fa-wifi "></i> Hotspot Log </a>
-    <a href="./?report=userlog&idbl=<?= strtolower(date("M")) . date("Y"); ?>&session=<?= $session; ?>" class=" <?= $sulog; ?>"> <i class="fa fa-users "></i> User Log </a>
+    <a href="./?hotspot=log&session=<?= $session; ?>" class="<?= $slog; ?>"> <i class="fa fa-wifi "></i> <?= $_hotspot_log ?> </a>
+    <a href="./?report=userlog&idbl=<?= strtolower(date("M")) . date("Y"); ?>&session=<?= $session; ?>" class=" <?= $sulog; ?>"> <i class="fa fa-users "></i> <?= $_user_log ?> </a>
   </div>
   <!--system-->
-  <div class="dropdown-btn <?= $sysmenu; ?>"><i class=" fa fa-gear"></i> System 
+  <div class="dropdown-btn <?= $sysmenu; ?>"><i class=" fa fa-gear"></i> <?= $_system ?>
     <i class="fa fa-caret-down"></i> &nbsp;
   </div>
   <div class="dropdown-container <?= $schmenu; ?>">
-    <a href="./?system=scheduler&session=<?= $session; ?>" class="<?= $ssch; ?>"> <i class="fa fa-clock-o "></i> Scheduler </a>
-    <a href="./admin.php?id=reboot&session=<?= $session; ?>" class=""> <i class="fa fa-power-off "></i> Reboot </a>            
-    <a href="./admin.php?id=shutdown&session=<?= $session; ?>" class=""> <i class="fa fa-power-off "></i> Shutdown </a>            
+    <a href="./?system=scheduler&session=<?= $session; ?>" class="<?= $ssch; ?>"> <i class="fa fa-clock-o "></i> <?= $_system_scheduler ?> </a>
+    <a href="./admin.php?id=reboot&session=<?= $session; ?>" class=""> <i class="fa fa-power-off "></i> <?= $_system_reboot ?> </a>            
+    <a href="./admin.php?id=shutdown&session=<?= $session; ?>" class=""> <i class="fa fa-power-off "></i> <?= $_system_off ?> </a> 
   </div>
   <!--dhcp leases-->
-  <a href="./?hotspot=dhcp-leases&session=<?= $session; ?>" class="menu <?= $slease; ?>"><i class=" fa fa-sitemap"></i> DHCP Leases</a>
+  <a href="./?hotspot=dhcp-leases&session=<?= $session; ?>" class="menu <?= $slease; ?>"><i class=" fa fa-sitemap"></i> <?= $_dhcp_leases ?></a>
   <!--traffic monitor-->
-  <a href="./?interface=traffic-monitor&session=<?= $session; ?>" class="menu <?= $strafficmonitor; ?>"><i class=" fa fa-area-chart"></i> Traffic Monitor</a>
+  <a href="./?interface=traffic-monitor&session=<?= $session; ?>" class="menu <?= $strafficmonitor; ?>"><i class=" fa fa-area-chart"></i> <?= $_traffic_monitor ?></a>
   <!--report-->
-  <a href="./?report=selling&idbl=<?= strtolower(date("M")) . date("Y"); ?>&session=<?= $session; ?>" class="menu <?= $sselling; ?>"><i class="nav-icon fa fa-money"></i> Report</a>
+  <a href="./?report=selling&idbl=<?= strtolower(date("M")) . date("Y"); ?>&session=<?= $session; ?>" class="menu <?= $sselling; ?>"><i class="nav-icon fa fa-money"></i> <?= $_report ?></a>
   <!--settings-->
-  <div class="dropdown-btn <?= $ssett; ?>"><i class=" fa fa-gear"></i> Settings 
+  <div class="dropdown-btn <?= $ssett; ?>"><i class=" fa fa-gear"></i> <?= $_settings ?> 
     <i class="fa fa-caret-down"></i> &nbsp;
   </div>
   <div class="dropdown-container <?= $settmenu; ?>">
-  <a href="./admin.php?id=settings&session=<?= $session; ?>" class="menu "> <i class="fa fa-gear "></i> Session Settings </a>
-  <a href="./admin.php?id=sessions" class="menu "> <i class="fa fa-gear "></i> Admin Settings </a>
-  <a href="./?hotspot=uplogo&session=<?= $session; ?>" class="menu <?= $uplogo; ?>"> <i class="fa fa-upload "></i> Upload Logo </a>
-  <a href="./?hotspot=template-editor&template=default&session=<?= $session; ?>" class="menu <?= $teditor; ?>"> <i class="fa fa-edit "></i> Template Editor </a>          
+  <a href="./admin.php?id=settings&session=<?= $session; ?>" class="menu "> <i class="fa fa-gear "></i> <?= $_session_settings ?> </a>
+  <a href="./admin.php?id=sessions" class="menu "> <i class="fa fa-gear "></i> <?= $_admin_settings ?> </a>
+  <a href="./?hotspot=uplogo&session=<?= $session; ?>" class="menu <?= $uplogo; ?>"> <i class="fa fa-upload "></i> <?= $_upload_logo ?> </a>
+  <a href="./?hotspot=template-editor&template=default&session=<?= $session; ?>" class="menu <?= $teditor; ?>"> <i class="fa fa-edit "></i> <?= $_template_editor ?> </a>          
   </div>
   <!--about-->
-  <a href="./?hotspot=about&session=<?= $session; ?>" class="menu <?= $sabout; ?>"><i class="fa fa-info-circle"></i> About</a>
+  <a href="./?hotspot=about&session=<?= $session; ?>" class="menu <?= $sabout; ?>"><i class="fa fa-info-circle"></i> <?= $_about ?></a>
 
 </div>
 <script>
 $(document).ready(function(){
   $(".connect").change(function(){
-    notify("Connecting");
+    notify("<?= $_connecting ?>");
     connect(this.value)
   });
   $(".stheme").change(function(){
-    notify("Loading theme");
+    notify("<?= $_loading_theme ?>");
     stheme(this.value)
   });
 });
@@ -338,6 +361,7 @@ $(document).ready(function(){
 <div id="notify"><div class="message"></div></div>
 <div id="temp"></div>
 <?php 
+include('./include/info.php');
 } ?>
 
 <div id="main">  
@@ -348,5 +372,4 @@ echo '<div class="main-container">';
   echo '<div class="main-container" style="display:none">';
 }
 ?>
-
 

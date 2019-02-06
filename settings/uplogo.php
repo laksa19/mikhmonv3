@@ -100,20 +100,20 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-12">
   <div class="card">
     <div class="card-header">
-        <h3 class="card-title"><i class="fa fa-upload"></i> Upload Logo Voucher</h3>
+        <h3 class="card-title"><i class="fa fa-upload"></i> <?= $_upload_logo ?></h3>
     </div>
     <div class="card-body">
       <div>
     <?= $galat; ?>
       <form action="" method="post" enctype="multipart/form-data">
 
-          <div class="pd-10">Format file name : logo-<?= $session; ?>.png </div>
+          <div class="pd-10"><?= $_format_file_name ?> : logo-<?= $session; ?>.png </div>
           <div class="input-group">
             <div class="input-group-4 col-box-8">
                 <input style="cursor: pointer; " type="file" class="group-item group-item-l" name="UploadLogo" >
             </div>
             <div class="input-group-2 col-box-4">
-                <input style="cursor: pointer; font-size: 14px; padding:8px;" class="group-item group-item-r" type="submit" value="Upload" title="Upload logo" name="submit">
+                <input style="cursor: pointer; font-size: 14px; padding:8px;" class="group-item group-item-r" type="submit" value="<?= $_upload ?>" title="Upload logo" name="submit">
             </div>
 
       </form>
@@ -122,8 +122,8 @@ if (!isset($_SESSION["mikhmon"])) {
       <table class="table table-bordered table-hover">
         <thead>
         <tr>
-          <th>List Logo</th>
-          <th>Action</th>
+          <th><?= $_list_logo ?></th>
+          <th><?= $_action ?></th>
         </tr>
       </thead>
       <tbody>
@@ -143,7 +143,7 @@ if (!isset($_SESSION["mikhmon"])) {
               
               <tr>
                 <td><a href="javascript:window.open('./img/<?= $file; ?>','_blank','width=300,height=300')"><img height="30px" src="./img/<?= $file; ?>" title="Open <?= $file; ?>"></a><br><span><?= $file; ?></span></td>
-                <td><a class="btn bg-danger" href="javascript:void(0)" onclick="if(confirm('Sure to delete <?= $file; ?> ?')){window.location='./admin.php?id=remove&logo=<?= $file; ?>'}else{}"><i class="fa fa-trash"></i> Delete</a>
+                <td><a class="btn bg-danger" href="javascript:void(0)" onclick="if(confirm('Sure to delete <?= $file; ?> ?')){window.location='./admin.php?id=remove-logo&logo=<?= $file; ?>&session=<?= $session ?>'}else{}"><i class="fa fa-trash"></i> <?= $_delete ?></a>
                 </td>
               </tr>
               

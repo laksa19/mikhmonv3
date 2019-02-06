@@ -79,7 +79,7 @@ textarea{
 	    	<div class="col-9">
 	    		<div class="card">
 					<div class="card-header">
-						<h3><i class="fa fa-edit"></i> Template Editor</h3>
+						<h3><i class="fa fa-edit"></i> <?= $_template_editor ?></h3>
 					</div>
 			<div class="card-body">
 				<form autocomplete="off" method="post" action="">
@@ -88,7 +88,7 @@ textarea{
 							<td>
 							<div class="row">
 								<div class="col-4 col-box-12">
-								<button type="submit" title="Save template" class="btn bg-primary" name="save"><i class="fa fa-save"></i> Save</button>
+								<button type="submit" title="Save template" class="btn bg-primary" name="save"><i class="fa fa-save"></i> <?= $_save ?></button>
 								<a class="btn bg-green" href="<?= $popup?>" title="View voucher with Logo"><i class="fa fa-image"></i> </a>
 								<a class="btn bg-green" href="<?= $popupQR?>" title="View voucher with  QR"><i class="fa fa-qrcode"></i> </a>
 								</div>

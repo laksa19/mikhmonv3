@@ -119,7 +119,7 @@ if (!isset($_SESSION["mikhmon"])) {
 	<div class="col-12">
   		<div class="card" >
   			<div class="card-header">
-  				<h3 class="card-title"><i class="fa fa-gear"></i> Session Settings &nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i></h3>
+  				<h3 class="card-title"><i class="fa fa-gear"></i> <?= $_session_settings ?> &nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i></h3>
   			</div>
         <div class="card-body">
     	   <div class="row">
@@ -127,12 +127,12 @@ if (!isset($_SESSION["mikhmon"])) {
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Session</h3>
+                  <h3 class="card-title"><?= $_session ?></h3>
                 </div>
                 <div class="card-body">
                   <table class="table">
                     <tr>
-                      <td>Session Name</td>
+                      <td><?= $_session_name ?></td>
                       <td><input class="form-control" id="sessname" type="text" name="sessname" title="Session Name" value="<?php if ($session == "new") {
                                                                                                                               echo "";
                                                                                                                             } else {
@@ -200,28 +200,28 @@ if (!isset($_SESSION["mikhmon"])) {
     <div class="card-body">    
 	<table class="table table-sm">
 	<tr>
-	<td class="align-middle">Hotspot Name  </td><td><input class="form-control" type="text" size="15" maxlength="50" name="hotspotname" title="Hotspot Name" value="<?= $hotspotname; ?>" required="1"/></td>
+	<td class="align-middle"><?= $_hotspot_name ?>  </td><td><input class="form-control" type="text" size="15" maxlength="50" name="hotspotname" title="Hotspot Name" value="<?= $hotspotname; ?>" required="1"/></td>
 	</tr>
 	<tr>
-	<td class="align-middle">DNS Name  </td><td><input class="form-control" type="text" size="15" maxlength="500" name="dnsname" title="DNS Name [IP->Hotspot->Server Profiles->DNS Name]" value="<?= $dnsname; ?>" required="1"/></td>
+	<td class="align-middle"><?= $_dns_name ?>  </td><td><input class="form-control" type="text" size="15" maxlength="500" name="dnsname" title="DNS Name [IP->Hotspot->Server Profiles->DNS Name]" value="<?= $dnsname; ?>" required="1"/></td>
 	</tr>
 	<tr>
-	<td class="align-middle">Currency  </td><td><input class="form-control" type="text" size="3" maxlength="4" name="currency" title="currency" value="<?= $currency; ?>" required="1"/></td>
+	<td class="align-middle"><?= $_currency ?>  </td><td><input class="form-control" type="text" size="3" maxlength="4" name="currency" title="currency" value="<?= $currency; ?>" required="1"/></td>
 	</tr>
 	<tr>
-	<td class="align-middle">Auto Reload</td><td>
+	<td class="align-middle"><?= $_auto_reload ?></td><td>
 	<div class="input-group">
 		<div class="input-group-10">
-        	<input class="group-item group-item-l" type="number" min="10" max="3600" name="areload" title="Auto Reload in sec [min 10s]" value="<?= $areload; ?>" required="1"/>
+        	<input class="group-item group-item-l" type="number" min="10" max="3600" name="areload" title="Auto Reload in sec [min 10]" value="<?= $areload; ?>" required="1"/>
     	</div>
             <div class="input-group-2">
-                <span class="group-item group-item-r pd-2p5 text-center align-middle">sec</span>
+                <span class="group-item group-item-r pd-2p5 text-center align-middle"><?= $_sec ?></span>
             </div>
         </div>
 	</td>
 	</tr>
 	<tr>
-	<td class="align-middle">Traffic Interface</td><td><input class="form-control" type="number" min="1" max="99" name="iface" title="Traffic Interface" value="<?= $iface; ?>" required="1"/></td>
+	<td class="align-middle"><?= $_traffic_interface ?></td><td><input class="form-control" type="number" min="1" max="99" name="iface" title="Traffic Interface" value="<?= $iface; ?>" required="1"/></td>
 	</tr>
 	<!--<tr>
     <td class="align-middle">Max Tx</td><td>
@@ -256,7 +256,7 @@ if (!isset($_SESSION["mikhmon"])) {
   <?php if (empty($livereport)) {
   } else { ?>
   <tr>
-    <td>Live Report</td>
+    <td><?= $_live_report ?></td>
     <td>
       <select class="form-control" name="livereport" >
           <option value="<?= $livereport; ?>"><?= ucfirst($livereport); ?></option>

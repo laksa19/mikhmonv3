@@ -42,10 +42,11 @@ if (!isset($_SESSION["mikhmon"])) {
   	<div class="card-body text-center">
   		<form action="" method="post" enctype="multipart/form-data">
         <div>
-          <h3>Are you sure to reboot <?= $session; ?>?</h3>
+          <h3><?= $_reboot.' '. $session; ?>?</h3>
         </div>
-  	  <button class="btn bg-warning" type="submit" title="Yes" name="submit">Yes</button>
-      <a class="btn bg-primary" href="./?hotspot=dashboard&session=<?= $session; ?>" title="No"> No </a>
+  	  <button class="btn bg-warning" type="submit" title="Yes" name="submit"><?= $_yes ?></button>
+      <a class="btn bg-primary" href="./?hotspot=dashboard&session=<?= $session; ?>" title="No"> <?= $_no ?> </a>
+      
     </form>
   </div>
 </div>

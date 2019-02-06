@@ -94,17 +94,19 @@ if (!isset($_SESSION["mikhmon"])) {
 	//$valy = $schdetails['interval'];
 // share WhatsApp  
   if ($getvalid != "") {
-    $wavalid = "Validity : *" . $getvalid . "* %0A";
+    $wavalid = $_validity." : *" . $getvalid . "* %0A";
   } else {
     $wavalid = "";
   }
   if ($utimelimit != "") {
-    $watlimit = "TimeLimit : *" . $utimelimit . "* %0A";
+    $watlimit = $_time_limit." : *" . $utimelimit . "* %0A";
   } else {
     $watlimit = "";
+    $bMB = "";
   }
   if ($udatalimit != "") {
-    $wadlimit = "DataLimit : *" . $udatalimit . "" . $MG . "* %0A";
+    $wadlimit = $_data_limit." : *" . $udatalimit . "" . $MG . "* %0A";
+    $bMG = $MG;
   } else {
     $wadlimit = "";
   }
@@ -112,9 +114,9 @@ if (!isset($_SESSION["mikhmon"])) {
     echo "";
   } else {
     if ($currency == in_array($currency, $cekindo['indo'])) {
-      $waprice = "Price : *" . $currency . " " . number_format($getprice, 0, ",", ".") . "* %0A";
+      $waprice = $_price." : *" . $currency . " " . number_format($getprice, 0, ",", ".") . "* %0A";
     } else {
-      $waprice = "Price : *" . $currency . " " . number_format($getprice) . "* %0A";
+      $waprice = $_price . " : *" . $currency . " " . number_format($getprice) . "* %0A";
     }
   }
 
@@ -148,6 +150,13 @@ Login : *http://" . $dnsname . "* %0A
   } else {
     $shareWA = $shareWAUP;
   }
+
+  $tempu = $uname.'-'.$upass.'-'.$udatalimit.$bMG.'-'.$utimelimit.'-'.$getvalid.'-'.$getprice.'-'.$session.'-'.$_SESSION['timezone'].'-'.$pbtac;
+  $gen = '<?php $tempu="' . $tempu . '";?>';
+          $temp = './bt/temp.php';
+          $handle = fopen($temp, 'w') or die('Cannot open file:  ' . $temp);
+          $data = $gen;
+          fwrite($handle, $data);
 
   if (isset($_POST['name'])) {
     $server = ($_POST['server']);
@@ -192,39 +201,41 @@ Login : *http://" . $dnsname . "* %0A
     } else {
     x.type = 'password';
     }}
+    var _0x7baa=["\x63\x6C\x69\x63\x6B","\x2E\x70\x72\x69\x6E\x74\x42\x54","\x72\x65\x61\x64\x79"];$(document)[_0x7baa[2]](function(){$(_0x7baa[1])[_0x7baa[0]](function(){printBT()})})
 </script>
 <div class="row">
-<div class="col-12">
+<div class="col-12"></div>
 <div class="card">
 <div class="card-header">
-    <h3><i class="fa fa-edit"></i> Edit User</h3>
+    <h3><i class="fa fa-edit"></i> <?= $_edit_user ?></h3>
 </div>
 <div class="card-body">
 <form autocomplete="new-password" method="post" action="">
   <div>
     <?php if ($_SESSION['ubp'] != "") {
-      echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'><i class='fa fa-close'></i> Close</a>";
+      echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'><i class='fa fa-close'></i> ".$_close."</a>";
     } elseif ($_SESSION['ubc'] != "") {
-      echo "    <a class='btn bg-warning' href='./?hotspot=users&comment=" . $_SESSION['ubc'] . "&session=" . $session . "'><i class='fa fa-close'></i> Close</a>";
+      echo "    <a class='btn bg-warning' href='./?hotspot=users&comment=" . $_SESSION['ubc'] . "&session=" . $session . "'><i class='fa fa-close'></i> ".$_close."</a>";
     } elseif ($_SESSION['hua'] != "") {
       $_SESSION['ubn'] = "";
-      echo "    <a class='btn bg-warning' href='./?hotspot=active&session=" . $session . "'><i class='fa fa-close'></i> Close</a>";
+      echo "    <a class='btn bg-warning' href='./?hotspot=active&session=" . $session . "'><i class='fa fa-close'></i> ".$_close."</a>";
       $_SESSION['hua'] = "";
     } elseif ($_SESSION['ubn'] != "") {
-      echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'><i class='fa fa-close'></i> Close</a>";
+      echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'><i class='fa fa-close'></i> ".$_close."</a>";
       $_SESSION['ubn'] = "";
     } else {
-      echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'><i class='fa fa-close'></i> Close</a>";
+      echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'><i class='fa fa-close'></i> ".$_close."</a>";
     }
     ?>
-    <button type="submit" name="save" class="btn bg-primary" > <i class="fa fa-save"></i> Save</button>
-    <div class="btn bg-danger"  onclick="if(confirm('Are you sure to delete username (<?= $uname; ?>)?')){window.location='./?remove-hotspot-user=<?= $uid; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $uname; ?>'><i class='fa fa-minus-square'></i> Remove</div>
-    <a class="btn bg-secondary"  title="Print" href="javascript:window.open('./voucher/print.php?user=<?= $usermode . "-" . $uname; ?>&qr=no&session=<?= $session; ?>','_blank','width=310,height=450').print();"> <i class="fa fa-print"></i> Print</a>
-    <a class="btn bg-info"  title="Print QR" href="javascript:window.open('./voucher/print.php?user=<?= $usermode . "-" . $uname; ?>&qr=yes&session=<?= $session; ?>','_blank','width=310,height=450').print();"> <i class="fa fa-qrcode"></i> QR</a>
+    <button type="submit" name="save" class="btn bg-primary" > <i class="fa fa-save"></i> <?= $_save ?></button>
+    <div class="btn bg-danger"  onclick="if(confirm('Are you sure to delete username (<?= $uname; ?>)?')){window.location='./?remove-hotspot-user=<?= $uid; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $uname; ?>'><i class='fa fa-minus-square'></i> <?= $_remove ?></div>
+    <a class="btn bg-secondary"  title="Print" href="javascript:window.open('./voucher/print.php?user=<?= $usermode . "-" . $uname; ?>&qr=no&session=<?= $session; ?>','_blank','width=310,height=450').print();"> <i class="fa fa-print"></i> <?= $_print ?></a>
+    <a class="btn bg-info"  title="Print QR" href="javascript:window.open('./voucher/print.php?user=<?= $usermode . "-" . $uname; ?>&qr=yes&session=<?= $session; ?>','_blank','width=310,height=450').print();"> <i class="fa fa-qrcode"></i> <?= $_print_qr ?></a>
     <?php if ($utimelimit == "1s") {
       echo '<a class="btn bg-info"  href="./?reset-hotspot-user=' . $uid . '&session=' . $session . '"> <i class="fa fa-retweet"></i> Reset</a>';
     } ?>
-    <a id="shareWA" class="btn bg-success" title="Share WhatsApp" href="whatsapp://send?text=<?= $shareWA; ?>"> <i class="fa fa-whatsapp"></i> Share</a>
+    <a id="shareWA" class="btn bg-green" title="Share WhatsApp" href="whatsapp://send?text=<?= $shareWA; ?>"> <i class="fa fa-whatsapp"></i> <?= $_share ?></a>
+    <div id="shareWA" class="btn bg-blue printBT" title="Print Bluetooth"><i class="fa fa-bluetooth"></i> <?= $_print ?> BT</div><br>    
   </div>
 <table class="table">
   <tr>
@@ -260,10 +271,10 @@ Login : *http://" . $dnsname . "* %0A
 		</td>
 	</tr>
   <tr>
-    <td class="align-middle">Name</td><td><input class="form-control" type="text" autocomplete="off" name="name" value="<?= $uname; ?>"></td>
+    <td class="align-middle"><?= $_name ?></td><td><input class="form-control" type="text" autocomplete="off" name="name" value="<?= $uname; ?>"></td>
   </tr>
   <tr>
-    <td class="align-middle">Password</td><td>
+    <td class="align-middle"><?= $_password ?></td><td>
 	<div class="input-group">
     <div class="input-group-11 col-box-10">
       <input class="group-item group-item-l" id="passUser" type="password" name="pass" autocomplete="new-password" value="<?= $upass; ?>">
@@ -277,7 +288,7 @@ Login : *http://" . $dnsname . "* %0A
 		</td>
   </tr>
   <tr>
-    <td class="align-middle">Profile</td><td>
+    <td class="align-middle"><?= $_profile ?></td><td>
 			<select class="form-control" name="profile" required="1">
 				<option><?= $uprofile; ?></option>
 				<?php $TotalReg = count($getprofile);
@@ -307,14 +318,14 @@ Login : *http://" . $dnsname . "* %0A
                                                                                                           } ?>" disabled></td>
   </tr>
   <tr>
-    <td class="align-middle">Time Limit</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if ($utimelimit == "1s") {
+    <td class="align-middle"><?= $_time_limit ?></td><td><input class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if ($utimelimit == "1s") {
                                                                                                                                               echo "";
                                                                                                                                             } else {
                                                                                                                                               echo $utimelimit;
                                                                                                                                             } ?>"></td>
   </tr>
   <tr>
-    <td class="align-middle">Data Limit</td><td>
+    <td class="align-middle"><?= $_data_limit ?></td><td>
       <div class="input-group">
         <div class="input-group-10 col-box-9">
         <input class="group-item group-item-l" type="number" min="0" max="9999" name="datalimit" value="<?= $udatalimit; ?>">
@@ -334,10 +345,10 @@ Login : *http://" . $dnsname . "* %0A
     </td>
   </tr>
   <tr>
-    <td class="align-middle">Comment</td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>"></td>
+    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>"></td>
   </tr>
   <tr>
-    <td class="align-middle">Price</td><td><input class="form-control" type="text" value="<?php if ($getprice == 0) {
+    <td class="align-middle"><?= $_price ?></td><td><input class="form-control" type="text" value="<?php if ($getprice == 0) {
                                                                                           } else {
                                                                                             if ($currency == in_array($currency, $cekindo['indo'])) {
                                                                                               echo $currency . " " . number_format($getprice, 0, ",", ".");
@@ -348,16 +359,16 @@ Login : *http://" . $dnsname . "* %0A
   </tr>
   <?php if ($getvalid != "") { ?>
   <tr>
-    <td class="align-middle">Validity</td><td><input class="form-control" type="text" value="<?= $getvalid; ?>" disabled></td>
+    <td class="align-middle"><?= $_validity ?></td><td><input class="form-control" type="text" value="<?= $getvalid; ?>" disabled></td>
   </tr>
   <tr>
-    <td class="align-middle">Start</td><td><input class="form-control" type="text" value="<?= $start; ?>" disabled></td>
+    <td class="align-middle"><?= $_start ?></td><td><input class="form-control" type="text" value="<?= $start; ?>" disabled></td>
   </tr>
   <tr>
     <td class="align-middle"><?php if ($utimelimit == "1s") {
-                              echo "Expired";
+                              echo $_expitred;
                             } else {
-                              echo "End";
+                              echo $_end;
                             } ?></td><td><input class="form-control" type="text" value="<?= $end; ?>" disabled></td>
   </tr>
   <?php 
@@ -365,19 +376,9 @@ Login : *http://" . $dnsname . "* %0A
 } ?>
   <tr>
     <td colspan="2">
-      <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
       <p style="padding:0px 5px;">
-        Format Time Limit.<br>
-        [wdhm] Contoh : 30d = 30hari, 12h = 12jam, 4w3d = 31hari.
+        <?= $_format_time_limit ?>
       </p>
-      <?php 
-    } else { ?>
-      <p style="padding:0px 5px;">
-        Format Time Limit.<br>
-        [wdhm] Example : 30d = 30days, 12h = 12hours, 4w3d = 31days.
-      </p>
-      <?php 
-    } ?>
     </td>
   </tr>
 </table>

@@ -29,7 +29,7 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-	<h3><i class=" fa fa-users"></i> Vouchers &nbsp;&nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer" title="Reload data"></i></h3>
+	<h3><i class=" fa fa-users"></i> <?= $_vouchers ?> &nbsp;&nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer" title="Reload data"></i></h3>
 </div>
 <div class="card-body">
 <div class="overflow" style="max-height: 80vh">	
@@ -51,8 +51,8 @@ if (!isset($_SESSION["mikhmon"])) {
                 }
                 ?></h3>
 
-              <a title="Open User by profile all" href="./?hotspot=users&profile=all&session=<?= $session; ?>"><i class="fa fa-external-link"></i> Open</a>&nbsp;
-              <a title="Generate User by profile <?= $pname; ?>" href="./?hotspot-user=generate&session=<?= $session; ?>"><i class="fa fa-users"></i> Generate</a>&nbsp;
+              <a title="Open User by profile all" href="./?hotspot=users&profile=all&session=<?= $session; ?>"><i class="fa fa-external-link"></i> <?= $_open ?></a>&nbsp;
+              <a title="Generate User by profile <?= $pname; ?>" href="./?hotspot-user=generate&session=<?= $session; ?>"><i class="fa fa-users"></i> <?= $_generate ?></a>&nbsp;
               </div>
             </div>
             
@@ -83,8 +83,8 @@ for ($i = 0; $i < $TotalReg; $i++) {
                 }
                 ?></h3>
 
-              <a title="Open User by profile <?= $pname; ?>" href="./?hotspot=users&profile=<?= $pname; ?>&session=<?= $session; ?>"><i class="fa fa-external-link"></i> Open</a>&nbsp;
-              <a title="Generate User by profile <?= $pname; ?>" href="./?hotspot-user=generate&genprof=<?= $pname; ?>&session=<?= $session; ?>"><i class="fa fa-users"></i> Generate</a>&nbsp;
+              <a title="Open User by profile <?= $pname; ?>" href="./?hotspot=users&profile=<?= $pname; ?>&session=<?= $session; ?>"><i class="fa fa-external-link"></i> <?= $_open ?></a>&nbsp;
+              <a title="Generate User by profile <?= $pname; ?>" href="./?hotspot-user=generate&genprof=<?= $pname; ?>&session=<?= $session; ?>"><i class="fa fa-users"></i> <?= $_generate ?></a>&nbsp;
               </div>
             </div>
             

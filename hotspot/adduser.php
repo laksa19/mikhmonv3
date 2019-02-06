@@ -76,18 +76,18 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-8">
 <div class="card box-bordered">
   <div class="card-header">
-    <h3><i class="fa fa-user-plus"></i> Add User <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> Processing... </i></small> </h3> 
+  <h3><i class="fa fa-user-plus"></i> <?= $_add_user ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small></h3> 
   </div>
   <div class="card-body">
 <form autocomplete="off" method="post" action="">  
   <div>
   <?php if ($_SESSION['ubp'] != "") {
-    echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'> <i class='fa fa-close'></i> Close</a>";
+    echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
   } else {
-    echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'> <i class='fa fa-close'></i> Close</a>";
+    echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
   }
   ?>
-    <button type="submit" onclick="loader()" class="btn bg-primary" name="save"><i class="fa fa-save"></i> Save</button>
+    <button type="submit" onclick="loader()" class="btn bg-primary" name="save"><i class="fa fa-save"></i> <?= $_save ?></button>
   </div>
 
 <table class="table">
@@ -105,10 +105,10 @@ if (!isset($_SESSION["mikhmon"])) {
 		</td>
 	</tr>
   <tr>
-    <td class="align-middle">Name</td><td><input class="form-control" type="text" autocomplete="off" name="name" value="" required="1" autofocus></td>
+    <td class="align-middle"><?= $_name ?></td><td><input class="form-control" type="text" autocomplete="off" name="name" value="" required="1" autofocus></td>
   </tr>
   <tr>
-    <td class="align-middle">Password</td><td>
+    <td class="align-middle"><?= $_password ?></td><td>
         <div class="input-group">
           <div class="input-group-11 col-box-10">
             <input class="group-item group-item-l" id="passUser" type="password" name="pass" autocomplete="new-password" value="" required="1">
@@ -122,7 +122,7 @@ if (!isset($_SESSION["mikhmon"])) {
 		</td>
   </tr>
   <tr>
-    <td class="align-middle">Profile</td><td>
+    <td class="align-middle"><?= $_profile ?></td><td>
 			<select class="form-control" onchange="GetVP();"  id="uprof" name="profile" required="1">
 				<?php $TotalReg = count($getprofile);
     for ($i = 0; $i < $TotalReg; $i++) {
@@ -133,10 +133,10 @@ if (!isset($_SESSION["mikhmon"])) {
 		</td>
 	</tr>
 	<tr>
-    <td class="align-middle">Time Limit</td><td><input class="form-control" type="text"  autocomplete="off" name="timelimit" value=""></td>
+    <td class="align-middle"><?= $_time_limit ?></td><td><input class="form-control" type="text"  autocomplete="off" name="timelimit" value=""></td>
   </tr>
   <tr>
-    <td class="align-middle">Data Limit</td><td>
+    <td class="align-middle"><?= $_data_limit ?></td><td>
       <div class="input-group">
         <div class="input-group-10 col-box-9">
           <input class="group-item group-item-l" type="number" min="0" max="9999" name="datalimit" value="<?= $udatalimit; ?>">
@@ -151,7 +151,7 @@ if (!isset($_SESSION["mikhmon"])) {
     </td>
   </tr>
   <tr>
-    <td class="align-middle">Comment</td><td><input class="form-control" type="text" title="No special characters" id="comment" autocomplete="off" name="comment" value=""></td>
+    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" title="No special characters" id="comment" autocomplete="off" name="comment" value=""></td>
   </tr>
   <tr >
     <td  colspan="4" class="align-middle"  id="GetValidPrice"></td>
@@ -164,33 +164,18 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-4">
   <div class="card">
     <div class="card-header">
-      <h3><i class="fa fa-book"></i> ReadMe</h3>
+      <h3><i class="fa fa-book"></i> <?= $_readme ?></h3>
     </div>
     <div class="card-body">
 <table>
    <tr>
     <td colspan="2">
-      <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
-      <p style="padding:0px 5px;">
-        Format Time Limit.<br>
-        [wdhm] Contoh : 30d = 30hari, 12h = 12jam, 4w3d = 31hari.
-      </p>
-       <p style="padding:0px 5px;">
-        Add User dengan Time Limit.<br>
-        Sebaiknya Time Limit < Validity.
-      </p>
-      <?php 
-    } else { ?>
-      <p style="padding:0px 5px;">
-        Format Time Limit.<br>
-        [wdhm] Example : 30d = 30days, 12h = 12hours, 4w3d = 31days.
+    <p style="padding:0px 5px;">
+      <?= $_format_time_limit ?>
     </p>
-      <p style="padding:0px 5px;">
-        Add User with Time Limit.<br>
-        Preferably  Time Limit < Validity.
-      </p>
-      <?php 
-    } ?>
+    <p style="padding:0px 5px;">
+      <?= $_details_add_user ?>
+    </p>
     </td>
   </tr>
 </table>
@@ -198,9 +183,6 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
 </div>
 <script>
-  function loader(){
-    document.getElementById('loader').style='display:block;';
-  }
 // get valid $ price
 function GetVP(){
   var prof = document.getElementById('uprof').value;

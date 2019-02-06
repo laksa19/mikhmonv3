@@ -24,8 +24,17 @@ if (!isset($_SESSION["mikhmon"])) {
 
 	$idhr = $_GET['idhr'];
 	$idbl = $_GET['idbl'];
+	if ($idhr != ""){
+		$_SESSION['report'] = "&idhr=".$idhr; 
+	} elseif ($idbl != ""){
+		$_SESSION['report'] = "&idbl=".$idbl; 
+	} else {
+		$_SESSION['report'] = "";
+	}
+	$_SESSION['idbl'] = $idbl;
 	$remdata = ($_POST['remdata']);
 	$prefix = $_GET['prefix'];
+	
 
 	$gettimezone = $API->comm("/system/clock/print");
 	$timezone = $gettimezone[0]['time-zone-name'];
@@ -74,11 +83,6 @@ if (!isset($_SESSION["mikhmon"])) {
 				"?source" => "$idhr",
 			));
 			$TotalReg = count($getData);
-			for ($i = 0; $i < $TotalReg; $i++) {
-
-				$totalSR += explode("-|-", $getData[$i]['name'])[3];
-
-			}
 		}
 		$filedownload = $idhr;
 		$shf = "hidden";
@@ -89,11 +93,6 @@ if (!isset($_SESSION["mikhmon"])) {
 				"?owner" => "$idbl",
 			));
 			$TotalReg = count($getData);
-			for ($i = 0; $i < $TotalReg; $i++) {
-
-				$totalSR += explode("-|-", $getData[$i]['name'])[3];
-
-			}
 		}
 		$filedownload = $idbl;
 		$shf = "hidden";
@@ -104,16 +103,12 @@ if (!isset($_SESSION["mikhmon"])) {
 				"?comment" => "mikhmon",
 			));
 			$TotalReg = count($getData);
-			for ($i = 0; $i < $TotalReg; $i++) {
-
-				$totalSR += explode("-|-", $getData[$i]['name'])[3];
-
-			}
 		}
 		$filedownload = "all";
 		$shf = "text";
 		$shd = "none";
 	}
+	
 }
 ?>
 		<script>
@@ -149,8 +144,20 @@ if (!isset($_SESSION["mikhmon"])) {
         // Download CSV file
         downloadCSV(csv.join("\n"), filename);
         }
-
+		window.onload=function() {
+          var sum = 0;
+          var dataTable = document.getElementById("selling");
+          
+          // use querySelector to find all second table cells
+          var cells = document.querySelectorAll("td + td + td + td + td + td");
+          for (var i = 0; i < cells.length; i++)
+          sum+=parseFloat(cells[i].firstChild.data);
+          
+          var th = document.getElementById('total');
+          th.innerHTML = th.innerHTML + (sum) ;
+        }
 		</script>
+	
 <script>
 $(document).ready(function(){
   $("#openResume").click(function(){
@@ -163,22 +170,26 @@ $(document).ready(function(){
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-	<h3><i class=" fa fa-money"></i> Selling Report <?= $idhr . $idbl; if ($prefix != "") {echo " prefix [" . $prefix . "]";} ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> Processing... </i></small></h3>
+	<h3><i class=" fa fa-money"></i> <?= $_selling_report ?> <?= $idhr . $idbl;	if ($prefix != "") {echo " prefix [" . $prefix . "]";} ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small></h3>
 </div>
 <div class="card-body">
 <div class="row">
-	<div>
+	<div class="row">
+	<div class="col-12">
 		<div style="padding-bottom: 5px; padding-top: 5px;">   
-		  <input id="filterTable" type="text" class="form-control" style="float:left; margin-top: 6px; max-width: 150px;" placeholder="Search..">&nbsp;
+		  <input id="filterTable" type="text" class="form-control" style="float:left; margin-top: 6px; max-width: 150px;" placeholder="<?= $_search ?>">&nbsp;
 		  <button class="btn bg-primary" onclick="exportTableToCSV('report-mikhmon-<?= $filedownload . $fprefix; ?>.csv')" title="Download selling report"><i class="fa fa-download"></i> CSV</button>
-		  <button class="btn bg-primary" onclick="location.href='./?report=selling&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> ALL</button>
-		  <button name="help" class="btn bg-primary" onclick="location.href='#help';" title="Help"><i class="fa fa-question"></i> Help</button>
-		  <button name="resume" id="openResume" class="btn bg-primary"title="Resume Report"><i class="fa fa-area-chart"></i> Resume</button>
-		  <button style="display: <?= $shd; ?>;" name="remdata" class="btn bg-danger" onclick="location.href='#remdata';" title="Delete Data <?= $filedownload; ?>"><i class="fa fa-trash"></i> Delete data <?= $filedownload; ?></button>
+		  <button class="btn bg-primary" onclick="location.href='./?report=selling&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> <?= $_all ?></button>
+		  <button name="help" class="btn bg-primary" onclick="location.href='#help';" title="Help"><i class="fa fa-question"></i> <?= $_help ?></button>
+		  <button name="resume" id="openResume" class="btn bg-primary"title="Resume Report"><i class="fa fa-area-chart"></i> <?= $_resume ?></button>
+		  <button style="display: <?= $shd; ?>;" name="remdata" class="btn bg-danger" onclick="location.href='#remdata';" title="Delete Data <?= $filedownload; ?>"><i class="fa fa-trash"></i> <?= $_delete_data.' '. $filedownload; ?></button>
+		  <button  id="remSelected" style="display: none;" class="btn bg-red" onclick="MikhmonRemoveReportSelected()"><i class="fa fa-trash"></i> <span id="selected"></span> <?= $_selected ?></button>
 		</div>
+	</div>
+	</div>
 		<div class="input-group mr-b-10">  
 			<div class="input-group-1 col-box-2">
-			<select style="padding:5px;" class="group-item group-item-l" title="Day" id="D">
+			<select style="padding:5px;" class="group-item group-item-l" title="<?= $_days ?>" id="D">
         			<?php
 										$day = explode("/", $idhr)[1];
 										if ($day != "") {
@@ -258,6 +269,7 @@ $(document).ready(function(){
 					}else if(D === ""){
 						window.location='./?report=selling&idbl='+M+Y+'&prefix='+X+'&session=<?= $session; ?>';
 					}
+					
 				}
 			</script>
 		</div>
@@ -265,17 +277,17 @@ $(document).ready(function(){
 			<table id="dataTable" class="table table-bordered table-hover text-nowrap">
 				<thead class="thead-light">
 				<tr>
-				  <th colspan=4 >Selling report <?= $filedownload . $fprefix; ?><b style="font-size:0;">,</b></th>
-				  <th style="text-align:right;">Total</th>
-				  <th style="text-align:right;" id="total"><?= $totalSR; ?></th>
+				  <th colspan=4 ><?= $_selling_report ?> <?= $filedownload . $fprefix; ?><b style="font-size:0;">,</b></th>
+				  <th style="text-align:right;"><?= $_total ?></th>
+				  <th style="text-align:right;" id="total"></th>
 				</tr>
 				<tr>
-					<th >Date</th>
-					<th >Time</th>
-					<th >Username</th>
-					<th >Profile</th>
-					<th >Comment</th>
-					<th style="text-align:right;">Price <?= $currency; ?></th>
+					<th ><?= $_date ?></th>
+					<th ><?= $_time ?></th>
+					<th ><?= $_user_name ?></th>
+					<th ><?= $_profile ?></th>
+					<th ><?= $_comment ?></th>
+					<th style="text-align:right;"> <?= $_price.' '. $currency; ?></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -356,23 +368,11 @@ $(document).ready(function(){
 <!-- Modal -->
 <div class="modal-window" id="remdata" aria-hidden="true">
   <div>
-  	<header><h1>Confirm</h1></header>
+  	<header><h1><?= $_confirm ?></h1></header>
   	<a style="font-weight:bold;" href="#" title="Close" class="modal-close">X</a>
 	<p>
-        <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
-		      <ul>
-		        <li>Menghapus Selling Report akan menghapus User Log juga.</li>
-		        <li>Disarankan untuk mengunduh  <a class="text-blue" href="./?hotspot=userlog&session=<?= $session; ?>">User Log</a> terlebih dahulu.</li>
-		      </ul>
-		    <?php 
-				} else { ?>
-		      <ul>
-		        <li>Deleting the Selling Report will delete the User Log as well. </li>
-		        <li>It is recommended to download <a class="text-blue" href="./?hotspot=userlog&session=<?= $session; ?>">User Log</a> first. </li>
-		      </ul>
-		    <?php 
-				} ?>
-		</p>
+			<?= $_delete_report ?>
+	</p>
 	<form autocomplete="off" method="post" action="">
 	<center>
 	<button type="submit" name="remdata" title="Yes" class="btn bg-primary">Yes</button>&nbsp;
@@ -383,30 +383,10 @@ $(document).ready(function(){
 </div>
 <div class="modal-window" id="help" aria-hidden="true">
   <div>
-  	<header><h1>Help</h1></header>
+  	<header><h1><?= $_help ?></h1></header>
   	<a style="font-weight:bold;" href="#" title="Close" class="modal-close">X</a>
 	<p> 
-		    <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
-		      <ul>
-		        <li>Klik CSV untuk mengunduh.</li>
-		        <li>Untuk filter per bulan, pilih Day dan bulannya, kemudian klik Filter.<br>
-		        	<img width="70%" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATUAAAAsCAYAAAAEsS/jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOlSURBVHhe7d09TtxAGMbxnCYSKOJDCggtqZIqHCRVpFwDiYJj0MARIq2i5QQUW6RH0CJST/x6bM/YM7Z38cfi1//iJ2F7PCvGfp+ZYQs+nH+7MACgBaEGQBVCDYAqhBoAVQg1AKoQagBUaQy1xdfv0fMA8F7VhtrBycLsH382Hz8dYgf2jxh74C2ioXZ4ujB7SVEdn33BjuQPKHYNmJtt6iEINdlyygrt+Ow8aIzxEGqA0ynUBMW0e4Qa4BBqChBqgEOoKUCoAQ6hpgChBjiEmgKEGuAQagoQaoBDqClAqAHOiKF2bZZP/8zLa+jhNtYem+oUardr8/J0by5j14AJGj3UggC7ujePBFsnhBrg7D7UhBTW69rc5MdZ0LnV3LNZXtlrN+vkeH3n3W/7fVxde+em7ffyj/e7W3Iu1lb0GmoNY2+vrc1y9eyue/deyvlSQN6Zh6SNe+bhat09N2nr9f3016yD51rtD3MwZD0MF2rpy5oVT7ByywohL5ZoAHrHCvz4+St4iHIu1lb0FmptY58HXjGp2JDJg6c51LK+vAkpbV+Epm0bXPf7Y1U5S0PWw4Ch1nSt+nKXZ+v0WmnlpoM/OzXNSqK3UIsojX0aat7KLeGvnIMQqjyrQKm/SNvK58lnaVqRY3ND1cPIoZbN3DmvWPyXW36uLZoJ82enpllJ9B9qNWPfU6il9xT9N4Ra6b2Qn8ufjfkYqh7G2X56BVW7rSkKUdrq2nr6ZEZqm5VEf6HWMvYdQ60Is2h/5ba5tE/pX9qW+sbcDFEP43xREFk5xIslKYZV0lbh1jMnM1LbrCS2eYhFSOTn/PFuG/tOoZY9M3+ltUGo2Tb2CwS2nvM2RD0ME2rpS+ud9wOuOPZm90w+60dDcma2eYjV8fVDqXXsW0LNtnfX05ArnlE1tOxx8/ZT2Pem9C0s0GD0UEuLpCR8WYttipCCqhRLqlqAM7ZVqCWC8W265o99W6hV7n9c3ZUnsjwkU9KPDTK7AqsLtdgKEKg3Yqj1TArE30bN2LahNjUSamw9sanJhpqsCGKz+hzpDjVZ4YereaDO9EIt+xscqzRHbahl21VWadjG9EINAbWhBrwBoaYAoQY4hJoChBrgEGoKEGqA0ynU3D8zjt+AcRBqgNMp1MTBycLsHfFf2neJUAOczqEmDk8X6Yot7wzj2k8mldh5AM1qQ03IVjR2HgDeq8ZQA4CpIdQAqEKoAVCFUAOgCqEGQBVCDYAiF+Y/bd3pxgv3MhEAAAAASUVORK5CYII=">
-		        </li>
-		        <li>Untuk filter berdasarkan prefix, isikan prefix di kolom search, kemudian klik filter.</li>
-		        <li>Disarankan untuk menghapus laporan penjualan setelah mengunduh laporan CSV.</li>
-		      </ul>
-		    <?php 
-				} else { ?>
-		      <ul>
-		        <li>Click CSV to download.</li>
-		        <li>For filters per month, select Day and month, then click Filter.<br>
-		        	<img width="70%" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATUAAAAsCAYAAAAEsS/jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOlSURBVHhe7d09TtxAGMbxnCYSKOJDCggtqZIqHCRVpFwDiYJj0MARIq2i5QQUW6RH0CJST/x6bM/YM7Z38cfi1//iJ2F7PCvGfp+ZYQs+nH+7MACgBaEGQBVCDYAqhBoAVQg1AKoQagBUaQy1xdfv0fMA8F7VhtrBycLsH382Hz8dYgf2jxh74C2ioXZ4ujB7SVEdn33BjuQPKHYNmJtt6iEINdlyygrt+Ow8aIzxEGqA0ynUBMW0e4Qa4BBqChBqgEOoKUCoAQ6hpgChBjiEmgKEGuAQagoQaoBDqClAqAHOiKF2bZZP/8zLa+jhNtYem+oUardr8/J0by5j14AJGj3UggC7ujePBFsnhBrg7D7UhBTW69rc5MdZ0LnV3LNZXtlrN+vkeH3n3W/7fVxde+em7ffyj/e7W3Iu1lb0GmoNY2+vrc1y9eyue/deyvlSQN6Zh6SNe+bhat09N2nr9f3016yD51rtD3MwZD0MF2rpy5oVT7ByywohL5ZoAHrHCvz4+St4iHIu1lb0FmptY58HXjGp2JDJg6c51LK+vAkpbV+Epm0bXPf7Y1U5S0PWw4Ch1nSt+nKXZ+v0WmnlpoM/OzXNSqK3UIsojX0aat7KLeGvnIMQqjyrQKm/SNvK58lnaVqRY3ND1cPIoZbN3DmvWPyXW36uLZoJ82enpllJ9B9qNWPfU6il9xT9N4Ra6b2Qn8ufjfkYqh7G2X56BVW7rSkKUdrq2nr6ZEZqm5VEf6HWMvYdQ60Is2h/5ba5tE/pX9qW+sbcDFEP43xREFk5xIslKYZV0lbh1jMnM1LbrCS2eYhFSOTn/PFuG/tOoZY9M3+ltUGo2Tb2CwS2nvM2RD0ME2rpS+ud9wOuOPZm90w+60dDcma2eYjV8fVDqXXsW0LNtnfX05ArnlE1tOxx8/ZT2Pem9C0s0GD0UEuLpCR8WYttipCCqhRLqlqAM7ZVqCWC8W265o99W6hV7n9c3ZUnsjwkU9KPDTK7AqsLtdgKEKg3Yqj1TArE30bN2LahNjUSamw9sanJhpqsCGKz+hzpDjVZ4YereaDO9EIt+xscqzRHbahl21VWadjG9EINAbWhBrwBoaYAoQY4hJoChBrgEGoKEGqA0ynU3D8zjt+AcRBqgNMp1MTBycLsHfFf2neJUAOczqEmDk8X6Yot7wzj2k8mldh5AM1qQ03IVjR2HgDeq8ZQA4CpIdQAqEKoAVCFUAOgCqEGQBVCDYAiF+Y/bd3pxgv3MhEAAAAASUVORK5CYII=">
-		        </li>
-		        <li>For filters based on prefix, fill prefix in the search input, then click filter.</li>
-		        <li>It is recommended to delete the sales report after download  the CSV report.</li>
-		      </ul>
-		    <?php 
-				} ?>
+			<?= $_help_report ?>
 	</p>
   </div>
 </div>

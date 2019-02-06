@@ -106,7 +106,7 @@ if (!isset($_SESSION["mikhmon"])) {
 		<div style="padding-bottom: 5px; padding-top: 5px; display: table-row;">	   
 		  <input id="filterTable" type="text" class="form-control" style="float:left; margin-top: 6px; max-width: 150px;" placeholder="Search..">&nbsp;
 		  <button class="btn bg-primary " onclick="exportTableToCSV('user-log-mikhmon-<?= $filedownload; ?>.csv')" title="Download user log"><i class="fa fa-download"></i> CSV</button>
-		  <button class="btn bg-primary " onclick="location.href='./?report=userlog&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> ALL</button>
+		  <button class="btn bg-primary " onclick="location.href='./?report=userlog&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> <?= $_all ?></button>
 		</div>
 		<div class="input-group mr-b-10">  
 			<div class="input-group-1 col-box-2">
@@ -200,12 +200,12 @@ if (!isset($_SESSION["mikhmon"])) {
 				  <th colspan=6 >User Log <?= $filedownload; ?></th>
 				</tr>
 				<tr>
-					<th >Date</th>
-					<th >Time</th>
-					<th >Username</th>
+					<th ><?= $_date ?></th>
+					<th ><?= $_time ?></th>
+					<th ><?= $_user_name ?></th>
 					<th >address</th>
 					<th >Mac Address</th>
-					<th >Validity</th>
+					<th ><?= $_validity ?></th>
 				</tr>
 				</thead>
 				<tbody>

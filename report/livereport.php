@@ -24,6 +24,10 @@ if (!isset($_SESSION["mikhmon"])) {
 // load session MikroTik
   $session = $_GET['session'];
 
+// lang
+include('../include/lang.php');
+include('../lang/'.$langid.'.php');
+
 
 // load config
   include('../include/config.php');
@@ -85,17 +89,17 @@ if (!isset($_SESSION["mikhmon"])) {
                     <div class="box-group-area">
                       <span >
                         <div id="reloadLreport">
-                          <?php 
+                        <?php 
                           if ($currency == in_array($currency, $cekindo['indo'])) {
-                            echo "Pendapatan <br/>" . "
-                          Hari ini " . $TotalRHr . "vcr : " . $currency . " " . number_format($tHr, 0, ",", ".") . "<br/>
-                          Bulan ini " . $TotalRBl . "vcr : " . $currency . " " . number_format($tBl, 0, ",", ".");
-
-                          } else {
-                            echo "Income <br/>" . "
-                          Today " . $TotalRHr . "vcr : " . $currency . " " . number_format($tHr, 2) . "<br/>
-                          This month " . $TotalRBl . "vcr : " . $currency . " " . number_format($tBl, 2);
+                            $dincome = number_format($tHr, 0, ",", ".");
+                            $mincome = number_format($tBl, 0, ",", ".");
+                          }else{
+                            $dincome = number_format($tHr, 2);
+                            $mincome = number_format($tBl, 2);
                           }
+                            echo $_income."<br/>" . "
+                          ".$_today." " . $TotalRHr . "vcr : " . $currency . " " . $dincome . "<br/>
+                          ".$_this_month." " . $TotalRBl . "vcr : " . $currency . " " . $mincome;
                           ?>
                         </div>
                     </span>

@@ -276,17 +276,17 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-8">
 <div class="card box-bordered">
 	<div class="card-header">
-		<h3><i class="fa fa-user-plus"></i> Generate User <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> Processing... </i></small></h3> 
+	<h3><i class="fa fa-user-plus"></i> <?= $_generate_user ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small></h3> 
 	</div>
 	<div class="card-body">
 <form autocomplete="off" method="post" action="">
 	<div>
 		<?php if ($_SESSION['ubp'] != "") {
-		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'> <i class='fa fa-close'></i> Close</a>";
+		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
 	} elseif ($_SESSION['vcr'] = "active") {
-		echo "    <a class='btn bg-warning' href='./?hotspot=users-by-profile&session=" . $session . "'> <i class='fa fa-close'></i> Close</a>";
+		echo "    <a class='btn bg-warning' href='./?hotspot=users-by-profile&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
 	} else {
-		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'> <i class='fa fa-close'></i> Close</a>";
+		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
 	}
 
 	?>
@@ -300,15 +300,15 @@ if (!isset($_SESSION["mikhmon"])) {
 	echo "all";
 } else {
 	echo $uprofile;
-} ?>&session=<?= $session; ?>"> <i class="fa fa-users"></i> User List</a>
-    <button type="submit" name="save" onclick="loader()" class="btn bg-primary" title="Generate User"> <i class="fa fa-save"></i> Generate</button>
-    <a class="btn bg-secondary" title="Print Default" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=no&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> Print</a>
-    <a class="btn bg-danger" title="Print QR" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-qrcode"></i> QR</a>
-    <a class="btn bg-info" title="Print Small" href="./voucher/print.php?id=<?= $urlprint; ?>&small=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> Small</a>
+} ?>&session=<?= $session; ?>"> <i class="fa fa-users"></i> <?= $_user_list ?></a>
+    <button type="submit" name="save" onclick="loader()" class="btn bg-primary" title="Generate User"> <i class="fa fa-save"></i> <?= $_generate ?></button>
+    <a class="btn bg-secondary" title="Print Default" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=no&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print ?></a>
+    <a class="btn bg-danger" title="Print QR" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-qrcode"></i> <?= $_print_qr ?></a>
+    <a class="btn bg-info" title="Print Small" href="./voucher/print.php?id=<?= $urlprint; ?>&small=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print_small ?></a>
 </div>
 <table class="table">
   <tr>
-    <td class="align-middle">Qty</td><td><div><input class="form-control " type="number" name="qty" min="1" max="500" value="1" required="1"></div></td>
+    <td class="align-middle"><?= $_qty ?></td><td><div><input class="form-control " type="number" name="qty" min="1" max="500" value="1" required="1"></div></td>
   </tr>
   <tr>
     <td class="align-middle">Server</td>
@@ -324,15 +324,15 @@ if (!isset($_SESSION["mikhmon"])) {
 	</td>
 	</tr>
 	<tr>
-    <td class="align-middle">User Mode</td><td>
+    <td class="align-middle"><?= $_user_mode ?></td><td>
 			<select class="form-control " onchange="defUserl();" id="user" name="user" required="1">
-				<option value="up">Username & Password</option>
-				<option value="vc">Username = Password</option>
+				<option value="up"><?= $_user_pass ?></option>
+				<option value="vc"><?= $_user_user ?></option>
 			</select>
 		</td>
 	</tr>
   <tr>
-    <td class="align-middle">User Length</td><td>
+    <td class="align-middle"><?= $_user_length ?></td><td>
       <select class="form-control " id="userl" name="userl" required="1">
         <option>4</option>
 				<option>3</option>
@@ -345,26 +345,26 @@ if (!isset($_SESSION["mikhmon"])) {
     </td>
   </tr>
   <tr>
-    <td class="align-middle">Prefix</td><td><input class="form-control " type="text" size="4" maxlength="4" autocomplete="off" name="prefix" value=""></td>
+    <td class="align-middle"><?= $_prefix ?></td><td><input class="form-control " type="text" size="4" maxlength="4" autocomplete="off" name="prefix" value=""></td>
   </tr>
   <tr>
-    <td class="align-middle">Character</td><td>
+    <td class="align-middle"><?= $_character ?></td><td>
       <select class="form-control " name="char" required="1">
-				<option id="lower" style="display:block;" value="lower">Random abcd</option>
-				<option id="upper" style="display:block;" value="upper">Random ABCD</option>
-				<option id="upplow" style="display:block;" value="upplow">Random aBcD</option>
-				<option id="lower1" style="display:none;" value="lower">Random abcd2345</option>
-				<option id="upper1" style="display:none;" value="upper">Random ABCD2345</option>
-				<option id="upplow1" style="display:none;" value="upplow">Random aBcD2345</option>
-				<option id="mix" style="display:block;" value="mix">Random 5ab2c34d</option>
-				<option id="mix1" style="display:block;" value="mix1">Random 5AB2C34D</option>
-				<option id="mix2" style="display:block;" value="mix2">Random 5aB2c34D</option>
-				<option id="num" style="display:none;" value="num">Random 1234</option>
+				<option id="lower" style="display:block;" value="lower"><?= $_random ?> abcd</option>
+				<option id="upper" style="display:block;" value="upper"><?= $_random ?> ABCD</option>
+				<option id="upplow" style="display:block;" value="upplow"><?= $_random ?> aBcD</option>
+				<option id="lower1" style="display:none;" value="lower"><?= $_random ?> abcd2345</option>
+				<option id="upper1" style="display:none;" value="upper"><?= $_random ?> ABCD2345</option>
+				<option id="upplow1" style="display:none;" value="upplow"><?= $_random ?> aBcD2345</option>
+				<option id="mix" style="display:block;" value="mix"><?= $_random ?> 5ab2c34d</option>
+				<option id="mix1" style="display:block;" value="mix1"><?= $_random ?> 5AB2C34D</option>
+				<option id="mix2" style="display:block;" value="mix2"><?= $_random ?> 5aB2c34D</option>
+				<option id="num" style="display:none;" value="num"><?= $_random ?> 1234</option>
 			</select>
     </td>
   </tr>
   <tr>
-    <td class="align-middle">Profile</td><td>
+    <td class="align-middle"><?= $_profile ?></td><td>
 			<select class="form-control " onchange="GetVP();" id="uprof" name="profile" required="1">
 				<?php if ($genprof != "") {
 				echo "<option>" . $genprof . "</option>";
@@ -379,10 +379,10 @@ if (!isset($_SESSION["mikhmon"])) {
 		</td>
 	</tr>
 	<tr>
-    <td class="align-middle">Time Limit</td><td><input class="form-control " type="text" size="4" autocomplete="off" name="timelimit" value=""></td>
+    <td class="align-middle"><?= $_time_limit ?></td><td><input class="form-control " type="text" size="4" autocomplete="off" name="timelimit" value=""></td>
   </tr>
 	<tr>
-    <td class="align-middle">Data Limit</td><td>
+    <td class="align-middle"><?= $_data_limit ?></td><td>
       <div class="input-group">
       	<div class="input-group-10 col-box-9">
         	<input class="group-item group-item-l" type="number" min="0" max="9999" name="datalimit" value="<?= $udatalimit; ?>">
@@ -397,7 +397,7 @@ if (!isset($_SESSION["mikhmon"])) {
     </td>
   </tr>
 	<tr>
-    <td class="align-middle">Comment</td><td><input class="form-control " type="text" title="No special characters" id="comment" autocomplete="off" name="adcomment" value=""></td>
+    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control " type="text" title="No special characters" id="comment" autocomplete="off" name="adcomment" value=""></td>
   </tr>
    <tr >
     <td  colspan="4" class="align-middle w-12"  id="GetValidPrice">
@@ -415,90 +415,36 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-4">
 	<div class="card">
 		<div class="card-header">
-			<h3><i class="fa fa-ticket"></i>
-			<?php if ($currency == in_array($currency, $cekindo['indo'])) {
-			echo "Generate Terakhir";
-		} else {
-			echo "Last Generated";
-		} ?></h3>
+			<h3><i class="fa fa-ticket"></i> <?= $_last_generate ?></h3>
 		</div>
 		<div class="card-body">
 <table class="table table-bordered">
- <?php if ($currency == in_array($currency, $cekindo['indo'])) {
-	echo '
   <tr>
-  	<td>Kode Generate</td><td>' . $ucode . '</td>
+  	<td><?= $_generate_code ?></td><td><?= $ucode ?></td>
   </tr>
   <tr>
-  	<td>Tanggal</td><td>' . $udate . '</td>
+  	<td><?= $_date ?></td><td><?= $udate ?></td>
   </tr>
   <tr>
-  	<td>Profile</td><td>' . $uprofile . '</td>
+  	<td><?= $_profile ?></td><td><?= $uprofile ?></td>
   </tr>
   <tr>
-  	<td>Validity</td><td>' . $uvalid . '</td>
+  	<td><?= $_validity ?></td><td><?= $uvalid ?></td>
   <tr>
-  	<td>Time Limit</td><td>' . $utlimit . '</td>
+  	<td><?= $_time_limit ?></td><td><?= $utlimit ?></td>
   </tr>
   <tr>
-  	<td>Data Limit</td><td>' . $udlimit . '</td>
+  	<td><?= $_data_limit ?></td><td><?= $udlimit ?></td>
   </tr>
   <tr>
-  	<td>Price</td><td>' . $uprice . '</td>
+  	<td><?= $_price ?></td><td><?= $uprice ?></td>
   </tr>
   <tr>
-  	<td>Lock User</td><td>' . $ulock . '</td>
-  </tr>';
-} else {
-	echo '
-  <tr>
-  	<td>Generate Code</td><td>' . $ucode . '</td>
+  	<td><?= $_lock_user ?></td><td><?= $ulock ?></td>
   </tr>
-  <tr>
-  	<td>Date</td><td>' . $udate . '</td>
-  </tr>
-  <tr>
-  	<td>Profile</td><td>' . $uprofile . '</td>
-  </tr>
-  <tr>
-  	<td>Validity</td><td>' . $uvalid . '</td>
-  <tr>
-  	<td>Time Limit</td><td>' . $utlimit . '</td>
-  </tr>
-  <tr>
-  	<td>Data Limit</td><td>' . $udlimit . '</td>
-  </tr>
-  <tr>
-  	<td>Price</td><td>' . $uprice . '</td>
-  </tr>
-  <tr>
-  	<td>Lock User</td><td>' . $ulock . '</td>
-  </tr>';
-}
-?>
   <tr>
     <td colspan="2">
-    	<?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
-    <p style="padding:0px 5px;">
-        Format Time Limit.<br>
-        [wdhm] Contoh : 30d = 30hari, 12h = 12jam, 4w3d = 31hari.
-    </p>
-    <p style="padding:0px 5px;">
-        Generate User dengan Time Limit.<br>
-        Sebaiknya Time Limit < Validity.
-    </p>
-    	<?php 
-			} else { ?>
-	<p style="padding:0px 5px;">
-        Format Time Limit.<br>
-        [wdhm] Example : 30d = 30days, 12h = 12hours, 4w3d = 31days.
-    </p>
-    <p style="padding:0px 5px;">
-        Generate User with Time Limit.<br>
-        Preferably  Time Limit < Validity.
-    </p>
-    <?php 
-		} ?>
+		<?= $_details_add_user ?>
     </td>
   </tr>
 </table>
@@ -506,9 +452,6 @@ if (!isset($_SESSION["mikhmon"])) {
 </div>
 </div>
 <script>
-	function loader(){
-		document.getElementById('loader').style='display:block;';
-	}
 // get valid $ price
 function GetVP(){
   var prof = document.getElementById('uprof').value;

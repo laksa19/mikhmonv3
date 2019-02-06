@@ -142,18 +142,18 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-8">
 <div class="card">
 <div class="card-header">
-    <h3><i class="fa fa-edit"></i> Edit Users Profile</h3>
+    <h3><i class="fa fa-edit"></i> <?= $_edit." ".$_user_profile ?></h3>
 </div>
 <div class="card-body">
 <form autocomplete="off" method="post" action="">
   <div>
-    <a class="btn bg-warning" href="./?hotspot=user-profiles&session=<?= $session; ?>"> <i class="fa fa-close"></i> Close</a>
-    <button type="submit" name="save" class="btn bg-primary" ><i class="fa fa-save"></i> Save</button>
-    <a class="btn bg-danger" href="./?remove-user-profile=<?= $pid; ?>&session=<?= $session; ?>"><i class="fa fa-minus-square"></i> Remove</a>
+    <a class="btn bg-warning" href="./?hotspot=user-profiles&session=<?= $session; ?>"> <i class="fa fa-close"></i> <?= $_close?></a>
+    <button type="submit" name="save" class="btn bg-primary" ><i class="fa fa-save"></i> <?= $_save ?></button>
+    <a class="btn bg-danger" href="./?remove-user-profile=<?= $pid; ?>&session=<?= $session; ?>"><i class="fa fa-minus-square"></i> <?= $_remove ?></a>
   </div>
 <table class="table">
   <tr>
-    <td>Name</td><td><input class="form-control" type="text" onchange="remSpace();" autocomplete="off" name="name" value="<?= $pname; ?>" required="1" autofocus></td>
+    <td><?= $_name ?></td><td><input class="form-control" type="text" onchange="remSpace();" autocomplete="off" name="name" value="<?= $pname; ?>" required="1" autofocus></td>
   </tr>
   <tr>
     <td>Shared Users</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="sharedusers" value="<?= $psharedu; ?>" required="1"></td>
@@ -162,7 +162,7 @@ if (!isset($_SESSION["mikhmon"])) {
     <td>Rate limit [up/down]</td><td><input class="form-control" type="text" name="ratelimit" autocomplete="off" value="<?= $pratelimit; ?>" placeholder="Example : 512k/1M" ></td>
   </tr>
   <tr>
-    <td>Expired Mode</td><td>
+    <td><?= $_expired_mode ?></td><td>
       <select class="form-control" onchange="RequiredV();" id="expmode" name="expmode" required="1">
         <option value="<?= $getexpmode; ?>"><?= $getexpmodet; ?></option>
         <option value="0">None</option>
@@ -174,16 +174,16 @@ if (!isset($_SESSION["mikhmon"])) {
     </td>
   </tr>
   <tr id="validity" style="display:none;">
-    <td>Validity</td><td><input class="form-control" type="text" id="validi" size="4" autocomplete="off" name="validity" value="<?= $getvalid; ?>" required="1"></td>
+    <td><?= $_validity ?></td><td><input class="form-control" type="text" id="validi" size="4" autocomplete="off" name="validity" value="<?= $getvalid; ?>" required="1"></td>
   </tr>
   <tr id="graceperiod" style="display:none;">
-    <td>Grace Period</td><td><input class="form-control" type="text" id="gracepi" size="4" autocomplete="off" name="graceperiod" value="<?= $getgracep; ?>" required="1"></td>
+    <td><?= $_grace_period ?></td><td><input class="form-control" type="text" id="gracepi" size="4" autocomplete="off" name="graceperiod" value="<?= $getgracep; ?>" required="1"></td>
   </tr>
   <tr>
-    <td>Price <?= $currency; ?></td><td><input class="form-control" type="text" min="0" name="price" value="<?= $getprice; ?>" ></td>
+    <td><?= $_price." ". $currency; ?></td><td><input class="form-control" type="text" min="0" name="price" value="<?= $getprice; ?>" ></td>
   </tr>
   <tr>
-    <td>Lock User</td><td>
+    <td><?= $_lock_user ?></td><td>
       <select class="form-control" id="lockunlock" name="lockunlock" required="1">
         <option value="<?= $getlocku; ?>"><?= $getlocku; ?></option>
         <option value="Enable">Enable</option>
@@ -214,47 +214,18 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-4">
   <div class="card">
     <div class="card-header">
-      <h3><i class="fa fa-book"></i> ReadMe</h3>
+      <h3><i class="fa fa-book"></i> <?= $_readme ?></h3>
     </div>
     <div class="card-body">
 <table class="table">
     <tr>
     <td colspan="2">
-      <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
       <p style="padding:0px 5px;">
-        Expired Mode adalah kontrol untuk user hotspot.<br>
-        Pilihan : Remove, Notice, Remove & Record,Notice & Record.
-        <ul>
-        <li>Remove : User akan dihapus ketika sudah grace period habis.</li>
-        <li>Notice : User tidah dihapus dan akan mendapatkan notifikasi setelah user expired.</li>
-        <li>Record : Menyimpan data harga tiap user yang login. Untuk menghitung total penjualan user hotspot dan ditampilkan dalam laporan penjualan.</li>
-        </ul>
+        <?= $_details_user_profile ?>
       </p>
-      <p>Grace Period : Tenggang waktu sebelum user dihapus.</p>
-      <p>Lock User : Username/Kode voucher hanya bisa digunakan pada 1 perangkat saja.</p>
       <p style="padding:0px 5px;">
-        Format Validity & Grace Period.<br>
-        [wdhm] Contoh : 30d = 30hari, 12h = 12jam, 5m = 5menit.
+        <?= $_format_validity_grace_period ?>
       </p>
-      <?php 
-    } else { ?>
-      <p style="padding:0px 5px;">
-        Expired Mode is the control for the hotspot user.<br>
-        Options : Remove, Notice, Remove & Record, Notice & Record.
-        <ul>
-        <li>Remove: User will be deleted when the grace period expires.</li>
-        <li>Notice: User will not deleted and get notification after user expiration.</li>
-        <li>Record: Save the price of each user login. To calculate total sales of hotspot users.</li>
-        </ul>
-      </p>
-      <p>Grace Period : Grace period before user deleted.</p>
-      <p>Lock User : Username can only be used on 1 device only.</p>
-      <p style="padding:0px 5px;">
-        Format Validity & Grace Period.<br>
-        [wdhm] Example : 30d = 30days, 12h = 12hours, 5m = 5minutes.
-      </p>
-      <?php 
-    } ?>
     </td>
   </tr>
 </table>
@@ -266,7 +237,7 @@ if (!isset($_SESSION["mikhmon"])) {
 function remSpace() {
   var upName = document.getElementsByName("name")[0];
   var newUpName = upName.value.replace(/\s/g, "-");
-  //alert("<?php if ($currency == in_array($currency, $cekindo['indo'])) {
+  alert("<?php if ($currency == in_array($currency, $cekindo['indo'])) {
             echo "Nama Profile tidak boleh berisi spasi";
           } else {
             echo "Profile name can't containing white space!";

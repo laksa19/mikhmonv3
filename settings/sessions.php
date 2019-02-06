@@ -22,7 +22,7 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
-  $_SESSION["v"] = "3.9";
+  $_SESSION["v"] = "3.10";
 
 // array color
   $color = array('1' => 'bg-blue', 'bg-indigo', 'bg-purple', 'bg-pink', 'bg-red', 'bg-yellow', 'bg-green', 'bg-teal', 'bg-cyan', 'bg-grey', 'bg-light-blue');
@@ -31,6 +31,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
     $suseradm = ($_POST['useradm']);
     $spassadm = encrypt($_POST['passadm']);
+    $sbtac = (preg_replace('/\s+/', '', $_POST['btac']));
 
     $cari = array('1' => "mikhmon<|<$useradm", "mikhmon>|>$passadm");
     $ganti = array('1' => "mikhmon<|<$suseradm", "mikhmon>|>$spassadm");
@@ -42,39 +43,38 @@ if (!isset($_SESSION["mikhmon"])) {
       file_put_contents("./include/config.php", "$newcontent");
     }
 
+  
+  $gen = '<?php $pbtac="' . $sbtac . '";?>';
+          $key = './include/btkey.php';
+          $handle = fopen($key, 'w') or die('Cannot open file:  ' . $key);
+          $data = $gen;
+          fwrite($handle, $data);
     echo "<script>window.location='./admin.php?id=sessions'</script>";
   }
 }
 ?>
 <script>
-  function PassMk(){
-    var x = document.getElementById('passmk');
+  function Pass(id){
+    var x = document.getElementById(id);
     if (x.type === 'password') {
     x.type = 'text';
     } else {
     x.type = 'password';
     }}
-    function PassAdm(){
-    var x = document.getElementById('passadm');
-    if (x.type === 'password') {
-    x.type = 'text';
-    } else {
-    x.type = 'password';
-  }}
 </script>
 
 <div class="row">
 	<div class="col-12">
   	<div class="card">
   		<div class="card-header">
-  			<h3 class="card-title"><i class="fa fa-gear"></i> Admin Settings &nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i></h3>
+  			<h3 class="card-title"><i class="fa fa-gear"></i> <?= $_admin_settings ?> &nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i></h3>
   		</div>
       <div class="card-body">
         <div class="row">
           <div class="col-6">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-server"></i> Router List</h3>
+                <h3 class="card-title"><i class="fa fa-server"></i> <?= $_router_list ?></h3>
               </div>
             <div class="card-body">
             <div class="row"> 
@@ -95,12 +95,12 @@ if (!isset($_SESSION["mikhmon"])) {
                                 
                                   <div class="box-group-area">
                                     <span>
-                                      Hotspot Name : <?= explode('%', $data[$value][4])[1]; ?><br>
-                                      Session Name : <?= $value; ?><br>
-                                      <span class="connect pointer"  id="<?= $value; ?>"><i class="fa fa-external-link"></i> Open</span>&nbsp;
-                                      <a href="./admin.php?id=settings&session=<?= $value; ?>"><i class="fa fa-edit"></i> Edit</a>&nbsp;
+                                      <?= $_hotspot_name ?> : <?= explode('%', $data[$value][4])[1]; ?><br>
+                                      <?= $_session_name ?> : <?= $value; ?><br>
+                                      <span class="connect pointer"  id="<?= $value; ?>"><i class="fa fa-external-link"></i> <?= $_open ?></span>&nbsp;
+                                      <a href="./admin.php?id=settings&session=<?= $value; ?>"><i class="fa fa-edit"></i> <?= $_edit ?></a>&nbsp;
                                       <a href="javascript:void(0)" onclick="if(confirm('Are you sure to delete data <?= $value;
-                                                                                                                    echo " (" . explode('%', $data[$value][4])[1] . ")"; ?>?')){window.location='./admin.php?id=remove&session=<?= $value; ?>'}else{}"><i class="fa fa-remove"></i> Delete</a>
+                                                                                                                    echo " (" . explode('%', $data[$value][4])[1] . ")"; ?>?')){window.location='./admin.php?id=remove-session&session=<?= $value; ?>'}else{}"><i class="fa fa-remove"></i> <?= $_delete ?></a>
                                     </span>
 
                                   </div>
@@ -120,15 +120,15 @@ if (!isset($_SESSION["mikhmon"])) {
           <form autocomplete="off" method="post" action="">  
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-user-circle"></i> Admin</h3>
+                <h3 class="card-title"><i class="fa fa-user-circle"></i> <?= $_admin ?></h3>
               </div>
             <div class="card-body">  
       <table class="table table-sm">
         <tr>
-          <td class="align-middle">Username  </td><td><input class="form-control" id="useradm" type="text" size="10" name="useradm" title="User Admin" value="<?= $useradm; ?>" required="1"/></td>
+          <td class="align-middle"><?= $_user_name ?> </td><td><input class="form-control" id="useradm" type="text" size="10" name="useradm" title="User Admin" value="<?= $useradm; ?>" required="1"/></td>
         </tr>
         <tr>
-          <td class="align-middle">Password  </td>
+          <td class="align-middle"><?= $_password ?> </td>
           <td>
           <div class="input-group">
           <div class="input-group-11 col-box-10"> 
@@ -136,26 +136,36 @@ if (!isset($_SESSION["mikhmon"])) {
               </div>
                 <div class="input-group-1 col-box-2">
                   <div class="group-item group-item-r pd-2p5 text-center align-middle">
-                      <input title="Show/Hide Password" type="checkbox" onclick="PassAdm()">
+                      <input title="Show/Hide Password" type="checkbox" onclick="Pass('passadm')">
                   </div>
                 </div>
             </div>
           </td>
         </tr>
         <tr>
+          <td class="align-middle"><?= $_bluetooth_ac ?></td>
+          <td>
+          <div class="input-group">
+          <div class="input-group-11 col-box-10"> 
+            <input class="group-item group-item-l" id="btac" type="password" size="10" name="btac" title="<?= $_bluetooth_ac ?>" value="<?= $pbtac; ?>" required="1"/>
+            </div>
+                <div class="input-group-1 col-box-2">
+                  <div class="group-item group-item-r pd-2p5 text-center align-middle">
+                      <input title="Show/Hide Password" type="checkbox" onclick="Pass('btac')">
+                  </div>
+                </div>
+            </div>
+            </td>
+        </tr>
+        <tr>
           <td></td><td class="text-right">
               <div class="input-group-4">
-                  <input class="group-item group-item-l" type="submit" style="cursor: pointer;" name="save" value="Save"/>
+                  <input class="group-item group-item-l" type="submit" style="cursor: pointer;" name="save" value="<?= $_save ?>"/>
                 </div>
                 <div class="input-group-2"> 
                   <div style="cursor: pointer;" class="group-item group-item-r pd-2p5 text-center" onclick="location.reload();" title="Reload Data"><i class="fa fa-refresh"></i></div>
                 </div>
                 </div>  
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle" colspan=2>
-            <strong>Please change username and password.</strong>
           </td>
         </tr>
       </table>

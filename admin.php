@@ -24,9 +24,18 @@ ob_start("ob_gzhandler");
 // check url
 $url = $_SERVER['REQUEST_URI'];
 
+// lang
+include('./lang/isocodelang.php');
+include('./include/lang.php');
+include('./lang/'.$langid.'.php');
+
+// btkkey
+include('./include/btkey.php');
+
 // theme
 include('./include/theme.php');
 include('./settings/settheme.php');
+include('./settings/setlang.php');
 if ($_SESSION['theme'] == "") {
   $theme = $theme;
 } else {
@@ -34,6 +43,9 @@ if ($_SESSION['theme'] == "") {
 }
 
 $id = $_GET['id'];
+$c = $_GET['c'];
+
+
 // load session MikroTik
 $session = $_GET['session'];
 $_SESSION["$session"] = $session;
@@ -55,6 +67,7 @@ $logo = $_GET['logo'];
 include_once('./include/headhtml.php');
 include('./include/config.php');
 include('./include/readcfg.php');
+
 include_once('./lib/routeros_api.class.php');
 include_once('./lib/formatbytesbites.php');
 ?>
@@ -68,13 +81,13 @@ if ($id == "login" || substr($url, -1) == "p") {
     if ($user == $useradm && $pass == decrypt($passadm)) {
       $_SESSION["mikhmon"] = $user;
 
-
-      echo "<script>window.location='./admin.php?id=sessions'</script>";
-
+        echo "<script>window.location='./admin.php?id=sessions'</script>";
+    
     } else {
       $error = '<div style="width: 100%; padding:5px 0px 5px 0px; border-radius:5px;" class="bg-danger"><i class="fa fa-ban"></i> Alert!<br>Invalid username or password.</div>';
     }
   }
+  
 
   include_once('./include/login.php');
 } elseif (!isset($_SESSION["mikhmon"])) {
@@ -86,6 +99,14 @@ if ($id == "login" || substr($url, -1) == "p") {
   $_SESSION["connect"] = "";
   include_once('./include/menu.php');
   include_once('./settings/sessions.php');
+  /*echo '
+  <script type="text/javascript">
+    document.getElementById("sessname").onkeypress = function(e) {
+    var chr = String.fromCharCode(e.which);
+    if (" _!@#$%^&*()+=;|?,~".indexOf(chr) >= 0)
+        return false;
+    };
+    </script>';*/
 } elseif ($id == "settings") {
   include_once('./include/menu.php');
   include_once('./settings/settings.php');
@@ -98,7 +119,7 @@ if ($id == "login" || substr($url, -1) == "p") {
     };
     </script>';
 } elseif ($id == "connect") {
-  ini_set("max_execution_time",5);
+  ini_set("max_execution_time",5);  
   include_once('./include/menu.php');
   $API = new RouterosAPI();
   $API->debug = false;
@@ -113,7 +134,7 @@ if ($id == "login" || substr($url, -1) == "p") {
     }else{
       echo "<script>alert('Mikhmon not connected!".$nl."Please check the IP, User, Password and port API must be enabled.')</script>";
     }
-    if($id == "settings"){
+    if($c == "settings"){
       echo "<script>window.location='./admin.php?id=settings&session=" . $session . "'</script>";
     }else{
       echo "<script>window.location='./admin.php?id=sessions'</script>";
@@ -126,7 +147,7 @@ if ($id == "login" || substr($url, -1) == "p") {
   include_once('./process/reboot.php');
 } elseif ($id == "shutdown") {
   include_once('./process/shutdown.php');
-} elseif ($id == "remove" && $session != "") {
+} elseif ($id == "remove-session" && $session != "") {
   include_once('./include/menu.php');
 
   $fc = file("./include/config.php");
@@ -145,7 +166,7 @@ if ($id == "login" || substr($url, -1) == "p") {
   echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Logout...</b>";
   session_destroy();
   echo "<script>window.location='./admin.php?id=login'</script>";
-} elseif ($id == "remove" && $logo != "") {
+} elseif ($id == "remove-logo" && $logo != "") {
   include_once('./include/menu.php');
   $logopath = "./img/";
   $remlogo = $logopath . $logo;
@@ -158,5 +179,7 @@ if ($id == "login" || substr($url, -1) == "p") {
 ?>
 <script src="js/mikhmon-ui.<?= $theme; ?>.min.js"></script>
 <script src="js/mikhmon.js?t=<?= str_replace(" ","_",date("Y-m-d H:i:s")); ?>"></script>
+<?php include('./include/info.php'); ?>
 </body>
 </html>
+

@@ -29,7 +29,7 @@ if (!isset($_SESSION["mikhmon"])) {
    var _0x381f=["\x63\x68\x61\x6E\x67\x65","\x76\x61\x6C","\x49\x6E\x74\x65\x72\x66\x61\x63\x65\x5F","\x76\x61\x6C\x75\x65","\x4D\x69\x6B\x68\x6D\x6F\x6E\x53\x65\x73\x73\x69\x6F\x6E","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\x73\x65\x74\x49\x74\x65\x6D","\x50\x6C\x65\x61\x73\x65\x20\x75\x73\x65\x20\x47\x6F\x6F\x67\x6C\x65\x20\x43\x68\x72\x6F\x6D\x65","\x72\x65\x6C\x6F\x61\x64","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x6F\x6E","\x23\x64\x5F\x69\x6E\x74\x65\x72\x66\x61\x63\x65"];$(function(){$(_0x381f[12])[_0x381f[11]](_0x381f[0],function(){var _0xd273x1=$(this)[_0x381f[1]]();var _0xd273x2=_0x381f[2]+ document[_0x381f[5]](_0x381f[4])[_0x381f[3]];if(_0xd273x1){if( typeof (Storage)!== _0x381f[6]){sessionStorage[_0x381f[7]](_0xd273x2,_0xd273x1)}else {alert(_0x381f[8])};window[_0x381f[10]][_0x381f[9]]()};return false})})
 </script>
           <div class="card">
-            <div class="card-header"><h3><i class="fa fa-area-chart"></i> Traffic Monitor </h3></div>
+            <div class="card-header"><h3><i class="fa fa-area-chart"></i> <?= $_traffic_monitor ?> </h3></div>
           
               <div class="card-body">
                 <div class="row">
@@ -40,7 +40,7 @@ if (!isset($_SESSION["mikhmon"])) {
                   ?>
                   <div class="col-12">
                   <select id="d_interface" class="dropd pd-5" >
-                    <option>Select Interface</option>
+                    <option><?= $_select_interface ?></option>
                     <?php 
                       for ($i = 0; $i < $TotalReg; $i++) {
                         echo '<option value="' . $getinterface[$i]['name'] . '">['.($i+1).'] ' . $getinterface[$i]['name'] . '</option>';
@@ -104,13 +104,13 @@ if (!isset($_SESSION["mikhmon"])) {
                               setInterval(function () {
                                 var _0xe05e=["\x49\x6E\x74\x65\x72\x66\x61\x63\x65\x5F","\x76\x61\x6C\x75\x65","\x4D\x69\x6B\x68\x6D\x6F\x6E\x53\x65\x73\x73\x69\x6F\x6E","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x67\x65\x74\x49\x74\x65\x6D"];var sesIface=_0xe05e[0]+ document[_0xe05e[3]](_0xe05e[2])[_0xe05e[1]];var interface=sessionStorage[_0xe05e[4]](sesIface)
                                 requestDatta(sessiondata,interface);
-                                chart.setTitle({ text: 'Interface ' + interface });
+                                chart.setTitle({ text: '<?= $_interface ?> ' + interface });
                               }, 3000);
                             }				
                           }
                         },
                         title: {
-                          text: 'Loading Interface...'
+                          text: '<?= $_loading_interface ?>...'
                         },
                         
                         xAxis: {

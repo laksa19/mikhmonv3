@@ -39,8 +39,12 @@ if (!isset($_SESSION["mikhmon"])) {
 
   $_SESSION["connect"] = "";
 
-  $trff = "trff" . $session;
-  $_SESSION[$trff] = "";
+// lang
+  include('./include/lang.php');
+  include('./lang/'.$langid.'.php');
+
+// btkey  
+  include('./include/btkey.php');
 
 // load config
   include('./include/config.php');
@@ -55,7 +59,6 @@ if (!isset($_SESSION["mikhmon"])) {
     $theme = $_SESSION['theme'];
   }
 
-
 // routeros api
   include_once('./lib/routeros_api.class.php');
   include_once('./lib/formatbytesbites.php');
@@ -65,7 +68,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
   $getidentity = $API->comm("/system/identity/print");
   $identity = $getidentity[0]['name'];
-   
+  
 
 // get variable
   $hotspot = $_GET['hotspot'];
@@ -104,12 +107,13 @@ if (!isset($_SESSION["mikhmon"])) {
   $comm = $_GET['comment'];
   $serveractive = $_GET['server'];
   $report = $_GET['report'];
+  $removereport = $_GET['remove-report'];
   $minterface = $_GET['interface'];
+
 
   $pagehotspot = array('users','hosts','ipbinding','cookies','log','dhcp-leases');
   $pageppp = array('secrets','profiles','active',);
   $pagereport = array('userlog','selling');
-
 
   include_once('./include/headhtml.php');
 
@@ -311,7 +315,7 @@ if (!isset($_SESSION["mikhmon"])) {
   }
 
 // traffic monitor
-elseif ($minterface == "traffic-monitor") {
+  elseif ($minterface == "traffic-monitor") {
   include_once('./traffic/trafficmonitor.php');
 }
 
@@ -392,6 +396,12 @@ elseif ($report == "resume-report") {
   include_once('./report/resumereport.php');
 }
 
+// selling
+  elseif ($removereport != "") {
+    echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
+
+    include_once('./process/removereport.php');
+  }
 
 // ppp secret
   elseif ($ppp == "secrets") {
@@ -421,6 +431,15 @@ elseif ($report == "resume-report") {
     include_once('./ppp/pppprofile.php');
   }
 
+// add ppp profile
+  elseif ($ppp == "add-profile") {
+    include_once('./ppp/addpppprofile.php');
+  }
+
+// add ppp profile
+elseif ($ppp == "edit-profile") {
+  include_once('./ppp/profilebyname.php');
+}
 // remove enable disable profile
   elseif ($removepprofile != "") {
     echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
@@ -456,23 +475,22 @@ elseif ($report == "resume-report") {
 </div>
 </div>
 </div>
-
 <script src="./js/highcharts/highcharts.js"></script>
 <script src="./js/highcharts/themes/hc.<?= $theme; ?>.js"></script>
 <script src="./js/mikhmon-ui.<?= $theme; ?>.min.js"></script>
-<script src="js/mikhmon.js?t=<?= str_replace(" ","_",date("Y-m-d H:i:s")); ?>"></script>
+<script src="./js/mikhmon.js?t=<?= str_replace(" ","_",date("Y-m-d H:i:s")); ?>"></script>
 
 <?php
 if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?session") {
   echo '<script>
   $(document).ready(function(){
-    $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3");
+    $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3"); 
     var interval= "' . ($areload * 1000) . '";
     setInterval(function() {
       
-      $("#r_1").load("./dashboard/aload.php?session=' . $session . '&load=sysresource #r_1"); 
-      $("#r_2").load("./dashboard/aload.php?session=' . $session . '&load=hotspot #r_2"); 
-      $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3"); 
+    $("#r_1").load("./dashboard/aload.php?session=' . $session . '&load=sysresource #r_1"); 
+    $("#r_2").load("./dashboard/aload.php?session=' . $session . '&load=hotspot #r_2"); 
+    $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3"); 
     
   }, interval);
 })
@@ -534,20 +552,21 @@ $(document).ready(function(){
     }
 });
 </script>";
+
 } elseif (in_array($hotspot, $pagehotspot) || in_array($ppp, $pageppp) || in_array($report, $pagereport) || $sys == "scheduler") {
-  echo '
-  <script>
-  $(document).ready(function(){
-    makeAllSortable();
-    $("#filterTable").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#dataTable tbody tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
+echo '
+<script>
+$(document).ready(function(){
+  makeAllSortable();
+  $("#filterTable").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#dataTable tbody tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
-  
-  </script>';
+});
+
+</script>';
 }
 }
 ?>

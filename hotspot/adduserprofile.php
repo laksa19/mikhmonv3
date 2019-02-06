@@ -89,17 +89,17 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-8">
 <div class="card box-bordered">
   <div class="card-header">
-    <h3><i class="fa fa-plus"></i> Add User Profile <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> Processing... </i></small></h3>
+    <h3><i class="fa fa-plus"></i> <?= $_add.' '.$_user_profile ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> Processing... </i></small></h3>
   </div>
   <div class="card-body">
 <form autocomplete="off" method="post" action="">
   <div>
-    <a class="btn bg-warning" href="./?hotspot=user-profiles&session=<?= $session; ?>"> <i class="fa fa-close btn-mrg"></i> Close</a>
-    <button type="submit" name="save" class="btn bg-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Save</button>
+    <a class="btn bg-warning" href="./?hotspot=user-profiles&session=<?= $session; ?>"> <i class="fa fa-close btn-mrg"></i> <?= $_close ?></a>
+    <button type="submit" name="save" class="btn bg-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> <?= $_save ?></button>
   </div>
 <table class="table">
   <tr>
-    <td class="align-middle">Name</td><td><input class="form-control" type="text" onchange="remSpace();" autocomplete="off" name="name" value="" required="1" autofocus></td>
+    <td class="align-middle"><?= $_name ?></td><td><input class="form-control" type="text" onchange="remSpace();" autocomplete="off" name="name" value="" required="1" autofocus></td>
   </tr>
   <tr>
     <td class="align-middle">Shared Users</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="sharedusers" value="1" required="1"></td>
@@ -108,7 +108,7 @@ if (!isset($_SESSION["mikhmon"])) {
     <td class="align-middle">Rate limit [up/down]</td><td><input class="form-control" type="text" name="ratelimit" autocomplete="off" value="" placeholder="Example : 512k/1M" ></td>
   </tr>
   <tr>
-    <td class="align-middle">Expired Mode</td><td>
+    <td class="align-middle"><?= $_expired_mode ?></td><td>
       <select class="form-control" onchange="RequiredV();" id="expmode" name="expmode" required="1">
         <option value="">Select...</option>
         <option value="0">None</option>
@@ -120,16 +120,16 @@ if (!isset($_SESSION["mikhmon"])) {
     </td>
   </tr>
   <tr id="validity" style="display:none;">
-    <td class="align-middle">Validity</td><td><input class="form-control" type="text" id="validi" size="4" autocomplete="off" name="validity" value="" required="1"></td>
+    <td class="align-middle"><?= $_validity ?></td><td><input class="form-control" type="text" id="validi" size="4" autocomplete="off" name="validity" value="" required="1"></td>
   </tr>
   <tr id="graceperiod" style="display:none;">
-    <td class="align-middle">Grace Period</td><td><input class="form-control" type="text" id="gracepi" size="4" autocomplete="off" name="graceperiod" placeholder="5m" value="5m" required="1"></td>
+    <td class="align-middle"><?= $_grace_period ?></td><td><input class="form-control" type="text" id="gracepi" size="4" autocomplete="off" name="graceperiod" placeholder="5m" value="5m" required="1"></td>
   </tr>
   <tr>
-    <td class="align-middle">Price <?= $currency; ?></td><td><input class="form-control" type="text" size="10" min="0" name="price" value="" ></td>
+    <td class="align-middle"><?= $_price.' '.$currency; ?></td><td><input class="form-control" type="text" size="10" min="0" name="price" value="" ></td>
   </tr>
   <tr>
-    <td>Lock User</td><td>
+    <td><?= $_lock_user ?></td><td>
       <select class="form-control" id="lockunlock" name="lockunlock" required="1">
         <option value="Disable">Disable</option>
         <option value="Enable">Enable</option>
@@ -158,47 +158,18 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-4">
   <div class="card">
     <div class="card-header">
-      <h3><i class="fa fa-book"></i> ReadMe</h3>
+      <h3><i class="fa fa-book"></i> <?= $_readme ?></h3>
     </div>
     <div class="card-body">
 <table class="table">
     <tr>
     <td colspan="2">
-      <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
       <p style="padding:0px 5px;">
-        Expired Mode adalah kontrol untuk user hotspot.<br>
-        Pilihan : Remove, Notice, Remove & Record, Notice & Record.
-        <ul>
-        <li>Remove : User akan dihapus ketika sudah grace period habis.</li>
-        <li>Notice : User tidah dihapus dan akan mendapatkan notifikasi setelah user expired.</li>
-        <li>Record : Menyimpan data harga tiap user yang login. Untuk menghitung total penjualan user hotspot dan ditampilkan dalam laporan penjualan.</li>
-        </ul>
+        <?= $_details_user_profile ?>
       </p>
-      <p>Grace Period : Tenggang waktu sebelum user dihapus.</p>
-      <p>Lock User : Username/Kode voucher hanya bisa digunakan pada 1 perangkat saja.</p>
       <p style="padding:0px 5px;">
-        Format Validity & Grace Period.<br>
-        [wdhm] Contoh : 30d = 30hari, 12h = 12jam, 5m = 5menit.
+        <?= $_format_validity_grace_period ?>
       </p>
-      <?php 
-    } else { ?>
-      <p style="padding:0px 5px;">
-        Expired Mode is the control for the hotspot user.<br>
-        Options : Remove, Notice, Remove & Record, Notice & Record.
-        <ul>
-        <li>Remove: User will be deleted when the grace period expires.</li>
-        <li>Notice: User will not deleted and get notification after user expiration.</li>
-        <li>Record: Save the price of each user login. To calculate total sales of hotspot users and displayed in the sales report.</li>
-        </ul>
-      </p>
-      <p>Grace Period : Grace period before user deleted.</p>
-      <p>Lock User : Username can only be used on 1 device only.</p>
-      <p style="padding:0px 5px;">
-        Format Validity & Grace Period.<br>
-        [wdhm] Example : 30d = 30days, 12h = 12hours, 5m = 5minutes.
-      </p>
-      <?php 
-    } ?>
     </td>
   </tr>
 </table>

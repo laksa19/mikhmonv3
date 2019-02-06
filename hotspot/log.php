@@ -33,7 +33,7 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-    <h3><i class=" fa fa-align-justify"></i> Hotspot Log &nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i></h3>
+    <h3><i class=" fa fa-align-justify"></i> <?= $_hotspot_log ?> &nbsp; | &nbsp;&nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i></h3>
 </div>
 <div class="card-body">
 
@@ -44,9 +44,9 @@ if (!isset($_SESSION["mikhmon"])) {
 <table class="table table-sm table-bordered table-hover" id="dataTable" >
 	<thead>
         <tr>
-            <th>Time</th>
-            <th>User (IP)</th>
-            <th>Messages</th>
+            <th><?= $_time ?></th>
+            <th><?= $_users ?> (IP)</th>
+            <th><?= $_messages ?></th>
         </tr>
     </thead>
 	<tbody>

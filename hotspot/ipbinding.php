@@ -36,7 +36,7 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-	<h3><i class=" fa fa-address-book"></i> IP Binding 
+	<h3><i class=" fa fa-address-book"></i> <?= $_ip_bindings ?> 
 <?php
 if ($countbinding < 2) {
 	echo "$countbinding item";
@@ -45,7 +45,7 @@ if ($countbinding < 2) {
 };
 echo "</th>";
 ?>
-</strong>
+&nbsp; | <strong name="help" class="pointer" onclick="location.href='#help';" title="Help"><i class="fa fa-question"></i> Help</strong>
     </h3>
 </div>
 <div class="card-body">	   
@@ -58,7 +58,7 @@ echo "</th>";
   <tr>
     <th></th>
     <th></th>
-    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Name</th>
+    <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> <?= $_name ?></th>
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> MAC Address</th>
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Address</th>
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> To Address</th>
@@ -86,6 +86,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
 		if ($bdisabled == "true") {
 			echo "<a class='text-warning' title='Enable Binding " . $addr . "' class='btnsmall' href='./?enable-ip-binding=" . $id . "&session=" . $session . "'><i class='fa fa-lock'></a></td>";
 		} else {
+
 			echo "<a title='Disable Binding " . $addr . "' class='btnsmall' href='./?disable-ip-binding=" . $id . "&session=" . $session . "'><i class='fa fa-unlock '></a></td>";
 		}
 		echo "<td style='text-align:center;'>";
@@ -96,7 +97,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
 		echo "</td>";
 		echo "<td>" . $commt . "</td>";
 		echo "<td>" . $maca . "</td>";
-		echo "<td>" . $addr . "</td>";
+		echo "<td>" . $addr . "</a></td>";
 		echo "<td>" . $toaddr . "</td>";
 		echo "<td>" . $server . "</td>";
 		echo "</tr>";
@@ -107,6 +108,27 @@ for ($i = 0; $i < $TotalReg; $i++) {
 </div>
 </div>
 </div>
+</div>
+<div class="modal-window" id="help" aria-hidden="true">
+  <div>
+  	<header><h1>Help</h1></header>
+  	<a style="font-weight:bold;" href="#" title="Close" class="modal-close">X</a>
+	<p> 
+		    <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
+		      <ul>
+		        <li>Masuk ke menu Hosts.</li>
+		        <li>Klik IP Address yang ingin di binding.</li>
+		      </ul>
+		    <?php 
+				} else { ?>
+		      <ul>
+		        <li>Go to Hosts menu.</li>
+		        <li>Click the IP Address that you want to binding.</li>
+		      </ul>
+		    <?php 
+				} ?>
+	</p>
+  </div>
 </div>
 </div>
 </div>

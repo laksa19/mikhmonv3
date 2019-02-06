@@ -40,6 +40,7 @@ if (!isset($_SESSION["mikhmon"])) {
   $getclock = $API->comm("/system/clock/print");
   $clock = $getclock[0];
   $timezone = $getclock[0]['time-zone-name'];
+  $_SESSION['timezone'] = $timezone;
   date_default_timezone_set($timezone);
 
 // get system resource MikroTik
@@ -129,10 +130,10 @@ if (!isset($_SESSION["mikhmon"])) {
           <div class="box-group">
             <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
               <div class="box-group-area">
-                <span >System Date & Time<br>
+                <span ><?= $_system_date_time ?><br>
                     <?php 
                     echo $clock['date'] . " " . $clock['time'] . "<br>
-                    Uptime : " . formatDTM($resource['uptime']);
+                    ".$_uptime." : " . formatDTM($resource['uptime']);
                     ?>
                 </span>
               </div>
@@ -146,8 +147,8 @@ if (!isset($_SESSION["mikhmon"])) {
               <div class="box-group-area">
                 <span >
                     <?php
-                    echo "Board Name : " . $resource['board-name'] . "<br/>
-                    Model : " . $routerboard['model'] . "<br/>
+                    echo $_board_name." : " . $resource['board-name'] . "<br/>
+                    ".$_model." : " . $routerboard['model'] . "<br/>
                     Router OS : " . $resource['version'];
                     ?>
                 </span>
@@ -162,9 +163,9 @@ if (!isset($_SESSION["mikhmon"])) {
               <div class="box-group-area">
                 <span >
                     <?php
-                    echo "CPU Load : " . $resource['cpu-load'] . "%<br/>
-                    Free Memory : " . formatBytes($resource['free-memory'], 2) . "<br/>
-                    Free HDD : " . formatBytes($resource['free-hdd-space'], 2)
+                    echo $_cpu_load." : " . $resource['cpu-load'] . "%<br/>
+                    ".$_free_memory." : " . formatBytes($resource['free-memory'], 2) . "<br/>
+                    ".$_free_hdd." : " . formatBytes($resource['free-hdd-space'], 2)
                     ?>
                 </span>
                 </div>
@@ -187,7 +188,7 @@ if (!isset($_SESSION["mikhmon"])) {
                               <span style="font-size: 15px;"><?= $hunit; ?></span>
                             </h1>
                           <div>
-                            <i class="fa fa-laptop"></i> Hotspot Active
+                            <i class="fa fa-laptop"></i> <?= $_hotspot_active ?>
                           </div>
                         </a>
                       </div>
@@ -199,7 +200,7 @@ if (!isset($_SESSION["mikhmon"])) {
                               <span style="font-size: 15px;"><?= $uunit; ?></span>
                             </h1>
                       <div>
-                            <i class="fa fa-users"></i> Hotspot Users
+                            <i class="fa fa-users"></i> <?= $_hotspot_users ?>
                           </div>
                       </a>
                     </div>
@@ -209,11 +210,11 @@ if (!isset($_SESSION["mikhmon"])) {
                       <a href="./?hotspot-user=add&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
-                              <span style="font-size: 15px;">Add</span>
+                              <span style="font-size: 15px;"><?= $_add ?></span>
                           </h1>
                         </div>
                         <div>
-                            <i class="fa fa-user-plus"></i> Hotspot User
+                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
                         </div>
                       </a>
                     </div>
@@ -223,11 +224,11 @@ if (!isset($_SESSION["mikhmon"])) {
                       <a href="./?hotspot-user=generate&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
-                              <span style="font-size: 15px;">Generate</span>
+                              <span style="font-size: 15px;"><?= $_generate ?></span>
                           </h1>
                         </div>
                         <div>
-                            <i class="fa fa-user-plus"></i> Hotspot User
+                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
                         </div>
                     </a>
                   </div>
@@ -237,10 +238,9 @@ if (!isset($_SESSION["mikhmon"])) {
           </div>
           </div>
             <div class="card">
-              <div class="card-header"><h3><i class="fa fa-area-chart"></i> Traffic </h3></div>
+              <div class="card-header"><h3><i class="fa fa-area-chart"></i> <?= $_traffic ?> </h3></div>
 
               <div class="card-body">
-                
   
                   <?php $getinterface = $API->comm("/interface/print");
                   $interface = $getinterface[$iface - 1]['name']; 
@@ -254,7 +254,7 @@ if (!isset($_SESSION["mikhmon"])) {
                     var chart;
                     var sessiondata = "<?= $session ?>";
                     var interface = "<?= $interface ?>";
-
+                    var n = 3000;
                     function requestDatta(session,iface) {
                       $.ajax({
                         url: './traffic/traffic.php?session='+session+'&iface='+iface,
@@ -307,7 +307,7 @@ if (!isset($_SESSION["mikhmon"])) {
                           }
                         },
                         title: {
-                          text: 'Interface ' + interface
+                          text: '<?= $_interface ?> ' + interface
                         },
                         
                         xAxis: {
@@ -369,15 +369,15 @@ if (!isset($_SESSION["mikhmon"])) {
                         <div id="reloadLreport">
                           <?php 
                           if ($currency == in_array($currency, $cekindo['indo'])) {
-                            echo "Pendapatan <br/>" . "
-                          Hari ini " . $TotalRHr . "vcr : " . $currency . " " . number_format($tHr, 0, ",", ".") . "<br/>
-                          Bulan ini " . $TotalRBl . "vcr : " . $currency . " " . number_format($tBl, 0, ",", ".");
-
-                          } else {
-                            echo "Income <br/>" . "
-                          Today " . $TotalRHr . "vcr : " . $currency . " " . number_format($tHr, 2) . "<br/>
-                          This month " . $TotalRBl . "vcr : " . $currency . " " . number_format($tBl, 2);
+                            $dincome = number_format($tHr, 0, ",", ".");
+                            $mincome = number_format($tBl, 0, ",", ".");
+                          }else{
+                            $dincome = number_format($tHr, 2);
+                            $mincome = number_format($tBl, 2);
                           }
+                            echo $_income."<br/>" . "
+                          ".$_today." " . $TotalRHr . "vcr : " . $currency . " " . $dincome . "<br/>
+                          ".$_this_month." " . $TotalRBl . "vcr : " . $currency . " " . $mincome;
                           ?>
                         </div>
                     </span>
@@ -388,15 +388,15 @@ if (!isset($_SESSION["mikhmon"])) {
             <div id="r_3" class="row">
             <div class="card">
               <div class="card-header">
-                <h3><a href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> Hotspot Log</a></h3></div>
+                <h3><a href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> <?= $_hotspot_log ?></a></h3></div>
                   <div class="card-body">
                     <div style="padding: 5px; height: <?= $logh; ?> ;" class="mr-t-10 overflow">
                       <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;">
                         <thead>
                           <tr>
-                            <th>Time</th>
-                            <th>User (IP)</th>
-                            <th>Messages</th>
+                            <th><?= $_time ?></th>
+                            <th><?= $_users ?> (IP)</th>
+                            <th><?= $_messages ?></th>
                           </tr>
                         </thead>
                         <tbody>

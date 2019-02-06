@@ -60,7 +60,7 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-12">
 	<div class="card">
 		<div class="card-header">
-    		<h3><i class="fa fa-wifi"></i> Hotspot Active <?php
+    		<h3><i class="fa fa-wifi"></i> <?= $_hotspot_active ?> <?php
 																																																			if ($serveractive == "") {
 																																																			} else {
 																																																				echo $serveractive . " ";
@@ -90,7 +90,7 @@ if (!isset($_SESSION["mikhmon"])) {
     <th class="text-right">Bytes Out</th>
     <th class="text-right">Time Left</th>
     <th>Login By</th>
-    <th>Comment</th>
+    <th><?= $_comment ?></th>
   </tr>
   </thead>
   <tbody>

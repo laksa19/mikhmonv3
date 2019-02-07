@@ -277,7 +277,7 @@ $(document).ready(function(){
 			<table id="dataTable" class="table table-bordered table-hover text-nowrap">
 				<thead class="thead-light">
 				<tr>
-				  <th colspan=4 ><?= $_selling_report ?> <?= $filedownload . $fprefix; ?><b style="font-size:0;">,</b></th>
+				  <th colspan=4 ><?= $_selling_report ?> <?= $filedownload . $fprefix; ?><b style="font-size:0;">,,,</b></th>
 				  <th style="text-align:right;"><?= $_total ?></th>
 				  <th style="text-align:right;" id="total"></th>
 				</tr>

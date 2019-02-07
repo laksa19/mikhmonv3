@@ -23,10 +23,19 @@ ob_start("ob_gzhandler");
 
 // check url
 $url = $_SERVER['REQUEST_URI'];
+
 // load session MikroTik
 $session = $_GET['session'];
 $id = $_GET['id'];
 $c = $_GET['c'];
+$router = $_GET['router'];
+$logo = $_GET['logo'];
+
+$ids = array(
+  "editor",
+  "uplogo",
+  "settings",
+);
 
 // lang
 include('./lang/isocodelang.php');
@@ -46,19 +55,6 @@ if ($_SESSION['theme'] == "") {
   $theme = $_SESSION['theme'];
 }
 
-
-$ids = array(
-    "editor",
-    "uplogo",
-    "settings",
-);
-if (empty($id)) {
-  echo "<script>window.location='./admin.php?id=sessions'</script>";
-}elseif(in_array($id, $ids) && empty($session)){
-	echo "<script>window.location='./admin.php?id=sessions'</script>";
-}
-$router = $_GET['router'];
-$logo = $_GET['logo'];
 
 // load config
 include_once('./include/headhtml.php');
@@ -104,7 +100,7 @@ if ($id == "login" || substr($url, -1) == "p") {
         return false;
     };
     </script>';*/
-} elseif ($id == "settings") {
+} elseif ($id == "settings" && !empty($session) || $id == "settings" && !empty($router)) {
   include_once('./include/menu.php');
   include_once('./settings/settings.php');
   echo '
@@ -115,7 +111,7 @@ if ($id == "login" || substr($url, -1) == "p") {
         return false;
     };
     </script>';
-} elseif ($id == "connect") {
+} elseif ($id == "connect"  && !empty($session)) {
   ini_set("max_execution_time",5);  
   include_once('./include/menu.php');
   $API = new RouterosAPI();
@@ -137,17 +133,17 @@ if ($id == "login" || substr($url, -1) == "p") {
       echo "<script>window.location='./admin.php?id=sessions'</script>";
     }
   }
-} elseif ($id == "uplogo") {
+} elseif ($id == "uplogo"  && !empty($session)) {
   include_once('./include/menu.php');
   include_once('./settings/uplogo.php');
-} elseif ($id == "reboot") {
+} elseif ($id == "reboot"  && !empty($session)) {
   include_once('./process/reboot.php');
-} elseif ($id == "shutdown") {
+} elseif ($id == "shutdown"  && !empty($session)) {
   include_once('./process/shutdown.php');
 } elseif ($id == "remove-session" && $session != "") {
   include_once('./include/menu.php');
 
-  $fc = file("./include/config.php");
+  $fc = file("./include/config.php" );
   $f = fopen("./include/config.php", "w");
   foreach ($fc as $line) {
     if (!strstr($line, $session))
@@ -158,20 +154,24 @@ if ($id == "login" || substr($url, -1) == "p") {
 } elseif ($id == "about") {
   include_once('./include/menu.php');
   include_once('./include/about.php');
-} elseif ($id == "logout") {
+} elseif ($id == "logout"  && !empty($session)) {
   include_once('./include/menu.php');
   echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Logout...</b>";
   session_destroy();
   echo "<script>window.location='./admin.php?id=login'</script>";
-} elseif ($id == "remove-logo" && $logo != "") {
+} elseif ($id == "remove-logo" && $logo != ""  && !empty($session)) {
   include_once('./include/menu.php');
   $logopath = "./img/";
   $remlogo = $logopath . $logo;
   unlink("$remlogo");
   echo "<script>window.location='./admin.php?id=uplogo&session=" . $session . "'</script>";
-} elseif ($id == "editor") {
+} elseif ($id == "editor"  && !empty($session)) {
   include_once('./include/menu.php');
   include_once('./settings/vouchereditor.php');
+} elseif (empty($id)) {
+  echo "<script>window.location='./admin.php?id=sessions'</script>";
+} elseif(in_array($id, $ids) && empty($session)){
+	echo "<script>window.location='./admin.php?id=sessions'</script>";
 }
 ?>
 <script src="js/mikhmon-ui.<?= $theme; ?>.min.js"></script>

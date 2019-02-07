@@ -23,10 +23,10 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
-  if ($id == "settings" && $router == "new") {
+  if ($id == "settings" && explode("-",$router)[0] == "new") {
     $data = '$data';
     $f = fopen('./include/config.php', 'a');
-    fwrite($f, "\n'$'data['new'] = array ('1'=>'new!','new@|@','new#|#','new%','new^','new&Rp','new*10','new(1','new)','new=','new@!@disable');");
+    fwrite($f, "\n'$'data['".$router."'] = array ('1'=>'".$router."!','".$router."@|@','".$router."#|#','".$router."%','".$router."^','".$router."&Rp','".$router."*10','".$router."(1','".$router.")','".$router."=','".$router."@!@disable');");
     fclose($f);
     $search = "'$'data";
     $replace = (string)"$data";
@@ -133,7 +133,7 @@ if (!isset($_SESSION["mikhmon"])) {
                   <table class="table">
                     <tr>
                       <td><?= $_session_name ?></td>
-                      <td><input class="form-control" id="sessname" type="text" name="sessname" title="Session Name" value="<?php if ($session == "new") {
+                      <td><input class="form-control" id="sessname" type="text" name="sessname" title="Session Name" value="<?php if (explode("-",$session)[0] == "new") {
                                                                                                                               echo "";
                                                                                                                             } else {
                                                                                                                               echo $session;

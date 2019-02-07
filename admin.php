@@ -154,7 +154,7 @@ if ($id == "login" || substr($url, -1) == "p") {
 } elseif ($id == "about") {
   include_once('./include/menu.php');
   include_once('./include/about.php');
-} elseif ($id == "logout"  && !empty($session)) {
+} elseif ($id == "logout") {
   include_once('./include/menu.php');
   echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Logout...</b>";
   session_destroy();

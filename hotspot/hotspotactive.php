@@ -29,6 +29,10 @@ if (!isset($_SESSION["mikhmon"])) {
 // load config
 	include('../include/config.php');
 	include('../include/readcfg.php');
+	
+// lang
+  include('../include/lang.php');
+  include('../lang/'.$langid.'.php');	
 
 // routeros api
 	include_once('../lib/routeros_api.class.php');

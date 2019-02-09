@@ -67,7 +67,7 @@ if (!isset($_SESSION["mikhmon"])) {
     $smaxrx = ($_POST['maxrx']);
     $mbgbtx = ($_POST['mbgbtx']);
     $mbgbrx = ($_POST['mbgbrx']);
-    $sesname = ($_POST['sessname']);
+    $sesname = (preg_replace('/\s+/', '-', $_POST['sessname']));
     $slivereport = ($_POST['livereport']);
     if ($smaxtx == "") {
       $smaxtx = "0";

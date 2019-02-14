@@ -30,7 +30,7 @@ date_default_timezone_set($_SESSION['timezone']);
 $session = $_GET['session'];
 
 $quickprint = $_GET['quickprint'];
-$qty = $_GET['qty'];
+$qty = 1;
 // lang
 include('../include/lang.php');
 include('../lang/'.$langid.'.php');

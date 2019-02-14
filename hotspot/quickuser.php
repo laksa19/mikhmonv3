@@ -30,7 +30,7 @@ date_default_timezone_set($_SESSION['timezone']);
 $session = $_GET['session'];
 
 $quickprint = $_GET['quickprint'];
-$qty = 1;
+$qty = $_GET['qty'];
 // lang
 include('../include/lang.php');
 include('../lang/'.$langid.'.php');
@@ -195,7 +195,8 @@ $getquickprint = $API->comm("/system/script/print", array("?name" => "$quickprin
           $uname = $userdetails['name'];
           $upass = $userdetails['password'];
           $uprofile = $userdetails['profile'];
-          $uuptime = formatDTM($userdetails['uptime']);
+					$uuptime = formatDTM($userdetails['uptime']);
+					$utimelimit = $userdetails['limit-uptime'];
           $udatalimit = $userdetails['limit-bytes-total'];
           $ucomment = $userdetails['comment'];
         

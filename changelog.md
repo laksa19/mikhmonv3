@@ -1,13 +1,13 @@
 ## Changelog
 
 ### Update 02-14 2019 V3.11
-1. Perbaaikan dashboard blank.
+1. Perbaikan dashboard blank.
 2. Penggantian Print Bluetooth dengan Quick Printer
-3. Penambahan Quick Print.Panduan, https://youtu.be/KGAsHU0qOBA
+3. Penambahan Quick Print. Panduan, https://youtu.be/KGAsHU0qOBA
 
 
 ### Update 02-06 2019 V3.10
-1. Perbaaikan delete logo.
+1. Perbaikan delete logo.
 2. Penambahan pilihan bahasa.
 3. Dukungan untuk print voucher dari Android. Telah diuji untuk Zjiang Printer Thermal Bluetooth - ZJ-5802.
 Panduan, https://laksa19.github.io/printBT.html

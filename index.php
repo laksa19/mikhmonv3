@@ -137,7 +137,7 @@ if (!isset($_SESSION["mikhmon"])) {
     echo "<script>window.location='./admin.php?id=login'</script>";
   }
 // redirect to home
-  elseif (substr(end(explode("/", $url)), 0, 8) == "?session") {
+  elseif (substr(explode("=", $url)[0],-9) == "/?session") {
 
     include_once('./dashboard/home.php');
     $_SESSION['ubn'] = "";
@@ -218,6 +218,15 @@ if (!isset($_SESSION["mikhmon"])) {
     include_once('./hotspot/exportusers.php');
   }
 
+// quick print
+elseif ($hotspot == "quick-print") {
+  include_once('./hotspot/quickprint.php');
+}
+
+// quick print
+elseif ($hotspot == "list-quick-print") {
+include_once('./hotspot/listquickprint.php');
+}  
 
 // add hotspot user
   elseif ($hotspotuser == "add") {

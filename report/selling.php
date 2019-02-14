@@ -24,6 +24,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
 	$idhr = $_GET['idhr'];
 	$idbl = $_GET['idbl'];
+	$idbl2 = explode("/",$idhr)[0].explode("/",$idhr)[2];
 	if ($idhr != ""){
 		$_SESSION['report'] = "&idhr=".$idhr; 
 	} elseif ($idbl != ""){
@@ -107,6 +108,16 @@ if (!isset($_SESSION["mikhmon"])) {
 		$filedownload = "all";
 		$shf = "text";
 		$shd = "none";
+	} elseif (strlen($idbl) > "0" ) {
+		if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+			$getData = $API->comm("/system/script/print", array(
+				"?owner" => "$idbl",
+			));
+			$TotalReg = count($getData);
+		}
+		$filedownload = $idbl;
+		$shf = "hidden";
+		$shd = "inline-block";
 	}
 	
 }
@@ -157,7 +168,7 @@ if (!isset($_SESSION["mikhmon"])) {
           th.innerHTML = th.innerHTML + (sum) ;
         }
 		</script>
-	
+
 <script>
 $(document).ready(function(){
   $("#openResume").click(function(){
@@ -170,7 +181,7 @@ $(document).ready(function(){
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-	<h3><i class=" fa fa-money"></i> <?= $_selling_report ?> <?= $idhr . $idbl;	if ($prefix != "") {echo " prefix [" . $prefix . "]";} ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small></h3>
+	<h3><i class=" fa fa-money"></i> <?= $_selling_report ?> <?= ucfirst($idhr) . ucfirst(substr($idbl,0,3).' '.substr($idbl,3,5));	if ($prefix != "") {echo " prefix [" . $prefix . "]";} ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small></h3>
 </div>
 <div class="card-body">
 <div class="row">
@@ -179,9 +190,10 @@ $(document).ready(function(){
 		<div style="padding-bottom: 5px; padding-top: 5px;">   
 		  <input id="filterTable" type="text" class="form-control" style="float:left; margin-top: 6px; max-width: 150px;" placeholder="<?= $_search ?>">&nbsp;
 		  <button class="btn bg-primary" onclick="exportTableToCSV('report-mikhmon-<?= $filedownload . $fprefix; ?>.csv')" title="Download selling report"><i class="fa fa-download"></i> CSV</button>
-		  <button class="btn bg-primary" onclick="location.href='./?report=selling&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> <?= $_all ?></button>
+			<button class="btn bg-primary" onclick="location.href='./?report=selling&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> <?= $_all ?></button>
+			<?php if(!empty($idbl)){echo '<button name="resume" id="openResume" class="btn bg-primary"title="Resume Report"><i class="fa fa-area-chart"></i> '.$_resume.'</button>';}else{
+				echo '<a class="btn bg-primary" href="./?report=selling&idbl='.$idbl2.'&session='.$session.'" title="Show '.ucfirst(substr($idbl2,0,3).' '.substr($idbl2,3,5)).'"><i class="fa fa-search"></i> '.ucfirst(substr($idbl2,0,3).' '.substr($idbl2,3,5)).'</a>';}?>
 		  <button name="help" class="btn bg-primary" onclick="location.href='#help';" title="Help"><i class="fa fa-question"></i> <?= $_help ?></button>
-		  <button name="resume" id="openResume" class="btn bg-primary"title="Resume Report"><i class="fa fa-area-chart"></i> <?= $_resume ?></button>
 		  <button style="display: <?= $shd; ?>;" name="remdata" class="btn bg-danger" onclick="location.href='#remdata';" title="Delete Data <?= $filedownload; ?>"><i class="fa fa-trash"></i> <?= $_delete_data.' '. $filedownload; ?></button>
 		  <button  id="remSelected" style="display: none;" class="btn bg-red" onclick="MikhmonRemoveReportSelected()"><i class="fa fa-trash"></i> <span id="selected"></span> <?= $_selected ?></button>
 		</div>
@@ -241,9 +253,9 @@ $(document).ready(function(){
 											echo "<option>" . $year . "</option>";
 										} elseif ($year1 != "") {
 											echo "<option>" . $year1 . "</option>";
-										} else {
+										} 
 											echo "<option>" . date("Y") . "</option>";
-										}
+										
 										for ($Y = 2018; $Y <= date("Y"); $Y++) {
 											if ($Y == date("Y")) {
 											} else {
@@ -353,8 +365,13 @@ $(document).ready(function(){
 					echo $price;
 					echo "</td>";
 					echo "</tr>";
+				
+				$dataresume .= $getname[0].$getname[3];
+				$totalresume += $getname[3];
+				$_SESSION['dataresume'] = $dataresume;
+				$_SESSION['totalresume'] = $TotalReg.'/'.$totalresume;
 				}
-
+					
 			}
 
 			?>

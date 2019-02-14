@@ -28,6 +28,9 @@ if (!isset($_SESSION["mikhmon"])) {
   if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?session") {
     $shome = "active";
     $mpage = $_dashboard;
+  } elseif ($hotspot == "quick-print" || $hotspot == "list-quick-print") {
+    $squick = "active";
+    $mpage = $_quick_print;   
   } elseif ($hotspot == "users" || $userbyprofile != "" || $hotspot == "export-users" || $removehotspotuserbycomment != "" || $removehotspotuser != "" || $removehotspotusers != "" || $disablehotspotuser || $enablehotspotuser != "") {
     $susersl = "active";
     $susers = "active";
@@ -307,6 +310,8 @@ include('./info.php');
   <!--cookies-->
    <a href="./?hotspot=cookies&session=<?= $session; ?>" class="menu <?= $scookies; ?>"><i class=" fa fa-hourglass"></i> <?= $_hotspot_cookies ?></a>
   </div>
+  <!--quick print-->
+  <a href="./?hotspot=quick-print&session=<?= $session; ?>" class="menu <?= $squick; ?>"> <i class="fa fa-print"></i> <?= $_quick_print ?> </a>
   <!--vouchers-->
   <a href="./?hotspot=users-by-profile&session=<?= $session; ?>" class="menu <?= $susersbp; ?>"> <i class="fa fa-ticket"></i> <?= $_vouchers ?> </a>
    <!--log-->

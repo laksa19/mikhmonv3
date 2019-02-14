@@ -22,7 +22,7 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
-  $_SESSION["v"] = "3.10";
+  $_SESSION["v"] = "3.11";
 
 // array color
   $color = array('1' => 'bg-blue', 'bg-indigo', 'bg-purple', 'bg-pink', 'bg-red', 'bg-yellow', 'bg-green', 'bg-teal', 'bg-cyan', 'bg-grey', 'bg-light-blue');
@@ -31,7 +31,8 @@ if (!isset($_SESSION["mikhmon"])) {
 
     $suseradm = ($_POST['useradm']);
     $spassadm = encrypt($_POST['passadm']);
-    $sbtac = (preg_replace('/\s+/', '', $_POST['btac']));
+    $logobt = ($_POST['logobt']);
+    $qrbt = ($_POST['qrbt']);
 
     $cari = array('1' => "mikhmon<|<$useradm", "mikhmon>|>$passadm");
     $ganti = array('1' => "mikhmon<|<$suseradm", "mikhmon>|>$spassadm");
@@ -44,8 +45,8 @@ if (!isset($_SESSION["mikhmon"])) {
     }
 
   
-  $gen = '<?php $pbtac="' . $sbtac . '";?>';
-          $key = './include/btkey.php';
+  $gen = '<?php $qrbt="' . $qrbt . '";?>';
+          $key = './include/quickbt.php';
           $handle = fopen($key, 'w') or die('Cannot open file:  ' . $key);
           $data = $gen;
           fwrite($handle, $data);
@@ -143,19 +144,14 @@ if (!isset($_SESSION["mikhmon"])) {
           </td>
         </tr>
         <tr>
-          <td class="align-middle"><?= $_bluetooth_ac ?></td>
+          <td class="align-middle"><?= $_quick_print ?> QR</td>
           <td>
-          <div class="input-group">
-          <div class="input-group-11 col-box-10"> 
-            <input class="group-item group-item-l" id="btac" type="password" size="10" name="btac" title="<?= $_bluetooth_ac ?>" value="<?= $pbtac; ?>" required="1"/>
-            </div>
-                <div class="input-group-1 col-box-2">
-                  <div class="group-item group-item-r pd-2p5 text-center align-middle">
-                      <input title="Show/Hide Password" type="checkbox" onclick="Pass('btac')">
-                  </div>
-                </div>
-            </div>
-            </td>
+            <select class="form-control" name="qrbt">
+            <option><?= $qrbt ?></option>
+              <option>enable</option>
+              <option>disable</option>
+            </select>
+          </td>
         </tr>
         <tr>
           <td></td><td class="text-right">
@@ -168,6 +164,7 @@ if (!isset($_SESSION["mikhmon"])) {
                 </div>  
           </td>
         </tr>
+        
       </table>
       <div id="loadV"></div> 
     </div>

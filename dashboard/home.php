@@ -21,20 +21,7 @@ error_reporting(0);
 if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
-// load session MikroTik
-  $session = $_GET['session'];
 
-
-// load config
-  include('../include/config.php');
-  include('../include/readcfg.php');
-
-// routeros api
-  include_once('../lib/routeros_api.class.php');
-  include_once('../lib/formatbytesbites.php');
-  $API = new RouterosAPI();
-  $API->debug = false;
-  $API->connect($iphost, $userhost, decrypt($passwdhost));
 
 // get MikroTik system clock
   $getclock = $API->comm("/system/clock/print");

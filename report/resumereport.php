@@ -29,14 +29,6 @@ $session = $_GET['session'];
   include('../include/config.php');
   include('../include/readcfg.php');
 
-// routeros api
-  include_once('../lib/routeros_api.class.php');
-  include_once('../lib/formatbytesbites.php');
-  $API = new RouterosAPI();
-  $API->debug = false;
-  $API->connect($iphost, $userhost, decrypt($passwdhost));
-// get selling report
-
 $idbl = $_GET['idbl'];
 $thisM = substr($idbl,0,3);
 $thisY = substr($idbl,-4);
@@ -58,62 +50,27 @@ if ($mn == date("n")){
   $totD = (days_in_month($mn, $thisY)+ 1);
 }
 
-
-
-$getSRBl = $API->comm("/system/script/print", array(
-  "?owner" => "$idbl",
-));
-$TotalRBl = count($getSRBl);
-
-for ($i = 0; $i < $TotalRBl; $i++) {
-
-  $tBl += explode("-|-", $getSRBl[$i]['name'])[3];
+function resume_per_day($date){
+$evalue =  explode($date,$_SESSION['dataresume']);
+$x = count($evalue);
+			for ($i = 0; $i < $x; $i++) {
+				$result += $evalue[$i];
+			}
+			return ($x-1).'/'.$result;
 }
+
+$totalvrc =  explode("/",$_SESSION['totalresume'])[0];
+$totalincome = explode("/",$_SESSION['totalresume'])[1];
 
 
 if ($currency == in_array($currency, $cekindo['indo'])) {
-  $totalreport = "Total " . $TotalRBl . "vcr : " . $currency . " " . number_format($tBl, 0, ",", ".");
+  $totalreport = "Total " . $totalvrc . "vcr : " . $currency . " " . number_format($totalincome, 0, ",", ".");
 
 } else {
-  $totalreport = "Total " . $TotalRBl . "vcr : " . $currency . " " . number_format($tBl, 2);
+  $totalreport = "Total " . $totalvrc . "vcr : " . $currency . " " . number_format($totalincome, 2);
 }
 
 
-
-    function resumeHr($idhr)
-    {
-      $session = $_GET['session'];
-  // load config
-      include('./include/config.php');
-      include('./include/readcfg.php');
-  // routeros api
-      include_once('./lib/routeros_api.class.php');
-      $API = new RouterosAPI();
-      $API->debug = false;
-      if($API->connect($iphost, $userhost, decrypt($passwdhost))){
-      $getSRHr = $API->comm("/system/script/print", array(
-        "?source" => "$idhr",
-      ));
-    
-      $TotalRHr = count($getSRHr);
-      for ($i = 0; $i < $TotalRHr; $i++) {
-        $tHr += explode("-|-", $getSRHr[$i]['name'])[3];
-      }
-      return $tHr;
-      }else{
-        $nl = '\n';
-        if ($currency == in_array($currency, $cekindo['indo'])) {
-            echo "<script>alert('Mikhmon not connected!".$nl."Silakan periksa kembali IP, User, Password dan port API harus enable.".$nl."Jika menggunakan koneksi VPN, pastikan VPN tersebut terkoneksi.')</script>";
-          }else{
-            echo "<script>alert('Mikhmon not connected!".$nl."Please check the IP, User, Password and port API must be enabled.')</script>";
-          }
-          if($c == "settings"){
-            echo "<script>window.location='./admin.php?id=settings&session=" . $session . "'</script>";
-          }else{
-            echo "<script>window.location='./admin.php?id=sessions'</script>";
-          }
-        }
-    }
 }
 ?>
 
@@ -181,8 +138,8 @@ for ($i = 1; $i < $totD; $i++) {
           $thisD = $i;
         }
         $idhr = strtolower($thisM . '/' . $thisD . '/' . $thisY);
-        if(resumeHr($idhr) == ""){$r = 0;}else{$r = resumeHr($idhr);}
-        echo "['<b>".ucfirst($thisM)." ".$thisD."</b>',".$r."],";
+        if(explode("/",resume_per_day($idhr))[1] == ""){$r = 0;}else{$r = explode("/",resume_per_day($idhr))[1];}
+        echo "['<b>".$thisD." " .ucfirst($thisM)." ".explode("/",resume_per_day($idhr))[0]."vcr</b>',".$r."],";
 }
 
 ?>

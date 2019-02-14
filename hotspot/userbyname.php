@@ -151,12 +151,34 @@ Login : *http://" . $dnsname . "* %0A
     $shareWA = $shareWAUP;
   }
 
-  $tempu = $uname.'-'.$upass.'-'.$udatalimit.$bMG.'-'.$utimelimit.'-'.$getvalid.'-'.$getprice.'-'.$session.'-'.$_SESSION['timezone'].'-'.$pbtac;
-  $gen = '<?php $tempu="' . $tempu . '";?>';
-          $temp = './bt/temp.php';
-          $handle = fopen($temp, 'w') or die('Cannot open file:  ' . $temp);
-          $data = $gen;
-          fwrite($handle, $data);
+// Print BT
+  $chl = urlencode("http://$dnsname/login?username=$uname&password=$upass");
+  $qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=100x100&chld=L|0&chl=' . $chl . '&choe=utf-8';
+
+if ($currency == in_array($currency, $cekindo['indo'])) {
+  $pricebt = $currency . " " . number_format($getprice, 0, ",", ".");
+  if (substr($getvalid, -1) == "d") {
+    $validity = substr($getvalid, 0, -1) . "Hari";
+  } else if (substr($getvalid, -1) == "h") {
+    $validity = substr($getvalid, 0, -1) . "Jam";
+  } else if (substr($getvalid, -1) == "m") {
+    $validity = substr($getvalid, 0, -1) . "Menit";
+  }
+  if (substr($utimelimit, -1) == "d" & strlen($utimelimit) > 3) {
+    $timelimit = ((substr($utimelimit, 0, -1) * 7) + substr($utimelimit, 2, 1)) . "Hari";
+  } else if (substr($utimelimit, -1) == "d") {
+    $timelimit = substr($utimelimit, 0, -1) . "Hari";
+  } else if (substr($utimelimit, -1) == "h") {
+    $timelimit = substr($utimelimit, 0, -1) . "Jam";
+  } else if (substr($utimelimit, -1) == "w") {
+    $timelimit = (substr($utimelimit, 0, -1) * 7) . "Hari";
+  }
+  } else {
+    $pricebt = $currency . " " . number_format($getprice);
+    $timelimit = $utimelimit;
+    $validity = $getvalid;
+  }
+
 
   if (isset($_POST['name'])) {
     $server = ($_POST['server']);
@@ -192,7 +214,9 @@ Login : *http://" . $dnsname . "* %0A
     echo "<script>window.location='./?hotspot-user=" . $uid . "&session=" . $session . "'</script>";
   }
 }
+include('./voucher/printbt.php');
 ?>
+
 <script>
   function PassUser(){
     var x = document.getElementById('passUser');
@@ -235,7 +259,8 @@ Login : *http://" . $dnsname . "* %0A
       echo '<a class="btn bg-info"  href="./?reset-hotspot-user=' . $uid . '&session=' . $session . '"> <i class="fa fa-retweet"></i> Reset</a>';
     } ?>
     <a id="shareWA" class="btn bg-green" title="Share WhatsApp" href="whatsapp://send?text=<?= $shareWA; ?>"> <i class="fa fa-whatsapp"></i> <?= $_share ?></a>
-    <div id="shareWA" class="btn bg-blue printBT" title="Print Bluetooth"><i class="fa fa-bluetooth"></i> <?= $_print ?> BT</div><br>    
+    <!--<div id="shareWA" class="btn bg-blue printBT" title="Print Bluetooth"><i class="fa fa-bluetooth"></i> <?= $_print ?> BT</div>-->
+    <div id="shareWA" class="btn bg-blue" onclick="sendToQuickPrinterChrome()" title="Print Bluetooth"><i class="fa fa-bluetooth"></i> <?= $_print ?> BT</div><br>    
   </div>
 <table class="table">
   <tr>
@@ -271,7 +296,7 @@ Login : *http://" . $dnsname . "* %0A
 		</td>
 	</tr>
   <tr>
-    <td class="align-middle"><?= $_name ?></td><td><input class="form-control" type="text" autocomplete="off" name="name" value="<?= $uname; ?>"></td>
+    <td class="align-middle"><?= $_name ?></td><td><input id="name" class="form-control" type="text" autocomplete="off" name="name" value="<?= $uname; ?>"></td>
   </tr>
   <tr>
     <td class="align-middle"><?= $_password ?></td><td>
@@ -318,7 +343,7 @@ Login : *http://" . $dnsname . "* %0A
                                                                                                           } ?>" disabled></td>
   </tr>
   <tr>
-    <td class="align-middle"><?= $_time_limit ?></td><td><input class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if ($utimelimit == "1s") {
+    <td class="align-middle"><?= $_time_limit ?></td><td><input id="timelimit" class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if ($utimelimit == "1s") {
                                                                                                                                               echo "";
                                                                                                                                             } else {
                                                                                                                                               echo $utimelimit;
@@ -328,10 +353,10 @@ Login : *http://" . $dnsname . "* %0A
     <td class="align-middle"><?= $_data_limit ?></td><td>
       <div class="input-group">
         <div class="input-group-10 col-box-9">
-        <input class="group-item group-item-l" type="number" min="0" max="9999" name="datalimit" value="<?= $udatalimit; ?>">
+        <input class="group-item group-item-l" type="number" min="0" max="9999" id="datalimit" name="datalimit" value="<?= $udatalimit; ?>">
       </div>
           <div class="input-group-2 col-box-3">
-              <select style="padding: 4.2px;" class="group-item group-item-r" name="mbgb" required="1">
+              <select style="padding: 4.2px;" class="group-item group-item-r" id="mbgb" name="mbgb" required="1">
 				        <option value="<?php if ($MG == "MB") {
                             echo "1048576";
                           } elseif ($MG == "GB") {
@@ -348,7 +373,7 @@ Login : *http://" . $dnsname . "* %0A
     <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>"></td>
   </tr>
   <tr>
-    <td class="align-middle"><?= $_price ?></td><td><input class="form-control" type="text" value="<?php if ($getprice == 0) {
+    <td class="align-middle"><?= $_price ?></td><td><input class="form-control" id="price" type="text" value="<?php if ($getprice == 0) {
                                                                                           } else {
                                                                                             if ($currency == in_array($currency, $cekindo['indo'])) {
                                                                                               echo $currency . " " . number_format($getprice, 0, ",", ".");
@@ -359,7 +384,7 @@ Login : *http://" . $dnsname . "* %0A
   </tr>
   <?php if ($getvalid != "") { ?>
   <tr>
-    <td class="align-middle"><?= $_validity ?></td><td><input class="form-control" type="text" value="<?= $getvalid; ?>" disabled></td>
+    <td class="align-middle"><?= $_validity ?></td><td><input class="form-control" type="text" id="validity" value="<?= $getvalid; ?>" disabled></td>
   </tr>
   <tr>
     <td class="align-middle"><?= $_start ?></td><td><input class="form-control" type="text" value="<?= $start; ?>" disabled></td>

@@ -42,8 +42,8 @@ include('./lang/isocodelang.php');
 include('./include/lang.php');
 include('./lang/'.$langid.'.php');
 
-// btkkey
-include('./include/btkey.php');
+// quick bt
+include('./include/quickbt.php');
 
 // theme
 include('./include/theme.php');

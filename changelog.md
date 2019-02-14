@@ -1,6 +1,6 @@
 ## Changelog
 
-### Update 02-14 2019 V3.10
+### Update 02-14 2019 V3.11
 1. Perbaaikan dashboard blank.
 2. Penggantian Print Bluetooth dengan Quick Printer
 3. Penambahan Quick Print.Panduan, https://youtu.be/KGAsHU0qOBA

@@ -25,6 +25,9 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
+// time zone
+date_default_timezone_set($_SESSION['timezone']);
+
 // load session MikroTik
   $session = $_GET['session'];
 
@@ -44,6 +47,7 @@ if (!isset($_SESSION["mikhmon"])) {
   $API->debug = false;
   $API->connect($iphost, $userhost, decrypt($passwdhost));
 
+  
   if ($userp != "") {
     $usermode = explode('-', $userp)[0];
     $pulluser = explode('-', $userp);
@@ -82,9 +86,9 @@ if (!isset($_SESSION["mikhmon"])) {
 
   $logo = "../img/logo-" . $session . ".png";
   if (file_exists($logo)) {
-    $logo = "../img/logo-" . $session . ".png?t=". str_replace(" ","_",date("Y-m-d H:i:s"));
+    $logo = "../img/logo-" . $session . ".png";
   } else {
-    $logo = "../img/logo.png?t=". str_replace(" ","_",date("Y-m-d H:i:s"));
+    $logo = "../img/logo.png";
   }
 
 }

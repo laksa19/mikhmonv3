@@ -151,9 +151,13 @@ Login : *http://" . $dnsname . "* %0A
     $shareWA = $shareWAUP;
   }
 
+// quick bt
+include('./include/quickbt.php');
+
 // Print BT
   $chl = urlencode("http://$dnsname/login?username=$uname&password=$upass");
   $qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=100x100&chld=L|0&chl=' . $chl . '&choe=utf-8';
+
 
 if ($currency == in_array($currency, $cekindo['indo'])) {
   $pricebt = $currency . " " . number_format($getprice, 0, ",", ".");

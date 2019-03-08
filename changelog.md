@@ -1,10 +1,14 @@
 ## Changelog
 
+### Update 03-08 2019 V3.12
+1. Perbaikan remove session.
+2. Penambahan print untuk report
+3. Penambahan filter berdasarkan comment dan range tanggal. (Mikhmon Online).
+
 ### Update 02-14 2019 V3.11
 1. Perbaikan dashboard blank.
 2. Penggantian Print Bluetooth dengan Quick Printer
 3. Penambahan Quick Print. Panduan, https://youtu.be/KGAsHU0qOBA
-
 
 ### Update 02-06 2019 V3.10
 1. Perbaikan delete logo.

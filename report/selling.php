@@ -26,9 +26,9 @@ if (!isset($_SESSION["mikhmon"])) {
 	$idbl = $_GET['idbl'];
 	$idbl2 = explode("/",$idhr)[0].explode("/",$idhr)[2];
 	if ($idhr != ""){
-		$_SESSION['report'] = "&idhr=".$idhr; 
+		$_SESSION['report'] = "&idhr=".$idhr;
 	} elseif ($idbl != ""){
-		$_SESSION['report'] = "&idbl=".$idbl; 
+		$_SESSION['report'] = "&idbl=".$idbl;
 	} else {
 		$_SESSION['report'] = "";
 	}
@@ -155,6 +155,37 @@ if (!isset($_SESSION["mikhmon"])) {
         // Download CSV file
         downloadCSV(csv.join("\n"), filename);
         }
+
+// https://stackoverflow.com/questions/33218607/use-inline-css-to-apply-usd-currency-format-within-html-table
+function number_format(number, decimals, dec_point, thousands_sep) {
+
+  number = (number + '')
+    .replace(/[^0-9+\-Ee.]/g, '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + (Math.round(n * k) / k)
+        .toFixed(prec);
+    };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n))
+    .split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '')
+    .length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1)
+      .join('0');
+  }
+  return s.join(dec);
+}
+        
 		window.onload=function() {
           var sum = 0;
           var dataTable = document.getElementById("selling");
@@ -165,7 +196,20 @@ if (!isset($_SESSION["mikhmon"])) {
           sum+=parseFloat(cells[i].firstChild.data);
           
           var th = document.getElementById('total');
-          th.innerHTML = th.innerHTML + (sum) ;
+    <?php if ($currency == in_array($currency, $cekindo['indo'])) {
+      echo 'th.innerHTML = "'.$currency.' " + number_format(th.innerHTML + (sum),"","",".") ;';
+		} else {
+			echo 'th.innerHTML = "'.$currency.' " + number_format(th.innerHTML + (sum),2,".",",") ;';
+		} ?>
+		
+		var tables = document.getElementsByTagName('tbody');
+    var table = tables[tables.length -1];
+    var rows = table.rows;
+    for(var i = 0, td; i < rows.length; i++){
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode(i + 1));
+        rows[i].insertBefore(td, rows[i].firstChild);
+    }
         }
 		</script>
 
@@ -177,7 +221,7 @@ $(document).ready(function(){
   });
 });
 </script>
-<div class="row">		
+<div class="row">
 <div class="col-12">
 <div class="card">
 <div class="card-header">
@@ -187,19 +231,20 @@ $(document).ready(function(){
 <div class="row">
 	<div class="row">
 	<div class="col-12">
-		<div style="padding-bottom: 5px; padding-top: 5px;">   
+		<div style="padding-bottom: 5px; padding-top: 5px;">
 		  <input id="filterTable" type="text" class="form-control" style="float:left; margin-top: 6px; max-width: 150px;" placeholder="<?= $_search ?>">&nbsp;
+		  <button name="help" class="btn bg-primary" onclick="location.href='#help';" title="Help"><i class="fa fa-question"></i> <?= $_help ?></button>
 		  <button class="btn bg-primary" onclick="exportTableToCSV('report-mikhmon-<?= $filedownload . $fprefix; ?>.csv')" title="Download selling report"><i class="fa fa-download"></i> CSV</button>
 			<button class="btn bg-primary" onclick="location.href='./?report=selling&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> <?= $_all ?></button>
 			<?php if(!empty($idbl)){echo '<button name="resume" id="openResume" class="btn bg-primary"title="Resume Report"><i class="fa fa-area-chart"></i> '.$_resume.'</button>';}else{
 				echo '<a class="btn bg-primary" href="./?report=selling&idbl='.$idbl2.'&session='.$session.'" title="Show '.ucfirst(substr($idbl2,0,3).' '.substr($idbl2,3,5)).'"><i class="fa fa-search"></i> '.ucfirst(substr($idbl2,0,3).' '.substr($idbl2,3,5)).'</a>';}?>
-		  <button name="help" class="btn bg-primary" onclick="location.href='#help';" title="Help"><i class="fa fa-question"></i> <?= $_help ?></button>
+		  <button name="print" class="btn bg-primary" onclick="window.open('./report/print.php?<?= explode("?report=selling&",$url)[1] ?>','_blank');" title="Print"><i class="fa fa-print"></i> <?= $_print ?></button>
 		  <button style="display: <?= $shd; ?>;" name="remdata" class="btn bg-danger" onclick="location.href='#remdata';" title="Delete Data <?= $filedownload; ?>"><i class="fa fa-trash"></i> <?= $_delete_data.' '. $filedownload; ?></button>
 		  <button  id="remSelected" style="display: none;" class="btn bg-red" onclick="MikhmonRemoveReportSelected()"><i class="fa fa-trash"></i> <span id="selected"></span> <?= $_selected ?></button>
 		</div>
 	</div>
 	</div>
-		<div class="input-group mr-b-10">  
+		<div class="input-group mr-b-10">
 			<div class="input-group-1 col-box-2">
 			<select style="padding:5px;" class="group-item group-item-l" title="<?= $_days ?>" id="D">
         			<?php
@@ -217,12 +262,12 @@ $(document).ready(function(){
 											}
 											echo "<option value='" . $x . "'>" . $x . "</option>";
 										}
-										?> 
+										?>
     		</select>
 			</div>
 			<div class="input-group-2 col-box-4">
 			<select style="padding:5px;" class="group-item group-item-md" title="Month" id="M">
-        			<?php 
+        			<?php
 										$idbls = array(1 => "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec");
 										$idblf = array(1 => "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 										$month = explode("/", $idhr)[0];
@@ -240,12 +285,12 @@ $(document).ready(function(){
 										for ($x = 1; $x <= 12; $x++) {
 											echo "<option value='" . $idbls[$x] . "''>" . $idblf[$x] . "</option>";
 										}
-										?> 
+										?>
     		</select>
 			</div>
 			<div class="input-group-2 col-box-3">
 			<select style="padding:5px;" class="group-item group-item-md" title="Year" id="Y">
-        			<?php 
+        			<?php
 										$year = explode("/", $idhr)[2];
 										$year1 = substr($idbl, 3, 4);
 
@@ -253,7 +298,7 @@ $(document).ready(function(){
 											echo "<option>" . $year . "</option>";
 										} elseif ($year1 != "") {
 											echo "<option>" . $year1 . "</option>";
-										} 
+										}
 											echo "<option>" . date("Y") . "</option>";
 										
 										for ($Y = 2018; $Y <= date("Y"); $Y++) {
@@ -262,10 +307,10 @@ $(document).ready(function(){
 												echo "<option value='" . $Y . "''>" . $Y . "</option>";
 											}
 										}
-										?> 
+										?>
     		</select>
 			</div>
-            <div class="input-group-2 col-box-3">	
+            <div class="input-group-2 col-box-3">
 				<div style="padding:3.5px;"  class="group-item group-item-r text-center pointer" onclick="filterR(); loader();"><i class="fa fa-search"></i> Filter</div>
 			</div>
 			<script type="text/javascript">
@@ -285,21 +330,22 @@ $(document).ready(function(){
 				}
 			</script>
 		</div>
-		  <div class="overflow box-bordered" style="max-height: 75vh">
+		  <div class="overflow box-bordered" style="max-height: 70vh">
 			<table id="dataTable" class="table table-bordered table-hover text-nowrap">
 				<thead class="thead-light">
 				<tr>
-				  <th colspan=4 ><?= $_selling_report ?> <?= $filedownload . $fprefix; ?><b style="font-size:0;">,,,</b></th>
+				  <th colspan=5 ><?= $_selling_report ?> <?= $filedownload . $fprefix; ?><b style="font-size:0;">,,,,</b></th>
 				  <th style="text-align:right;"><?= $_total ?></th>
 				  <th style="text-align:right;" id="total"></th>
 				</tr>
 				<tr>
+				  <th >&#8470;</th>
 					<th ><?= $_date ?></th>
 					<th ><?= $_time ?></th>
 					<th ><?= $_user_name ?></th>
 					<th ><?= $_profile ?></th>
 					<th ><?= $_comment ?></th>
-					<th style="text-align:right;"> <?= $_price.' '. $currency; ?></th>
+					<th style="text-align:right;"> <?= $_price ?></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -402,7 +448,7 @@ $(document).ready(function(){
   <div>
   	<header><h1><?= $_help ?></h1></header>
   	<a style="font-weight:bold;" href="#" title="Close" class="modal-close">X</a>
-	<p> 
+	<p>
 			<?= $_help_report ?>
 	</p>
   </div>

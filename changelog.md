@@ -1,5 +1,8 @@
 ## Changelog
 
+### Update 03-14 2019 V3.12 R1
+1. Perbaikan user profile. Meminimalisir user terhapus sesaat setelah login. !Silakan update user profile dari Mikhmon.
+
 ### Update 03-08 2019 V3.12
 1. Perbaikan remove session.
 2. Penambahan print untuk report

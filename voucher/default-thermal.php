@@ -1,4 +1,11 @@
-	            	            	            	            	            	            	            	            	            	            	            	            	            	            	            	            
+
+<style>
+	.qrcode{
+		height:100px;
+		width:100px;
+	}
+</style>
+
 <table class="voucher" style=" width: 180px;">
   <tbody>
 <!-- Logo Hotspotname -->
@@ -45,7 +52,7 @@
 <!-- QR Code    -->
 <?php if ($qr == "yes") { ?>
       <td colspan="2">
-	<img src="<?= $qrcode ?>" alt="qrcode">
+	<?= $qrcode ?>
       </td>
       </tr>
 <?php 

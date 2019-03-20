@@ -32,7 +32,7 @@ if (!isset($_SESSION["mikhmon"])) {
 	
 // lang
   include('../include/lang.php');
-  include('../lang/'.$langid.'.php');	
+  include('../lang/'.$langid.'.php');
 
 // routeros api
 	include_once('../lib/routeros_api.class.php');
@@ -65,22 +65,22 @@ if (!isset($_SESSION["mikhmon"])) {
 	<div class="card">
 		<div class="card-header">
     		<h3><i class="fa fa-wifi"></i> <?= $_hotspot_active ?> <?php
-																																																			if ($serveractive == "") {
-																																																			} else {
-																																																				echo $serveractive . " ";
-																																																			}
-																																																			if ($counthotspotactive < 2) {
-																																																				echo "$counthotspotactive item";
-																																																			} elseif ($counthotspotactive > 1) {
-																																																				echo "$counthotspotactive items";
-																																																			};
-																																																			if ($serveractive == "") {
-																																																			} else {
-																																																				echo " | <a href='./?hotspot=active&session=" . $session . "'> <i class='fa fa-search'></i> Show all</a>";
-																																																			}
-																																																			?>			</h3>
+				if ($serveractive == "") {
+				} else {
+					echo $serveractive . " ";
+				}
+				if ($counthotspotactive < 2) {
+					echo "$counthotspotactive item";
+				} elseif ($counthotspotactive > 1) {
+					echo "$counthotspotactive items";
+				};
+				if ($serveractive == "") {
+				} else {
+					echo " | <a href='./?hotspot=active&session=" . $session . "'> <i class='fa fa-search'></i> Show all</a>";
+				}
+				?>			</h3>
         </div>
-         <div class="card-body overflow">	   
+         <div class="card-body overflow">
 <table id="tFilter" class="table table-bordered table-hover text-nowrap">
   <thead>
   <tr>
@@ -112,9 +112,9 @@ for ($i = 0; $i < $TotalReg; $i++) {
 	$byteso = formatBytes($hotspotactive['bytes-out'], 2);
 	$loginby = $hotspotactive['login-by'];
 	$comment = $hotspotactive['comment'];
-
+	$uriprocess = "'./?remove-user-active=" . $id . "&session=" . $session . "'";
 	echo "<tr>";
-	echo "<td style='text-align:center;'><a  title='Remove " . $user . "' href='./?remove-user-active=" . $id . "&session=" . $session . "'><i class='fa fa-minus-square text-danger'></i></a></td>";
+	echo "<td style='text-align:center;'><span class='pointer'  title='Remove " . $user . "' onclick=loadpage(".$uriprocess.")><i class='fa fa-minus-square text-danger'></i></span></td>";
 	echo "<td><a  title='filter " . $server . "' href='./?hotspot=active&server=" . $server . "&session=" . $session . "'><i class='fa fa-server'></i> " . $server . "</a></td>";
 	echo "<td><a title='Open User " . $user . "' href=./?hotspot-user=" . $user . "&session=" . $session . "><i class='fa fa-edit'></i> " . $user . "</a></td>";
 	echo "<td>" . $address . "</td>";

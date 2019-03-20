@@ -90,7 +90,7 @@ if (isset($_POST['nama'])) {
 		$getuser = $API->comm("/ip/hotspot/user/print", array("?name" => "$name"));
 		$user = $getuser[0]['name'];
 		$profile = $getuser[0]['profile'];
-		$comment = $getuser[0]['comment'];
+		$exp = $getuser[0]['comment'];
 		$uptime = formatDTM($getuser[0]['uptime']);
 		$getbytein = $getuser[0]['bytes-in'];
 		$getbyteo = $getuser[0]['bytes-out'];
@@ -116,21 +116,15 @@ if (isset($_POST['nama'])) {
 			$getvalid = substr($getvalid, 0, strlen($getvalid) - 1) . " " . $title[14];
 		}
 
-		$API->write('/system/scheduler/print', false);
-		$API->write('?=name=' . $name . '');
-		$ARRAY1 = $API->read();
-		$regtable = $ARRAY1[0];
-		$exp = $regtable['next-run'];
-		$strd = $regtable['start-date'];
-		$strt = $regtable['start-time'];
-		$flogin = $regtable['comment'];
+
 	}
-	if ($user == "" || $exp == "") {
+  
+	if ($user == "" || (substr($exp,3,1) != "/" && substr($exp,6,1) != "/")) {
 		echo "<h3 class='text-center'>User <i style='color:#008CCA;'>$name</i> $title[9]</h3>";
 	} elseif ($limitup == "1s" || $uptime == $limitup || $getbyteo == $limitbyte) {
 		echo "<h3 class='text-center'>User <i style='color:#008CCA;'>$name</i> $title[10]</h3>";
 	}
-	if ($user == "" || $exp == "") {
+	if ($user == "" || (substr($exp,3,1) != "/" && substr($exp,6,1) != "/")) {
 	} else {
 		?>
 <section>
@@ -162,13 +156,6 @@ if (isset($_POST['nama'])) {
 	echo "		<td > $bytetot</td>";
 	echo "	</tr>";
 	if ($limitup == "1s" || $uptime == $limitup || $getbyteo == $limitbyte) {
-		if ($flogin == "") {
-		} else {
-			echo "	<tr>";
-			echo "		<td >Start</td>";
-			echo "		<td >$flogin</td>";
-			echo "	</tr>";
-		}
 		echo "	<tr>";
 		echo "		<td >Status</td>";
 		echo "		<td >$title[16]</td>";
@@ -184,21 +171,13 @@ if (isset($_POST['nama'])) {
 		echo "		<td >$title[6]</td>";
 		echo "		<td >$getvalid</td>";
 		echo "	</tr>";
-		echo "	<tr>";
-		echo "		<td >$title[7]</td>";
-		echo "		<td >$strd $strt</td>";
-		echo "	</tr>";
-		echo "	<tr>";
+				echo "	<tr>";
 		echo "		<td >$title[8]</td>";
 		echo "		<td >$exp</td>";
 		echo "	</tr>";
 		echo "	<tr>";
 		echo "		<td >Status</td>";
 		echo "		<td >$title[15]</td>";
-		echo "	</tr>";
-		echo "	<tr>";
-		echo "		<td >Comment</td>";
-		echo "		<td >$comment</td>";
 		echo "	</tr>";
 		echo "</table>";
 		echo "</div>";

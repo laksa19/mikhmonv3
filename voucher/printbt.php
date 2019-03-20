@@ -29,9 +29,9 @@ function sendToQuickPrinterChrome(){
                         "<center>Login : http://<?= $dnsname ?>\n" +
                         //"<line0>\n" +
                         <?php if($qrbt == "enable"){
-                          echo '"<center><image>" + "'.$qrcode.'"';
+                          echo '"<center><image>" + "'.$qrcode.'" +"\n"';
                         }else{echo '"\n"';}?>
-                        + "<cut>\n"
+                        + "<cut>"
                 ;
     var textEncoded = encodeURI(commandsToPrint);
     window.location.href="intent://"+textEncoded+"#Intent;scheme=quickprinter;package=pe.diegoveloper.printerserverapp;end;";

@@ -43,9 +43,7 @@ if ($countbinding < 2) {
 } elseif ($countbinding > 1) {
 	echo "$countbinding items";
 };
-echo "</th>";
 ?>
-&nbsp; | <strong name="help" class="pointer" onclick="location.href='#help';" title="Help"><i class="fa fa-question"></i> Help</strong>
     </h3>
 </div>
 <div class="card-body">	   
@@ -80,14 +78,15 @@ for ($i = 0; $i < $TotalReg; $i++) {
 
 	echo "<tr>";
 	?>
-  	<td style='text-align:center;'><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete (<?= $maca; ?>)?')){window.location='./?remove-ip-binding=<?= $id . "&mac=" . $maca . "&addr=" . $addr; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $maca; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  	<td style='text-align:center;'><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete (<?= $maca; ?>)?')){loadpage('./?remove-ip-binding=<?= $id . '&mac=' . $maca . '&addr=' . $addr; ?>&session=<?= $session; ?>')}else{}" title='Remove <?= $maca; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   	<?php
-		echo "<a class='btnsmall' title='Remove " . $maca . "' href='./?remove-ip-binding=" . $id . "&mac=" . $maca . "&addr=" . $addr . "&session=" . $session . "'></a>";
-		if ($bdisabled == "true") {
-			echo "<a class='text-warning' title='Enable Binding " . $addr . "' class='btnsmall' href='./?enable-ip-binding=" . $id . "&session=" . $session . "'><i class='fa fa-lock'></a></td>";
-		} else {
 
-			echo "<a title='Disable Binding " . $addr . "' class='btnsmall' href='./?disable-ip-binding=" . $id . "&session=" . $session . "'><i class='fa fa-unlock '></a></td>";
+		if ($bdisabled == "true") {
+			$uriprocess = "'./?enable-ip-binding=" . $id . "&session=" . $session . "'";
+			echo "<span class='text-warning btnsmall pointer' title='Enable Binding " . $addr . "' onclick=loadpage(".$uriprocess.")><i class='fa fa-lock'></span></td>";
+		} else {
+			$uriprocess = "'./?disable-ip-binding=" . $id . "&session=" . $session . "'";
+			echo "<span title='Disable Binding " . $addr . "' class='btnsmall pointer' onclick=loadpage(".$uriprocess.")><i class='fa fa-unlock '></span></td>";
 		}
 		echo "<td style='text-align:center;'>";
 		if ($binding['bypassed'] == "true") {

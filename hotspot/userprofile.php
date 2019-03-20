@@ -67,7 +67,6 @@ if (!isset($_SESSION["mikhmon"])) {
 		<th class="align-middle">Rate<br>Limit</th>
 		<th class="align-middle"><?= $_expired_mode ?></th>
 		<th class="align-middle"><?= $_validity ?></th>
-		<th class="align-middle"><?= $_grace_period ?></th>
 		<th class="text-right align-middle" > <?= $_price." ".$currency; ?></th>
 		<th class="align-middle"><?= $_lock_user ?></th>
     </tr>
@@ -85,7 +84,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
 	$ponlogin = $profiledetalis['on-login'];
 	echo "<tr>";
 	?>
-  <td style='text-align:center;'><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete profile (<?= $pname; ?>)?')){window.location='./?remove-user-profile=<?= $pid; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $pname; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <td style='text-align:center;'><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete profile (<?= $pname; ?>)?')){loadpage('./?remove-user-profile=<?= $pid; ?>&session=<?= $session; ?>')}else{}" title='Remove <?= $pname; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   <?php
 	echo "<a title='Open User by profile " . $pname . "'  href='./?hotspot=users&profile=" . $pname . "&session=" . $session . "'><i class='fa fa-users'></i></a></td>";
 	echo "<td><a title='Open User Profile " . $pname . "' href='./?user-profile=" . $pid . "&session=" . $session . "'><i class='fa fa-edit'></i> $pname</a></td>";
@@ -116,11 +115,6 @@ for ($i = 0; $i < $TotalReg; $i++) {
 	$getvalid = explode(",", $ponlogin);
 	echo $getvalid[3];
 
-	echo "</td>";
-	echo "<td>";
-
-	$getgracep = explode(",", $ponlogin);
-	echo $getgracep[4];
 	echo "</td>";
 
 	echo "<td style='text-align:right;'>";

@@ -72,11 +72,21 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
   } else {
     $datalimit = formatBytes($getdatalimit, 2);
   }
-   // CHart Size
-  $chs = "80x80";
-	// CHart Link
-  $chl = urlencode("http://$dnsname/login?username=$username&password=$password");
-  $qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=' . $chs . '&chld=L|0&chl=' . $chl . '&choe=utf-8';
+  
+  $urilogin = "http://$dnsname/login?username=$username&password=$password";
+  $qrcode = "
+	<canvas class='qrcode' id='qr'></canvas>
+    <script>
+      (function() {
+        var qr = new QRious({
+          element: document.getElementById('qr'),
+          value: '".$urilogin."',
+          size:'256'
+        });
+
+      })();
+    </script>
+	";
 
   $num = 1;
 
@@ -88,7 +98,8 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
 		<title>Voucher-<?= $hotspotname . "-" . $getuprofile . "-" . $id; ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="pragma" content="no-cache" />
-		<link rel="icon" href="../img/favicon.png" />
+    <link rel="icon" href="../img/favicon.png" />
+    <script src="../js/qrious.min.js"></script>
 		<style>
 body {
   color: #000000;

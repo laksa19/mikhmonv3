@@ -33,7 +33,7 @@ DNS Name Hotspot :
 <?= $dnsname; ?>
 
 QR Code :
-<img src="<?= $qrcode ?>">
+<?= $qrcode ?>
 
 Number Voucher:
 <?= $num; ?>

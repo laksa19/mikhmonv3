@@ -18,9 +18,14 @@
 session_start();
 // hide all error
 error_reporting(0);
-
+$id = explode("-",$removeuserprofile);
+$pid = $id[0];
+$monid = $id[1];
 $API->comm("/ip/hotspot/user/profile/remove", array(
-    ".id" => "$removeuserprofile",
+    ".id" => "$pid",
+));
+$API->comm("/system/scheduler/remove", array(
+    ".id" => "$monid",
 ));
 echo "<script>window.location='./?hotspot=user-profiles&session=" . $session . "'</script>";
 ?>

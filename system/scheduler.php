@@ -61,6 +61,7 @@ echo "</th>";
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Start Time</th>
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Interval</th>
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Next Run</th>
+		<th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Run Count</th>
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Comment</th>
   </tr>
   </thead>
@@ -74,24 +75,28 @@ for ($i = 0; $i < $TotalReg; $i++) {
 	$startt = $sch['start-time'];
 	$interval = formatInterval($sch['interval']);
 	$nextrun = $sch['next-run'];
+	$runcount = $sch['run-count'];
 	$comment = $sch['comment'];
 	$disabled = $sch['disabled'];
 
 	echo "<tr>";
 	?>
-  	<td style='text-align:center;'><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete scheduler (<?= $name; ?>)?')){window.location='./?remove-scheduler=<?= $id; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $name; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  	<td style='text-align:center;'><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete scheduler (<?= $name; ?>)?')){loadpage('./?remove-scheduler=<?= $id; ?>&session=<?= $session; ?>')}else{}" title='Remove <?= $name; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   	<?php
 
 		if ($disabled == "true") {
-			echo "<a class='text-warning' title='Enable Scheduler " . $name . "'  href='./?enable-scheduler=" . $id . "&session=" . $session . "'><i class='fa fa-lock '></i></a></td>";
+			$uriprocess = "'./?enable-scheduler=" . $id . "&session=" . $session . "'";
+			echo "<span class='text-warning pointer' title='Enable Scheduler " . $name . "'  onclick=loadpage(".$uriprocess.")><i class='fa fa-lock '></i></span></td>";
 		} else {
-			echo "<a title='Disable Scheduler " . $name . "'  href='./?disable-scheduler=" . $id . "&session=" . $session . "'><i class='fa fa-unlock '></i></a></td>";
+			$uriprocess = "'./?disable-scheduler=" . $id . "&session=" . $session . "'";
+			echo "<span  class='pointer' title='Disable Scheduler " . $name . "'  onclick=loadpage(".$uriprocess.")><i class='fa fa-unlock '></i></span></td>";
 		}
 		echo "<td>" . $name . "</td>";
 		echo "<td>" . $startd . "</td>";
 		echo "<td>" . $startt . "</td>";
 		echo "<td>" . $interval . "</td>";
 		echo "<td>" . $nextrun . "</a></td>";
+		echo "<td>" . $runcount . "</a></td>";
 		echo "<td>" . $comment . "</a></td>";
 		echo "</tr>";
 	}

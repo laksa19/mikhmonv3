@@ -27,7 +27,7 @@ if (!isset($_SESSION["mikhmon"])) {
   ));
 
   if (isset($_POST['name'])) {
-    $name = ($_POST['name']);
+    $name = (preg_replace('/\s+/', '-',$_POST['name']));
     $sharedusers = ($_POST['sharedusers']);
     $ratelimit = ($_POST['ratelimit']);
     $expmode = ($_POST['expmode']);
@@ -41,30 +41,39 @@ if (!isset($_SESSION["mikhmon"])) {
     }
     $getlock = ($_POST['lockunlock']);
     if ($getlock == Enable) {
-      $lock = ';[:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';
+      $lock = '; [:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';
     } else {
       $lock = "";
     }
-    $parent = ($_POST['parent']);
 
-    $onlogin1 = ':put (",rem,' . $price . ',' . $validity . ',' . $graceperiod . ',,' . $getlock . ',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime (' . $validity . ');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime (' . $graceperiod . ');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]';
-    $onlogin2 = ':put (",ntf,' . $price . ',' . $validity . ',,,' . $getlock . ',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime (' . $validity . ');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
-    $onlogin3 = ':put (",remc,' . $price . ',' . $validity . ',' . $graceperiod . ',,' . $getlock . ',"); {:local price ("' . $price . '");:local date [/system clock get date ];:local time [/system clock get time ];:local uptime (' . $validity . ');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime (' . $graceperiod . ');[/system scheduler add disabled=no interval=\$uptime name=$user comment=$date-$time on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; :local profile [:put  [/ip hotspot user get $user profile]]; :local comment [:put [/ip hotspot user get $user comment]]; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-' . $validity . '-|-$profile-|-$comment" owner="$bln$thn" source=$date comment=mikhmon]';
-    $onlogin4 = ':put (",ntfc,' . $price . ',' . $validity . ',,,' . $getlock . ',"); {:local price ("' . $price . '");:local date [/system clock get date ];:local time [/system clock get time ];:local uptime (' . $validity . ');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; :local profile [:put  [/ip hotspot user get $user profile]]; :local comment [:put [/ip hotspot user get $user comment]]; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-' . $validity . '-|-$profile-|-$comment" owner="$bln$thn" source=$date comment=mikhmon]';
+    $randstarttime = "0".rand(1,5).":".rand(10,59).":00";
+
+    $parent = ($_POST['parent']);
+    
+    $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikhmon';
+    
+    $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ',,,' . $getlock . ',"); {:global date [ /system clock get date ];:global year [ :pick $date 7 11 ];:global comment [ /ip hotspot user get $user comment]; :local ucode [:pic $comment 0 3]; :if ($ucode = "vc-" or $ucode = "up-" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
+    
 
     if ($expmode == "rem") {
-      $onlogin = $onlogin1 . $lock . "}}";
+      $onlogin = $onlogin . $lock . "}}";
+      $mode = "remove";
     } elseif ($expmode == "ntf") {
-      $onlogin = $onlogin2 . $lock . "}}";
+      $onlogin = $onlogin . $lock . "}}";
+      $mode = "set limit-uptime=1s";
     } elseif ($expmode == "remc") {
-      $onlogin = $onlogin3 . $lock . "}}";
+      $onlogin = $onlogin . $record . $lock . "}}";
+      $mode = "remove";
     } elseif ($expmode == "ntfc") {
-      $onlogin = $onlogin4 . $lock . "}}";
+      $onlogin = $onlogin . $record . $lock . "}}";
+      $mode = "set limit-uptime=1s";
     } elseif ($expmode == "0" && $price != "") {
       $onlogin = ':put (",,' . $price . ',,,noexp,' . $getlock . ',")' . $lock;
     } else {
       $onlogin = "";
     }
+
+    $bgservice = ':global dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" ); :local monthdays ( 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ); :local days [ :pick $d 4 6 ]; :local month [ :pick $d 0 3 ]; :local year [ :pick $d 7 11 ]; :local months ([ :find $montharray $month]); :for i from=0 to=$months do={ :set days ( $days + [ :pick $monthdays $i ] ) }; :return ($days + $year * 365); }; :global timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
 
     $API->comm("/ip/hotspot/user/profile/add", array(
 			  		  /*"add-mac-cookie" => "yes",*/
@@ -75,6 +84,15 @@ if (!isset($_SESSION["mikhmon"])) {
       "transparent-proxy" => "yes",
       "on-login" => "$onlogin",
       "parent-queue" => "$parent",
+    ));
+
+    $API->comm("/system/scheduler/add", array(
+    "name" => "$name",
+    "start-time" => "$randstarttime",
+    "interval" => "00:02:00",
+    "on-event" => "$bgservice",
+    "disabled" => "no",
+    "comment" => "Monitor Profile $name",
     ));
 
     $getprofile = $API->comm("/ip/hotspot/user/profile/print", array(

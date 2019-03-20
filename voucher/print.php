@@ -25,9 +25,6 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
-// time zone
-date_default_timezone_set($_SESSION['timezone']);
-
 // load session MikroTik
   $session = $_GET['session'];
 
@@ -47,7 +44,6 @@ date_default_timezone_set($_SESSION['timezone']);
   $API->debug = false;
   $API->connect($iphost, $userhost, decrypt($passwdhost));
 
-  
   if ($userp != "") {
     $usermode = explode('-', $userp)[0];
     $pulluser = explode('-', $userp);
@@ -86,9 +82,9 @@ date_default_timezone_set($_SESSION['timezone']);
 
   $logo = "../img/logo-" . $session . ".png";
   if (file_exists($logo)) {
-    $logo = "../img/logo-" . $session . ".png";
+    $logo = "../img/logo-" . $session . ".png?t=". str_replace(" ","_",date("Y-m-d H:i:s"));
   } else {
-    $logo = "../img/logo.png";
+    $logo = "../img/logo.png?t=". str_replace(" ","_",date("Y-m-d H:i:s"));
   }
 
 }
@@ -100,6 +96,7 @@ date_default_timezone_set($_SESSION['timezone']);
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="pragma" content="no-cache" />
 		<link rel="icon" href="../img/favicon.png" />
+		<script src="../js/qrious.min.js"></script>
 		<style>
 body {
   color: #000000;
@@ -145,6 +142,8 @@ table.voucher {
 
 <?php for ($i = 0; $i < $TotalReg; $i++) {;
   $regtable = $getuser[$i];
+  $uid = str_replace("=","",base64_encode($regtable['.id']));
+  $idqr = str_replace("=","",base64_encode(($regtable['.id']."qr")));
   $username = $regtable['name'];
   $password = $regtable['password'];
   $profile = $regtable['profile'];
@@ -156,12 +155,22 @@ table.voucher {
   } else {
     $datalimit = formatBytes($getdatalimit, 2);
   }
-   // CHart Size
-  $chs = "80x80";
-	// CHart Link
-  $chl = urlencode("http://$dnsname/login?username=$username&password=$password");
-  $qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=' . $chs . '&chld=L|0&chl=' . $chl . '&choe=utf-8';
+  
+  $urilogin = "http://$dnsname/login?username=$username&password=$password";
+  $qrcode = "
+	<canvas class='qrcode' id='".$uid."'></canvas>
+    <script>
+      (function() {
+        var ".$uid." = new QRious({
+          element: document.getElementById('".$uid."'),
+          value: '".$urilogin."',
+          size:'256'
+        });
 
+      })();
+    </script>
+	";
+ 
   $num = $i + 1;
   ?>
 <?php

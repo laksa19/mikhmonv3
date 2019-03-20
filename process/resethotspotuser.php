@@ -20,7 +20,7 @@ session_start();
 error_reporting(0);
 
 $API->comm("/ip/hotspot/user/set", array(
-	".id" => "$resethotspotuser", "limit-uptime" => "0"
+	".id" => "$resethotspotuser", "limit-uptime" => "0", "comment" => ""
 ));
 $API->comm("/ip/hotspot/user/reset-counters", array(
 	".id" => "$resethotspotuser",

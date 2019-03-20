@@ -75,16 +75,16 @@ if (!isset($_SESSION["mikhmon"])) {
           echo "<script>window.location='./?hotspot=users&profile=all&session=" . $session . "</script>";
         } ?>
          &nbsp; | &nbsp; <a href="./?hotspot-user=add&session=<?= $session; ?>" title="Add User"><i class="fa fa-user-plus"></i> <?= $_add ?></a>
-        &nbsp; | &nbsp; <a href="./?hotspot-user=generate&session=<?= $session; ?>" title="Generate User"><i class="fa fa-users"></i> <?= $_generate ?></a>        
+        &nbsp; | &nbsp; <a href="./?hotspot-user=generate&session=<?= $session; ?>" title="Generate User"><i class="fa fa-users"></i> <?= $_generate ?></a>
          &nbsp; | &nbsp; <a href="<?= str_replace("=users", "=export-users", $url); ?>&export=script" title="Download User List as Mikrotik Script"><i class="fa fa-download"></i> Script</a>&nbsp; | &nbsp; <a href="<?= str_replace("=users", "=export-users", $url); ?>&export=csv" title="Download User List as CSV"><i class="fa fa-download"></i> CSV</a>
-        </span>  &nbsp; 
+        </span>  &nbsp;
         <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small>
     </h3>
     
 </div>
-<div class="card-body">	
+<div class="card-body">
   <div class="row">
-   <div class="col-6 pd-t-5 pd-b-5"> 
+   <div class="col-6 pd-t-5 pd-b-5">
   <div class="input-group">
     <div class="input-group-4 col-box-4">
       <input id="filterTable" type="text" style="padding:5.8px;" class="group-item group-item-l" placeholder="<?= $_search ?>">
@@ -103,7 +103,7 @@ if (!isset($_SESSION["mikhmon"])) {
   </div>
   <div class="input-group-4 col-box-4">
     <select style="padding:5px;" class="group-item group-item-r" id="comment" name="comment" onchange="location = './?hotspot=users&comment='+ this.value +'&session=<?= $session;?>';">
-    <?php 
+    <?php
     if ($comm != "") {
     } else {
       echo "<option value=''>".$_comment."</option>";
@@ -125,7 +125,7 @@ if (!isset($_SESSION["mikhmon"])) {
  
   <div class="col-6">
     <?php if ($comm != "") { ?>
-            <button class="btn bg-red" onclick="if(confirm('Are you sure to delete username by comment (<?= $comm; ?>)?')){window.location='./?remove-hotspot-user-by-comment=<?= $comm; ?>&session=<?= $session; ?>';loader();}else{}" title="Remove user by comment <?= $comm; ?>">  <i class="fa fa-trash"></i> <?= $_by_comment ?></button>
+  <button class="btn bg-red" onclick="if(confirm('Are you sure to delete username by comment (<?= $comm; ?>)?')){loadpage('./?remove-hotspot-user-by-comment=<?= $comm; ?>&session=<?= $session; ?>');loader();}else{}" title="Remove user by comment <?= $comm; ?>">  <i class="fa fa-trash"></i> <?= $_by_comment ?></button>
     <?php ;
   } ?>
   <script>
@@ -135,10 +135,10 @@ if (!isset($_SESSION["mikhmon"])) {
     if (comm === "" ){
       <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
       alert('Silakan pilih salah satu Comment terlebih dulu!');
-      <?php 
+      <?php
     } else { ?>
       alert('Please choose one of the Comments first!');
-      <?php 
+      <?php
     } ?>
     }else{
       var win = window.open(url, '_blank');
@@ -148,13 +148,13 @@ if (!isset($_SESSION["mikhmon"])) {
   <button class="btn bg-primary" title='Print' onclick="printV('qr','no');"><i class="fa fa-print"></i> <?= $_print_default ?></button>
   <button class="btn bg-primary" title='Print QR' onclick="printV('qr','yes');"><i class="fa fa-print"></i> <?= $_print_qr ?></button>
   <button class="btn bg-primary" title='Print Small'onclick="printV('small','yes');"><i class="fa fa-print"></i> <?= $_print_small ?></button>
-  </div>  
+  </div>
 </div>
-<div class="overflow mr-t-10 box-bordered" style="max-height: 75vh">   
+<div class="overflow mr-t-10 box-bordered" style="max-height: 75vh">
 <table id="dataTable" class="table table-bordered table-hover text-nowrap">
   <thead>
   <tr>
-    <th style="min-width:50px;" class="align-middle text-center" ><?= $counttuser; ?></th>
+    <th style="min-width:50px;" class="align-middle text-center" id="cuser"><?= $counttuser; ?></th>
     <th style="min-width:50px;" class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Server</th>
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> <?= $_name ?></th>
     <th>Print</th>
@@ -165,7 +165,7 @@ if (!isset($_SESSION["mikhmon"])) {
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> <?= $_comment ?></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="tbody">
 <?php
 for ($i = 0; $i < $TotalReg; $i++) {
   $userdetails = $getuser[$i];
@@ -195,13 +195,14 @@ for ($i = 0; $i < $TotalReg; $i++) {
 
   echo "<tr>";
   ?>
-  
-  <td style='text-align:center;'>  <i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete username (<?= $uname; ?>)?')){window.location='./?remove-hotspot-user=<?= $uid; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $uname; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <td style='text-align:center;'>  <i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete username (<?= $uname; ?>)?')){loadpage('./?remove-hotspot-user=<?= $uid; ?>&session=<?= $session; ?>')}else{}" title='Remove <?= $uname; ?>'></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   <?php
   if ($udisabled == "true") {
-    echo "<a class='text-warning' title='Enable User " . $uname . "'  href='./?enable-hotspot-user=" . $uid . "&session=" . $session . "'><i class='fa fa-lock '></i></a></td>";
+    $uriprocess = "'./?enable-hotspot-user=" . $uid . "&session=" . $session."'";
+    echo '<span class="text-warning pointer" title="Enable User ' . $uname . '"  onclick="loadpage('.$uriprocess.')"><i class="fa fa-lock "></i></span></td>';
   } else {
-    echo "<a title='Disable User " . $uname . "'  href='./?disable-hotspot-user=" . $uid . "&session=" . $session . "'><i class='fa fa-unlock '></i></a></td>";
+    $uriprocess = "'./?disable-hotspot-user=" . $uid . "&session=" . $session."'";
+    echo '<span class="pointer" title="Disable User ' . $uname . '"  onclick="loadpage('.$uriprocess.')"><i class="fa fa-unlock "></i></span></td>';
   }
   echo "<td>" . $userver . "</td>";
   if ($uname == $upass) {
@@ -209,18 +210,20 @@ for ($i = 0; $i < $TotalReg; $i++) {
   } else {
     $usermode = "up";
   }
-  $popup = "javascript:window.open('./voucher/print.php?user=" . $usermode . "-" . $uname . "&qr=no&session=" . $session . "','_blank','width=310,height=450').print();";
-  $popupQR = "javascript:window.open('./voucher/print.php?user=" . $usermode . "-" . $uname . "&qr=yes&session=" . $session . "','_blank','width=310,height=450').print();";
+  $popup = "javascript:window.open('./voucher/print.php?user=" . $usermode . "-" . $uname . "&qr=no&session=" . $session . "','_blank','width=320,height=550').print();";
+  $popupQR = "javascript:window.open('./voucher/print.php?user=" . $usermode . "-" . $uname . "&qr=yes&session=" . $session . "','_blank','width=320,height=550').print();";
   echo "<td><a title='Open User " . $uname . "' href=./?hotspot-user=" . $uid . "&session=" . $session . "><i class='fa fa-edit'></i> " . $uname . " </a>";
-  echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popup . '"><i class="fa fa-print"></i></a> &nbsp <a title="Print ' . $uname . '" href="' . $popupQR . '"><i class="fa fa-qrcode"></i></a></td>';
+  echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popup . '"><i class="fa fa-print"></i></a> &nbsp <a title="Print ' . $uname . '" href="' . $popupQR . '"><i class="fa fa-qrcode"></i> </a></td>';
   echo "<td>" . $uprofile . "</td>";
   echo "<td style=' text-align:right'>" . $uuptime . "</td>";
   echo "<td style=' text-align:right'>" . $ubytesi . "</td>";
   echo "<td style=' text-align:right'>" . $ubyteso . "</td>";
   echo "<td>";
   if ($uname == "default-trial") {
-  } else {
+  } else if (substr($ucomment,0,3) == "vc-" || substr($ucomment,0,3) == "up-") {
     echo "<a href=./?hotspot=users&comment=" . $ucomment . "&session=" . $session . " title='Filter by " . $ucomment . "'>" . $ucomment . "</a>";
+  } else {
+    echo $ucomment.' ';
   }
   echo $utimelimit . ' ' . $udatalimit . "</td>";
 

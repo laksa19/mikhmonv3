@@ -24,6 +24,8 @@ ini_set('max_execution_time', 300);
 if (!isset($_SESSION["mikhmon"])) {
 	header("Location:../admin.php?id=login");
 } else {
+// time zone
+date_default_timezone_set($_SESSION['timezone']);
 
 	$genprof = $_GET['genprof'];
 	if ($genprof != "") {
@@ -59,6 +61,7 @@ if (!isset($_SESSION["mikhmon"])) {
 	$srvlist = $API->comm("/ip/hotspot/print");
 
 	if (isset($_POST['qty'])) {
+		
 		$qty = ($_POST['qty']);
 		$server = ($_POST['server']);
 		$user = ($_POST['user']);
@@ -455,10 +458,7 @@ if (!isset($_SESSION["mikhmon"])) {
 // get valid $ price
 function GetVP(){
   var prof = document.getElementById('uprof').value;
-  var url = "./process/getvalidprice.php?name=";
-  var session = "&session=<?= $session; ?>"
-  var getvalidprice = url+prof+session
-  $("#GetValidPrice").load(getvalidprice);
-}
+  $("#GetValidPrice").load("./process/getvalidprice.php?name="+prof+"&session=<?= $session; ?> #getdata");
+} 
 </script>
 </div>

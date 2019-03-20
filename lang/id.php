@@ -14,7 +14,7 @@ $_admin_settings = "Pengaturan Admin";
 $_all = "Semua";
 $_auto_reload = "Memuat Otomatis";
 $_bluetooth_ac = "Kode akses Cetak BT";
-$_board_name = "Nama Papan";
+$_board_name = "Papan Nama";
 $_by_comment = "Berdasarkan Komentar";
 $_cancel = "Batal";
 $_character = "Karakter";
@@ -91,7 +91,6 @@ $_readme = "Baca Saya";
 $_reboot = "Yakin akan menyakan ulang";
 $_remove = "Hapus";
 $_report = "Laporan";
-$_reset_start_date = "Atur Ulang Tanggal Mulai";
 $_resume = "Ringkasan";
 $_router_list = "Daftar Router";
 $_save = "Simpan";
@@ -161,17 +160,16 @@ $_details_user_profile = '
 '.$_expired_mode.' adalah kontrol untuk user hotspot.<br>
         Pilihan : Remove, Notice, Remove & Record,Notice & Record.
         <ul>
-        <li>Remove : User akan dihapus ketika sudah grace period habis.</li>
+        <li>Remove : User akan dihapus ketika sudah kadaluarsa.</li>
         <li>Notice : User tidah dihapus dan akan mendapatkan notifikasi setelah user expired.</li>
         <li>Record : Menyimpan data harga tiap user yang login. Untuk menghitung total penjualan user hotspot dan ditampilkan dalam laporan penjualan.</li>
         </ul>
         </p>
-        <p>'.$_grace_period.' : Tenggang waktu sebelum user dihapus.</p>
         <p>'.$_lock_user.' : Username/Kode voucher hanya bisa digunakan pada 1 perangkat saja.</p>
 ';
 
 $_format_validity_grace_period = '
-Format '.$_validity.' & '.$_grace_period.'<br>
+Format '.$_validity.'<br>
 [wdhm] Contoh : 30d = 30'.$_days.', 12h = 12'.$_hours.', 4w3d = 31'.$_days.'.
 ';
 
@@ -188,8 +186,7 @@ $_help_report = '
 	<li>Untuk filter per bulan, pilih Day dan bulannya, kemudian klik Filter.<br>
 	<img width="70%" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATUAAAAsCAYAAAAEsS/jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOlSURBVHhe7d09TtxAGMbxnCYSKOJDCggtqZIqHCRVpFwDiYJj0MARIq2i5QQUW6RH0CJST/x6bM/YM7Z38cfi1//iJ2F7PCvGfp+ZYQs+nH+7MACgBaEGQBVCDYAqhBoAVQg1AKoQagBUaQy1xdfv0fMA8F7VhtrBycLsH382Hz8dYgf2jxh74C2ioXZ4ujB7SVEdn33BjuQPKHYNmJtt6iEINdlyygrt+Ow8aIzxEGqA0ynUBMW0e4Qa4BBqChBqgEOoKUCoAQ6hpgChBjiEmgKEGuAQagoQaoBDqClAqAHOiKF2bZZP/8zLa+jhNtYem+oUardr8/J0by5j14AJGj3UggC7ujePBFsnhBrg7D7UhBTW69rc5MdZ0LnV3LNZXtlrN+vkeH3n3W/7fVxde+em7ffyj/e7W3Iu1lb0GmoNY2+vrc1y9eyue/deyvlSQN6Zh6SNe+bhat09N2nr9f3016yD51rtD3MwZD0MF2rpy5oVT7ByywohL5ZoAHrHCvz4+St4iHIu1lb0FmptY58HXjGp2JDJg6c51LK+vAkpbV+Epm0bXPf7Y1U5S0PWw4Ch1nSt+nKXZ+v0WmnlpoM/OzXNSqK3UIsojX0aat7KLeGvnIMQqjyrQKm/SNvK58lnaVqRY3ND1cPIoZbN3DmvWPyXW36uLZoJ82enpllJ9B9qNWPfU6il9xT9N4Ra6b2Qn8ufjfkYqh7G2X56BVW7rSkKUdrq2nr6ZEZqm5VEf6HWMvYdQ60Is2h/5ba5tE/pX9qW+sbcDFEP43xREFk5xIslKYZV0lbh1jMnM1LbrCS2eYhFSOTn/PFuG/tOoZY9M3+ltUGo2Tb2CwS2nvM2RD0ME2rpS+ud9wOuOPZm90w+60dDcma2eYjV8fVDqXXsW0LNtnfX05ArnlE1tOxx8/ZT2Pem9C0s0GD0UEuLpCR8WYttipCCqhRLqlqAM7ZVqCWC8W265o99W6hV7n9c3ZUnsjwkU9KPDTK7AqsLtdgKEKg3Yqj1TArE30bN2LahNjUSamw9sanJhpqsCGKz+hzpDjVZ4YereaDO9EIt+xscqzRHbahl21VWadjG9EINAbWhBrwBoaYAoQY4hJoChBrgEGoKEGqA0ynU3D8zjt+AcRBqgNMp1MTBycLsHfFf2neJUAOczqEmDk8X6Yot7wzj2k8mldh5AM1qQ03IVjR2HgDeq8ZQA4CpIdQAqEKoAVCFUAOgCqEGQBVCDYAiF+Y/bd3pxgv3MhEAAAAASUVORK5CYII=">
 	</li>
-	<li>Filter berdasarkan '.$_prefix.', isikan '.$_prefix.' '.$_user_name.' di kolom '.$_search.', kemudian klik filter.</li>
-	<li>Filter berdasarkan '.$_comment.', isikan !!'.$_comment.' di kolom '.$_search.', kemudian klik filter. Atau klik salah satu '.$_comment.'. (Mikhmon Online).</li>
+	<li>Untuk filter berdasarkan '.$_prefix.', isikan '.$_prefix.' di kolom '.$_search.', kemudian klik filter.</li>
 	<li>Disarankan untuk menghapus laporan penjualan setelah mengunduh laporan CSV.</li>
 	</ul>
 ';

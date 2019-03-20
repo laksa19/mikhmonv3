@@ -214,7 +214,8 @@ $getquickprint = $API->comm("/system/script/print", array("?name" => "$quickprin
          
 // Print BT
   $chl = urlencode("http://$dnsname/login?username=$uname&password=$upass");
-  $qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=100x100&chld=L|0&chl=' . $chl . '&choe=utf-8';
+	//$qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=100x100&chld=L|0&chl=' . $chl . '&choe=utf-8';
+	$qrcode = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='.$chl;
 
 if ($currency == in_array($currency, $cekindo['indo'])) {
   $pricebt = $currency . " " . number_format($getprice, 0, ",", ".");

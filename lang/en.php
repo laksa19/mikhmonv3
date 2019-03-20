@@ -160,17 +160,17 @@ $_details_user_profile = '
 '.$_expired_mode.' is the control for the hotspot user.<br>
 Options : Remove, Notice, Remove & Record, Notice & Record.
 <ul>
-<li>Remove: User will be deleted when the grace period expires.</li>
+<li>Remove: User will be deleted when expires.</li>
 <li>Notice: User will not deleted and get notification after user expiration.</li>
 <li>Record: Save the price of each user login. To calculate total sales of hotspot users.</li>
 </ul>
 </p>
-        <p>'.$_grace_period.' : Grace period before user deleted.</p>
+        
         <p>'.$_lock_user.' : Username can only be used on 1 device only.</p>
 ';
 
 $_format_validity_grace_period = '
-Format '.$_validity.' & '.$_grace_period.'<br>
+Format '.$_validity.'<br>
 [wdhm] Example : 30d = 30'.$_days.', 12h = 12'.$_hours.', 4w3d = 31'.$_days.'.
 ';
 

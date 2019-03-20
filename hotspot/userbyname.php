@@ -76,6 +76,10 @@ if (!isset($_SESSION["mikhmon"])) {
     echo "<script>window.location='./?hotspot=users&profile=all&session=" . $session . "'</script>";
   }
 
+  if((substr($ucomment,3,1) == "/" && substr($ucomment,6,1) == "/") || substr($ucomment,0,3) == "vc-" || substr($ucomment,0,3) == "up-"){
+		$commt = 'disabled';
+  }
+  
   $getprofilebyuser = $API->comm("/ip/hotspot/user/profile/print", array(
     "?name" => "$uprofile"
   ));
@@ -92,7 +96,7 @@ if (!isset($_SESSION["mikhmon"])) {
   $start = $schdetails['start-date'] . " " . $schdetails['start-time'];
   $end = $schdetails['next-run'];
 	//$valy = $schdetails['interval'];
-// share WhatsApp  
+// share WhatsApp
   if ($getvalid != "") {
     $wavalid = $_validity." : *" . $getvalid . "* %0A";
   } else {
@@ -131,7 +135,7 @@ Password : *" . $upass . "* %0A
 " . $wadlimit . "
 " . $waprice . " %0A
 Login : *http://" . $dnsname . "* %0A
---------- 
+---------
 ";
   $shareWAVC = "
 %0A---------%0A
@@ -156,7 +160,9 @@ include('./include/quickbt.php');
 
 // Print BT
   $chl = urlencode("http://$dnsname/login?username=$uname&password=$upass");
-  $qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=100x100&chld=L|0&chl=' . $chl . '&choe=utf-8';
+	//$qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=100x100&chld=L|0&chl=' . $chl . '&choe=utf-8';
+  $qrcode = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='.$chl;
+ 
 
 
 if ($currency == in_array($currency, $cekindo['indo'])) {
@@ -204,6 +210,14 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
     } else {
       $datalimit = $datalimit * $mbgb;
     }
+    if ($name == $password) {
+      $usermode = "vc-";
+    }else{
+      $usermode = "up-";
+    }
+    if (empty($comment)){
+      $comment = $usermode.$comment;
+    }
     $API->comm("/ip/hotspot/user/set", array(
       ".id" => "$uid",
       "server" => "$server",
@@ -235,7 +249,7 @@ include('./voucher/printbt.php');
 <div class="col-12"></div>
 <div class="card">
 <div class="card-header">
-    <h3><i class="fa fa-edit"></i> <?= $_edit_user ?></h3>
+    <h3><i class="fa fa-edit"></i> <?php  echo $_edit_user.' '.$uname.' '; if ($utimelimit == "1s") {  echo $_expired;}?></h3>
 </div>
 <div class="card-body">
 <form autocomplete="new-password" method="post" action="">
@@ -256,7 +270,7 @@ include('./voucher/printbt.php');
     }
     ?>
     <button type="submit" name="save" class="btn bg-primary" > <i class="fa fa-save"></i> <?= $_save ?></button>
-    <div class="btn bg-danger"  onclick="if(confirm('Are you sure to delete username (<?= $uname; ?>)?')){window.location='./?remove-hotspot-user=<?= $uid; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $uname; ?>'><i class='fa fa-minus-square'></i> <?= $_remove ?></div>
+    <div class="btn bg-danger"  onclick="if(confirm('Are you sure to delete username (<?= $uname; ?>)?')){loadpage('./?remove-hotspot-user=<?= $uid; ?>&session=<?= $session; ?>')}else{}" title='Remove <?= $uname; ?>'><i class='fa fa-minus-square'></i> <?= $_remove ?></div>
     <a class="btn bg-secondary"  title="Print" href="javascript:window.open('./voucher/print.php?user=<?= $usermode . "-" . $uname; ?>&qr=no&session=<?= $session; ?>','_blank','width=310,height=450').print();"> <i class="fa fa-print"></i> <?= $_print ?></a>
     <a class="btn bg-info"  title="Print QR" href="javascript:window.open('./voucher/print.php?user=<?= $usermode . "-" . $uname; ?>&qr=yes&session=<?= $session; ?>','_blank','width=310,height=450').print();"> <i class="fa fa-qrcode"></i> <?= $_print_qr ?></a>
     <?php if ($utimelimit == "1s") {
@@ -264,7 +278,7 @@ include('./voucher/printbt.php');
     } ?>
     <a id="shareWA" class="btn bg-green" title="Share WhatsApp" href="whatsapp://send?text=<?= $shareWA; ?>"> <i class="fa fa-whatsapp"></i> <?= $_share ?></a>
     <!--<div id="shareWA" class="btn bg-blue printBT" title="Print Bluetooth"><i class="fa fa-bluetooth"></i> <?= $_print ?> BT</div>-->
-    <div id="shareWA" class="btn bg-blue" onclick="sendToQuickPrinterChrome()" title="Print Bluetooth"><i class="fa fa-bluetooth"></i> <?= $_print ?> BT</div><br>    
+    <div id="shareWA" class="btn bg-blue" onclick="sendToQuickPrinterChrome()" title="Print Bluetooth"><i class="fa fa-bluetooth"></i> <?= $_print ?> BT</div><br>
   </div>
 <table class="table">
   <tr>
@@ -272,10 +286,10 @@ include('./voucher/printbt.php');
     <td>
 			<select class="form-control" name="disabled" required="1">
 				<option value="<?= $ueduser; ?>"><?php if ($ueduser == "true") {
-                                      echo "No";
-                                    } else {
-                                      echo "Yes";
-                                    } ?></option>
+          echo "No";
+        } else {
+          echo "Yes";
+        } ?></option>
 				<option value="no">Yes</option>
 				<option value="yes">No</option>
 			</select>
@@ -286,10 +300,10 @@ include('./voucher/printbt.php');
     <td>
 			<select class="form-control" name="server" required="1">
 				<option><?php if ($userver == "") {
-              echo "all";
-            } else {
-              echo $userver;
-            } ?></option>
+  echo "all";
+} else {
+  echo $userver;
+} ?></option>
 				<option>all</option>
 				<?php $TotalReg = count($srvlist);
     for ($i = 0; $i < $TotalReg; $i++) {
@@ -309,9 +323,9 @@ include('./voucher/printbt.php');
       <input class="group-item group-item-l" id="passUser" type="password" name="pass" autocomplete="new-password" value="<?= $upass; ?>">
     </div>
           <div class="input-group-1 col-box-2">
-            <div class="group-item group-item-r pd-2p5 text-center">
-              <input title="Show/Hide Password" type="checkbox" onclick="PassUser()">
-            </div>
+<div class="group-item group-item-r pd-2p5 text-center">
+  <input title="Show/Hide Password" type="checkbox" onclick="PassUser()">
+</div>
           </div>
   </div>
 		</td>
@@ -333,25 +347,21 @@ include('./voucher/printbt.php');
   </tr>
   <tr>
     <td class="align-middle">Uptime</td><td><input class="form-control" type="text" value="<?php if ($uuptime == 0) {
-                                                                                          } else {
-                                                                                            echo $uuptime;
-                                                                                          } ?>" disabled></td>
+      } else {
+        echo $uuptime;
+      } ?>" disabled></td>
   </tr>
   <tr>
     <td class="align-middle">Bytes  In / Out</td><td><input class="form-control" type="text" value="<?php if ($ubytesout == 0) {
-                                                                                                    } else {
-                                                                                                      echo formatBytes($ubytesin, 2);
-                                                                                                    } ?> / <?php if ($ubytesout == 0) {
-                                                                                                          } else {
-                                                                                                            echo formatBytes($ubytesout, 2);
-                                                                                                          } ?>" disabled></td>
+    } else {
+      echo formatBytes($ubytesin, 2);
+    } ?> / <?php if ($ubytesout == 0) {
+    } else {
+          echo formatBytes($ubytesout, 2);
+    } ?>" disabled></td>
   </tr>
   <tr>
-    <td class="align-middle"><?= $_time_limit ?></td><td><input id="timelimit" class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if ($utimelimit == "1s") {
-                                                                                                                                              echo "";
-                                                                                                                                            } else {
-                                                                                                                                              echo $utimelimit;
-                                                                                                                                            } ?>"></td>
+    <td class="align-middle"><?= $_time_limit ?></td><td><input id="timelimit" class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if ($utimelimit == "1s") {echo "";} else {echo $utimelimit;} ?>"></td>
   </tr>
   <tr>
     <td class="align-middle"><?= $_data_limit ?></td><td>
@@ -361,11 +371,7 @@ include('./voucher/printbt.php');
       </div>
           <div class="input-group-2 col-box-3">
               <select style="padding: 4.2px;" class="group-item group-item-r" id="mbgb" name="mbgb" required="1">
-				        <option value="<?php if ($MG == "MB") {
-                            echo "1048576";
-                          } elseif ($MG == "GB") {
-                            echo "1073741824";
-                          } ?>"><?= $MG; ?></option>
+				        <option value="<?php if ($MG == "MB") {echo "1048576";  } elseif ($MG == "GB") {echo "1073741824";  } ?>"><?= $MG; ?></option>
 				        <option value=1048576>MB</option>
 				        <option value=1073741824>GB</option>
 			        </select>
@@ -374,33 +380,23 @@ include('./voucher/printbt.php');
     </td>
   </tr>
   <tr>
-    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>"></td>
+    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>" <?= $commt ?>></td>
   </tr>
   <tr>
     <td class="align-middle"><?= $_price ?></td><td><input class="form-control" id="price" type="text" value="<?php if ($getprice == 0) {
-                                                                                          } else {
-                                                                                            if ($currency == in_array($currency, $cekindo['indo'])) {
-                                                                                              echo $currency . " " . number_format($getprice, 0, ",", ".");
-                                                                                            } else {
-                                                                                              echo $currency . " " . number_format($getprice);
-                                                                                            }
-                                                                                          } ?>" disabled></td>
+      } else {
+        if ($currency == in_array($currency, $cekindo['indo'])) {
+          echo $currency . " " . number_format($getprice, 0, ",", ".");
+        } else {
+          echo $currency . " " . number_format($getprice);
+        }
+      } ?>" disabled></td>
   </tr>
   <?php if ($getvalid != "") { ?>
   <tr>
     <td class="align-middle"><?= $_validity ?></td><td><input class="form-control" type="text" id="validity" value="<?= $getvalid; ?>" disabled></td>
   </tr>
-  <tr>
-    <td class="align-middle"><?= $_start ?></td><td><input class="form-control" type="text" value="<?= $start; ?>" disabled></td>
-  </tr>
-  <tr>
-    <td class="align-middle"><?php if ($utimelimit == "1s") {
-                              echo $_expitred;
-                            } else {
-                              echo $_end;
-                            } ?></td><td><input class="form-control" type="text" value="<?= $end; ?>" disabled></td>
-  </tr>
-  <?php 
+  <?php
 } else {
 } ?>
   <tr>

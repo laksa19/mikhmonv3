@@ -72,9 +72,10 @@ for ($i = 0; $i < $TotalReg; $i++) {
 	$domain = $cookies['domain'];
 	$exp = formatDTM($cookies['expires-in']);
 
+	$uriprocess = "'./?remove-cookie=" . $id . "&session=" . $session . "'";
 
 	echo "<tr>";
-	echo "<td style='text-align:center;'><a  title='Remove " . $user . "' href='./?remove-cookie=" . $id . "&session=" . $session . "'><i class='fa fa-minus-square text-danger'></i></a></td>";
+	echo "<td style='text-align:center;'><span class='pointer'  title='Remove " . $user . "' onclick=loadpage(".$uriprocess.")><i class='fa fa-minus-square text-danger'></i></span></td>";
 	echo "<td>" . $user . "</td>";
 	echo "<td>" . $maca . "</td>";
 	echo "<td>" . $domain . "</td>";

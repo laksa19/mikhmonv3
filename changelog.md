@@ -20,7 +20,8 @@
 ![newqr](https://raw.githubusercontent.com/laksa19/laksa19.github.io/master/img/newqr.gif)
    
 3. Penghapusan Grace period. 
-4. Perubahan mode expired. 
+4. Pehapusan info start dan end user.
+5. Perubahan mode expired. 
 	
 	Mode baru ini tidak lagi menggunakan scheduler per user. Sebagai gantinya informasi tanggal expired akan dipindahkan ke comment user setelah login. Silakan update user profile agar dapat menggunakan mode expired yang baru. Perngecekan expired user yang login sebelum user profile diupdate atau yang masih menggunakan mode expired versi 3.12, bisa melalui scheduler di Mikhmon.
 

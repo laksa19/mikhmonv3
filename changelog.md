@@ -22,7 +22,7 @@
 3. Penghapusan Grace period. 
 4. Perbahan mode expired. Silakan update user profile agar dapat menggunakan mode expired yang baru.
 
-    !Untuk yang menggunakan expired mode dengan record jangan update user profile yang sudah ada. Sebaiknya buat user profile baru dan generate user baru dengan user profile tersebut. Apa yang terjadi jika diupdate? Report penjualan akan menjadi bertambah untuk masing-user yang sudah login.
+    !Untuk yang menggunakan expired mode dengan record jangan update user profile yang sudah ada. Sebaiknya buat user profile baru dan generate user baru dengan user profile tersebut. Apa yang terjadi jika diupdate? Report penjualan akan menjadi bertambah untuk masing-user yang sudah login. Tapi kalau tidak ada masalah dengan data penjualan yang double, silakan update user profilenya.
 
 ### Update 03-12 2019 V3.12 R1
 1. Perbaikan user profile. Meminimalisir user terhapus sesaat setelah login. !Silakan update user profile dari Mikhmon.

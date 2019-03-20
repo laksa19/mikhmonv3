@@ -17,7 +17,7 @@
 </style>
 ```
 
-
+![newqr](https://raw.githubusercontent.com/laksa19/laksa19.github.io/master/img/newqr.gif)
    
 3. Penghapusan Grace period. 
 4. Perbahan mode expired. Silakan update user profile agar dapat menggunakan mode expired yang baru.

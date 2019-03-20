@@ -31,6 +31,8 @@
  		
 	```mar/20/2019 16:05:11```.
 
+6. Cek status voucher tidak bisa untuk user yang masih menggunakan profile dengan mode expired versi 3.12.
+
 ### Update 03-12 2019 V3.12 R1
 1. Perbaikan user profile. Meminimalisir user terhapus sesaat setelah login. !Silakan update user profile dari Mikhmon.
 

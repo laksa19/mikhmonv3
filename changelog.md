@@ -1,7 +1,7 @@
 ## Changelog
 
 ### Update 03-20 2019 V3.13
-1. Perbaikan QR Code.
+1. Perbaikan QR Code. Tidak lagi menggunakan Google chart API.
 2. Perubahan variable QR Code menjadi <?= $qrcode ?> tanpa tag <img>. 
 	  
    !Perlu penyesuaian untuk template hotspot, ubah 

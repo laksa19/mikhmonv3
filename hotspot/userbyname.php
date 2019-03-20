@@ -76,7 +76,7 @@ if (!isset($_SESSION["mikhmon"])) {
     echo "<script>window.location='./?hotspot=users&profile=all&session=" . $session . "'</script>";
   }
 
-  if((substr($ucomment,3,1) == "/" && substr($ucomment,6,1) == "/") || substr($ucomment,0,3) == "vc-" || substr($ucomment,0,3) == "up-"){
+  if((substr($ucomment,3,1) == "/" && substr($ucomment,6,1) == "/")){
 		$commt = 'disabled';
   }
   
@@ -215,9 +215,13 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
     }else{
       $usermode = "up-";
     }
-    if (empty($comment)){
+    
+    if((substr($comment,3,1) == "/" && substr($comment,6,1) == "/") || substr($comment,0,3) == "vc-" || substr($comment,0,3) == "up-"){
+      $comment = $comment;
+    }else{
       $comment = $usermode.$comment;
     }
+
     $API->comm("/ip/hotspot/user/set", array(
       ".id" => "$uid",
       "server" => "$server",

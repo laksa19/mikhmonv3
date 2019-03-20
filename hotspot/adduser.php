@@ -51,9 +51,9 @@ if (!isset($_SESSION["mikhmon"])) {
     }else{
       $usermode = "up-";
     }
-    if (!empty($chkvalid)){
+    
       $comment = $usermode.$comment;
-    }
+    
     $API->comm("/ip/hotspot/user/add", array(
       "server" => "$server",
       "name" => "$name",
@@ -160,11 +160,10 @@ if (!isset($_SESSION["mikhmon"])) {
     </td>
   </tr>
   <tr>
-    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" title="No special characters" id="comment" autocomplete="off" name="comment" value=""><input class="form-control" type="hidden" title="No special characters" id="valid" autocomplete="off" name="valid" value=""></td>
+    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" title="No special characters" id="comment" autocomplete="off" name="comment" value=""></td>
   </tr>
   <tr >
     <td  colspan="4" class="align-middle"  id="GetValidPrice"></td>
-    <div style="display:none"  id="tempvalid"></div>
   </tr>
 </table>
 </form>
@@ -197,10 +196,6 @@ if (!isset($_SESSION["mikhmon"])) {
 function GetVP(){
   var prof = document.getElementById('uprof').value;
   $("#GetValidPrice").load("./process/getvalidprice.php?name="+prof+"&session=<?= $session; ?> #getdata");
-  $("#tempvalid").load("./process/getvalidprice.php?name="+prof+"&session=<?= $session; ?> #validity");
-  setTimeout(function() {
-    document.getElementById('valid').value = document.getElementById('validity').innerHTML;
-}, 500);
 }  
 </script>
 </div>

@@ -20,7 +20,7 @@
 
    
 3. Penghapusan Grace period. 
-4. Perbahan mode expired.
+4. Perbahan mode expired. Silakan update user profile agar dapat menggunakan mode expired yang baru.
 
     !Untuk yang menggunakan expired mode dengan record jangan update user profile yang sudah ada. Sebaiknya buat user profile baru dan generate user baru dengan user profile tersebut. Apa yang terjadi jika diupdate? Report penjualan akan menjadi bertambah untuk masing-user yang sudah login.
 

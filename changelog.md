@@ -23,6 +23,8 @@
 4. Perbahan mode expired. Silakan update user profile agar dapat menggunakan mode expired yang baru.
 
     !Untuk yang menggunakan expired mode dengan record jangan update user profile yang sudah ada. Sebaiknya buat user profile baru dan generate user baru dengan user profile tersebut. Apa yang terjadi jika diupdate? Report penjualan akan menjadi bertambah untuk masing-user yang sudah login. Tapi kalau tidak ada masalah dengan data penjualan yang double, silakan update user profilenya.
+    
+    !Jangan hapus atau mengganti comment user jika sudah menggunakan format tanggal sebagai berikut : ```mar/20/2019 16:05:11```.
 
 ### Update 03-12 2019 V3.12 R1
 1. Perbaikan user profile. Meminimalisir user terhapus sesaat setelah login. !Silakan update user profile dari Mikhmon.

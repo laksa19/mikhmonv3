@@ -2,7 +2,7 @@
 
 ### Update 03-20 2019 V3.13
 1. Perbaikan QR Code. Tidak lagi menggunakan Google chart API.
-2. Perubahan variable QR Code menjadi <?= $qrcode ?> tanpa tag <img>. 
+2. Perubahan variable QR Code menjadi <?= $qrcode ?> tanpa tag ```<img>```. 
 	  
    !Perlu penyesuaian untuk template hotspot, ubah 
   ```<img src="<?= $qrcode ?>" >``` menjadi ```<?= $qrcode ?>``` tanpa tag ```<img>```. Bagi yang menggunakan template default bisa reset template default untuk menyesuaikan QR Code.

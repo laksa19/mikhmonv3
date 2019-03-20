@@ -4,7 +4,7 @@
 1. Perbaikan QR Code. Tidak lagi menggunakan Google chart API.
 2. Perubahan variable QR Code menjadi <?= $qrcode ?> tanpa tag ```<img>```. 
 	  
-   !Perlu penyesuaian untuk template hotspot, ubah 
+   ! Perlu penyesuaian untuk template hotspot, ubah 
   ```<img src="<?= $qrcode ?>" >``` menjadi ```<?= $qrcode ?>``` tanpa tag ```<img>```. Bagi yang menggunakan template default bisa reset template default untuk menyesuaikan QR Code.
 	  
    Untuk template voucher yang lain bisa menyesuaikan ukuran QR Code dapat menambahkan style sebagai berikut.

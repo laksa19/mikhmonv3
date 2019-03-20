@@ -1,5 +1,29 @@
 ## Changelog
 
+### Update 03-20 2019 V3.13
+1. Perbaikan QR Code.
+2. Perubahan variable QR Code menjadi <?= $qrcode ?> tanpa tag <img>. 
+	  
+   !Perlu penyesuaian untuk template hotspot, ubah 
+  ```<img src="<?= $qrcode ?>" >``` menjadi ```<?= $qrcode ?>``` tanpa tag ```<img>```. Bagi yang menggunakan template default bisa reset template default untuk menyesuaikan QR Code.
+	  
+   Untuk template voucher yang lain bisa menyesuaikan ukuran QR Code dapat menambahkan style sebagai berikut.
+```
+<style>
+ .qrcode{
+ height:80px;
+ width:80px;
+  }
+</style>
+```
+
+
+   
+3. Penghapusan Grace period. 
+4. Perbahan mode expired.
+
+    !Untuk yang menggunakan expired mode dengan record jangan update user profile yang sudah ada. Sebaiknya buat user profile baru dan generate user baru dengan user profile tersebut. Apa yang terjadi jika diupdate? Report penjualan akan menjadi bertambah untuk masing-user yang sudah login.
+
 ### Update 03-12 2019 V3.12 R1
 1. Perbaikan user profile. Meminimalisir user terhapus sesaat setelah login. !Silakan update user profile dari Mikhmon.
 

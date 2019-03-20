@@ -20,11 +20,13 @@
 ![newqr](https://raw.githubusercontent.com/laksa19/laksa19.github.io/master/img/newqr.gif)
    
 3. Penghapusan Grace period. 
-4. Perubahan mode expired, tidak menggunakan scheduler per user. Silakan update user profile agar dapat menggunakan mode expired yang baru. Perngecekan expired user yang login sebelum user profile diupdate bisa melalui scheduler di Mikhmon.
+4. Perubahan mode expired. 
+	
+	Mode baru ini tidak lagi menggunakan scheduler per user. Sebagai gantinya informasi tanggal expired akan dipindahkan ke comment user, setelah login. Silakan update user profile agar dapat menggunakan mode expired yang baru. Perngecekan expired user yang login sebelum user profile diupdate bisa melalui scheduler di Mikhmon.
 
-    !Untuk yang menggunakan expired mode dengan record jangan update user profile yang sudah ada. Sebaiknya buat user profile baru dan generate user baru dengan user profile tersebut. Apa yang terjadi jika diupdate? Report penjualan akan menjadi bertambah untuk masing-user yang sudah login. Tapi kalau tidak ada masalah dengan data penjualan yang double, silakan update user profilenya.
+    ! Untuk yang menggunakan expired mode dengan record jangan update user profile yang sudah ada. Sebaiknya buat user profile baru dan generate user baru dengan user profile tersebut. Apa yang terjadi jika diupdate? Report penjualan akan menjadi bertambah untuk masing-user yang sudah login. Tapi kalau tidak ada masalah dengan data penjualan yang double, silakan update user profilenya.
     
-    !Jangan hapus atau mengganti comment user jika sudah menggunakan format tanggal sebagai berikut : ```mar/20/2019 16:05:11```.
+    ! Jangan hapus atau mengganti comment user jika sudah menggunakan format tanggal sebagai berikut : ```mar/20/2019 16:05:11```.
 
 ### Update 03-12 2019 V3.12 R1
 1. Perbaikan user profile. Meminimalisir user terhapus sesaat setelah login. !Silakan update user profile dari Mikhmon.

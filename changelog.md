@@ -1,5 +1,8 @@
 ## Changelog
 
+### Update 03-21 2019 V3.13 r1
+1. Perbaikan user profile, untuk data penjualan. Silakan diupdate kembali user profilenya.
+
 ### Update 03-20 2019 V3.13
 1. Perbaikan QR Code. Tidak lagi menggunakan Google chart API.
 2. Perubahan variable QR Code menjadi <?= $qrcode ?> tanpa tag ```<img>```. 
@@ -33,7 +36,7 @@
 
 6. Cek status voucher tidak bisa untuk user yang masih menggunakan profile dengan mode expired versi 3.12.
 
-### Update 03-12 2019 V3.12 R1
+### Update 03-12 2019 V3.12 r1
 1. Perbaikan user profile. Meminimalisir user terhapus sesaat setelah login. !Silakan update user profile dari Mikhmon.
 
 ### Update 03-08 2019 V3.12

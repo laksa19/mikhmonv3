@@ -1,7 +1,7 @@
 ## Changelog
 
 ### Update 03-22 2019 V3.13 r2
-1. Perbaikan user profile, untuk data penjualan dobel. Silakan diupdate kembali user profilenya.
+1. Perbaikan user profile, untuk data penjualan dobel (user 2 digit angka). Silakan diupdate kembali user profilenya.
 
 ### Update 03-21 2019 V3.13 r1
 1. Perbaikan user profile, untuk data penjualan tidak muncul di Mikhmon. Silakan diupdate kembali user profilenya.

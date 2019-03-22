@@ -1,7 +1,10 @@
 ## Changelog
 
+### Update 03-22 2019 V3.13 r2
+1. Perbaikan user profile, untuk data penjualan dobel. Silakan diupdate kembali user profilenya.
+
 ### Update 03-21 2019 V3.13 r1
-1. Perbaikan user profile, untuk data penjualan. Silakan diupdate kembali user profilenya.
+1. Perbaikan user profile, untuk data penjualan tidak muncul di Mikhmon. Silakan diupdate kembali user profilenya.
 
 ### Update 03-20 2019 V3.13
 1. Perbaikan QR Code. Tidak lagi menggunakan Google chart API.

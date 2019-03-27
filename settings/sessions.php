@@ -22,8 +22,6 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
-  $_SESSION["v"] = "3.13";
-
 // array color
   $color = array('1' => 'bg-blue', 'bg-indigo', 'bg-purple', 'bg-pink', 'bg-red', 'bg-yellow', 'bg-green', 'bg-teal', 'bg-cyan', 'bg-grey', 'bg-light-blue');
 
@@ -167,7 +165,7 @@ if (!isset($_SESSION["mikhmon"])) {
         </tr>
         
       </table>
-      <div id="loadV"></div>
+      <div id="loadV">v<?= $_SESSION['v']; ?> <span ><i class="fa fa-info-circle"></i> <a class="text-blue" href="./admin.php?id=about">Check Update</a></span></div>
     </div>
     </div>
     </form>

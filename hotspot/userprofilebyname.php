@@ -46,6 +46,9 @@ if (!isset($_SESSION["mikhmon"])) {
   $ponlogin = $profiledetalis['on-login'];
   $sparent = $profiledetalis['parent-queue'];
 
+
+  if(empty($sparent)){$sparent = "none";}
+
   $getexpmode = explode(",", $ponlogin)[1];
 
   if ($getexpmode == "rem") {
@@ -74,7 +77,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
   $getlocku = explode(",", $ponlogin)[6];
   if ($getlocku == "") {
-    $getprice = "Disable";
+    $getlocku = "Disable";
   } else {
     $getlocku = $getlocku;
   }

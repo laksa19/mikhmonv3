@@ -535,29 +535,21 @@ if ($livereport == "enable" || $livereport == "") {
 } elseif ($userprofile == "add" || substr($userprofile, 0, 1) == "*" || $userprofile != "") {
   echo "<script>
   //enable disable input on ready
-$(document).ready(function(){
+  $(document).ready(function(){
     var exp = document.getElementById('expmode').value;
     var val = document.getElementById('validity').style;
-    var grp = document.getElementById('graceperiod').style;
     var vali = document.getElementById('validi');
-    var grpi = document.getElementById('gracepi');
     if (exp === 'rem' || exp === 'remc') {
       val.display= 'table-row';
       vali.type = 'text';
       $('#validi').focus();
-      grp.display = 'table-row';
-      grpi.type = 'text';
     } else if (exp === 'ntf' || exp === 'ntfc') {
       val.display = 'table-row';
       vali.type = 'text';
       $('#validi').focus();
-      grp.display = 'none';
-      grpi.type = 'hidden';
     } else {
       val.display = 'none';
-      grp.display = 'none';
       vali.type = 'hidden';
-      grpi.type = 'hidden';
     }
 });
 </script>";

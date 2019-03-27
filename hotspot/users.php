@@ -108,14 +108,21 @@ if (!isset($_SESSION["mikhmon"])) {
     } else {
       echo "<option value=''>".$_comment."</option>";
     }
+    $TotalReg = count($getuser);
     for ($i = 0; $i < $TotalReg; $i++) {
       $ucomment = $getuser[$i]['comment'];
-      if (substr($ucomment, 0, 2) == "vc" || substr($ucomment, 0, 2) == "up") {
-        if ($ucomment !== $getuser[$i - 1]['comment']) {
-          echo "<option value='" . $ucomment . "' >" . $ucomment . "</option>";
-        }
-      }
+      $acomment .= ",".$ucomment;
     }
+
+    $ocomment=  explode(",",$acomment);
+    
+    foreach (array_unique($ocomment) as $tcomment) {
+
+      if (is_numeric(substr($tcomment, 3, 3))) {
+        echo "<option value='" . $tcomment . "' >" . $tcomment. "</option>";
+       }
+      
+     }
 
     ?>
     </select>

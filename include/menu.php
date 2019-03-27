@@ -23,6 +23,7 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
+  include ('./include/version.php');
 
   $btnmenuactive = "font-weight: bold;background-color: #f9f9f9; color: #000000";
   if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?session") {

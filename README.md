@@ -5,7 +5,7 @@
 
 #### Update 03-27 2019 V3.13 r3
 1. Perbaikan edit profile.
-2. Perbaikan userlist (dobel koment di pilihan komen).
+2. Perbaikan userlist (dobel comment di pilihan/filter user berdasarkan comment).
 3. Penambahan changelog di laman About.
 
 #### Update 03-22 2019 V3.13 r2

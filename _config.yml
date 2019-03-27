@@ -1,23 +1,8 @@
-# Jekyll configuration
 
-whitelist:
-  - jekyll-redirect-from
-  - jekyll-github-metadata
-
-plugins:
-  - jekyll-redirect-from
-  - jekyll-github-metadata
 
 # Markdown
 
-highlighter: false
-markdown: kramdown
-kramdown:
-  input: GFM
-  hard_wrap: false
-  parse_block_html: true
-  syntax_highlighter_opts:
-    disable: true
+highlighter: true
 
 # Defaults
 

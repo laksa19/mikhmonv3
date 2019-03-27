@@ -16,7 +16,7 @@
 	  
    Untuk template voucher yang lain bisa menyesuaikan ukuran QR Code dapat menambahkan style sebagai berikut.
    
-```
+```html
 <style>
 .qrcode{
 height:80px;

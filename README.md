@@ -3,6 +3,11 @@
 [update.zip](https://github.com/laksa19/laksa19.github.io/blob/master/download/update.zip?raw=true)
 ### Changelog
 
+#### Update 03-27 2019 V3.13 r3
+1. Perbaikan edit profile.
+2. Perbaikan userlist (dobel koment di pilihan komen).
+3. Penambahan changelog di laman About.
+
 #### Update 03-22 2019 V3.13 r2
 1. Perbaikan user profile, untuk data penjualan dobel (user 2 digit angka). Silakan diupdate kembali user profilenya.
 

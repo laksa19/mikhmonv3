@@ -27,3 +27,5 @@ defaults:
       category: "Others"
       excerpt_separator: "<!--more-->"
       prism_languages: []
+
+theme: jekyll-theme-minimal

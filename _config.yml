@@ -1,6 +1,5 @@
 
 exclude:
-  - README.md
   - LICENSE
   - admin.php
   - index.php

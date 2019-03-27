@@ -1,5 +1,9 @@
 exclude:
   - README.md
+  - LICENSE
+  - admin.php
+  - index.php
+  - verson.txt
 
 highlighter: false
 markdown: kramdown

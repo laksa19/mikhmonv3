@@ -1,4 +1,15 @@
+# Jekyll configuration
 
+whitelist:
+  - jekyll-redirect-from
+  - jekyll-github-metadata
+
+plugins:
+  - jekyll-redirect-from
+  - jekyll-github-metadata
+  
 # Markdown
 
 highlighter: true
+
+

@@ -18,10 +18,10 @@
    
 ```html
 <style>
-.qrcode{
-height:80px;
-width:80px;
-}
+  .qrcode{
+  height:80px;
+  width:80px;
+  }
 </style>
 ```
 

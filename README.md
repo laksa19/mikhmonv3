@@ -3,6 +3,12 @@
 [update.zip](https://github.com/laksa19/laksa19.github.io/blob/master/download/update.zip?raw=true)
 ### Changelog
 
+#### Update 03-30 2019 V3.13 r4
+1. Perbaikan edit user.
+2. Penambahan nama profile di filter comment (user list).
+3. Penambahan hapus expired user (klik expired pada kolom comment user list).
+4. Perbaikan print laporan penjualan.
+
 #### Update 03-27 2019 V3.13 r3
 1. Perbaikan edit profile.
 2. Perbaikan userlist (dobel comment di pilihan/filter user berdasarkan comment).

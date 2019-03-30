@@ -55,9 +55,19 @@ if (!isset($_SESSION["mikhmon"])) {
       "count-only" => "",
       "?comment" => "$comm",
     ));
-    if ($counttuser == 0) {
-      echo "<script>window.location='./?hotspot=users&profile=all&session=" . $session . "</script>";
-    }
+    
+  }
+  $exp = $_GET['exp'];
+  if ($exp != "") {
+    $getuser = $API->comm("/ip/hotspot/user/print", array(
+      "?limit-uptime" => "1s",
+    ));
+    
+    $counttuser = $API->comm("/ip/hotspot/user/print", array(
+      "count-only" => "",
+      "?limit-uptime" => "1s",
+    ));
+    
   }
   $getprofile = $API->comm("/ip/hotspot/user/profile/print");
   $TotalReg2 = count($getprofile);
@@ -111,7 +121,8 @@ if (!isset($_SESSION["mikhmon"])) {
     $TotalReg = count($getuser);
     for ($i = 0; $i < $TotalReg; $i++) {
       $ucomment = $getuser[$i]['comment'];
-      $acomment .= ",".$ucomment;
+      $uprofile = $getuser[$i]['profile'];
+      $acomment .= ",".$ucomment."#". $uprofile;
     }
 
     $ocomment=  explode(",",$acomment);
@@ -119,9 +130,9 @@ if (!isset($_SESSION["mikhmon"])) {
     foreach (array_unique($ocomment) as $tcomment) {
 
       if (is_numeric(substr($tcomment, 3, 3))) {
-        echo "<option value='" . $tcomment . "' >" . $tcomment. "</option>";
+        echo "<option value='" . explode("#",$tcomment)[0] . "' >". explode("#",$tcomment)[0]." ".explode("#",$tcomment)[1]. "</option>";
        }
-      
+
      }
 
     ?>
@@ -133,8 +144,9 @@ if (!isset($_SESSION["mikhmon"])) {
   <div class="col-6">
     <?php if ($comm != "") { ?>
   <button class="btn bg-red" onclick="if(confirm('Are you sure to delete username by comment (<?= $comm; ?>)?')){loadpage('./?remove-hotspot-user-by-comment=<?= $comm; ?>&session=<?= $session; ?>');loader();}else{}" title="Remove user by comment <?= $comm; ?>">  <i class="fa fa-trash"></i> <?= $_by_comment ?></button>
-    <?php ;
-  } ?>
+    <?php ; }else if ($exp == "1"){ ?>
+  <button class="btn bg-red" onclick="if(confirm('Are you sure to delete users?')){loadpage('./?remove-hotspot-user-expired=1&session=<?= $session; ?>');loader();}else{}" title="Remove user expired">  <i class="fa fa-trash"></i> Expired Users</button>
+      <?php } ?>
   <script>
     function printV(a,b){
     var comm = document.getElementById('comment').value;
@@ -228,11 +240,13 @@ for ($i = 0; $i < $TotalReg; $i++) {
   echo "<td>";
   if ($uname == "default-trial") {
   } else if (substr($ucomment,0,3) == "vc-" || substr($ucomment,0,3) == "up-") {
-    echo "<a href=./?hotspot=users&comment=" . $ucomment . "&session=" . $session . " title='Filter by " . $ucomment . "'>" . $ucomment . "</a>";
-  } else {
+    echo "<a href=./?hotspot=users&comment=" . $ucomment . "&session=" . $session . " title='Filter by " . $ucomment . "'><i class='fa fa-search'></i> ". $ucomment." ". $udatalimit ." ".$utimelimit . "</a>";
+  } else if ($utimelimit == ' expired') {
+    echo "<a href=./?hotspot=users&profile=all&exp=1&session=" . $session . " title='Filter by expired'><i class='fa fa-search'></i> " . $ucomment." ". $udatalimit ." ".$utimelimit . "</a>";
+  }else{
     echo $ucomment.' ';
   }
-  echo $utimelimit . ' ' . $udatalimit . "</td>";
+  echo  "</td>";
 
 
 }

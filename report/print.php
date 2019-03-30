@@ -50,9 +50,11 @@ if (!isset($_SESSION["mikhmon"])) {
 		$_SESSION['report'] = "";
 	}
 	$_SESSION['idbl'] = $idbl;
-
+	$remdata = ($_POST['remdata']);
 	$prefix = $_GET['prefix'];
-
+	$fcomment = $_GET['comment'];
+	$range = $_GET['range'];
+	if(!empty($range)){$trange = "[".$range."]";}
 	
 	$pcomment = substr($prefix, 0,2);
 	if($pcomment == "!!"){
@@ -63,7 +65,45 @@ if (!isset($_SESSION["mikhmon"])) {
 	$timezone = $gettimezone[0]['time-zone-name'];
 	date_default_timezone_set($timezone);
 
+	if (isset($remdata)) {
+		if (strlen($idhr) > "0") {
+			if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+				$API->write('/system/script/print', false);
+				$API->write('?source=' . $idhr . '', false);
+				$API->write('=.proplist=.id');
+				$ARREMD = $API->read();
+				for ($i = 0; $i < count($ARREMD); $i++) {
+					$API->write('/system/script/remove', false);
+					$API->write('=.id=' . $ARREMD[$i]['.id']);
+					$READ = $API->read();
 
+				}
+			}
+		} elseif (strlen($idbl) > "0") {
+			if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+				$API->write('/system/script/print', false);
+				$API->write('?owner=' . $idbl . '', false);
+				$API->write('=.proplist=.id');
+				$ARREMD = $API->read();
+				for ($i = 0; $i < count($ARREMD); $i++) {
+					$API->write('/system/script/remove', false);
+					$API->write('=.id=' . $ARREMD[$i]['.id']);
+					$READ = $API->read();
+
+				}
+			}
+
+		}
+		echo "<script>window.location='./?report=selling&session=" . $session . "'</script>";
+	}
+
+	if ($pcomment == "!!"){
+		$fprefix = "-comment-[" . $fcomment . "]";
+	} else	if ($prefix != "") {
+		$fprefix = "-prefix-[" . $prefix . "]";
+	} else {
+		$fprefix = "";
+	}
 	if (strlen($idhr) > "0") {
 		if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
 			$getData = $API->comm("/system/script/print", array(
@@ -115,8 +155,10 @@ if (!isset($_SESSION["mikhmon"])) {
 		<meta charset="utf-8">
 		<meta http-equiv="cache-control" content="private" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
-		   /*table*/
+	/*table*/
   .table {
     width: 100%;
     background-color: #FFFFFF;
@@ -137,9 +179,27 @@ if (!isset($_SESSION["mikhmon"])) {
   
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #000 !important;
+   border: 1px solid #000 !important;
   }
-		  
+	@page
+	{
+   size: auto;
+   margin-left: 7mm;
+   margin-right: 3mm;
+   margin-top: 9mm;
+   margin-bottom: 3mm;
+	}
+	@media print
+	{
+   table { page-break-after:auto }
+   tr    { page-break-inside:avoid; page-break-after:auto }
+   td    { page-break-inside:avoid; page-break-after:auto }
+   thead { display:table-header-group }
+   tfoot { display:table-footer-group }
+	}	 
+	h3 {
+		margin:0px;
+	} 
 		</style>
 		
 	</head>
@@ -209,7 +269,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 		  <div class="overflow box-bordered" style="max-height: 70vh">
 			<table id="dataTable" class="table table-bordered table-hover text-nowrap">
-				<thead class="thead-light">
+				<thead><tr><th colspan="7"><?= "<h3>".$_selling_report."</h3>". $hotspotname ?></th></tr></thead>
 				<tr>
 				  <th style="text-align:left;" colspan=5 ><?= $_selling_report ?> <?= $trange.$filedownload . $fprefix; ?><b style="font-size:0;">,,,</b></th>
 				  <th style="text-align:right;"><?= $_total ?></th>
@@ -224,7 +284,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 					<th ><?= $_comment ?></th>
 					<th style="text-align:right;"> <?= $_price; ?></th>
 				</tr>
-				</thead>
+				
 				<tbody id="tbody">
 				<?php
 			if ($fcomment != "" || $pcomment == "!!") {

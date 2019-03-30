@@ -160,8 +160,8 @@ include('./include/quickbt.php');
 
 // Print BT
   $chl = urlencode("http://$dnsname/login?username=$uname&password=$upass");
-	//$qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=100x100&chld=L|0&chl=' . $chl . '&choe=utf-8';
-  $qrcode = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='.$chl;
+	$qrcode = 'https://chart.googleapis.com/chart?cht=qr&chs=100x100&chld=L|0&chl=' . $chl . '&choe=utf-8';
+  //$qrcode = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='.$chl;
  
 
 
@@ -199,6 +199,7 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
     $timelimit = ($_POST['timelimit']);
     $datalimit = ($_POST['datalimit']);
     $comment = ($_POST['comment']);
+    $hcomment = ($_POST['h_comment']);
     $mbgb = ($_POST['mbgb']);
     if ($timelimit == "") {
       $timelimit = "0";
@@ -216,7 +217,11 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
       $usermode = "up-";
     }
     
-    if((substr($comment,3,1) == "/" && substr($comment,6,1) == "/") || substr($comment,0,3) == "vc-" || substr($comment,0,3) == "up-"){
+    if((substr($hcomment,3,1) == "/" && substr($hcomment,6,1) == "/")){
+      $comment = $hcomment;
+    }elseif((substr($comment,3,1) == "/" && substr($comment,6,1) == "/")){
+      $comment = $comment;
+    }elseif(substr($comment,0,3) == "vc-" || substr($comment,0,3) == "up-"){
       $comment = $comment;
     }else{
       $comment = $usermode.$comment;
@@ -384,7 +389,7 @@ include('./voucher/printbt.php');
     </td>
   </tr>
   <tr>
-    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>" <?= $commt ?>></td>
+    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>" <?= $commt ?>><input type="hidden" name="h_comment" value="<?= $ucomment ?>"></td>
   </tr>
   <tr>
     <td class="align-middle"><?= $_price ?></td><td><input class="form-control" id="price" type="text" value="<?php if ($getprice == 0) {

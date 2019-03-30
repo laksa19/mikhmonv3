@@ -186,7 +186,7 @@ if (!isset($_SESSION["mikhmon"])) {
         <?= $_details_user_profile ?>
       </p>
       <p style="padding:0px 5px;">
-        <?= $_format_validity_grace_period ?>
+        <?= $_format_validity ?>
       </p>
     </td>
   </tr>

@@ -447,7 +447,12 @@ date_default_timezone_set($_SESSION['timezone']);
   </tr>
   <tr>
     <td colspan="2">
-		<?= $_details_add_user ?>
+		<p style="padding:0px 5px;">
+      <?= $_format_time_limit ?>
+    </p>
+    <p style="padding:0px 5px;">
+      <?= $_details_add_user ?>
+    </p>
     </td>
   </tr>
 </table>

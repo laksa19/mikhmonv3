@@ -91,6 +91,7 @@ $_readme = "Leeme";
 $_reboot = "Are you sure to reboot";
 $_remove = "Eliminar";
 $_report = "Reporte";
+$_reset_start_date = "Reset Start Date";
 $_resume = "Resumen";
 $_router_list = "Lista de Router";
 $_save = "Guardar";
@@ -165,13 +166,14 @@ Opciones : Remove, Notice, Remove & Record, Notice & Record.
 <li>Record: Guardar el precio de cada usuario de inicio de sesión. Para calcular las ventas totales de usuarios de hotspot..</li>
 </ul>
 </p>
+        
         <p>'.$_lock_user.' : El nombre de usuario solo se puede utilizar en 1 dispositivo.</p>
 ';
 
-$_format_validity_grace_period = '
+$_format_validity = '
 Formato '.$_validity.'<br>
-[wdhm] Ejemplo : 30d = 30'.$_days.', 12h = 12'.$_hours.', 4w3d = 31'.$_days.'.
-';
+[wdhm] Ejemplo : 30d = 30'.$_days.', 12h = 12'.$_hours.'.'
+;
 
 $_format_ip_binding = '
     Formato Upload/Download Max Limite<br>
@@ -187,6 +189,7 @@ $_help_report = '
 	<img width="70%" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATUAAAAsCAYAAAAEsS/jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOlSURBVHhe7d09TtxAGMbxnCYSKOJDCggtqZIqHCRVpFwDiYJj0MARIq2i5QQUW6RH0CJST/x6bM/YM7Z38cfi1//iJ2F7PCvGfp+ZYQs+nH+7MACgBaEGQBVCDYAqhBoAVQg1AKoQagBUaQy1xdfv0fMA8F7VhtrBycLsH382Hz8dYgf2jxh74C2ioXZ4ujB7SVEdn33BjuQPKHYNmJtt6iEINdlyygrt+Ow8aIzxEGqA0ynUBMW0e4Qa4BBqChBqgEOoKUCoAQ6hpgChBjiEmgKEGuAQagoQaoBDqClAqAHOiKF2bZZP/8zLa+jhNtYem+oUardr8/J0by5j14AJGj3UggC7ujePBFsnhBrg7D7UhBTW69rc5MdZ0LnV3LNZXtlrN+vkeH3n3W/7fVxde+em7ffyj/e7W3Iu1lb0GmoNY2+vrc1y9eyue/deyvlSQN6Zh6SNe+bhat09N2nr9f3016yD51rtD3MwZD0MF2rpy5oVT7ByywohL5ZoAHrHCvz4+St4iHIu1lb0FmptY58HXjGp2JDJg6c51LK+vAkpbV+Epm0bXPf7Y1U5S0PWw4Ch1nSt+nKXZ+v0WmnlpoM/OzXNSqK3UIsojX0aat7KLeGvnIMQqjyrQKm/SNvK58lnaVqRY3ND1cPIoZbN3DmvWPyXW36uLZoJ82enpllJ9B9qNWPfU6il9xT9N4Ra6b2Qn8ufjfkYqh7G2X56BVW7rSkKUdrq2nr6ZEZqm5VEf6HWMvYdQ60Is2h/5ba5tE/pX9qW+sbcDFEP43xREFk5xIslKYZV0lbh1jMnM1LbrCS2eYhFSOTn/PFuG/tOoZY9M3+ltUGo2Tb2CwS2nvM2RD0ME2rpS+ud9wOuOPZm90w+60dDcma2eYjV8fVDqXXsW0LNtnfX05ArnlE1tOxx8/ZT2Pem9C0s0GD0UEuLpCR8WYttipCCqhRLqlqAM7ZVqCWC8W265o99W6hV7n9c3ZUnsjwkU9KPDTK7AqsLtdgKEKg3Yqj1TArE30bN2LahNjUSamw9sanJhpqsCGKz+hzpDjVZ4YereaDO9EIt+xscqzRHbahl21VWadjG9EINAbWhBrwBoaYAoQY4hJoChBrgEGoKEGqA0ynU3D8zjt+AcRBqgNMp1MTBycLsHfFf2neJUAOczqEmDk8X6Yot7wzj2k8mldh5AM1qQ03IVjR2HgDeq8ZQA4CpIdQAqEKoAVCFUAOgCqEGQBVCDYAiF+Y/bd3pxgv3MhEAAAAASUVORK5CYII=">
 	</li>
 	<li>Para filtros basados en'.$_prefix.', completar '.$_prefix.' en la entrada de búsqueda, luego haga clic en filtro.</li>
+	<li>Filtre en base a los comentarios, complete el !!Comentario en la columna Buscar y luego haga clic en filtro O haga clic en uno de los comentarios. (Mikhmon Online).</li>
 		        <li>Se recomienda eliminar el informe de ventas después de descargar el informe CSV.</li>
 	</ul>
 ';

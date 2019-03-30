@@ -83,6 +83,7 @@ if (!isset($_SESSION["mikhmon"])) {
   $removeuserprofile = $_GET['remove-user-profile'];
   $resethotspotuser = $_GET['reset-hotspot-user'];
   $removehotspotuserbycomment = $_GET['remove-hotspot-user-by-comment'];
+  $removeexpiredhotspotuser = $_GET['remove-hotspot-user-expired'];
   $enablehotspotuser = $_GET['enable-hotspot-user'];
   $disablehotspotuser = $_GET['disable-hotspot-user'];
   $enableipbinding = $_GET['enable-ip-binding'];
@@ -263,6 +264,13 @@ include_once('./hotspot/listquickprint.php');
 
     include_once('./process/removehotspotuserbycomment.php');
   }
+
+// remove expired hotspot user
+elseif ($removeexpiredhotspotuser != "") {
+  echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
+
+  include_once('./process/removeexpiredhotspotuser.php');
+}   
 
 // reset hotspot user
   elseif ($resethotspotuser != "") {

@@ -4,7 +4,7 @@
 ### Changelog
 
 #### Update 03-31 2019 V3.13 r5
-1. Perbaikan user profile. (user expired saat pergantian bulan). Silakan diupdate kembali user profilenya.
+1. Perbaikan user profile. (user expired dipergantian bulan). Silakan diupdate kembali user profilenya.
 
 #### Update 03-30 2019 V3.13 r4
 1. Perbaikan edit user.

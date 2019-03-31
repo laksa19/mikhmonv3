@@ -114,6 +114,7 @@ if (!isset($_SESSION["mikhmon"])) {
     }
 
     $randstarttime = "0".rand(1,5).":".rand(10,59).":00";
+    $randinterval = "00:02:".rand(10,59);
 
     $parent = ($_POST['parent']);
 
@@ -140,7 +141,7 @@ if (!isset($_SESSION["mikhmon"])) {
       $onlogin = "";
     }
 
-    $bgservice = ':global dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" ); :local monthdays ( 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ); :local days [ :pick $d 4 6 ]; :local month [ :pick $d 0 3 ]; :local year [ :pick $d 7 11 ]; :local months ([ :find $montharray $month]); :for i from=0 to=$months do={ :set days ( $days + [ :pick $monthdays $i ] ) }; :return ($days + $year * 365); }; :global timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
+    $bgservice = ':global dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" );:local days [ :pick $d 4 6 ];:local month [ :pick $d 0 3 ];:local year [ :pick $d 7 11 ];:local monthint ([ :find $montharray $month]);:local month ($monthint + 1);:if ( [len $month] = 1) do={:local zero ("0");:return [:tonum ("$year$zero$month$days")];} else={:return [:tonum ("$year$month$days")];}}; :global timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
     
 
     $API->comm("/ip/hotspot/user/profile/set", array(
@@ -158,7 +159,7 @@ if (!isset($_SESSION["mikhmon"])) {
       $API->comm("/system/scheduler/add", array(
         "name" => "$name",
         "start-time" => "$randstarttime",
-        "interval" => "00:02:00",
+        "interval" => "$randinterval",
         "on-event" => "$bgservice",
         "disabled" => "no",
         "comment" => "Monitor Profile $name",
@@ -168,7 +169,7 @@ if (!isset($_SESSION["mikhmon"])) {
       ".id" => "$monid",
       "name" => "$name",
       "start-time" => "$randstarttime",
-      "interval" => "00:02:00",
+      "interval" => "$randinterval",
       "on-event" => "$bgservice",
       "disabled" => "no",
       "comment" => "Monitor Profile $name",

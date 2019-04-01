@@ -3,6 +3,15 @@
 [update.zip](https://github.com/laksa19/laksa19.github.io/blob/master/download/update.zip?raw=true)
 ### Changelog
 
+#### Update 04-01 2019 V3.13 r6
+1. Perbaikan penghitungan tanggal dan jam uer profile. 
+
+	Silakan diupdate kembali user profilenya. (buka user profile dari Mikhmon, sempan kembali masing-masing user profile).
+
+	Setelah update user profile hapus semua environment (system -> scripts -> environment).
+
+	![delenvironment](https://raw.githubusercontent.com/laksa19/laksa19.github.io/master/img/delenvironment.gif)
+
 #### Update 03-31 2019 V3.13 r5
 1. Perbaikan user profile. (user expired dipergantian bulan). Silakan diupdate kembali user profilenya.
 	https://github.com/laksa19/mikhmonv3/issues/5

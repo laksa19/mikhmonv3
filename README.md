@@ -12,6 +12,8 @@
 
 	![delenvironment](https://raw.githubusercontent.com/laksa19/laksa19.github.io/master/img/delenvironment.gif)
 
+	Link Video [Update Profile v3.13 r6](https://drive.google.com/file/d/1ezFG0yxr3LOTgymH_ivUulF8MVevO2-V/view?usp=sharing)
+
 #### Update 03-31 2019 V3.13 r5
 1. Perbaikan user profile. (user expired dipergantian bulan). Silakan diupdate kembali user profilenya.
 	https://github.com/laksa19/mikhmonv3/issues/5

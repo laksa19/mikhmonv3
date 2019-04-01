@@ -6,7 +6,7 @@
 #### Update 04-01 2019 V3.13 r6
 1. Perbaikan penghitungan tanggal dan jam monitor user profile. 
 
-	Silakan diupdate kembali user profilenya. (buka user profile dari Mikhmon, sempan kembali masing-masing user profile).
+	Silakan diupdate kembali user profilenya. (buka user profile dari Mikhmon, simpan kembali masing-masing user profile).
 
 	Setelah update user profile hapus semua environment (system -> scripts -> environment).
 

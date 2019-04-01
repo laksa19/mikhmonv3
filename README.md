@@ -16,7 +16,7 @@
 
 #### Update 03-31 2019 V3.13 r5
 1. Perbaikan user profile. (user expired dipergantian bulan). Silakan diupdate kembali user profilenya.
-	https://github.com/laksa19/mikhmonv3/issues/5
+	[https://github.com/laksa19/mikhmonv3/issues/5](https://github.com/laksa19/mikhmonv3/issues/5)
 
 #### Update 03-30 2019 V3.13 r4
 1. Perbaikan edit user.

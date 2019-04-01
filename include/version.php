@@ -2,7 +2,7 @@
 if (!isset($_SESSION["mikhmon"])) {
     header("Location:../admin.php?id=login");
   } else {
-        $_SESSION["v"] = "3.13 r5 03-31-2019";
-        //echo '<span style="display:none" id="ver">3134</span>';
+        $_SESSION["v"] = "3.13 r6 04-01-2019";
+        //echo '<span style="display:none" id="ver">3136</span>';
     
     }

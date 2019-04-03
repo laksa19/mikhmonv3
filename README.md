@@ -3,8 +3,9 @@
 [update.zip](https://github.com/laksa19/laksa19.github.io/blob/master/download/update.zip?raw=true)
 ### Changelog
 
-#### Update 04-01 2019 V3.13 r6
+#### Update 04-02 2019 V3.13 r6
 1. Perbaikan penghitungan tanggal dan jam monitor user profile. 
+2. Perubahan global function ke local function. 
 
 	Silakan diupdate kembali user profilenya. (buka user profile dari Mikhmon, simpan kembali masing-masing user profile).
 

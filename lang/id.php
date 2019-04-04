@@ -171,8 +171,8 @@ $_details_user_profile = '
 
 $_format_validity = '
 Format '.$_validity.'<br>
-[wdhm] Contoh : 30d = 30'.$_days.', 12h = 12'.$_hours
-.'.';
+[wdhm] Contoh : 30d = 30'.$_days.', 12h = 12'.$_hours.', 30m = 30'.$_minutes.'<br>
+5'.$_hours.' 30'.$_minutes.' = 5h30m';
 
 $_format_ip_binding = '
     Format Upload/Download Max Limit<br>

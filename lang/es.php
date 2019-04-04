@@ -172,8 +172,8 @@ Opciones : Remove, Notice, Remove & Record, Notice & Record.
 
 $_format_validity = '
 Formato '.$_validity.'<br>
-[wdhm] Ejemplo : 30d = 30'.$_days.', 12h = 12'.$_hours.'.'
-;
+[wdhm] Ejemplo : 30d = 30'.$_days.', 12h = 12'.$_hours.', 30m = 30'.$_minutes.'<br>
+5'.$_hours.' 30'.$_minutes.' = 5h30m';
 
 $_format_ip_binding = '
     Formato Upload/Download Max Limite<br>

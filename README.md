@@ -3,6 +3,10 @@
 [update.zip](https://github.com/laksa19/laksa19.github.io/blob/master/download/update.zip?raw=true)
 ### Changelog
 
+#### Update 04-06 2019 V3.13 r7
+1. Perbaikan add user profile.
+2. Perubahan edit user profile. 
+
 #### Update 04-02 2019 V3.13 r6
 1. Perbaikan penghitungan tanggal dan jam monitor user profile. 
 2. Perubahan global function ke local function. 

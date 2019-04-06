@@ -87,14 +87,30 @@ if (!isset($_SESSION["mikhmon"])) {
       "parent-queue" => "$parent",
     ));
 
-    $API->comm("/system/scheduler/add", array(
-    "name" => "$name",
-    "start-time" => "$randstarttime",
-    "interval" => "$randinterval",
-    "on-event" => "$bgservice",
-    "disabled" => "no",
-    "comment" => "Monitor Profile $name",
-    ));
+    if($expmode != "0"){
+      if (empty($monid)){
+        $API->comm("/system/scheduler/add", array(
+          "name" => "$name",
+          "start-time" => "$randstarttime",
+          "interval" => "$randinterval",
+          "on-event" => "$bgservice",
+          "disabled" => "no",
+          "comment" => "Monitor Profile $name",
+          ));
+      }else{
+      $API->comm("/system/scheduler/set", array(
+        ".id" => "$monid",
+        "name" => "$name",
+        "start-time" => "$randstarttime",
+        "interval" => "$randinterval",
+        "on-event" => "$bgservice",
+        "disabled" => "no",
+        "comment" => "Monitor Profile $name",
+        ));
+      }}else{
+        $API->comm("/system/scheduler/remove", array(
+          ".id" => "$monid"));
+      }
 
     $getprofile = $API->comm("/ip/hotspot/user/profile/print", array(
       "?name" => "$name",

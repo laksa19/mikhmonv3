@@ -90,8 +90,7 @@ if (!isset($_SESSION["mikhmon"])) {
     "?name" => "$pname",
   ));
   $monexpired = $getmonexpired[0];
-  $_SESSION['monid'] = $monexpired['.id'];
-  $monid = $_SESSION['monid'];
+  $monid = $monexpired['.id'];
 
   if (isset($_POST['name'])) {
     $name = (preg_replace('/\s+/', '-',$_POST['name']));
@@ -155,7 +154,7 @@ if (!isset($_SESSION["mikhmon"])) {
       "on-login" => "$onlogin",
       "parent-queue" => "$parent",
     ));
-
+    if($expmode != "0"){
     if (empty($monid)){
       $API->comm("/system/scheduler/add", array(
         "name" => "$name",
@@ -175,6 +174,9 @@ if (!isset($_SESSION["mikhmon"])) {
       "disabled" => "no",
       "comment" => "Monitor Profile $name",
       ));
+    }}else{
+      $API->comm("/system/scheduler/remove", array(
+        ".id" => "$monid"));
     }
 
     echo "<script>window.location='./?user-profile=" . $pid . "&session=" . $session . "'</script>";
@@ -192,7 +194,7 @@ if (!isset($_SESSION["mikhmon"])) {
   <div>
     <a class="btn bg-warning" href="./?hotspot=user-profiles&session=<?= $session; ?>"> <i class="fa fa-close"></i> <?= $_close?></a>
     <button type="submit" name="save" class="btn bg-primary" ><i class="fa fa-save"></i> <?= $_save ?></button>
-    <button class="btn bg-danger" onclick="if(confirm('Are you sure to delete profile (<?= $pname; ?>)?')){loadpage('./?remove-user-profile=<?= $pid; ?>&session=<?= $session; ?>')}else{}"><i class="fa fa-minus-square"></i> <?= $_remove ?></button>
+    <button class="btn bg-danger" onclick="if(confirm('Are you sure to delete profile (<?= $pname; ?>)?')){loadpage('./?remove-user-profile=<?= $pid; ?>&pname=<?= $pname ?>&session=<?= $session; ?>')}else{}"><i class="fa fa-minus-square"></i> <?= $_remove ?></button>
   </div>
 <table class="table">
   <tr>

@@ -55,8 +55,10 @@ if (!isset($_SESSION["mikhmon"])) {
   include('./settings/settheme.php');
   if ($_SESSION['theme'] == "") {
     $theme = $theme;
+    $themecolor = $themecolor;
   } else {
     $theme = $_SESSION['theme'];
+    $themecolor = $_SESSION['themecolor'];
   }
 
 // routeros api

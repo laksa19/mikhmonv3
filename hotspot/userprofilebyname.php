@@ -91,6 +91,9 @@ if (!isset($_SESSION["mikhmon"])) {
   ));
   $monexpired = $getmonexpired[0];
   $monid = $monexpired['.id'];
+	$pmon = $monexpired['name'];
+	$chkpmon = $monexpired['disabled'];
+	if(empty($pmon) || $chkpmon == "true"){$moncolor = "text-orange";}else{$moncolor = "text-green";}
 
   if (isset($_POST['name'])) {
     $name = (preg_replace('/\s+/', '-',$_POST['name']));
@@ -187,18 +190,17 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="col-8">
 <div class="card">
 <div class="card-header">
-    <h3><i class="fa fa-edit"></i> <?= $_edit." ".$_user_profile ?></h3>
+    <h3><i class="fa fa-edit"></i> <?= $_edit." ".$_user_profile ?> </h3>
 </div>
 <div class="card-body">
 <form autocomplete="off" method="post" action="">
   <div>
     <a class="btn bg-warning" href="./?hotspot=user-profiles&session=<?= $session; ?>"> <i class="fa fa-close"></i> <?= $_close?></a>
     <button type="submit" name="save" class="btn bg-primary" ><i class="fa fa-save"></i> <?= $_save ?></button>
-    <button class="btn bg-danger" onclick="if(confirm('Are you sure to delete profile (<?= $pname; ?>)?')){loadpage('./?remove-user-profile=<?= $pid; ?>&pname=<?= $pname ?>&session=<?= $session; ?>')}else{}"><i class="fa fa-minus-square"></i> <?= $_remove ?></button>
   </div>
 <table class="table">
   <tr>
-    <td><?= $_name ?></td><td><input class="form-control" type="text" onchange="remSpace();" autocomplete="off" name="name" value="<?= $pname; ?>" required="1" autofocus></td>
+    <td><?= $_name ?> <i class="fa fa-ci fa-circle <?= $moncolor ?>"></i></td><td><input class="form-control" type="text" onchange="remSpace();" autocomplete="off" name="name" value="<?= $pname; ?>" required="1" autofocus></td>
   </tr>
   <tr>
     <td>Shared Users</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="sharedusers" value="<?= $psharedu; ?>" required="1"></td>

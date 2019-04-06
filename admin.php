@@ -50,9 +50,11 @@ include('./include/theme.php');
 include('./settings/settheme.php');
 include('./settings/setlang.php');
 if ($_SESSION['theme'] == "") {
-  $theme = $theme;
-} else {
-  $theme = $_SESSION['theme'];
+    $theme = $theme;
+    $themecolor = $themecolor;
+  } else {
+    $theme = $_SESSION['theme'];
+    $themecolor = $_SESSION['themecolor'];
 }
 
 

@@ -28,6 +28,8 @@ error_reporting(0);
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!-- Tell the browser to be responsive to screen width -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Theme color -->
+		<meta name="theme-color" content="<?= $themecolor ?>" />
 		<!-- Font Awesome -->
 		<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css" />
 		<!-- Mikhmon UI -->
@@ -39,10 +41,10 @@ error_reporting(0);
 		<!-- pace -->
 		<link href="css/pace.<?= $theme; ?>.css" rel="stylesheet" />
 		<script src="js/pace.min.js"></script>
+
 		
 	</head>
 	<body>
-		
 		<div class="wrapper">
 
 			

@@ -4,8 +4,8 @@
 ### Changelog
 
 #### Update 04-06 2019 V3.13 r7
-1. Perbaikan add user profile.
-2. Perubahan edit user profile. 
+1. Perbaikan add user profile (gagal membuat monitor profile di scheduler).
+2. Perbaikan edit profile (remove monitor profile untuk expired mode none).
 
 #### Update 04-02 2019 V3.13 r6
 1. Perbaikan penghitungan tanggal dan jam monitor user profile. 

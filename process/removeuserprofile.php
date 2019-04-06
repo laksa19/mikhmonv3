@@ -18,9 +18,15 @@
 session_start();
 // hide all error
 error_reporting(0);
-$id = explode("-",$removeuserprofile);
-$pid = $id[0];
-$monid = $id[1];
+
+$pid = $removeuserprofile;
+$pname = $_GET['pname'];
+
+$getmonid = $API->comm("/system/scheduler/print", array(
+    "?name" => "$pname",
+));
+$monid = $getmonid[0]['.id'];
+
 $API->comm("/ip/hotspot/user/profile/remove", array(
     ".id" => "$pid",
 ));

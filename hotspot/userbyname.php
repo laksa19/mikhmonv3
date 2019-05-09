@@ -23,6 +23,8 @@ if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
 
+  date_default_timezone_set($_SESSION['timezone']);
+
   $getprofile = $API->comm("/ip/hotspot/user/profile/print");
   $srvlist = $API->comm("/ip/hotspot/print");
 
@@ -53,6 +55,7 @@ if (!isset($_SESSION["mikhmon"])) {
   $ubytesout = $userdetails['bytes-out'];
   $ubytesin = $userdetails['bytes-in'];
   $ucomment = $userdetails['comment'];
+  
 
   if (substr(formatBytes2($udatalimit, 2), -2) == "MB") {
     $udatalimit = $udatalimit / 1048576;
@@ -77,7 +80,16 @@ if (!isset($_SESSION["mikhmon"])) {
   }
 
   if((substr($ucomment,3,1) == "/" && substr($ucomment,6,1) == "/")){
-		$commt = 'disabled';
+    $commt = 'disabled';
+    $comment2t = 'text';
+    $_tcomment = $_expired;
+    $_tcomment2 = $_comment;
+    $ucomment2 = substr($ucomment,21, (strlen($ucomment)-21));
+    $ucomment =  substr($ucomment,0,20);
+  }else{
+    $comment2t = 'hidden';
+    $_tcomment = $_comment;
+    $_tcomment2 = "";
   }
   
   $getprofilebyuser = $API->comm("/ip/hotspot/user/profile/print", array(
@@ -199,6 +211,7 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
     $timelimit = ($_POST['timelimit']);
     $datalimit = ($_POST['datalimit']);
     $comment = ($_POST['comment']);
+    $comment2 = ($_POST['comment2']);
     $hcomment = ($_POST['h_comment']);
     $mbgb = ($_POST['mbgb']);
     if ($timelimit == "") {
@@ -218,9 +231,9 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
     }
     
     if((substr($hcomment,3,1) == "/" && substr($hcomment,6,1) == "/")){
-      $comment = $hcomment;
+      $comment = $hcomment." ".$comment2;
     }elseif((substr($comment,3,1) == "/" && substr($comment,6,1) == "/")){
-      $comment = $comment;
+      $comment = $comment." ".$comment2;
     }elseif(substr($comment,0,3) == "vc-" || substr($comment,0,3) == "up-"){
       $comment = $comment;
     }else{
@@ -381,15 +394,19 @@ include('./voucher/printbt.php');
           <div class="input-group-2 col-box-3">
               <select style="padding: 4.2px;" class="group-item group-item-r" id="mbgb" name="mbgb" required="1">
 				        <option value="<?php if ($MG == "MB") {echo "1048576";  } elseif ($MG == "GB") {echo "1073741824";  } ?>"><?= $MG; ?></option>
-				        <option value=1048576>MB</option>
-				        <option value=1073741824>GB</option>
+				        <option value="1048576">MB</option>
+				        <option value="1073741824">GB</option>
 			        </select>
           </div>
       </div>
     </td>
   </tr>
   <tr>
-    <td class="align-middle"><?= $_comment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>" <?= $commt ?>><input type="hidden" name="h_comment" value="<?= $ucomment ?>"></td>
+    <td class="align-middle"><?= $_tcomment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>" <?= $commt ?>><input type="hidden" name="h_comment" value="<?= $ucomment ?>"></td>
+  </tr>
+  <tr>
+  <tr>
+    <td class="align-middle"><?= $_tcomment2 ?></td><td><input class="form-control" type="<?= $comment2t ;?>" id="comment2" autocomplete="off" name="comment2" title="No special characters" value="<?= $ucomment2; ?>"></td>
   </tr>
   <tr>
     <td class="align-middle"><?= $_price ?></td><td><input class="form-control" id="price" type="text" value="<?php if ($getprice == 0) {

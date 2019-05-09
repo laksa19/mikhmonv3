@@ -24,7 +24,9 @@ ob_start("ob_gzhandler");
 if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
 } else {
-
+  
+  date_default_timezone_set($_SESSION['timezone']);
+  
 // load session MikroTik
   $session = $_GET['session'];
 
@@ -43,6 +45,8 @@ if (!isset($_SESSION["mikhmon"])) {
   $API = new RouterosAPI();
   $API->debug = false;
   $API->connect($iphost, $userhost, decrypt($passwdhost));
+
+  
 
   if ($userp != "") {
     $usermode = explode('-', $userp)[0];

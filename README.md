@@ -3,6 +3,12 @@
 [update.zip](https://github.com/laksa19/laksa19.github.io/blob/master/download/update.zip?raw=true)
 ### Changelog
 
+#### Update 05-09 2019 V3.14
+1. Perbaikan time zone untuk print / quick print.
+2. Penambahan input comment setelah comment user berubah menjadi tanggal expired.
+
+	![314](https://github.com/laksa19/laksa19.github.io/blob/master/img/3.14.gif)
+
 #### Update 04-06 2019 V3.13 r7
 1. Perbaikan add user profile (gagal membuat monitor profile di scheduler).
 2. Perbaikan edit profile (remove monitor profile untuk expired mode none).

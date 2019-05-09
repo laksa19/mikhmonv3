@@ -90,6 +90,7 @@ if (!isset($_SESSION["mikhmon"])) {
     $comment2t = 'hidden';
     $_tcomment = $_comment;
     $_tcomment2 = "";
+    $display = 'style="display:none"';
   }
   
   $getprofilebyuser = $API->comm("/ip/hotspot/user/profile/print", array(
@@ -405,7 +406,7 @@ include('./voucher/printbt.php');
     <td class="align-middle"><?= $_tcomment ?></td><td><input class="form-control" type="text" id="comment" autocomplete="off" name="comment" title="No special characters" value="<?= $ucomment; ?>" <?= $commt ?>><input type="hidden" name="h_comment" value="<?= $ucomment ?>"></td>
   </tr>
   <tr>
-  <tr>
+  <tr <?=$display?>>
     <td class="align-middle"><?= $_tcomment2 ?></td><td><input class="form-control" type="<?= $comment2t ;?>" id="comment2" autocomplete="off" name="comment2" title="No special characters" value="<?= $ucomment2; ?>"></td>
   </tr>
   <tr>

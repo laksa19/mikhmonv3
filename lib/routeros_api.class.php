@@ -568,7 +568,7 @@ function randN($length) {
 }
 
 function randUC($length) {
-	$chars = "ABCDEFGHIJKMNPRSTUVWXYZ";
+	$chars = "ABCDEFGHJKLMNPRSTUVWXYZ";
 	$charArray = str_split($chars);
 	$charCount = strlen($chars);
 	$result = "";
@@ -593,7 +593,7 @@ function randLC($length) {
 }
 
 function randULC($length) {
-	$chars = "ABCDEFGHIJKMNPRSTUVWXYZabcdefghijkmnprstuvwxyz";
+	$chars = "ABCDEFGHJKLMNPRSTUVWXYZabcdefghijkmnprstuvwxyz";
 	$charArray = str_split($chars);
 	$charCount = strlen($chars);
 	$result = "";
@@ -619,7 +619,7 @@ function randNLC($length) {
 }
 
 function randNUC($length) {
-	$chars = "23456789ABCDEFGHIJKMNPRSTUVWXYZ";
+	$chars = "23456789ABCDEFGHJKLMNPRSTUVWXYZ";
 	$charArray = str_split($chars);
 	$charCount = strlen($chars);
 	$result = "";
@@ -632,7 +632,7 @@ function randNUC($length) {
 }
 
 function randNULC($length) {
-	$chars = "23456789ABCDEFGHIJKMNPRSTUVWXYZabcdefghijkmnprstuvwxyz";
+	$chars = "23456789ABCDEFGHJKLMNPRSTUVWXYZabcdefghijkmnprstuvwxyz";
 	$charArray = str_split($chars);
 	$charCount = strlen($chars);
 	$result = "";

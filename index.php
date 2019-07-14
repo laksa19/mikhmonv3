@@ -39,12 +39,15 @@ if (!isset($_SESSION["mikhmon"])) {
 
   $_SESSION["connect"] = "";
 
+// time zone
+  date_default_timezone_set($_SESSION['timezone']);
+
 // lang
   include('./include/lang.php');
   include('./lang/'.$langid.'.php');
 
-// btkey  
-  include('./include/btkey.php');
+// quick bt
+  include('./include/quickbt.php');
 
 // load config
   include('./include/config.php');
@@ -222,13 +225,13 @@ if (!isset($_SESSION["mikhmon"])) {
   }
 
 // quick print
-elseif ($hotspot == "quick-print") {
-  include_once('./hotspot/quickprint.php');
-}
+  elseif ($hotspot == "quick-print") {
+    include_once('./hotspot/quickprint.php');
+  }
 
 // quick print
 elseif ($hotspot == "list-quick-print") {
-include_once('./hotspot/listquickprint.php');
+  include_once('./hotspot/listquickprint.php');
 }  
 
 // add hotspot user
@@ -272,7 +275,7 @@ elseif ($removeexpiredhotspotuser != "") {
   echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
 
   include_once('./process/removeexpiredhotspotuser.php');
-}   
+}  
 
 // reset hotspot user
   elseif ($resethotspotuser != "") {
@@ -416,6 +419,11 @@ elseif ($report == "resume-report") {
 }
 
 // selling
+elseif ($report == "export") {
+  include_once('./report/export.php');
+}
+
+// selling
   elseif ($removereport != "") {
     echo "<b class='cl-w'><i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Processing...</b>";
 
@@ -502,30 +510,42 @@ elseif ($ppp == "edit-profile") {
 <?php
 if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?session") {
   echo '<script>
-  $(document).ready(function(){
-    $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3"); 
-    var interval= "' . ($areload * 1000) . '";
-    setInterval(function() {
+    $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3");  
+    var interval1 = "' . ($areload * 1000) . '";
+    var dashboard = setInterval(function() {
       
     $("#r_1").load("./dashboard/aload.php?session=' . $session . '&load=sysresource #r_1"); 
     $("#r_2").load("./dashboard/aload.php?session=' . $session . '&load=hotspot #r_2"); 
     $("#r_3").load("./dashboard/aload.php?session=' . $session . '&load=logs #r_3"); 
     
-  }, interval);
-})
-</script>
+  }, interval1);
 
 ';
 if ($livereport == "enable" || $livereport == "") {
-  echo '<script>
-  $(document).ready(function(){
-    var interval= "65432";
-    setInterval(function() {
+  if($_SESSION[$session.'sdate'] != $_SESSION[$session.'idhr']){
+    echo '$("#r_4").load("./report/livereport.php?session=' . $session . ' #r_4");';
+    }else if ($_SESSION[$session.'sdate'] == $_SESSION[$session.'idhr']){  
+    }else{
+      echo '$("#r_4").load("./report/livereport.php?session=' . $session . ' #r_4");';
+    }
+  echo  '
+    var interval2 = "65432";
+    var livereport = setInterval(function() {
     $("#r_4").load("./report/livereport.php?session=' . $session . ' #r_4"); 
-  }, interval);
-  })
+  }, interval2);
+ ';}
+  echo ' 
+  function cancelPage(){
+    window.stop();
+    clearInterval(dashboard);';
+    if ($livereport == "enable" || $livereport == "") {
+    echo '
+    clearInterval(livereport);';
+    }
+  echo '
+    }
 </script>';
-}
+
 } elseif ($hotspot == "active" && $serveractive != "") {
   echo '<script>
   $(document).ready(function(){
@@ -545,7 +565,7 @@ if ($livereport == "enable" || $livereport == "") {
 } elseif ($userprofile == "add" || substr($userprofile, 0, 1) == "*" || $userprofile != "") {
   echo "<script>
   //enable disable input on ready
-  $(document).ready(function(){
+$(document).ready(function(){
     var exp = document.getElementById('expmode').value;
     var val = document.getElementById('validity').style;
     var vali = document.getElementById('validi');
@@ -577,7 +597,8 @@ $(document).ready(function(){
   });
 });
 
-</script>';
+</script>
+';
 }
 }
 ?>

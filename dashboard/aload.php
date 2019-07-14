@@ -209,7 +209,7 @@ include('../lang/'.$langid.'.php');
   // get hotspot log
   $getlog = $API->comm("/log/print", array("?topics" => "hotspot,info,debug", ));
   $log = array_reverse($getlog);
-  $THotspotLog = count($getlog);
+  //$THotspotLog = count($getlog);
 
   if ($livereport == "disable") {
     $logh = "457px";
@@ -232,7 +232,7 @@ include('../lang/'.$langid.'.php');
                         <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;">
                           <thead>
                             <tr>
-                            <th><?= $_time ?></th>
+                            <th><?= $_time .$THotspotLog; ?></th>
                             <th><?= $_users ?> (IP)</th>
                             <th><?= $_messages ?></th>
                             </tr>
@@ -241,20 +241,8 @@ include('../lang/'.$langid.'.php');
                       
   <?php
 
-  if ($THotspotLog > 100) {
-    $n = 100;
-  } elseif ($THotspotLog > 200) {
-    $n = 200;
-  } elseif ($THotspotLog > 300) {
-    $n = 300;
-  } elseif ($THotspotLog > 400) {
-    $n = 400;
-  } elseif ($THotspotLog > 500) {
-    $n = 500;
-  } else {
-    $n = $THotspotLog;
-  }
-  for ($i = 0; $i < $n; $i++) {
+
+  for ($i = 0; $i < 20; $i++) {
     $mess = explode(":", $log[$i]['message']);
     $time = $log[$i]['time'];
     echo "<tr>";

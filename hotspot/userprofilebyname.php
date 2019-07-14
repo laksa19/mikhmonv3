@@ -35,6 +35,8 @@ if (!isset($_SESSION["mikhmon"])) {
     }
   }
 
+  $getpool = $API->comm("/ip/pool/print");
+
   $getprofile = $API->comm("/ip/hotspot/user/profile/print", array(
     "?.id" => "$userprofile"
   ));
@@ -44,9 +46,10 @@ if (!isset($_SESSION["mikhmon"])) {
   $psharedu = $profiledetalis['shared-users'];
   $pratelimit = $profiledetalis['rate-limit'];
   $ponlogin = $profiledetalis['on-login'];
+  $ppool = $profiledetalis['address-pool'];
   $sparent = $profiledetalis['parent-queue'];
 
-
+  if(empty($ppool)){$ppool = "none";}
   if(empty($sparent)){$sparent = "none";}
 
   $getexpmode = explode(",", $ponlogin)[1];
@@ -103,6 +106,7 @@ if (!isset($_SESSION["mikhmon"])) {
     $validity = ($_POST['validity']);
     $graceperiod = ($_POST['graceperiod']);
     $getprice = ($_POST['price']);
+    $addrpool = ($_POST['ppool']);
     if ($getprice == "") {
       $price = "0";
     } else {
@@ -150,6 +154,7 @@ if (!isset($_SESSION["mikhmon"])) {
 			  		  /*"add-mac-cookie" => "yes",*/
       ".id" => "$pid",
       "name" => "$name",
+      "address-pool" => "$addrpool",
       "rate-limit" => "$ratelimit",
       "shared-users" => "$sharedusers",
       "status-autorefresh" => "1m",
@@ -201,6 +206,21 @@ if (!isset($_SESSION["mikhmon"])) {
 <table class="table">
   <tr>
     <td><?= $_name ?> <i class="fa fa-ci fa-circle <?= $moncolor ?>"></i></td><td><input class="form-control" type="text" onchange="remSpace();" autocomplete="off" name="name" value="<?= $pname; ?>" required="1" autofocus></td>
+  </tr>
+  <tr>
+    <td class="align-middle">Address Pool</td>
+    <td>
+    <select class="form-control " name="ppool">
+      <option><?= $ppool; ?></option>
+      <option>none</option>
+        <?php $TotalReg = count($getpool);
+        for ($i = 0; $i < $TotalReg; $i++) {
+
+          echo "<option>" . $getpool[$i]['name'] . "</option>";
+        }
+        ?>
+    </select>
+    </td>
   </tr>
   <tr>
     <td>Shared Users</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="sharedusers" value="<?= $psharedu; ?>" required="1"></td>

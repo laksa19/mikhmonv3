@@ -23,6 +23,8 @@ if (!isset($_SESSION["mikhmon"])) {
 } else {
 // load session MikroTik
   $session = $_GET['session'];
+// set  timezone
+date_default_timezone_set($_SESSION['timezone']);
 
 // lang
 include('../include/lang.php');
@@ -60,21 +62,30 @@ include('../lang/'.$langid.'.php');
     $idhr = $thisM . "/" . $thisD . "/" . $thisY;
     $idbl = $thisM . $thisY;
 
-    $getSRHr = $API->comm("/system/script/print", array(
+    $_SESSION[$session.'idhr'] = $idhr;
+
+   /* $getSRHr = $API->comm("/system/script/print", array(
       "?source" => "$idhr",
     ));
     $TotalRHr = count($getSRHr);
+    $_SESSION[$session.'totalHr'] = $TotalRHr;*/
     $getSRBl = $API->comm("/system/script/print", array(
       "?owner" => "$idbl",
     ));
     $TotalRBl = count($getSRBl);
-
+    $_SESSION[$session.'totalBl'] = $TotalRBl;
+/*
     for ($i = 0; $i < $TotalRHr; $i++) {
 
       $tHr += explode("-|-", $getSRHr[$i]['name'])[3];
 
-    }
+    }*/
     for ($i = 0; $i < $TotalRBl; $i++) {
+      if($getSRBl[$i]['source'] == $idhr){
+        $tHr += explode("-|-", $getSRBl[$i]['name'])[3];
+        $TotalRHr += count($getSRBl[$i]['source']);
+        $_SESSION[$session.'totalHr'] = $TotalRHr;
+      }
 
       $tBl += explode("-|-", $getSRBl[$i]['name'])[3];
     }
@@ -93,9 +104,13 @@ include('../lang/'.$langid.'.php');
                           if ($currency == in_array($currency, $cekindo['indo'])) {
                             $dincome = number_format($tHr, 0, ",", ".");
                             $mincome = number_format($tBl, 0, ",", ".");
+                            $_SESSION[$session.'dincome'] = $dincome;
+                            $_SESSION[$session.'mincome'] = $mincome;
                           }else{
                             $dincome = number_format($tHr, 2);
                             $mincome = number_format($tBl, 2);
+                            $_SESSION[$session.'dincome'] = $dincome;
+                            $_SESSION[$session.'mincome'] = $mincome;
                           }
                             echo $_income."<br/>" . "
                           ".$_today." " . $TotalRHr . "vcr : " . $currency . " " . $dincome . "<br/>

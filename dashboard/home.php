@@ -73,6 +73,8 @@ if (!isset($_SESSION["mikhmon"])) {
   } else {
     $logh = "350px";
     $lreport = "style='display:block;'";
+  }
+/*
 // get selling report
     $thisD = date("d");
     $thisM = strtolower(date("M"));
@@ -105,7 +107,7 @@ if (!isset($_SESSION["mikhmon"])) {
 
       $tBl += explode("-|-", $getSRBl[$i]['name'])[3];
     }
-  }
+  }*/
 }
 ?>
     
@@ -121,6 +123,7 @@ if (!isset($_SESSION["mikhmon"])) {
                     <?php 
                     echo $clock['date'] . " " . $clock['time'] . "<br>
                     ".$_uptime." : " . formatDTM($resource['uptime']);
+                    $_SESSION[$session.'sdate'] = $clock['date'];
                     ?>
                 </span>
               </div>
@@ -170,7 +173,7 @@ if (!isset($_SESSION["mikhmon"])) {
                   <div class="row">
                     <div class="col-3 col-box-6">
                       <div class="box bg-blue bmh-75">
-                        <a href="./?hotspot=active&session=<?= $session; ?>">
+                        <a onclick="cancelPage()" href="./?hotspot=active&session=<?= $session; ?>">
                           <h1><?= $counthotspotactive; ?>
                               <span style="font-size: 15px;"><?= $hunit; ?></span>
                             </h1>
@@ -182,7 +185,7 @@ if (!isset($_SESSION["mikhmon"])) {
                     </div>
                     <div class="col-3 col-box-6">
                     <div class="box bg-green bmh-75">
-                      <a href="./?hotspot=users&profile=all&session=<?= $session; ?>">
+                      <a onclick="cancelPage()" href="./?hotspot=users&profile=all&session=<?= $session; ?>">
                             <h1><?= $countallusers; ?>
                               <span style="font-size: 15px;"><?= $uunit; ?></span>
                             </h1>
@@ -194,7 +197,7 @@ if (!isset($_SESSION["mikhmon"])) {
                   </div>
                   <div class="col-3 col-box-6">
                     <div class="box bg-yellow bmh-75">
-                      <a href="./?hotspot-user=add&session=<?= $session; ?>">
+                      <a onclick="cancelPage()" href="./?hotspot-user=add&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
                               <span style="font-size: 15px;"><?= $_add ?></span>
@@ -208,7 +211,7 @@ if (!isset($_SESSION["mikhmon"])) {
                   </div>
                   <div class="col-3 col-box-6">
                     <div class="box bg-red bmh-75">
-                      <a href="./?hotspot-user=generate&session=<?= $session; ?>">
+                      <a onclick="cancelPage()" href="./?hotspot-user=generate&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
                               <span style="font-size: 15px;"><?= $_generate ?></span>
@@ -355,17 +358,14 @@ if (!isset($_SESSION["mikhmon"])) {
                       <span >
                         <div id="reloadLreport">
                           <?php 
-                          if ($currency == in_array($currency, $cekindo['indo'])) {
-                            $dincome = number_format($tHr, 0, ",", ".");
-                            $mincome = number_format($tBl, 0, ",", ".");
+                          if ($_SESSION[$session.'sdate'] == $_SESSION[$session.'idhr']){
+                            echo $_income." <br/>" . "
+                          ".$_today." " . $_SESSION[$session.'totalHr'] . "vcr : " . $currency . " " . $_SESSION[$session.'dincome']. "<br/>
+                          ".$_this_month." " . $_SESSION[$session.'totalBl'] . "vcr : " . $currency . " " . $_SESSION[$session.'mincome']; 
                           }else{
-                            $dincome = number_format($tHr, 2);
-                            $mincome = number_format($tBl, 2);
+                            echo "<div id='loader' ><i><span> <i class='fa fa-circle-o-notch fa-spin'></i> ". $_processing." </i></div>";
                           }
-                            echo $_income."<br/>" . "
-                          ".$_today." " . $TotalRHr . "vcr : " . $currency . " " . $dincome . "<br/>
-                          ".$_this_month." " . $TotalRBl . "vcr : " . $currency . " " . $mincome;
-                          ?>
+                          ?>                       
                         </div>
                     </span>
                 </div>
@@ -375,7 +375,7 @@ if (!isset($_SESSION["mikhmon"])) {
             <div id="r_3" class="row">
             <div class="card">
               <div class="card-header">
-                <h3><a href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> <?= $_hotspot_log ?></a></h3></div>
+                <h3><a onclick="cancelPage()" href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> <?= $_hotspot_log ?></a></h3></div>
                   <div class="card-body">
                     <div style="padding: 5px; height: <?= $logh; ?> ;" class="mr-t-10 overflow">
                       <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;">
@@ -389,7 +389,7 @@ if (!isset($_SESSION["mikhmon"])) {
                         <tbody>
                           <tr>
                             <td colspan="3" class="text-center">
-                              <div><i class="fa fa-spinner"></i> Loading logs</div>
+                            <div id="loader" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></div>
                             </td>
                           </tr>
                       </tbody>

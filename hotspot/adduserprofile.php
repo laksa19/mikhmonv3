@@ -26,6 +26,8 @@ if (!isset($_SESSION["mikhmon"])) {
     "?dynamic" => "false",
   ));
 
+  $getpool = $API->comm("/ip/pool/print");
+
   if (isset($_POST['name'])) {
     $name = (preg_replace('/\s+/', '-',$_POST['name']));
     $sharedusers = ($_POST['sharedusers']);
@@ -34,6 +36,7 @@ if (!isset($_SESSION["mikhmon"])) {
     $validity = ($_POST['validity']);
     $graceperiod = ($_POST['graceperiod']);
     $getprice = ($_POST['price']);
+    $addrpool = ($_POST['ppool']);
     if ($getprice == "") {
       $price = "0";
     } else {
@@ -79,6 +82,7 @@ if (!isset($_SESSION["mikhmon"])) {
     $API->comm("/ip/hotspot/user/profile/add", array(
 			  		  /*"add-mac-cookie" => "yes",*/
       "name" => "$name",
+      "address-pool" => "$addrpool",
       "rate-limit" => "$ratelimit",
       "shared-users" => "$sharedusers",
       "status-autorefresh" => "1m",
@@ -135,6 +139,20 @@ if (!isset($_SESSION["mikhmon"])) {
 <table class="table">
   <tr>
     <td class="align-middle"><?= $_name ?></td><td><input class="form-control" type="text" onchange="remSpace();" autocomplete="off" name="name" value="" required="1" autofocus></td>
+  </tr>
+  <tr>
+    <td class="align-middle">Address Pool</td>
+    <td>
+    <select class="form-control " name="ppool">
+      <option>none</option>
+        <?php $TotalReg = count($getpool);
+        for ($i = 0; $i < $TotalReg; $i++) {
+
+          echo "<option>" . $getpool[$i]['name'] . "</option>";
+        }
+        ?>
+    </select>
+    </td>
   </tr>
   <tr>
     <td class="align-middle">Shared Users</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="sharedusers" value="1" required="1"></td>

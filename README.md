@@ -5,7 +5,7 @@
 
 #### Update 07-14 2019 V3.16
 1. Penambahan address pool di add user profile dan edit user profile
-2. Notif new update
+2. Notif new update di admin settings
 
 #### Update 07-02 2019 V3.15
 1. Update RouterOS API for support v6.45.x

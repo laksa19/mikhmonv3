@@ -68,7 +68,7 @@ include('../lang/'.$langid.'.php');
               <div class="box-group-area">
               <span ><?= $_system_date_time ?><br>
                     <?php 
-                    echo $clock['date'] . " " . $clock['time'] . "<br>
+                    echo ucfirst($clock['date']) . " " . $clock['time'] . "<br>
                     ".$_uptime." : " . formatDTM($resource['uptime']);
                     ?>
                 </span>

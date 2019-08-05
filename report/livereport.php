@@ -84,10 +84,18 @@ include('../lang/'.$langid.'.php');
       if($getSRBl[$i]['source'] == $idhr){
         $tHr += explode("-|-", $getSRBl[$i]['name'])[3];
         $TotalRHr += count($getSRBl[$i]['source']);
-        $_SESSION[$session.'totalHr'] = $TotalRHr;
+        
       }
 
       $tBl += explode("-|-", $getSRBl[$i]['name'])[3];
+
+      if($TotalRHr == ""){
+        $TotalRHr = "0";
+        $_SESSION[$session.'totalHr'] = "0";
+      }else{
+        $_SESSION[$session.'totalHr'] = $TotalRHr;
+      }
+      
     }
   }
 }

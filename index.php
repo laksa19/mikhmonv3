@@ -523,6 +523,7 @@ if ($hotspot == "dashboard" || substr(end(explode("/", $url)), 0, 8) == "?sessio
 ';
 if ($livereport == "enable" || $livereport == "") {
   if($_SESSION[$session.'sdate'] != $_SESSION[$session.'idhr']){
+    $_SESSION[$session.'totalHr'] = "0";
     echo '$("#r_4").load("./report/livereport.php?session=' . $session . ' #r_4");';
     }else if ($_SESSION[$session.'sdate'] == $_SESSION[$session.'idhr']){  
     }else{

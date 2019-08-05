@@ -35,8 +35,9 @@ $_dns_name = "Nama DNS";
 $_edit = "Edit";
 $_edit_user = "Edit Pengguna";
 $_end = "Berakhir";
-$_expired = "Kadaluarsa";
-$_expired_mode = "Mode Kadaluarsa";
+$_expired = "Kedaluwarsa";
+$_expired_mode = "Mode Kedaluwarsa";
+$_extend_expired_date = "Menambah Tanggal Expired";
 $_format_file_name = "Format nama file";
 $_free_hdd = "HDD Bebas";
 $_free_memory = "Memori Bebas";
@@ -53,6 +54,7 @@ $_hotspot_name = "Nama Hotspot";
 $_hotspot_users = "Pengguna Hotspot";
 $_hours = "jam";
 $_income = "Pendapatan";
+$_idle_timeout = "Idle Timeout";
 $_interface = "Antarmuka";
 $_ip_bindings = "Mengikat IP";
 $_last_generate = "Terakhir Dihasilkan";
@@ -65,6 +67,7 @@ $_lock_user = "Kunci Pengguna";
 $_log = "Log";
 $_logout = "Keluar";
 $_messages = "Pesan";
+$_min = "mnt";
 $_minutes = "menit";
 $_model = "Model";
 $_name = "Nama";
@@ -89,6 +92,7 @@ $_quick_print = "Cetak Cepat";
 $_random = "Acak";
 $_readme = "Baca Saya";
 $_reboot = "Yakin akan menyakan ulang";
+$_reduce_expired_date = "Mengurangi Tanggal Expired";
 $_remove = "Hapus";
 $_report = "Laporan";
 $_reset_start_date = "Atur Ulang Tanggal Mulai";
@@ -101,6 +105,7 @@ $_seconds = "detik";
 $_selected = "Terpilih";
 $_select_interface = "Pilih Antarmuka";
 $_selling_report = "Laporan Penjualan";
+$_send_to_WA = "Kirim ke WhatsApp";
 $_session_name = "Nama Sesi";
 $_session = "Sesi";
 $_session_settings = "Pengaturan Sesi";
@@ -161,7 +166,7 @@ $_details_user_profile = '
 '.$_expired_mode.' adalah kontrol untuk user hotspot.<br>
         Pilihan : Remove, Notice, Remove & Record, Notice & Record.
         <ul>
-        <li>Remove : User akan dihapus ketika sudah kadaluarsa.</li>
+        <li>Remove : User akan dihapus ketika sudah kedaluwarsa.</li>
         <li>Notice : User tidah dihapus dan akan mendapatkan notifikasi setelah user expired.</li>
         <li>Record : Menyimpan data harga tiap user yang login. Untuk menghitung total penjualan user hotspot dan ditampilkan dalam laporan penjualan.</li>
         </ul>

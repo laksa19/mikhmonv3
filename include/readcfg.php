@@ -31,15 +31,15 @@ $dnsname = explode('^', $data[$session][5])[1];
 $currency = explode('&', $data[$session][6])[1];
 $areload = explode('*', $data[$session][7])[1];
 $iface = explode('(', $data[$session][8])[1];
-$maxtx = explode(')', $data[$session][9])[1];
-$maxrx = explode('=', $data[$session][10])[1];
+$infolp = explode(')', $data[$session][9])[1];
+$idleto = explode('=', $data[$session][10])[1];
 $sesname = explode('+', $data[$session][10])[1];
 $useradm = explode('<|<', $data['mikhmon'][1])[1];
 $passadm = explode('>|>', $data['mikhmon'][2])[1];
 $livereport = explode('@!@', $data[$session][11])[1];
 
-
 $cekindo['indo'] = array(
     'RP', 'Rp', 'rp', 'IDR', 'idr', 'RP.', 'Rp.', 'rp.', 'IDR.', 'idr.',
 );
+
 

@@ -159,21 +159,28 @@ if (!isset($_SESSION["mikhmon"])) {
     $mpage = $_template_editor;
   }
 }
+
+if($idleto != "disable"){
+  $didleto = 'display:block;';
+}else{
+  $didleto = 'display:none;';
+}
 ?>
+<span style="display:none;" id="idto"><?= $idleto ;?></span>
 
 
 <?php if ($id != "") { ?>
 
 <div id="navbar" class="navbar">
   <div class="navbar-left">
-    <a id="brand" class="text-center" href="javascript:void(0)"><span>MIKHMON</span></a>
+    <a id="brand" class="text-center" href="javascript:void(0)">MIKHMON</a>
 
 <a id="openNav" class="navbar-hover" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
 <a id="closeNav" class="navbar-hover" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
 <a id="cpage" class="navbar-left" href="javascript:void(0)"><?= $mpage; ?></a>
 </div>
  <div class="navbar-right">
-  <a href="./admin.php?id=logout" ><i class="fa fa-sign-out mr-1"></i> <?= $_logout ?></a>
+  <a id="logout" href="./admin.php?id=logout" ><i class="fa fa-sign-out mr-1"></i> <?= $_logout ?></a>
   <select class="stheme ses text-right mr-t-10 pd-5">
     <option> <?= $_theme?></option>
     <?php for ($i = 0; $i < count($mtheme); $i++) {
@@ -195,6 +202,7 @@ if (!isset($_SESSION["mikhmon"])) {
       }
     ?>
   </select>
+  <a title="Idle Timeout" style="<?= $didleto; ?>"><span style="width:70px;" class="pd-5 radius-3"><i class="fa fa-clock-o mr-1"></i>  <span class="mr-1" id="timer"></span></span></a>
 </div>
 </div>
 
@@ -240,14 +248,14 @@ include('./info.php');
 
 <div id="navbar" class="navbar">
   <div class="navbar-left">
-    <a id="brand" class="text-center" href="./?session=<?= $session; ?>"><span>MIKHMON</span></a>
+    <a id="brand" class="text-center" href="./?session=<?= $session; ?>">MIKHMON</a>
 
 <a id="openNav" class="navbar-hover" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
 <a id="closeNav" class="navbar-hover" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
 <a id="cpage" class="navbar-left" href="javascript:void(0)"><?= $mpage; ?></a>
 </div>
  <div class="navbar-right">
-  <a href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> <?= $_logout ?></a>
+  <a id="logout" href="./?hotspot=logout&session=<?= $session; ?>" ><i class="fa fa-sign-out mr-1"></i> <?= $_logout ?></a>
   <select class="stheme ses text-right mr-t-10 pd-5">
     <option> <?= $_theme ?></option>
     <?php for ($i = 0; $i < count($mtheme); $i++) {
@@ -272,7 +280,7 @@ include('./info.php');
       ?>
     
   </select>
-  
+  <a title="Idle Timeout" style="<?= $didleto; ?>"><span style="width:70px;" class="pd-5 radius-3"><i class="fa fa-clock-o mr-1"></i>  <span class="mr-1" id="timer"></span></span></a>
 </div>
 </div>
 

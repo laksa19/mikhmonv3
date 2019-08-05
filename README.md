@@ -3,6 +3,12 @@
 [update.zip](https://laksa19.github.io/getdownloadlink.html?update.zip){:target="_blank"}
 ### Changelog
 
+#### Update 08-06 2019 V3.17
+1. Perbaikan live report.
+2. Perbaikan generate users.
+3. Penambahan idle tileout (auto logout).
+4. Penambahan ping IP Mikrotik di session settings.
+
 #### Update 07-14 2019 V3.16
 1. Penambahan address pool di add user profile dan edit user profile
 2. Notif new update di admin settings

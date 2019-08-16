@@ -1,5 +1,4 @@
 #Jekyll configuration
 url: "https://laksa19.github.io/mikhmonv3"
 title: Changelog Mikhmon V3	
-markdown: kmarkdown
 highlighter: rouge

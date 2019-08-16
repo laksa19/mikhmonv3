@@ -3,6 +3,9 @@
 [update.zip](https://laksa19.github.io/getdownloadlink.html?update.zip){:target="_blank"}
 ### Changelog
 
+#### Update 08-16 2019 V3.18
+1. Penambahan harga jual. (Harga yang tampil di voucher)
+
 #### Update 08-06 2019 V3.17
 1. Perbaikan live report.
 2. Perbaikan generate users.

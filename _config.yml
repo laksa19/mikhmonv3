@@ -1,25 +1,8 @@
 
 
- # Markdown	
-
- highlighter: true	
-
- # Defaults	
-
- defaults:	
-  - scope:	
-      path: ""	
-      type: pages	
-    values:	
-      layout: "default"	
-      og_type: article	
-      type: article	
-      category: "Others"	
-      excerpt_separator: "<!--more-->"	
-
  # Site info	
 
- url: https://laksa19.github.io	
+url: https://laksa19.github.io/mikhmonv3	
 title: Changelog Mikhmon V3	
 
  repository: laksa19/mikhmonv3

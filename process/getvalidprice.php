@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright (C) 2018 Laksamadi Guko.
+ *  Copyright (C) 2019 Laksamadi Guko.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,9 @@ if (!isset($_SESSION["mikhmon"])) {
   $passwdhost = explode('#|#', $data[$session][3])[1];
   $curency = explode('&', $data[$session][6])[1];
 
-
+// lang
+include('../include/lang.php');
+include('../lang/'.$langid.'.php');
 
   include_once('../lib/routeros_api.class.php');
 
@@ -43,18 +45,27 @@ if (!isset($_SESSION["mikhmon"])) {
   if ($uprofname != "") {
     $getprofile = $API->comm("/ip/hotspot/user/profile/print", array("?name" => "$uprofname"));
     $ponlogin = $getprofile[0]['on-login'];
-    $getvalid = "Validity : " . explode(",", $ponlogin)[3];
+    $getvalid = $_validity. " : " . explode(",", $ponlogin)[3];
     $getprice = explode(",", $ponlogin)[2];
-    $getlock = "| Lock User : " . explode(",", $ponlogin)[6];
+    $getsprice = explode(",", $ponlogin)[4];
+    $getlock = "| ".$_lock_user." : " . explode(",", $ponlogin)[6];
     if ($getprice == 0) {
     } else {
       if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
-        $price = "| Price : " . $curency . " " . number_format($getprice, 0, ",", ".");
+        $price = "| ".$_price." : " . $curency . " " . number_format($getprice, 0, ",", ".");
       } else {
-        $price = "| Price : " . $curency . " " . number_format($getprice);
+        $price = "| ".$_price." : " . $curency . " " . number_format($getprice);
       }
     }
-    echo '<b id="getdata">' . $getvalid . ' ' . $price . ' ' . $getlock . '</b>';
+    if ($getsprice == 0) {
+    } else {
+      if ($curency == "Rp" || $curency == "rp" || $curency == "IDR" || $curency == "idr") {
+        $sprice = "| ".$_selling_price." : " . $curency . " " . number_format($getsprice, 0, ",", ".");
+      } else {
+        $sprice = "| ".$_selling_price." : " . $curency . " " . number_format($getsprice);
+      }
+    }
+    echo '<b id="getdata">' . $getvalid . ' ' . $price . ' ' . $sprice . ' ' . $getlock . '</b>';
     echo '<span id="validity">' . explode(",", $ponlogin)[3] . '</span> ';
   }
 }

@@ -92,10 +92,11 @@ date_default_timezone_set($_SESSION['timezone']);
 		$ponlogin = $getprofile[0]['on-login'];
 		$getvalid = explode(",", $ponlogin)[3];
 		$getprice = explode(",", $ponlogin)[2];
+		$getsprice = explode(",", $ponlogin)[4];
 		$getlock = explode(",", $ponlogin)[6];
 		$_SESSION['ubp'] = $profile;
 		$commt = $user . "-" . rand(100, 999) . "-" . date("m.d.y") . "-" . $adcomment;
-		$gentemp = $commt . "|~" . $profile . "~" . $getvalid . "~" . $getprice . "~" . $timelimit . "~" . $datalimit . "~" . $getlock;
+		$gentemp = $commt . "|~" . $profile . "~" . $getvalid . "~" . $getprice . "!".$getsprice."~" . $timelimit . "~" . $datalimit . "~" . $getlock;
 		$gen = '<?php $genu="'.encrypt($gentemp).'";?>';
 		$temp = './voucher/temp.php';
 		$handle = fopen($temp, 'w') or die('Cannot open file:  ' . $temp);
@@ -244,11 +245,17 @@ date_default_timezone_set($_SESSION['timezone']);
 	} else {
 		$uvalid = $uvalid;
 	}
-	$uprice = $genuser1[3];
+	$uprice = explode("!",$genuser1[3])[0];
 	if ($uprice == "0") {
 		$uprice = "-";
 	} else {
 		$uprice = $uprice;
+	}
+	$suprice = explode("!",$genuser1[3])[1];
+	if ($suprice == "0") {
+		$suprice = "-";
+	} else {
+		$suprice = $suprice;
 	}
 	$utlimit = $genuser1[4];
 	if ($utlimit == "0") {
@@ -267,8 +274,10 @@ date_default_timezone_set($_SESSION['timezone']);
 	$urlprint = explode("|", decrypt($genu))[0];
 	if ($currency == in_array($currency, $cekindo['indo'])) {
 		$uprice = $currency . " " . number_format($uprice, 0, ",", ".");
+		$suprice = $currency . " " . number_format($suprice, 0, ",", ".");
 	} else {
 		$uprice = $currency . " " . number_format($uprice);
+		$suprice = $currency . " " . number_format($suprice);
 
 	}
 
@@ -441,6 +450,9 @@ date_default_timezone_set($_SESSION['timezone']);
   </tr>
   <tr>
   	<td><?= $_price ?></td><td><?= $uprice ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_selling_price ?></td><td><?= $suprice ?></td>
   </tr>
   <tr>
   	<td><?= $_lock_user ?></td><td><?= $ulock ?></td>

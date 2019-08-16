@@ -74,15 +74,28 @@ if (!isset($_SESSION["mikhmon"])) {
   $ponlogin = $getprofile[0]['on-login'];
   $validity = explode(",", $ponlogin)[3];
   $getprice = explode(",", $ponlogin)[2];
-  if ($getprice == 0) {
-    $price = "";
-  } else {
-    if ($currency == in_array($currency, $cekindo['indo'])) {
-      $price = $currency . " " . number_format($getprice, 0, ",", ".");
-    } else {
-      $price = $currency . " " . number_format($getprice, 2);
+  $getsprice = explode(",", $ponlogin)[4];
+
+ 
+  
+    if($getsprice == "0" && $getprice != "0"){
+      if ($currency == in_array($currency, $cekindo['indo'])) {
+        $price = $currency . " " . number_format($getprice, 0, ",", ".");
+      } else {
+        $price = $currency . " " . number_format($getprice, 2);
+      }
+    }else if($getsprice != "0"){
+      if ($currency == in_array($currency, $cekindo['indo'])) {
+        $price = $currency . " " . number_format($getsprice, 0, ",", ".");
+      } else {
+        $price = $currency . " " . number_format($getsprice, 2);
+      }
+    }else if ($getsprice == "0") {
+      $price = "";
     }
-  }
+
+    
+  
 
   $logo = "../img/logo-" . $session . ".png";
   if (file_exists($logo)) {

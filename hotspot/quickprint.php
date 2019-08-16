@@ -54,12 +54,15 @@ for ($i = 0; $i < $TotalReg; $i++) {
   $datalimit = $quickprintsource[9];
   $comment = $quickprintsource[10];
   $validity = $quickprintsource[11];
-  $getprice = $quickprintsource[12];
+  $getprice = explode("_",$quickprintsource[12])[0];
+  $getsprice = explode("_",$quickprintsource[12])[1];
   $userlock = $quickprintsource[13];
   if ($currency == in_array($currency, $cekindo['indo'])) {
     $price = $currency . " " . number_format($getprice, 0, ",", ".");
+    $sprice = $currency . " " . number_format($getsprice, 0, ",", ".");
 } else {
     $price = $currency . " " . number_format($getprice);
+    $sprice = $currency . " " . number_format($getsprice);
 }
   ?>
 	     <div class="col-4">
@@ -70,7 +73,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
             </div>
               <div class="box-group-area">
                 <h3 ><?= $_package ?> : <?= $package; ?> <br></h3>
-                <span><?= $_time_limit ?>  : <?= $timelimit ?> | <?= $_data_limit ?>  : <?= formatBytes($datalimit, 2) ?> <br> <?= $_validity ?>  : <?= $validity ?> | <?= $_price ?>  : <?= $price ?></span>
+                <span><?= $_time_limit ?>  : <?= $timelimit ?> | <?= $_data_limit ?>  : <?= formatBytes($datalimit, 2) ?> <br> <?= $_validity ?>  : <?= $validity ?> | <?= $_price ?>  : <?= $price ?> | <?= $_selling_price ?>  : <?= $sprice ?></span>
               </div>
             </div>
             

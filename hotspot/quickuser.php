@@ -63,8 +63,17 @@ $getquickprint = $API->comm("/system/script/print", array("?name" => "$quickprin
   $datalimit = $quickprintsource[9];
   $comment = $quickprintsource[10];
   $getvalid = $quickprintsource[11];
-  $getprice = $quickprintsource[12];
+  $getprice = explode("_",$quickprintsource[12])[0];
+  $getsprice = explode("_",$quickprintsource[12])[1];
   $userlock = $quickprintsource[13];
+
+  if($getsprice == "" && $getprice != ""){
+	  $price = $getprice;
+  }else if($getsprice != ""){
+	  $price = $getsprice;
+  }else if ($getsprice == "") {
+	$price = "";
+  }
 
 		$commt = $usermode . "-" . rand(100, 999) . "-" . date("m.d.y") . "-" . $comment;
 
@@ -218,7 +227,7 @@ $getquickprint = $API->comm("/system/script/print", array("?name" => "$quickprin
 	//$qrcode = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='.$chl;
 
 if ($currency == in_array($currency, $cekindo['indo'])) {
-  $pricebt = $currency . " " . number_format($getprice, 0, ",", ".");
+  $pricebt = $currency . " " . number_format($price, 0, ",", ".");
   if (substr($getvalid, -1) == "d") {
     $validity = substr($getvalid, 0, -1) . "Hari";
   } else if (substr($getvalid, -1) == "h") {
@@ -233,8 +242,9 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
   } else if (substr($utimelimit, -1) == "w") {
     $timelimit = (substr($utimelimit, 0, -1) * 7) . "Hari";
   }
+
   } else {
-    $pricebt = $currency . " " . number_format($getprice);
+    $pricebt = $currency . " " . number_format($price);
     $timelimit = $utimelimit;
     $validity = $getvalid;
   }

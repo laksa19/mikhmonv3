@@ -104,6 +104,7 @@ $_sec = "dtk";
 $_seconds = "detik";
 $_selected = "Terpilih";
 $_select_interface = "Pilih Antarmuka";
+$_selling_price = "Harga Jual";
 $_selling_report = "Laporan Penjualan";
 $_send_to_WA = "Kirim ke WhatsApp";
 $_session_name = "Nama Sesi";

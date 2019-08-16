@@ -104,6 +104,7 @@ $_sec = "sec";
 $_seconds = "segundo";
 $_selected = "Napili";
 $_select_interface = "Piliin and harapan";
+$_selling_price = "Selling Price";
 $_selling_report = "Bentahang Ulat";
 $_send_to_WA = "Send to WhatsApp";
 $_session_name = "Pangalan ng Sesyon";

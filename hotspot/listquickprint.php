@@ -46,7 +46,7 @@ if(isset($qpid) && isset($rem)){
 	$API->comm("/system/script/remove", array(
 		".id" => "$qpid",
 ));
-
+echo '<script>window.location.reload()</script>';
 }	
 
 	// get quick print
@@ -124,9 +124,10 @@ $getquickprint = $API->comm("/system/script/print", array("?.id" => "$qpid"));
 		$ponlogin = $getprofile[0]['on-login'];
 		$getvalid = explode(",", $ponlogin)[3];
 		$getprice = explode(",", $ponlogin)[2];
+		$getsprice = explode(",", $ponlogin)[4];
 		$getlock = explode(",", $ponlogin)[6];
 
-        $source = '#'.$name.'#'.$server.'#'.$user.'#'.$userl.'#'.$prefix.'#'.$char.'#'.$profile.'#'.$timelimit.'#'.$datalimit.'#'.$adcomment.'#'.$getvalid.'#'.$getprice.'#'.$getlock;
+        $source = '#'.$name.'#'.$server.'#'.$user.'#'.$userl.'#'.$prefix.'#'.$char.'#'.$profile.'#'.$timelimit.'#'.$datalimit.'#'.$adcomment.'#'.$getvalid.'#'.$getprice.'_'.$getsprice.'#'.$getlock;
 
 		if (isset($qpid)){
 			$API->comm("/system/script/set", array(
@@ -299,7 +300,8 @@ $getquickprint = $API->comm("/system/script/print", array("?.id" => "$qpid"));
                     <th><?= $_time_limit ?></th>
                     <th><?= $_data_limit ?></th>
                     <th><?= $_validity ?></th>
-                    <th><?= $_price ?></th>
+					<th><?= $_price ?></th>
+					<th><?= $_selling_price ?></th>
                     <th><?= $_lock_user ?></th>
                     <th><?= $_comment ?></th>
                     </tr>
@@ -322,16 +324,19 @@ for ($i = 0; $i < $TotalReg; $i++) {
   $datalimit = $quickprintsource[9];
   $comment = $quickprintsource[10];
   $validity = $quickprintsource[11];
-  $getprice = $quickprintsource[12];
+  $getprice = explode("_",$quickprintsource[12])[0];
+  $getsprice = explode("_",$quickprintsource[12])[1];
   $userlock = $quickprintsource[13];
   if ($currency == in_array($currency, $cekindo['indo'])) {
     $price = $currency . " " . number_format($getprice, 0, ",", ".");
+    $sprice = $currency . " " . number_format($getsprice, 0, ",", ".");
 } else {
     $price = $currency . " " . number_format($getprice);
+    $sprice = $currency . " " . number_format($getsprice);
 }
 ?>
 <tr>
-<td><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete (<?= $package; ?>)?')){window.location='./?hotspot=list-quick-print&remove&qpid=<?= $qpid; ?>&session=<?= $session; ?>'}else{}" title='Remove <?= $package; ?>'></i>&nbsp</td>	
+<td><i class='fa fa-minus-square text-danger pointer' onclick="if(confirm('Are you sure to delete (<?= $package; ?>)?')){loadpage('./?hotspot=list-quick-print&remove&qpid=<?= $qpid; ?>&session=<?= $session; ?>')}else{}" title='Remove <?= $package; ?>'></i>&nbsp</td>	
 <td><a title="Edit <?= $_package.' '. $package; ?>" href="./?hotspot=list-quick-print&qpid=<?= $qpid; ?>&session=<?= $session; ?>"><i class="fa fa-edit"></i> <?= $package; ?></a></td>
 <td><?= $server ?></td>
 <td><?= $usermode ?></td>
@@ -342,6 +347,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
 <td><?= formatBytes($datalimit, 2) ?></td>
 <td><?= $validity ?></td>
 <td><?= $price ?></td>
+<td><?= $sprice ?></td>
 <td><?= $userlock ?></td>
 <td><?= $comment ?></td>
               </tr>

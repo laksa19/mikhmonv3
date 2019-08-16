@@ -100,6 +100,7 @@ if (!isset($_SESSION["mikhmon"])) {
   $ponlogin = $profiledetalis['on-login'];
   $getvalid = explode(",", $ponlogin)[3];
   $getprice = explode(",", $ponlogin)[2];
+  $getsprice = explode(",", $ponlogin)[4];
 
 
   $getsch = $API->comm("/system/scheduler/print", array(
@@ -127,14 +128,24 @@ if (!isset($_SESSION["mikhmon"])) {
   } else {
     $wadlimit = "";
   }
-  if ($getprice == 0) {
-    echo "";
-  } else {
+  
+  if($getsprice == "" && $getprice != ""){
     if ($currency == in_array($currency, $cekindo['indo'])) {
       $waprice = $_price." : *" . $currency . " " . number_format($getprice, 0, ",", ".") . "* %0A";
     } else {
       $waprice = $_price . " : *" . $currency . " " . number_format($getprice) . "* %0A";
     }
+    $btprice = $getprice;
+  }else if($getsprice != ""){
+    if ($currency == in_array($currency, $cekindo['indo'])) {
+      $waprice = $_price." : *" . $currency . " " . number_format($getsprice, 0, ",", ".") . "* %0A";
+    } else {
+      $waprice = $_price . " : *" . $currency . " " . number_format($getsprice) . "* %0A";
+    }
+    $btprice = $getsprice;
+  }else if ($getsprice == "") {
+    $waprice = "";
+    $btprice = "";
   }
 
   $shareWAUP = "
@@ -179,7 +190,7 @@ include('./include/quickbt.php');
 
 
 if ($currency == in_array($currency, $cekindo['indo'])) {
-  $pricebt = $currency . " " . number_format($getprice, 0, ",", ".");
+  $pricebt = $currency . " " . number_format($btprice, 0, ",", ".");
   if (substr($getvalid, -1) == "d") {
     $validity = substr($getvalid, 0, -1) . "Hari";
   } else if (substr($getvalid, -1) == "h") {
@@ -197,7 +208,7 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
     $timelimit = (substr($utimelimit, 0, -1) * 7) . "Hari";
   }
   } else {
-    $pricebt = $currency . " " . number_format($getprice);
+    $pricebt = $currency . " " . number_format($btprice);
     $timelimit = $utimelimit;
     $validity = $getvalid;
   }
@@ -416,6 +427,16 @@ include('./voucher/printbt.php');
           echo $currency . " " . number_format($getprice, 0, ",", ".");
         } else {
           echo $currency . " " . number_format($getprice);
+        }
+      } ?>" disabled></td>
+  </tr>
+  <tr>
+    <td class="align-middle"><?= $_selling_price ?></td><td><input class="form-control" id="price" type="text" value="<?php if ($getprice == 0) {
+      } else {
+        if ($currency == in_array($currency, $cekindo['indo'])) {
+          echo $currency . " " . number_format($getsprice, 0, ",", ".");
+        } else {
+          echo $currency . " " . number_format($getsprice);
         }
       } ?>" disabled></td>
   </tr>

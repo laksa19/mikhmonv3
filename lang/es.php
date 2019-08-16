@@ -104,6 +104,7 @@ $_sec = "sec";
 $_seconds = "segundos";
 $_selected = "Seleccionar";
 $_select_interface = "Seleccionar Interface";
+$_selling_price = "Selling Price";
 $_selling_report = "Informe de ventas";
 $_send_to_WA = "Send to WhatsApp";
 $_session_name = "Nombre de la Sesión";

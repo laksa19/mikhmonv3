@@ -5,6 +5,7 @@
 
 #### Update 08-16 2019 V3.18
 1. Penambahan harga jual. (Harga yang tampil di voucher)
+2. Untuk pengguna Termux, uninstall Mikhmon kemudian install lagi. [panduan](https://laksa19.github.io/tutorial){:target="_blank"}
 
 #### Update 08-06 2019 V3.17
 1. Perbaikan live report.

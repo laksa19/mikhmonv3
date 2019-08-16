@@ -30,6 +30,8 @@
 2. Perbaikan edit profile (remove monitor profile untuk expired mode none).
 3. Penambahan indikator monitor profile di laman list user profile dan edit user profile (Green = Monitor Profile aktif, Orange = Monitor Profile tidak aktif).
 
+	``` Monitor Profile adalah scheduler yang mengecek expired user ```
+
 	![indicator](https://raw.githubusercontent.com/laksa19/laksa19.github.io/master/img/profile-indicator.png)
 
 #### Update 04-02 2019 V3.13 r6

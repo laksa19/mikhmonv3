@@ -6,7 +6,7 @@
 #### Update 08-16 2019 V3.18
 1. Penambahan harga jual. (Harga yang tampil di voucher)
 
-	*update user profile dan update juga template vouchernya, silakan download di [website](https://laksa19.github.io/voucher){:target="_blank"}
+	*update user profile isi harga jual(selling price) dan update juga template vouchernya, silakan download di [website](https://laksa19.github.io/voucher){:target="_blank"}
 	
 2. Untuk pengguna Termux, uninstall Mikhmon kemudian install lagi. [panduan](https://laksa19.github.io/tutorial){:target="_blank"} 	
 

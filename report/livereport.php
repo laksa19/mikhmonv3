@@ -80,14 +80,14 @@ include('../lang/'.$langid.'.php');
       $tHr += explode("-|-", $getSRHr[$i]['name'])[3];
 
     }*/
-    for ($i = 0; $i < $TotalRBl; $i++) {
-      if($getSRBl[$i]['source'] == $idhr){
-        $tHr += explode("-|-", $getSRBl[$i]['name'])[3];
-        $TotalRHr += count($getSRBl[$i]['source']);
-        
-      }
-
-      $tBl += explode("-|-", $getSRBl[$i]['name'])[3];
+    foreach($getSRBl as $row){
+    
+      if((explode("-|-", $row['name'])[0]) == $idhr){
+         $tHr += explode("-|-", $row['name'])[3];
+         $TotalRHr += count($row['source']);
+ 
+       }
+       $tBl += explode("-|-", $row['name'])[3];
 
       if($TotalRHr == ""){
         $TotalRHr = "0";

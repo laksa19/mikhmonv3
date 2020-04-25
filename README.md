@@ -1,14 +1,13 @@
 ### MIKHMON V3
-#### Download update.zip
-[update.zip](https://laksa19.github.io/getdownloadlink.html?update.zip){:target="_blank"}
+
 ### Changelog
 
 #### Update 08-16 2019 V3.18
 1. Penambahan harga jual. (Harga yang tampil di voucher)
 
-	*update user profile isi harga jual(selling price) dan update juga template vouchernya, silakan download di [website](https://laksa19.github.io/voucher){:target="_blank"}
+	*update user profile isi harga jual(selling price) dan update juga template vouchernya, silakan download di [website](https://laksa19.github.io/?mikhmon/v3/voucher)
 	
-2. Untuk pengguna Termux, uninstall Mikhmon kemudian install lagi. [panduan](https://laksa19.github.io/tutorial){:target="_blank"} 	
+2. Untuk pengguna Termux, uninstall Mikhmon kemudian install lagi. 
 
 #### Update 08-06 2019 V3.17
 1. Perbaikan live report.

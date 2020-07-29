@@ -4,19 +4,19 @@ $langname = "Spanish";
 $language = "Language";
 // Translator Fernando Sepulveda
 $_about = "Acerca";
-$_action = "Action";
+$_action = "Acción";
 $_add = "Anadir Usuarios";
 $_add_router = "Añadir Router";
 $_add_user = "Añadir Usuario";
 $_add_user_profile = "Añadir Perfil";
 $_admin = "Admin";
-$_admin_settings = "Admin Settings";
+$_admin_settings = "Configuración de administrador";
 $_all = "Todo";
-$_auto_reload = "Auto load";
-$_bluetooth_ac = "Print BT Access Code";
-$_board_name = "Board ";
+$_auto_reload = "Carga automática";
+$_bluetooth_ac = "Imprimir código de acceso BT";
+$_board_name = "Tablero ";
 $_by_comment = "Por comentario";
-$_cancel = "Cancel";
+$_cancel = "Cancelar";
 $_character = "Caracteres";
 $_close = "Cerrar";
 $_comment = "Comentario";
@@ -30,15 +30,15 @@ $_date ="Fecha";
 $_days = "Días";
 $_delete_data = "Borrar datos";
 $_delete = "Eliminar";
-$_dhcp_leases = "DHCP Leases";
-$_dns_name = "DNS Name";
+$_dhcp_leases = "Arrendamientos DHCP";
+$_dns_name = "Nombre DNS";
 $_edit = "Editar";
 $_edit_user = "Editar Usuarios";
 $_end = "Fin";
 $_expired = "Expirado";
 $_expired_mode = "Modo Expirado";
-$_extend_expired_date = "Extend Expired Date";
-$_format_file_name = "Format file name";
+$_extend_expired_date = "Extender fecha de vencimiento";
+$_format_file_name = "Formatear nombre de archivo";
 $_free_hdd = "Libre HDD";
 $_free_memory = "Memoria Libre";
 $_generate_code = "Generar Código";
@@ -54,11 +54,11 @@ $_hotspot_name = "Nombre Hotspot";
 $_hotspot_users = "Usuarios Hotspot";
 $_hours = "horas";
 $_income = "Ingresos";
-$_idle_timeout = "Idle Timeout";
+$_idle_timeout = "Tiempo de inactividad";
 $_interface = "Inteface";
 $_ip_bindings = "IP Bindings";
 $_last_generate = "Ultimos Generados";
-$_list_logo = "List Logo";
+$_list_logo = "Lista Logo";
 $_live_report = "Reporte en Vivo";
 $_loading = "Cargando";
 $_loading_interface = "Cargando Interface";
@@ -73,29 +73,29 @@ $_model = "Modelo";
 $_name = "Nombre";
 $_no = "No";
 $_open = "Abrir";
-$_package = "Package";
+$_package = "Paquete";
 $_password = "Password";
 $_please_login = "Por Favor Inicia Sesión";
 $_ppp_active = "PPP Activos";
-$_ppp_profiles = "PPP Profiles";
+$_ppp_profiles = "Perfiles PPP";
 $_ppp_secrets = "PPP Secrets";
 $_prefix = "Prefijo";
 $_price = "Precio";
 $_print_default = "Por Defecto";
 $_print = "Imprimir";
 $_print_qr = "QR";
-$_print_small = "Small";
+$_print_small = "Pequeña";
 $_processing = "Procesando...";
 $_profile = "Perfil";
 $_qty = "Cantidad";
-$_quick_print = "Quick Print";
-$_random = "Random";
+$_quick_print = "Impresión rápida";
+$_random = "Aleatorio";
 $_readme = "Leeme";
-$_reboot = "Are you sure to reboot";
-$_reduce_expired_date = "Reduce Expired Date";
+$_reboot = "¿Estás seguro de reiniciar?";
+$_reduce_expired_date = "Reducir fecha de vencimiento";
 $_remove = "Eliminar";
 $_report = "Reporte";
-$_reset_start_date = "Reset Start Date";
+$_reset_start_date = "Restablecer fecha de inicio";
 $_resume = "Resumen";
 $_router_list = "Lista de Router";
 $_save = "Guardar";
@@ -104,9 +104,9 @@ $_sec = "sec";
 $_seconds = "segundos";
 $_selected = "Seleccionar";
 $_select_interface = "Seleccionar Interface";
-$_selling_price = "Selling Price";
+$_selling_price = "Precio de venta";
 $_selling_report = "Informe de ventas";
-$_send_to_WA = "Send to WhatsApp";
+$_send_to_WA = "Enviar a WhatsApp";
 $_session_name = "Nombre de la Sesión";
 $_session = "Sesión";
 $_session_settings = "Configuración de Sesión";
@@ -165,11 +165,11 @@ $_details_add_user = '
 
 $_details_user_profile = '
 '.$_expired_mode.' Es el control para el usuario del hotspot.<br>
-Opciones : Remove, Notice, Remove & Record, Notice & Record.
+Opciones : Eliminar, aviso, Eliminar y registrar, Aviso y registrar.
 <ul>
-<li>Remove: El usuario será eliminado cuando  expire..</li>
-<li>Notice: El usuario no se eliminará y recibirá una notificación después de la expiración del usuario.</li>
-<li>Record: Guardar el precio de cada usuario de inicio de sesión. Para calcular las ventas totales de usuarios de hotspot..</li>
+<li>Eliminar: El usuario será eliminado cuando  expire..</li>
+<li>Naviso: El usuario no se eliminará y recibirá una notificación después de la expiración del usuario.</li>
+<li>Registrar: Guardar el precio de cada usuario de inicio de sesión. Para calcular las ventas totales de usuarios de hotspot..</li>
 </ul>
 </p>
         

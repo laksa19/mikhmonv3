@@ -1,6 +1,16 @@
 ### MIKHMON V3
 
+#### Download update.zip
+[update.zip](https://laksa19.github.io/getdownloadlink.html?update.zip){:target="_blank"}
+
 ### Changelog
+
+### Update 04-07 2020
+1. Added Dockerfile for test
+	- git clone project
+	- docker build --tag mikhmonv3 .
+	- docker run --rm -i -t -p 8080:80 --name="mkhmn1" mikhmonv3
+	- go to localhost:8080
 
 #### Update 08-16 2019 V3.18
 1. Penambahan harga jual. (Harga yang tampil di voucher)

@@ -1,7 +1,7 @@
 ### MIKHMON V3
 
 #### Download update.zip
-[update.zip](https://laksa19.github.io/getdownloadlink.html?update.zip){:target="_blank"}
+[update.zip](https://raw.githubusercontent.com/laksa19/laksa19.github.io/master/download/update.zip){:target="_blank"}
 
 ### Changelog
 

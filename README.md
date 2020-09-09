@@ -5,7 +5,7 @@
 
 ### Changelog
 
-#### Update 09-08 2019 V3.19
+#### Update 09-08 2020 V3.19
 1. Penambahan jumlah sisa voucher di "option comment" laman user list.
 
 #### Update 04-07 2020

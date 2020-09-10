@@ -195,6 +195,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
   $uname = $userdetails['name'];
   $upass = $userdetails['password'];
   $uprofile = $userdetails['profile'];
+  $umacadd = $userdetails['mac-address'];
   $uuptime = formatDTM($userdetails['uptime']);
   $ubytesi = formatBytes($userdetails['bytes-in'], 2);
   $ubyteso = formatBytes($userdetails['bytes-out'], 2);
@@ -236,6 +237,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
   echo "<td><a title='Open User " . $uname . "' href=./?hotspot-user=" . $uid . "&session=" . $session . "><i class='fa fa-edit'></i> " . $uname . " </a>";
   echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popup . '"><i class="fa fa-print"></i></a> &nbsp <a title="Print ' . $uname . '" href="' . $popupQR . '"><i class="fa fa-qrcode"></i> </a></td>';
   echo "<td>" . $uprofile . "</td>";
+  echo "<td style=' text-align:left'>" . $umacadd . "</td>";
   echo "<td style=' text-align:right'>" . $uuptime . "</td>";
   echo "<td style=' text-align:right'>" . $ubytesi . "</td>";
   echo "<td style=' text-align:right'>" . $ubyteso . "</td>";

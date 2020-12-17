@@ -246,25 +246,25 @@ date_default_timezone_set($_SESSION['timezone']);
 		$uvalid = $uvalid;
 	}
 	$uprice = explode("!",$genuser1[3])[0];
-	if ($uprice == "0") {
+	if ($uprice == 0) {
 		$uprice = "-";
 	} else {
 		$uprice = $uprice;
 	}
 	$suprice = explode("!",$genuser1[3])[1];
-	if ($suprice == "0") {
+	if ($suprice == 0) {
 		$suprice = "-";
 	} else {
 		$suprice = $suprice;
 	}
 	$utlimit = $genuser1[4];
-	if ($utlimit == "0") {
+	if ($utlimit == 0) {
 		$utlimit = "-";
 	} else {
 		$utlimit = $utlimit;
 	}
 	$udlimit = $genuser1[5];
-	if ($udlimit == "0") {
+	if ($udlimit == 0) {
 		$udlimit = "-";
 	} else {
 		$udlimit = formatBytes($udlimit, 2);

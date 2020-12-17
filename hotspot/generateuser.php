@@ -246,25 +246,25 @@ date_default_timezone_set($_SESSION['timezone']);
 		$uvalid = $uvalid;
 	}
 	$uprice = explode("!",$genuser1[3])[0];
-	if ($uprice == 0) {
+	if ($uprice == "0") {
 		$uprice = "-";
 	} else {
 		$uprice = $uprice;
 	}
 	$suprice = explode("!",$genuser1[3])[1];
-	if ($suprice == 0) {
+	if ($suprice == "0") {
 		$suprice = "-";
 	} else {
 		$suprice = $suprice;
 	}
 	$utlimit = $genuser1[4];
-	if ($utlimit == 0) {
+	if ($utlimit == "0") {
 		$utlimit = "-";
 	} else {
 		$utlimit = $utlimit;
 	}
 	$udlimit = $genuser1[5];
-	if ($udlimit == 0) {
+	if ($udlimit == "0") {
 		$udlimit = "-";
 	} else {
 		$udlimit = formatBytes($udlimit, 2);
@@ -273,8 +273,8 @@ date_default_timezone_set($_SESSION['timezone']);
 	//$urlprint = "$umode-$ucode-$udate-$ucommt";
 	$urlprint = explode("|", decrypt($genu))[0];
 	if ($currency == in_array($currency, $cekindo['indo'])) {
-		$uprice = $currency . " " . number_format($uprice, 0, ',', '.');
-		$suprice = $currency . " " . number_format($suprice, 0, ',', '.');
+		$uprice = $currency . " " . number_format($uprice, 0, ",", ".");
+		$suprice = $currency . " " . number_format($suprice, 0, ",", ".");
 	} else {
 		$uprice = $currency . " " . number_format($uprice);
 		$suprice = $currency . " " . number_format($suprice);

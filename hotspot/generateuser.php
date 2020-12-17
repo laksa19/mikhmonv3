@@ -273,8 +273,8 @@ date_default_timezone_set($_SESSION['timezone']);
 	//$urlprint = "$umode-$ucode-$udate-$ucommt";
 	$urlprint = explode("|", decrypt($genu))[0];
 	if ($currency == in_array($currency, $cekindo['indo'])) {
-		$uprice = $currency . " " . number_format($uprice, 0, ",", ".");
-		$suprice = $currency . " " . number_format($suprice, 0, ",", ".");
+		$uprice = $currency . " " . number_format($uprice, 0, ',', '.');
+		$suprice = $currency . " " . number_format($suprice, 0, ',', '.');
 	} else {
 		$uprice = $currency . " " . number_format($uprice);
 		$suprice = $currency . " " . number_format($suprice);

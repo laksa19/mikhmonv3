@@ -132,7 +132,7 @@ if (!isset($_SESSION["mikhmon"])) {
 			<div class="input-group-2 col-box-4">
 			<select style="padding:5px;" class="group-item group-item-md" title="Month" id="M">
         			<?php 
-										$idbls = array(1 => "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "okt", "nov", "dec");
+										$idbls = array(1 => "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec");
 										$idblf = array(1 => "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 										$month = explode("/", $idhr)[0];
 										$month1 = substr($idbl, 0, 3);

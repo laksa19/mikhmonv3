@@ -1,11 +1,14 @@
 ### MIKHMON V3
 
 #### Download update.zip
-[update.zip](https://laksa19.github.io/getdownloadlink.html?update.zip){:target="_blank"}
+[update.zip](https://raw.githubusercontent.com/laksa19/laksa19.github.io/master/download/update.zip){:target="_blank"}
 
 ### Changelog
 
-### Update 04-07 2020
+#### Update 09-08 2020 V3.19
+1. Penambahan jumlah sisa voucher di "option comment" laman user list.
+
+#### Update 04-07 2020
 1. Added Dockerfile for test
 	- git clone project
 	- docker build --tag mikhmonv3 .

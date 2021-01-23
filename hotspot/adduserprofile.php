@@ -49,7 +49,7 @@ if (!isset($_SESSION["mikhmon"])) {
       $sprice = $getsprice;
     }
     $getlock = ($_POST['lockunlock']);
-    if ($getlock == Enable) {
+    if ($getlock == "Enable") {
       $lock = '; [:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';
     } else {
       $lock = "";

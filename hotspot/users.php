@@ -127,13 +127,15 @@ if (!isset($_SESSION["mikhmon"])) {
 
     $ocomment=  explode(",",$acomment);
     
-    foreach (array_unique($ocomment) as $tcomment) {
+    $comments=array_count_values($ocomment) ;
+    foreach ($comments as $tcomment=>$value) {
 
       if (is_numeric(substr($tcomment, 3, 3))) {
-        echo "<option value='" . explode("#",$tcomment)[0] . "' >". explode("#",$tcomment)[0]." ".explode("#",$tcomment)[1]. "</option>";
+       
+        echo "<option value='" . explode("#",$tcomment)[0] . "' >". explode("#",$tcomment)[0]." ".explode("#",$tcomment)[1]. " [".$value. "]</option>";
        }
-
-     }
+ 
+    }
 
     ?>
     </select>
@@ -178,6 +180,7 @@ if (!isset($_SESSION["mikhmon"])) {
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> <?= $_name ?></th>
     <th>Print</th>
     <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> <?= $_profile ?></th>
+	  <th class="pointer" title="Click to sort"><i class="fa fa-sort"></i> Mac Address</th>
     <th class="text-right align-middle pointer" title="Click to sort"><i class="fa fa-sort"></i> <?= $_uptime_user ?></th>
     <th class="text-right align-middle pointer" title="Click to sort"><i class="fa fa-sort"></i> Bytes In</th>
     <th class="text-right align-middle pointer" title="Click to sort"><i class="fa fa-sort"></i> Bytes Out</th>
@@ -193,6 +196,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
   $uname = $userdetails['name'];
   $upass = $userdetails['password'];
   $uprofile = $userdetails['profile'];
+  $umacadd = $userdetails['mac-address'];
   $uuptime = formatDTM($userdetails['uptime']);
   $ubytesi = formatBytes($userdetails['bytes-in'], 2);
   $ubyteso = formatBytes($userdetails['bytes-out'], 2);
@@ -234,6 +238,7 @@ for ($i = 0; $i < $TotalReg; $i++) {
   echo "<td><a title='Open User " . $uname . "' href=./?hotspot-user=" . $uid . "&session=" . $session . "><i class='fa fa-edit'></i> " . $uname . " </a>";
   echo '</td><td class"text-center"><a title="Print ' . $uname . '" href="' . $popup . '"><i class="fa fa-print"></i></a> &nbsp <a title="Print ' . $uname . '" href="' . $popupQR . '"><i class="fa fa-qrcode"></i> </a></td>';
   echo "<td>" . $uprofile . "</td>";
+  echo "<td style=' text-align:left'>" . $umacadd . "</td>";
   echo "<td style=' text-align:right'>" . $uuptime . "</td>";
   echo "<td style=' text-align:right'>" . $ubytesi . "</td>";
   echo "<td style=' text-align:right'>" . $ubyteso . "</td>";

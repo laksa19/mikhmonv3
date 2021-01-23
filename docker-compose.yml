@@ -1,0 +1,47 @@
+version: "3"
+services:
+  php_7_4:
+    image: php:7.4-fpm
+    container_name: php_7_4
+    tty: true
+    working_dir: /var/www
+    volumes: 
+      - .:/var/www/    
+    networks: 
+      mikhmon_network:
+        ipv4_address: 172.27.0.5
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    tty: true
+    volumes: 
+      - .:/var/www/
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports: 
+      - "8080:80"
+    networks:
+      mikhmon_network:
+        ipv4_address: 172.27.0.6
+  routeros:
+    image: evilfreelancer/docker-routeros
+    container_name: mikrotik_test
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    ports:
+      - "8728:8728"
+      - "8729:8729"
+      - "8081:80"
+    networks:
+      mikhmon_network:
+        ipv4_address: 172.27.0.7
+networks: 
+  mikhmon_network:
+    driver: bridge
+    ipam: 
+      driver: default
+      config: 
+        - subnet: 172.27.0.0/24
+  

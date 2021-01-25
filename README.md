@@ -5,6 +5,15 @@
 
 ### Changelog
 
+#### Update 24-01 2021
+1. Added docker-compose.yml for test-lab. added mikrotik routeros image.
+	- git clone project
+	- open project folder in terminal
+	- run terminal command --> docker-compose up -d
+	- go to localhost:8081. write ip address 192.168.88.1. write password 12345. apply configuration.
+	- go to localhost:8080. user:mikhmon password:1234. add router. ip address 172.27.0.7, user:admin, password: 12345. write 'test' other inputs.last click save button
+	- for stop --> docker-compose down
+	
 #### Update 09-08 2020 V3.19
 1. Penambahan jumlah sisa voucher di "option comment" laman user list.
 

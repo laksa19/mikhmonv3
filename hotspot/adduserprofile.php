@@ -92,7 +92,7 @@ if (!isset($_SESSION["mikhmon"])) {
       "rate-limit" => "$ratelimit",
       "shared-users" => "$sharedusers",
       "status-autorefresh" => "1m",
-      "transparent-proxy" => "yes",
+      //"transparent-proxy" => "yes",
       "on-login" => "$onlogin",
       "parent-queue" => "$parent",
     ));

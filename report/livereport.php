@@ -84,7 +84,7 @@ include('../lang/'.$langid.'.php');
     
       if((explode("-|-", $row['name'])[0]) == $idhr){
          $tHr += explode("-|-", $row['name'])[3];
-         $TotalRHr += count($row['source']);
+         $TotalRHr += count((array)$row['source']); /*Modif line add (array) by github https://github.com/MasKawer*/
  
        }
        $tBl += explode("-|-", $row['name'])[3];

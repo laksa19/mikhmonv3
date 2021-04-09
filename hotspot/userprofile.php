@@ -134,9 +134,9 @@ for ($i = 0; $i < $TotalReg; $i++) {
 		echo "";
 	} else {
 		if ($currency == in_array($currency, $cekindo['indo'])) {
-			echo number_format($price, 0, ",", ".");
+			echo number_format((float)$price, 0, ",", ".");
 		} else {
-			echo number_format($price, 2);
+			echo number_format((float)$price, 2);
 		}
 	}
 
@@ -149,9 +149,9 @@ for ($i = 0; $i < $TotalReg; $i++) {
 		echo "";
 	} else {
 		if ($currency == in_array($currency, $cekindo['indo'])) {
-			echo number_format($price, 0, ",", ".");
+			echo number_format((float)$price, 0, ",", ".");
 		} else {
-			echo number_format($price, 2);
+			echo number_format((float)$price, 2);
 		}
 	}
 

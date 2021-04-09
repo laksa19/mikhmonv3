@@ -58,11 +58,11 @@ for ($i = 0; $i < $TotalReg; $i++) {
   $getsprice = explode("_",$quickprintsource[12])[1];
   $userlock = $quickprintsource[13];
   if ($currency == in_array($currency, $cekindo['indo'])) {
-    $price = $currency . " " . number_format($getprice, 0, ",", ".");
-    $sprice = $currency . " " . number_format($getsprice, 0, ",", ".");
+    $price = $currency . " " . number_format((float)$getprice, 0, ",", ".");
+    $sprice = $currency . " " . number_format((float)$getsprice, 0, ",", ".");
 } else {
-    $price = $currency . " " . number_format($getprice);
-    $sprice = $currency . " " . number_format($getsprice);
+    $price = $currency . " " . number_format((float)$getprice);
+    $sprice = $currency . " " . number_format((float)$getsprice);
 }
   ?>
 	     <div class="col-4">

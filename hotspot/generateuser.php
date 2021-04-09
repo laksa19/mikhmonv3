@@ -50,9 +50,9 @@ date_default_timezone_set($_SESSION['timezone']);
 		}
 
 		if ($currency == in_array($currency, $cekindo['indo'])) {
-			$getprice = $currency . " " . number_format($getprice, 0, ",", ".");
+			$getprice = $currency . " " . number_format((float)$getprice, 0, ",", ".");
 		} else {
-			$getprice = $currency . " " . number_format($getprice);
+			$getprice = $currency . " " . number_format((float)$getprice);
 		}
 		$ValidPrice = "<b>Validity : " . $getvalid . " | Price : " . $getprice . " | Lock User : " . $getlocku . "</b>";
 	} else {
@@ -273,11 +273,11 @@ date_default_timezone_set($_SESSION['timezone']);
 	//$urlprint = "$umode-$ucode-$udate-$ucommt";
 	$urlprint = explode("|", decrypt($genu))[0];
 	if ($currency == in_array($currency, $cekindo['indo'])) {
-		$uprice = $currency . " " . number_format($uprice, 0, ",", ".");
-		$suprice = $currency . " " . number_format($suprice, 0, ",", ".");
+		$uprice = $currency . " " . number_format((float)$uprice, 0, ",", ".");
+		$suprice = $currency . " " . number_format((float)$suprice, 0, ",", ".");
 	} else {
-		$uprice = $currency . " " . number_format($uprice);
-		$suprice = $currency . " " . number_format($suprice);
+		$uprice = $currency . " " . number_format((float)$uprice);
+		$suprice = $currency . " " . number_format((float)$suprice);
 
 	}
 

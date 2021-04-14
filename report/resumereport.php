@@ -54,7 +54,7 @@ function resume_per_day($date){
 $evalue =  explode($date,$_SESSION['dataresume']);
 $x = count($evalue);
 			for ($i = 0; $i < $x; $i++) {
-				$result += $evalue[$i];
+				$result += (int) $evalue[$i];
 			}
 			return ($x-1).'/'.$result;
 }

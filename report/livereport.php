@@ -110,13 +110,13 @@ include('../lang/'.$langid.'.php');
                         <div id="reloadLreport">
                         <?php 
                           if ($currency == in_array($currency, $cekindo['indo'])) {
-                            $dincome = number_format($tHr, 0, ",", ".");
-                            $mincome = number_format($tBl, 0, ",", ".");
+                            $dincome = number_format((float)$tHr, 0, ",", ".");
+                            $mincome = number_format((float)$tBl, 0, ",", ".");
                             $_SESSION[$session.'dincome'] = $dincome;
                             $_SESSION[$session.'mincome'] = $mincome;
                           }else{
-                            $dincome = number_format($tHr, 2);
-                            $mincome = number_format($tBl, 2);
+                            $dincome = number_format((float)$tHr, 2);
+                            $mincome = number_format((float)$tBl, 2);
                             $_SESSION[$session.'dincome'] = $dincome;
                             $_SESSION[$session.'mincome'] = $mincome;
                           }

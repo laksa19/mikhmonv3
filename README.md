@@ -5,6 +5,10 @@
 
 ### Changelog
 
+#### Update 06-30 2021 V3.20
+1. Perbaikan typo script profile ```on-login```.
+	- Silakan update user profile dari Mikhmon, dengan cara membuka tiap user profile, kemudian klik Save.
+
 #### Update 24-01 2021
 1. Added docker-compose.yml for test-lab. added mikrotik routeros image.
 	- git clone project

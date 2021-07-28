@@ -56,7 +56,7 @@ $_hours = "saat";
 $_idle_timeout = "Boşta Kalma Zaman Aşımı";
 $_income = "Gelir";
 $_interface = "Arayüz";
-$_ip_bindings = "IP Bağlamaları";
+$_ip_bindings = "IP Bağlantıları";
 $_last_generate = "Son Oluşturma";
 $_list_logo = "Logoyu Listele";
 $_live_report = "Canlı Rapor";
@@ -91,7 +91,7 @@ $_qty = "Miktar";
 $_quick_print = "Hızlı Yazdır";
 $_random = "Rastgele";
 $_readme = "Beni Oku";
-$_reboot = "Yeniden başlatacağınızdan emin misiniz";
+$_reboot = "Yeniden başlatmak istediğinize emin misiniz?";
 $_reduce_expired_date = "Son Kullanma Tarihini Azaltın";
 $_remove = "Kaldır";
 $_report = "Rapor";
@@ -164,7 +164,7 @@ $_details_add_user = '
 ';
 
 $_details_user_profile = '
-'.$_expired_mode.' hotspot kullanıcısı için kontroldür.<br>
+'.$_expired_mode.' hotspot kullanıcısı için kontrollerdir.<br>
 Seçenekler: Kaldır, Bildir, Kaldır ve Kaydet, Bildir ve Kaydet.
 <ul>
 <li>Kaldır: Kullanıcı süresi dolduğunda silinecek.</li>

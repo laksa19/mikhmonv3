@@ -89,9 +89,11 @@ if (!isset($_SESSION["mikhmon"])) {
     <th>User</th>
     <th>Address</th>
     <th>Mac Address</th>
-    <th class="text-right">Uptime</th>
+    <th class="text-right">TX</th>
+    <th class="text-right">RX</th>
     <th class="text-right">Bytes In</th>
     <th class="text-right">Bytes Out</th>
+    <th class="text-right">Uptime</th>
     <th class="text-right">Time Left</th>
     <th>Login By</th>
     <th><?= $_comment ?></th>
@@ -112,6 +114,12 @@ for ($i = 0; $i < $TotalReg; $i++) {
 	$byteso = formatBytes($hotspotactive['bytes-out'], 2);
 	$loginby = $hotspotactive['login-by'];
 	$comment = $hotspotactive['comment'];
+	$rates = $API->comm("/queue/simple/print", array(
+		".proplist" => "rate",
+		"?name" => "<hotspot-" . $user . ">"
+	));
+	$txrate = formatBytes(explode("/", $rates[0]['rate'])[0], 2);
+	$rxrate = formatBytes(explode("/", $rates[0]['rate'])[1], 2);
 	$uriprocess = "'./?remove-user-active=" . $id . "&session=" . $session . "'";
 	echo "<tr>";
 	echo "<td style='text-align:center;'><span class='pointer'  title='Remove " . $user . "' onclick=loadpage(".$uriprocess.")><i class='fa fa-minus-square text-danger'></i></span></td>";
@@ -119,9 +127,11 @@ for ($i = 0; $i < $TotalReg; $i++) {
 	echo "<td><a title='Open User " . $user . "' href=./?hotspot-user=" . $user . "&session=" . $session . "><i class='fa fa-edit'></i> " . $user . "</a></td>";
 	echo "<td>" . $address . "</td>";
 	echo "<td>" . $mac . "</td>";
-	echo "<td style='text-align:right;'>" . $uptime . "</td>";
+	echo "<td style='text-align:right;'>" . $txrate . "</td>";
+	echo "<td style='text-align:right;'>" . $rxrate . "</td>";
 	echo "<td style='text-align:right;'>" . $bytesi . "</td>";
 	echo "<td style='text-align:right;'>" . $byteso . "</td>";
+	echo "<td style='text-align:right;'>" . $uptime . "</td>";
 	echo "<td style='text-align:right;'>" . $usesstime . "</td>";
 	echo "<td>" . $loginby . "</td>";
 	echo "<td>" . $comment . "</td>";

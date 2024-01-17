@@ -1,1 +1,0 @@
-<?php $langid="en";?>

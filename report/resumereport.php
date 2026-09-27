@@ -44,11 +44,7 @@ return $month == 2 ? ($year % 4 ? 28 : ($year % 100 ? 29 : ($year % 400 ? 28 : 2
 } 
 
 
-if ($mn == date("n")){
-  $totD =  (date('d') +1);
-}else{
-  $totD = (days_in_month($mn, $thisY)+ 1);
-}
+$totD = days_in_month($mn, $thisY) + 1;
 
 function resume_per_day($date){
 $evalue =  explode($date,$_SESSION['dataresume']);
@@ -137,7 +133,7 @@ for ($i = 1; $i < $totD; $i++) {
         } else {
           $thisD = $i;
         }
-        $idhr = strtolower($thisM . '/' . $thisD . '/' . $thisY);
+        $idhr = $thisY . "-" . str_pad($mn, 2, "0", STR_PAD_LEFT) . "-" . $thisD;
         if(explode("/",resume_per_day($idhr))[1] == ""){$r = 0;}else{$r = explode("/",resume_per_day($idhr))[1];}
         echo "['<b>".$thisD." " .ucfirst($thisM)." ".explode("/",resume_per_day($idhr))[0]."vcr</b>',".$r."],";
 }

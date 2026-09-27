@@ -5,6 +5,12 @@
 
 ### Changelog
 
+#### Update 09-28 2026
+
+1. Compatible with MikroTik RouterOS v7.24.4.
+2. Improved expiration date validation for more accurate date handling.
+3. Standardized date formatting in reports and user profiles.
+
 #### Update 06-30 2021 V3.20
 1. Perbaikan typo script profile ```on-login```.
 	- Silakan update user profile dari Mikhmon, dengan cara membuka tiap user profile, kemudian klik Save.

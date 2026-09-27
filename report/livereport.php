@@ -59,7 +59,7 @@ include('../lang/'.$langid.'.php');
       $thisD = $thisD;
     }
 
-    $idhr = $thisM . "/" . $thisD . "/" . $thisY;
+    $idhr = $thisY . "-" . date("m") . "-" . $thisD;
     $idbl = $thisM . $thisY;
 
     $_SESSION[$session.'idhr'] = $idhr;

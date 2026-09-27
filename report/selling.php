@@ -24,7 +24,15 @@ if (!isset($_SESSION["mikhmon"])) {
 
 	$idhr = $_GET['idhr'];
 	$idbl = $_GET['idbl'];
-	$idbl2 = explode("/",$idhr)[0].explode("/",$idhr)[2];
+	$reportMonthPrefix = "";
+	if (preg_match('/^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)(\d{4})$/', $idbl, $monthParts)) {
+		$monthNumbers = array("jan" => "01", "feb" => "02", "mar" => "03", "apr" => "04", "may" => "05", "jun" => "06", "jul" => "07", "aug" => "08", "sep" => "09", "oct" => "10", "nov" => "11", "dec" => "12");
+		$reportMonthPrefix = $monthParts[2] . "-" . $monthNumbers[$monthParts[1]];
+	}
+	$idbl2 = "";
+	if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $idhr, $dateParts)) {
+		$idbl2 = strtolower(date("M", mktime(0, 0, 0, (int) $dateParts[2], 1, (int) $dateParts[1]))) . $dateParts[1];
+	}
 	if ($idhr != ""){
 		$_SESSION['report'] = "&idhr=".$idhr;
 	} elseif ($idbl != ""){
@@ -91,8 +99,11 @@ if (!isset($_SESSION["mikhmon"])) {
 	} elseif (strlen($idbl) > "0") {
 		if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
 			$getData = $API->comm("/system/script/print", array(
-				"?owner" => "$idbl",
+				"?comment" => "mikhmon",
 			));
+			$getData = array_values(array_filter($getData, function ($record) use ($reportMonthPrefix) {
+				return $reportMonthPrefix != "" && strpos($record['name'], $reportMonthPrefix . "-") === 0;
+			}));
 			$TotalReg = count($getData);
 		}
 		$filedownload = $idbl;
@@ -248,7 +259,7 @@ $(document).ready(function(){
 			<div class="input-group-1 col-box-2">
 			<select style="padding:5px;" class="group-item group-item-l" title="<?= $_days ?>" id="D">
         			<?php
-										$day = explode("/", $idhr)[1];
+										$day = preg_match('/^\d{4}-\d{2}-(\d{2})$/', $idhr, $dailyDateParts) ? $dailyDateParts[1] : "";
 										if ($day != "") {
 											echo "<option value='" . $day . "'>" . $day . "</option>";
 										}
@@ -270,7 +281,7 @@ $(document).ready(function(){
         			<?php
 										$idbls = array(1 => "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec");
 										$idblf = array(1 => "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-										$month = explode("/", $idhr)[0];
+										$month = preg_match('/^\d{4}-(\d{2})-\d{2}$/', $idhr, $dailyDateParts) ? $idbls[(int) $dailyDateParts[1]] : "";
 										$month1 = substr($idbl, 0, 3);
 
 										if ($month != "") {
@@ -291,7 +302,7 @@ $(document).ready(function(){
 			<div class="input-group-2 col-box-3">
 			<select style="padding:5px;" class="group-item group-item-md" title="Year" id="Y">
         			<?php
-										$year = explode("/", $idhr)[2];
+										$year = preg_match('/^(\d{4})-\d{2}-\d{2}$/', $idhr, $dailyDateParts) ? $dailyDateParts[1] : "";
 										$year1 = substr($idbl, 3, 4);
 
 										if ($year != "") {
@@ -320,9 +331,10 @@ $(document).ready(function(){
 					var M = document.getElementById('M').value;
 					var Y = document.getElementById('Y').value;
 					var X = document.getElementById('filterTable').value;
+					var monthNumbers = {jan:'01', feb:'02', mar:'03', apr:'04', may:'05', jun:'06', jul:'07', aug:'08', sep:'09', oct:'10', nov:'11', dec:'12'};
 
 					if(D !== ""){
-						window.location='./?report=selling&idhr='+M+'/'+D+'/'+Y+'&prefix='+X+'&session=<?= $session; ?>';
+						window.location='./?report=selling&idhr='+Y+'-'+monthNumbers[M]+'-'+D+'&prefix='+X+'&session=<?= $session; ?>';
 					}else if(D === ""){
 						window.location='./?report=selling&idbl='+M+Y+'&prefix='+X+'&session=<?= $session; ?>';
 					}

@@ -119,12 +119,13 @@ if (isset($_POST['nama'])) {
 
 	}
   
-	if ($user == "" || (substr($exp,3,1) != "/" && substr($exp,6,1) != "/")) {
+	$isExpirationDate = preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $exp) === 1;
+	if ($user == "" || !$isExpirationDate) {
 		echo "<h3 class='text-center'>User <i style='color:#008CCA;'>$name</i> $title[9]</h3>";
 	} elseif ($limitup == "1s" || $uptime == $limitup || $getbyteo == $limitbyte) {
 		echo "<h3 class='text-center'>User <i style='color:#008CCA;'>$name</i> $title[10]</h3>";
 	}
-	if ($user == "" || (substr($exp,3,1) != "/" && substr($exp,6,1) != "/")) {
+	if ($user == "" || !$isExpirationDate) {
 	} else {
 		?>
 <section>

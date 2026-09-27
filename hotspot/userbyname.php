@@ -79,7 +79,8 @@ if (!isset($_SESSION["mikhmon"])) {
     echo "<script>window.location='./?hotspot=users&profile=all&session=" . $session . "'</script>";
   }
 
-  if((substr($ucomment,3,1) == "/" && substr($ucomment,6,1) == "/")){
+  $isExpirationDate = preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $ucomment) === 1;
+  if($isExpirationDate){
     $commt = 'disabled';
     $comment2t = 'text';
     $_tcomment = $_expired;
@@ -242,9 +243,9 @@ if ($currency == in_array($currency, $cekindo['indo'])) {
       $usermode = "up-";
     }
     
-    if((substr($hcomment,3,1) == "/" && substr($hcomment,6,1) == "/")){
+    if(preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $hcomment) === 1){
       $comment = $hcomment." ".$comment2;
-    }elseif((substr($comment,3,1) == "/" && substr($comment,6,1) == "/")){
+    }elseif(preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $comment) === 1){
       $comment = $comment." ".$comment2;
     }elseif(substr($comment,0,3) == "vc-" || substr($comment,0,3) == "up-"){
       $comment = $comment;
